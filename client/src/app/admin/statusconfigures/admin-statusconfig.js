@@ -45,6 +45,10 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
       $scope.alerts.detail = [];
       adminResource.updateStatusConfig(statusConfigDetails._id, $scope.statusDetail).then(function(result){
         console.log(result);
+         $scope.alerts.detail.push({
+            type: 'success',
+            msg: 'Account detail is updated.'
+          });
         if(result.success){
 
           console.log("trying to alert show");

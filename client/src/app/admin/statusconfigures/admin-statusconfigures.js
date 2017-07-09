@@ -64,6 +64,7 @@ angular.module('admin.statusconfigures.index').controller('statusConfiguresIndex
           if(result.success){
             // redirect to admin users index page
             $location.path('/admin/statusconfigures');
+            $route.reload();
           }else{
             //error due to server side validation
             angular.forEach(result.errors, function(err, index){
