@@ -293,8 +293,25 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.askingPrice)}">
                             <label class="col-md-3 control-label" for="askingPrice">Asking Price:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="askingPrice" id="notific8_text" class="form-control" ng-model="propertyDetail.askingPrice" required>
+                                <input type="text" name="askingPrice" id="notific8_text" class="form-control" value="" ng-model="propertyDetail.askingPrice" required>
                                 <span class="help-block" ng-show="showError(detailForm.askingPrice, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                       	 	<label class="col-md-3 control-label" for="askingPrice"></label>
+                            <div class="col-md-5">
+                            	<div ng-show="showError(detailForm.askingPrice, 'required') != ''">
+                                	<label>Does this fit our cash offer BUY formula:</label>
+                                	<label>ARV X 65% - repairs = Good Deal?</label>
+                                	<div class="input-group">
+	                               		<input type="radio" ng-model="propertyDetail.propertyPrice" name="selectPrice" value="Yes" required>&nbsp;&nbsp;Yes
+	                               		<input type="radio" ng-model="propertyDetail.propertyPrice" name=selectPrice value="No" style="margin-left: 5px" required>&nbsp;&nbsp;No
+	                               		<div id="propertyPrice" ng-show="propertyDetail.propertyPrice == 'No'">
+	                               			<label>"In order for us to purchase properties, they need to make investment sense."</label>
+	                               			<input type="text" name="modifyPrice" id="notific8_text" class="form-control" ng-model="propertyDetail.modifyPrice">
+	                               		</div>
+	                               	</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairs)}">
@@ -304,11 +321,43 @@
                                 <span class="help-block" ng-show="showError(detailForm.repairs, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairNeed)}">
+                        <div class="form-group">
                             <label class="col-md-3 control-label" for="repairNeed">Repair Needed:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="repairNeed" id="notific8_text" class="form-control" ng-model="propertyDetail.repairNeed" required>
-                                <span class="help-block" ng-show="showError(detailForm.repairNeed, 'required')">This field is required</span>
+                            	<div class="col-lg-6">
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Roof">&nbsp;&nbsp;Roof
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Kitchen">&nbsp;&nbsp;Kitchen
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Bath">&nbsp;&nbsp;Bath(s)
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Paint">&nbsp;&nbsp;Paint
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Carpet">&nbsp;&nbsp;Carpet
+                            		</div>
+                            	</div>
+                            	<div class="col-lg-6">
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Windows">&nbsp;&nbsp;Windows
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Furnance">&nbsp;&nbsp;Furnance
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Drywall">&nbsp;&nbsp;Drywall
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Plumbing">&nbsp;&nbsp;Plumbing
+                            		</div>
+                            		<div class="input-group">
+                            			<input type="checkbox" ng-model="propertyDetail.Electrical">&nbsp;&nbsp;Electrical
+                            		</div>
+                            	</div>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherRepairDetail)}">
