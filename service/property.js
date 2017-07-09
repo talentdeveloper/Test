@@ -245,6 +245,29 @@ var property = {
 
   },
 
+  deleteProperty: function(req, res, next){
+
+    console.log("try to deleteProperty in nodejs");
+    var workflow = req.app.utility.workflow(req, res);
+
+    workflow.on('validate', function() {
+
+      workflow.emit('deleteProperty');
+    });
+
+    workflow.on('deleteProperty', function(err) {
+      req.app.db.models.Property.findByIdAndRemove(req.params.id, function(err, property) {
+        if (err) {
+          return workflow.emit('exception', err);
+        }
+
+        workflow.emit('response');
+      });
+    });
+
+    workflow.emit('validate');
+  },
+
   identity: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
 
