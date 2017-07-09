@@ -47,14 +47,14 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
         console.log(result);
          $scope.alerts.detail.push({
             type: 'success',
-            msg: 'Account detail is updated.'
+            msg: 'Status is updated.'
           });
         if(result.success){
 
           console.log("trying to alert show");
           $scope.alerts.detail.push({
             type: 'success',
-            msg: 'Account detail is updated.'
+            msg: 'Status is updated.'
           });
         }else{
           angular.forEach(result.errors, function(err, index){

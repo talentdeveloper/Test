@@ -42,6 +42,10 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
     console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
+      $scope.alerts.detail.push({
+            type: 'success',
+            msg: 'Changes have been updated.'
+          });
       console.log($scope.propertyDetail);
       adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
         if(result.success){

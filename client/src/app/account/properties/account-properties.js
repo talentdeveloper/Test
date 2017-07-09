@@ -28,8 +28,8 @@ angular.module('account.properties.list').config(['$routeProvider', 'securityAut
 }]);
 
 
-angular.module('account.properties.list').controller('AccountPropertyListCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyList',
-  function($scope, $location, $log, security, utility, restResource, data){
+angular.module('account.properties.list').controller('AccountPropertyListCtrl', [ '$scope', '$route', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyList',
+  function($scope, $route, $location, $log, security, utility, restResource, data){
     var user = data.user;
     console.log(user);
 
@@ -37,6 +37,27 @@ angular.module('account.properties.list').controller('AccountPropertyListCtrl', 
       console.log(list);
       $scope.properties = list;
     });
+
+    $scope.deleteProperty = function(id) {
+      $scope.deleteAlerts =[];
+      if(confirm('Are you sure?')){
+        restResource.deleteProperty(id).then(function(result) {
+        
+          if(result.success){
+            // redirect to admin users index page
+            $location.path('/account/propertylist');
+            $route.reload();
+          }else{
+            //error due to server side validation
+            angular.forEach(result.errors, function(err, index){
+              $scope.deleteAlerts.push({ type: 'danger', msg: err});
+            });
+          }
+        }, function(x){
+          $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting user: ' + x });
+        });
+      }
+    };
 
   }
 ]);

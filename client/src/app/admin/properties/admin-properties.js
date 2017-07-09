@@ -83,6 +83,27 @@ angular.module('admin.properties.index').controller('PropertiesIndexCtrl', ['$sc
       });
     };
 
+    $scope.deleteProperty = function(id) {
+      $scope.deleteAlerts =[];
+      if(confirm('Are you sure?')){
+        adminResource.deleteProperty(id).then(function(result) {
+        
+          if(result.success){
+            // redirect to admin users index page
+            $location.path('/admin/properties');
+            $route.reload();
+          }else{
+            //error due to server side validation
+            angular.forEach(result.errors, function(err, index){
+              $scope.deleteAlerts.push({ type: 'danger', msg: err});
+            });
+          }
+        }, function(x){
+          $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting user: ' + x });
+        });
+      }
+    };
+
     // $scope vars
     //select elements and their associating options
     $scope.status = [
@@ -101,6 +122,10 @@ angular.module('admin.properties.index').controller('PropertiesIndexCtrl', ['$sc
    
       {label: "username \u25B2", value: "user.name"},
       {label: "username \u25BC", value: "-user.name"},
+      {label: "Date submitted \u25B2", value: "submittedOn"},
+      {label: "Date submitted \u25BC", value: "-submittedOn"},
+      {label: "Status \u25B2", value: "status"},
+      {label: "Status \u25BC", value: "-status"},
  
     ];
     $scope.limits = [
