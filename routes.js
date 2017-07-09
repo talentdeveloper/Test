@@ -171,6 +171,7 @@ exports = module.exports = function(app, passport) {
   app.post('/api/account/properties', property.create);
   app.get('/api/account/properties', property.getAccountProperties);
   app.get('/api/account/propertylist/:id', property.findPropertyList);
+  app.delete('/api/account/propertylist/:id', property.deleteProperty);
 
   app.get('/api/account/propertystatuses', account.getPropertyStatuses);
 
