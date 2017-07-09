@@ -33,6 +33,7 @@ angular.module('admin.properties.index').config(['$routeProvider', function($rou
 angular.module('admin.properties.index').controller('PropertiesIndexCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'properties',
   function($scope, $route, $location, $log, utility, adminResource, data){
     // local var
+    console.log(data);
     console.log(data.data[1].user);
     var deserializeData = function(data){
       $scope.items = data.items;
@@ -85,6 +86,7 @@ angular.module('admin.properties.index').controller('PropertiesIndexCtrl', ['$sc
 
     $scope.deleteProperty = function(id) {
       $scope.deleteAlerts =[];
+      console.log(id);
       if(confirm('Are you sure?')){
         adminResource.deleteProperty(id).then(function(result) {
         
