@@ -336,7 +336,7 @@
                                 <span class="help-block" ng-show="showError(detailForm.askingPrice, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group"  ng-class="{'has-error': hasError(detailForm.repairs)}">
+                        <div class="form-group">
                        	 	<label class="col-md-3 control-label" for="askingPrice"></label>
                             <div class="col-md-5">
                             	<div ng-show="showError(detailForm.askingPrice, 'required') != ''">
@@ -347,7 +347,7 @@
 	                               		<input type="radio" ng-model="propertyDetail.propertyPrice" name=selectPrice value="No" style="margin-left: 5px" required>&nbsp;&nbsp;No
 	                               		<div id="propertyPrice" ng-show="propertyDetail.propertyPrice == 'No'">
 	                               			<label>"In order for us to purchase properties, they need to make investment sense."</label>
-	                               			<input type="text" name="listedOnMLS" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyPrice">
+	                               			<input type="text" name="listedOnMLS" id="notific8_text" class="form-control" ng-model="propertyDetail.modifyPrice">
 	                               		</div>
 	                               	</div>
                                 </div>
