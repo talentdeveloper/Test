@@ -1,0 +1,176 @@
+<div class="row" id="admin">
+    <div class="row">
+        <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.submitted }} </div>
+                    <div class="desc"> Properties Submitted </div>
+                </div> -->
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+<!--             </div>
+        </div> -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.new }} </div>
+                    <div class="desc"> New </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.activelyWorking }} </div>
+                    <div class="desc"> In Progress </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.offerAccepted }} </div>
+                    <div class="desc" style="padding-left: 5px;"> Offers Accepted </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.offerRejected }} </div>
+                    <div class="desc" style="padding-left: 5px;"> Offers Rejected </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.ucSeller }} </div>
+                    <div class="desc"> UC Seller </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.ucBuyer }} </div>
+                    <div class="desc"> UC Buyer </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.closed }} </div>
+                    <div class="desc"> Closed </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ user.deadLeads }} </div>
+                    <div class="desc"> Dead Leads </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+    </div>
+<!--     <div class="col-sm-6">
+        <div class="page-header"><h1>Admin Area</h1></div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="user.users"></div>
+                    <div class="stat-label">Users</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="user.accounts"></div>
+                    <div class="stat-label">Accounts</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="user.admins"></div>
+                    <div class="stat-label">Admins</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="user.groups"></div>
+                    <div class="stat-label">Groups</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="pivoted.categories"></div>
+                    <div class="stat-label">Categories</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="well stat">
+                    <div class="stat-value" ng-bind="pivoted.statuses"></div>
+                    <div class="stat-label">Statuses</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 special">
+        <div class="page-header"><h1>Super Dashboard</h1></div>
+        <i class="fa fa-gears super-awesome"></i></div> -->
+</div>

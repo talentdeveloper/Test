@@ -1,0 +1,26 @@
+<!-- <div class="row">
+    <div>
+        <div >
+            <h1>Property Statuses</h1>
+        </div>
+        <div class="media" ng-repeat="statusesResult in statusesResults">
+            <div class="media-body">
+                <h4 class="media-heading">{{statusesResult.statusName}}</h4>
+                <p>{{statusesResult.statusDetail}}</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="portlet light ">
+        <div>
+            <h1>Property Statuses</h1>
+        </div>
+    
+    <div class="portlet-body"  ng-repeat="statusesResult in statusesResults">
+        <div class="note note-success">
+            <h3 class="block">{{statusesResult.statusName}}</h3>
+            <p> {{statusesResult.statusDetail}} </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,532 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-header"><h1>Profile Settings</h1></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3" ng-if="social">
+        <legend>Social Connections</legend>
+        <alert ng-repeat="alert in socialAlerts" type="{{alert.type}}" close="closeSocialAlert($index)">{{alert.msg}}</alert>
+        <a ng-repeat-start="(provider, property) in social" ng-if="property.connected" ng-click="disconnect(provider)" class="btn btn-block btn-danger"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Disconnect {{property.text}}</a>
+        <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.submitted }} </div>
+                    <div class="desc"> Properties Submitted </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.new }} </div>
+                    <div class="desc"> New </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.activelyWorking }} </div>
+                    <div class="desc"> In Progress </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.offerAccepted }} </div>
+                    <div class="desc"> Offers Accepted </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.offerRejected }} </div>
+                    <div class="desc"> Offers Rejected </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.ucSeller }} </div>
+                    <div class="desc"> UC Seller </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.ucBuyer }} </div>
+                    <div class="desc"> UC Buyer </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.closed }} </div>
+                    <div class="desc"> Closed </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number" style="padding-top: 10px;"> {{ stats.deadLeads }} </div>
+                    <div class="desc"> Dead Leads </div>
+                </div>
+                <!-- <a class="more" href="#"> View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-inner">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="portlet light memberupdate">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-green-sharp sbold">Set Your Avatar</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <form name="photoForm" class="form-horizontal">
+                    
+                    <div class="form-group">
+                        <div class="col-md-3 control-label" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3">
+                            <span>Drop Image Here</span>
+                        </div>
+                        <div class="col-md-5">
+                            <img ng-src={{image}} />
+                            <span class="file-name">{{ imageFileName }}</span>
+                        </div>  
+                        <div class="col-md-5">
+                            <input type="file" name="myfile" file-model="file.upload" ng-disabled="uploading" onchange="angular.element(this).scope().photoChanged(this.files)">
+
+                            <img ng-src="{{ thumbnail.dataUrl || user.photoURL }}" height="200" width="200">
+                            <!-- <img src="file:///C:/Users/User/Pictures/minion_in_despicable_me_2-wide.jpg" height="200" width="200"> -->
+                        </div>
+                    </div>                        
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="setPhoto"></label>
+                        <div class="col-md-5">
+                            <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Set Photo </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-6">
+            <div class="portlet light memberupdate">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green-sharp sbold">Set Password</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <form name="passwordForm" class="form-horizontal">
+                        
+                        <alert ng-repeat="alert in alerts.pass" type="{{alert.type}}" close="closeAlert('pass', $index)">{{alert.msg}}</alert>
+                        <div class="form-group" ng-class="{'has-error': hasError(passwordForm.password)}">
+                            <label class="col-md-3 control-label" for="password">New Password:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="password" id="notific8_text" class="form-control" ng-model="pass.newPassword" required>
+                                <span class="help-block" ng-show="showError(passwordForm.password, 'required')">This field is required</span>
+                            </div>                            
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(passwordForm.confirm)}">
+                            <label class="col-md-3 control-label" for="confirm">Confirm Password:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="confirm" id="notific8_text" class="form-control" ng-model="pass.confirm" required>
+                                <span class="help-block" ng-show="showError(passwordForm.confirm, 'required')">This field is required</span>
+                            </div>                            
+                        </div>                                                                       
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setPassword"></label>
+                            <div class="col-md-5">
+                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-disabled="!canSave(passwordForm)" ng-click="submit(passwordForm)"> Set Password </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="portlet light memberupdate">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green-sharp sbold">Name Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form class="form-horizontal" name="detailForm">
+                        <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.first)}">
+                            <label class="col-md-3 control-label" for="first">First Name:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="first" id="notific8_text" class="form-control" ng-model="userDetail.first" required>
+                                <span class="help-block" ng-show="showError(detailForm.first, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.last)}">
+                            <label class="col-md-3 control-label" for="last">Last Name:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="last" id="notific8_text" class="form-control" ng-model="userDetail.last" required>
+                                <span class="help-block" ng-show="showError(detailForm.last, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="title"></label>
+                            <div class="col-md-5">
+                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-disabled="!canSave(detailForm)" ng-click="submit(detailForm)"> Update </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="page-content-inner">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light memberupdate">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green-sharp sbold">Identity</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <form name="identityForm" class="form-horizontal">
+                        
+                        <alert ng-repeat="alert in alerts.identity" type="{{alert.type}}" close="closeAlert('identity', $index)">{{alert.msg}}</alert>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
+                            <label class="col-md-3 control-label" for="username">Username:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="username" id="notific8_text" class="form-control" ng-model="user.username" required server-error>
+                                <span class="help-block" ng-show="showError(identityForm.username, 'required')">This field is required</span>
+                                <span class="help-block" ng-show="showError(identityForm.username, 'server')">{{errfor.username}}</span>
+                            </div>                            
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
+                            <label class="col-md-3 control-label" for="email">Email:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="email" id="notific8_text" class="form-control" ng-model="user.email" required server-error>
+                                <span class="help-block" ng-show="showError(identityForm.email, 'required')">This field is required</span>
+                                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
+                                <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
+                            </div>                            
+                        </div>                                                
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.address)}">
+                            <label class="col-md-3 control-label" for="address">Address:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="address" id="notific8_text" class="form-control" ng-model="user.address" required>
+                                <span class="help-block" ng-show="showError(detailForm.address, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.city)}">
+                            <label class="col-md-3 control-label" for="city">City:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="city" id="notific8_text" class="form-control" ng-model="user.city" required>
+                                <span class="help-block" ng-show="showError(detailForm.city, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
+                            <label class="col-md-3 control-label" for="state">State:*</label>
+                            <div class="col-md-5">
+                                <select id="notific8_life" class="form-control input-medium" ng-model="user.state" required>
+                                    <option value="AL">AL</option>
+                                    <option value="AK">AK</option>
+                                    <option value="AZ">AZ</option>
+                                    <option value="AR">AR</option>
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="CT">CT</option>
+                                    <option value="DE">DE</option>
+                                    <option value="FL">FL</option>
+                                    <option value="GA">GA</option>
+                                    <option value="HI">HI</option>
+                                    <option value="ID">ID</option>
+                                    <option value="IL">IL</option>
+                                    <option value="IN">IN</option>
+                                    <option value="IA">IA</option>
+                                    <option value="KS">KS</option>
+                                    <option value="KY">KY</option>
+                                    <option value="LA">LA</option>
+                                    <option value="ME">ME</option>
+                                    <option value="MD">MD</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MI">MI</option>
+                                    <option value="MN">MN</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MO">MO</option>
+                                    <option value="MT">MT</option>
+                                    <option value="NE">NE</option>
+                                    <option value="NV">NV</option>
+                                    <option value="NH">NH</option>
+                                    <option value="NJ" selected="selected">NJ</option>
+                                    <option value="NM">NM</option>
+                                    <option value="NY">NY</option>
+                                    <option value="NC">NC</option>
+                                    <option value="ND">ND</option>
+                                    <option value="OH">OH</option>
+                                    <option value="OK">OK</option>
+                                    <option value="OR">OR</option>
+                                    <option value="PA">PA</option>
+                                    <option value="RI">RI</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SD">SD</option>
+                                    <option value="TN">TN</option>
+                                    <option value="TX">TX</option>
+                                    <option value="UT">UT</option>
+                                    <option value="VT">VT</option>
+                                    <option value="VA">VA</option>
+                                    <option value="WA">WA</option>
+                                    <option value="WV">WV</option>
+                                    <option value="WI">WI</option>
+                                    <option value="WY">WY</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.zip)}">
+                            <label class="col-md-3 control-label" for="zip">Zip:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="zip" id="notific8_text" class="form-control" ng-model="user.zip" required>
+                                <span class="help-block" ng-show="showError(detailForm.zip, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
+                            <label class="col-md-3 control-label" for="phone">Phone:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="phone" id="notific8_text" class="form-control" ng-model="user.phone" required>
+                                <span class="help-block" ng-show="showError(detailForm.phone, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.paypal)}">
+                            <label class="col-md-3 control-label" for="paypal">Paypal Email:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="paypal" id="notific8_text" class="form-control" ng-model="user.paypal">
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
+                            <label class="col-md-3 control-label" for="occupation">Occupation:</label>
+                            <div class="col-md-5">
+                                <select id="notific8_life" class="form-control input-medium" ng-model="user.occupation">                                                      
+                                    <option value="agentbroker">Real Estate Agent/Broker</option>
+                                    <option value="mortgage">Mortgage/Loan Professional</option>
+                                    <option value="accountant">Accountant</option>
+                                    <option value="attorney">Attorney</option>
+                                    <option value="other" selected="selected">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherSpecify)}">
+                            <label class="col-md-3 control-label" for="otherSpecify">(if other, please specify):</label>
+                            <div class="col-md-5">
+                                <input type="text" name="otherSpecify" id="notific8_text" class="form-control" ng-model="user.otherSpecify">
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="markets">Your Markets:</label>
+                            
+                        </div>
+                        <div class="form-group">
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Atlantic
+                                    <input type="checkbox" value="0" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Hunterdon
+                                    <input type="checkbox" value="0" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Sussex
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Gloucester
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Salem
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Cumberland
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Ocean
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Camden
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Monmouth
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Bergen
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Merser
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Union
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Hudson
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Somerset
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Essex
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Passaic
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Cape May
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Morris
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div><br>
+                            <div class="mt-checkbox-list">
+                                <label class="col-md-3 control-label"> Burlington
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Middlesex
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                                <label class="col-md-3 control-label"> Warren
+                                    <input type="checkbox" value="1" name="test" />
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.whereHeardUs)}">
+                            <label class="col-md-3 control-label" for="whereHeardUs">Where did you hear about us?:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="whereHeardUs" id="notific8_text" class="form-control" ng-model="user.whereHeardUs">
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group">
+                            
+                            <div class="col-md-3 control-label" style="padding-top: 0px;">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="notific8_sticky" value="1"> </label>
+                            </div>
+                            <label>I'd like to receive additional information from www.NJBirdDogs.com about real estate and property locating opportunities</label>
+                        </div>                                                                       
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="update"></label>
+                            <div class="col-md-5">
+                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-disabled="!canSave(identityForm)" ng-click="submit(identityForm)"> Update </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+                  

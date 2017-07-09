@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-header"><h1>Profile Settings</h1></div>
+    </div>
+</div>
+                 
+<div class="page-content-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light memberupdate">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green-sharp sbold">Input or Edit Video URL</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form class="form-horizontal" name="detailForm">
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyType)}">
+                            <label class="col-md-3 control-label" for="propertyType">Welcome Page Video URL: </label>
+                            <div class="col-md-5">
+                                <input type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="videoURL.welcomePageURL" required>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyType)}">
+                            <label class="col-md-3 control-label" for="propertyType">Instruction Video URL: </label>
+                            <div class="col-md-5">
+                                <input type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="videoURL.instructionURL" required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyType)}">
+                            <label class="col-md-3 control-label" for="propertyType">Description </label>
+                            <div class="col-md-5">
+                                <textarea type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="videoURL.description" required></textarea>
+                            </div>
+                        </div>
+                        (If the URL is Youtube, and you don't wanna show related videos, please add "?rel=0&amp;show-info=0" at the end of the URL)
+                                          
+                        
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="title"></label>
+                            <div class="col-md-5">
+                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submitVideoForm()"> Update </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
