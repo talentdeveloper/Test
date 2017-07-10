@@ -1,4 +1,4 @@
-angular.module('account.settings', ['gm', 'config', 'account.settings.social', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
+angular.module('account.settings', ['config', 'account.settings.social', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
 angular.module('account.settings').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider){
   $routeProvider
     .when('/account/settings', {
@@ -41,11 +41,25 @@ angular.module('account.settings').directive('fileModel', ['$parse', function($p
   };
 }]);
 
-angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL',
-  function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL){
+angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL', '$http',
+  function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http){
     var account = accountDetails.account;
     var user = accountDetails.user;
     console.log(user._id);
+
+    
+    var getZillowURL = function() {
+      $http.jsonp('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=<ZILLOWID>&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA')
+      .success(function (result) {
+        $scope.mortgageLocation = result;
+        console.log('success!');
+        console.log(result);
+      })
+      .error(function (data, status) {
+        console.log('error!');
+        console.log(data);
+      });
+    };
 
     restResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
       console.log(accountPropertyStats['PropertySubmitted']);
@@ -61,14 +75,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         deadLeads: accountPropertyStats['DeadLeads']
       };
     });
-
-    $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-      var location = $scope.autocomplete.getPlace().geometry.location;
-      console.log($scope.autocomplete.getPlace());
-      $scope.lat = location.lat();
-      $scope.lng = location.lng();
-      $scope.$apply();
-  });
 
     
 
@@ -322,5 +328,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         disconnect(provider);
       }
     };
+    getZillowURL();
   }
 ]);

@@ -1,4 +1,4 @@
-angular.module('account.properties.submit', ['config', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
+angular.module('account.properties.submit', ['gm', 'config', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
 angular.module('account.properties.submit').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider){
   $routeProvider
     .when('/account/properties', {
@@ -44,7 +44,19 @@ angular.module('account.properties.submit').directive('fileModel', ['$parse', fu
 }]);
 angular.module('account.properties.submit').controller('AccountPropertySubmitCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyDetails', 'SOCIAL', '$timeout',
   function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
-	// textarea row fixed 15 lines
+	// Address automatic Complete
+
+  $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+    var location = $scope.autocomplete.getPlace().geometry.location;
+    console.log($scope.autocomplete.getPlace());
+    $scope.lat = location.lat();
+    $scope.lng = location.lng();
+    $scope.$apply();
+  }); 
+
+
+
+  // textarea row fixed 15 lines
 	$scope.limitRows = function() {
 		var rows = angular.element('#textarea').val().split('\n').length;
 		var maxRows = 15;
