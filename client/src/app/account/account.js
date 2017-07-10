@@ -34,7 +34,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     temp = data;
 
     var show = function() {
-//      quote();
+      quote();
       ModalService.showModal({
         templateUrl: 'account/welcome.tpl.html',
         controller: "Controller",
@@ -45,14 +45,14 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
         console.log(modal.element.modal());
         modal.close.then(function(result) {
           // close Progress Here
-//          quote();
+          quote();
         });
       });
     };
 
-    $scope.quote = function() {
+    var quote = function() {
       accountResource.getQuote().then(function(result) {
-    	  return result[0].authoBy;
+        $scope.quotes = result[0].authorBy;
       });
     };
     show();
