@@ -106,7 +106,7 @@ angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$ro
         });
       }
     };
-
+    /////
     // $scope vars
     //select elements and their associating options
     $scope.roles = [{label: "any", value: ""}, {label: "admin", value: "admin"}, {label: "account", value: "account"}];
