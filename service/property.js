@@ -56,6 +56,15 @@ var property = {
 
     require('async').parallel([getPropertyData, getUserData], asyncFinally);
   },
+
+  getAccountProperty: function (req, res, next) {
+    req.app.db.models.Property.findById(req.params.id).exec(function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json(user);
+    });
+  },
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
 

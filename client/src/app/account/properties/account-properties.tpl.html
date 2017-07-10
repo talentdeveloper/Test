@@ -97,7 +97,7 @@
                     <td ng-bind="property.status"></td>
                     <td ng-bind="property.submittedOn"></td>
                     <td ng-bind="property.user.name"></td>                
-                    <td><a class="btn btn-default btn-sm" ng-href="/admin/properties/{{property._id}}">Edit</a>
+                    <td><a class="btn btn-default btn-sm" ng-href="/account/propertyedit/{{property._id}}">Edit</a>
                     <button type="button" class="btn btn-danger" ng-click="deleteProperty(property._id)">Delete</button></td>
                 </tr>
                 <tr ng-show="property.length === 0">

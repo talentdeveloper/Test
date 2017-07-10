@@ -33,6 +33,9 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.getAccountProperties = function(){
     return $http.get(baseUrl + '/account/properties').then(processResponse, processError);
   };
+  resource.getAccountProperty = function(_id) {
+    return $http.get(baseUrl + '/account/propertyedit/' + _id).then(processResponse, processError);
+  }
   resource.setAccountProperty = function(data){
     return $http.put(baseUrl + '/account/properties', data).then(processResponse, processError);
   };
