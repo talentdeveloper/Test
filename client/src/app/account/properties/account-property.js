@@ -43,20 +43,61 @@ angular.module('account.properties.submit').directive('fileModel', ['$parse', fu
   };
 }]);
 angular.module('account.properties.submit').controller('AccountPropertySubmitCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyDetails', 'SOCIAL', '$timeout',
-  function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
+	function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
+	
 	// Address automatic Complete
-
-  $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-    var location = $scope.autocomplete.getPlace().geometry.location;
-    console.log($scope.autocomplete.getPlace());
-    $scope.lat = location.lat();
-    $scope.lng = location.lng();
-    $scope.$apply();
-  }); 
-
-
-
-  // textarea row fixed 15 lines
+	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+		console.log("Address:!!!!!!!!!!!", $scope.autocomplete.getPlace().address_components);
+		$scope.propertyDetail = {};
+		var componentForm = {
+	        street_number: 'short_name',
+	        route: 'long_name',
+	        locality: 'long_name',
+	        administrative_area_level_1: 'short_name',
+	        country: 'long_name',
+	        postal_code: 'short_name'
+		};
+		
+		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
+			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
+			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+			switch (addressType) {
+			case 'postal_code':
+				$scope.propertyDetail.propertyZip = val;
+				break;
+			case 'street_number':
+				$scope.propertyDetail.propertyAddress = val;
+				break;
+			case 'route':
+				
+				break;
+			case 'locality':
+				$scope.propertyDetail.propertyCity = val;
+				break;
+			case 'administrative_area_level_1':
+				$scope.propertyDetail.propertyState = val;
+				break;
+			case 'administrative_area_level_2':
+				$scope.propertyDetail.propertyCounty = val;
+				break;
+			case 'administrative_area_level_3':
+				
+				break;
+			case 'country':
+				
+				break;
+			}
+		}
+		console.log("RESULT", $scope.propertyDetail);
+//		$scope.propertyDetail = {
+//				propertyAddress: 	$scope.autocomplete.getPlace().address_components[0].long_name
+//		};
+		var location = $scope.autocomplete.getPlace().geometry.location;
+	    $scope.lat = location.lat();
+	    $scope.lng = location.lng();
+	    $scope.$apply();
+	}); 
+	// textarea row fixed 15 lines
 	$scope.limitRows = function() {
 		var rows = angular.element('#textarea').val().split('\n').length;
 		var maxRows = 15;

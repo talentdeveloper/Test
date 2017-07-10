@@ -102,6 +102,13 @@
                 <div class="portlet-body">
                     <form class="form-horizontal" name="detailForm">
                         <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
+			                <label class="col-md-3 control-label" for="phone">AutoAddress:*</label>
+			                <div class="col-md-5">
+			                    <!-- <input type="text" gm-places-autocomplete ng-model="autocomplete"> -->
+			                    <input type="text" id="notific8_text" class="form-control" gm-places-autocomplete ng-model="autocomplete" required>
+			                </div>
+			            </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
                             <label class="col-md-3 control-label" for="propertyType">Property Type:</label>
                             <div class="col-md-5">
@@ -113,17 +120,6 @@
 	                                    <option value="land">Land</option>                                    
 	                                </select>
                             	</div>
-
-                                <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
-                                    <label class="col-md-3 control-label" for="phone">Phone:*</label>
-                                    <div class="col-md-5">
-                                        
-                                        <input type="text" gm-places-autocomplete ng-model="autocomplete" style="width: 600px;"/>
-                                        
-                                        
-                                    </div>
-                                </div>
-                                          
                             	<!-- Select Residential -->
                                 <div ng-show="propertyDetail.propertyType == 'residential'">
                                 	<div id="selectUnit">
