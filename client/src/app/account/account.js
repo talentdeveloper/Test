@@ -34,6 +34,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     temp = data;
 
     var show = function() {
+//      quote();
       ModalService.showModal({
         templateUrl: 'account/welcome.tpl.html',
         controller: "Controller",
@@ -44,18 +45,15 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
         console.log(modal.element.modal());
         modal.close.then(function(result) {
           // close Progress Here
+//          quote();
         });
       });
     };
-    
-    $scope.getRandomIndex = function(length) {
-    	return Math.floor(Math.random() * length);
-    }
-    $scope.quotes = function() {
-    	accountResource.getQuote().then(function(result) {
-    		console.log(result);
-    		return result;
-    	});
+
+    $scope.quote = function() {
+      accountResource.getQuote().then(function(result) {
+    	  return result[0].authoBy;
+      });
     };
     show();
   }]);
