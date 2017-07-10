@@ -177,6 +177,8 @@ exports = module.exports = function(app, passport) {
 
   app.get('/api/account/getstats/:id', account.getUserPropertyStats);
 
+  app.get('/api/getquote', account.getQuote);
+
 
   
   

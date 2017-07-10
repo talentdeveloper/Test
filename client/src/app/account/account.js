@@ -34,6 +34,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     temp = data;
 
     var show = function() {
+      quote();
       ModalService.showModal({
         templateUrl: 'account/welcome.tpl.html',
         controller: "Controller",
@@ -50,8 +51,8 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     };
 
     var quote = function() {
-      accountResource.getQuote().then(funtion(result) {
-
+      accountResource.getQuote().then(function(result) {
+        console.log(result);
       });
     };
     show();
