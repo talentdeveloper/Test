@@ -37,6 +37,18 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
   function($scope, $route, $location, utility, adminResource, propertyDetails) {
     // local vars
     //var property = propertyDetails.property;
+	
+	// textarea row fixed 15 lines
+	$scope.limitRows = function() {
+		var rows = angular.element('#textarea').val().split('\n').length;
+		var maxRows = 15;
+		if(rows > maxRows) {
+			alert("Only 15 lines are allowed.");
+			var modifiedText = angular.element('#textarea').val().split('\n').slice(0, maxRows);
+			angular.element('#textarea').val(modifiedText.join('\n'));
+		}
+	};
+	
     var user = propertyDetails.user;
     console.log(propertyDetails.propertyAddress);
     console.log(user);
