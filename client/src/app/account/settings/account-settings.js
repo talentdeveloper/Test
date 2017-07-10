@@ -1,4 +1,4 @@
-angular.module('account.settings', ['config', 'account.settings.social', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
+angular.module('account.settings', ['gm', 'config', 'account.settings.social', 'security.service', 'security.authorization', 'services.accountResource', 'services.utility','ui.bootstrap', 'directives.serverError']);
 angular.module('account.settings').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider){
   $routeProvider
     .when('/account/settings', {
@@ -61,6 +61,14 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         deadLeads: accountPropertyStats['DeadLeads']
       };
     });
+
+    $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+      var location = $scope.autocomplete.getPlace().geometry.location;
+      console.log($scope.autocomplete.getPlace());
+      $scope.lat = location.lat();
+      $scope.lng = location.lng();
+      $scope.$apply();
+  });
 
     
 
