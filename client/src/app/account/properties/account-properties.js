@@ -34,7 +34,7 @@ angular.module('account.properties.list').controller('AccountPropertyListCtrl', 
     console.log(user);
 
     restResource.findPropertyList(user._id).then(function(list){
-      console.log(list);
+      console.log("List All", list);
       $scope.properties = list;
     });
 
