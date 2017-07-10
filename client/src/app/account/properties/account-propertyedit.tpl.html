@@ -244,14 +244,14 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.beds)}">
                             <label class="col-md-3 control-label" for="beds">Beds:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="beds" id="notific8_text" class="form-control" ng-model="propertyDetail.beds" required>
+                                <input type="number" name="beds" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.beds" required>
                                 <span class="help-block" ng-show="showError(detailForm.beds, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.baths)}">
-                            <label class="col-md-3 control-label" for="baths">Beds:*</label>
+                            <label class="col-md-3 control-label" for="baths">Baths:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="baths" id="notific8_text" class="form-control" ng-model="propertyDetail.baths" required>
+                                <input type="number" name="baths" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.baths" required>
                                 <span class="help-block" ng-show="showError(detailForm.baths, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -328,7 +328,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherRepairDetail)}">
                             <label class="col-md-3 control-label" for="otherRepairDetail">Other Repairs/Detail:*</label>
                             <div class="col-md-5">
-                                <textarea type="text" name="otherRepairDetail" id="notific8_text" class="form-control" ng-model="propertyDetail.otherRepairDetail" required></textarea>
+                                <textarea type="text" name="otherRepairDetail" id="textarea" rows="15" class="form-control" ng-model="propertyDetail.otherRepairDetail" required></textarea>
                                 <span class="help-block" ng-show="showError(detailForm.otherRepairDetail, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -380,14 +380,14 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.offerAmountAccepted)}">
                             <label class="col-md-3 control-label" for="offerAmountAccepted">Offer Amount Accepted:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="offerAmountAccepted" id="notific8_text" class="form-control" ng-model="propertyDetail.offerAmountAccepted" required>
+                                <input type="number" name="offerAmountAccepted" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.offerAmountAccepted" required>
                                 <span class="help-block" ng-show="showError(detailForm.offerAmountAccepted, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.approxARV)}">
                             <label class="col-md-3 control-label" for="approxARV">ARV:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="approxARV" id="notific8_text" class="form-control" ng-model="propertyDetail.approxARV" required>
+                                <input type="number" name="approxARV" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.approxARV" required>
                                 <span class="help-block" ng-show="showError(detailForm.approxARV, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -419,3 +419,14 @@
         </div>
     </div>
 </div>
+<script>
+	$('#textarea').keydown(function() {
+		var rows = $('#textarea').val().split('\n').length;
+		var maxRows = 15;
+		if(rows > maxRows) {
+			alert("Only 15 lines are allowed.");
+			modifiedText = $('#textarea').val().split('\n').slice(0, maxRows);
+			$('#textarea').val(modifiedText.join('\n'));
+		}
+	});
+</script>
