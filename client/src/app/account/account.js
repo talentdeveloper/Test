@@ -32,6 +32,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
   function($scope, data, $sce, ModalService, accountResource){
     console.log(data.welcomePageURL);
     temp = data;
+    var value = '';
 
     var show = function() {
       quote();
@@ -49,11 +50,29 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
         });
       });
     };
-
+    
     var quote = function() {
-      accountResource.getQuote().then(function(result) {
-        $scope.quotes = result[0].authorBy;
-      });
+    	accountResource.getQuote().then(function(result) {
+    		$scope.quotes = '';
+    		var dayOfYear = moment().format('DDD');
+    		
+    		if(dayOfYear <= result.length) {
+    			$scope.quotes = result[dayOfYear - 1];
+    		} else if(dayOfYear > result.length){
+    			var dayVal = (dayOfYear / result.length) - 1;
+    			if(dayOfYear <= result.length) {
+    				$scope.quotes = result[dayVal];
+    			} else {
+    				$scope.quotes = result[(dayVal / result.length) - 1];
+    			}
+    		}
+    		
+    	    /*$scope.dayOfMonth = moment().format('D');
+    	    $scope.weekOfYear = moment().format('w');
+    	    $scope.dayOfWeek = moment().format('d');
+    	    $scope.weekYear = moment().format('gg');
+    	    $scope.hourOfDay = moment().format('H');*/
+    	});
     };
     show();
   }]);
