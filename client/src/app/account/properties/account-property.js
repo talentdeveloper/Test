@@ -88,10 +88,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 				break;
 			}
 		}
-		console.log("RESULT", $scope.propertyDetail);
-//		$scope.propertyDetail = {
-//				propertyAddress: 	$scope.autocomplete.getPlace().address_components[0].long_name
-//		};
 		var location = $scope.autocomplete.getPlace().geometry.location;
 	    $scope.lat = location.lat();
 	    $scope.lng = location.lng();
