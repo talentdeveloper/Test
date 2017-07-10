@@ -38,8 +38,8 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
   function($scope, $route, $location, utility, accountResource, propertyDetail) {
     // local vars
     //var property = propertyDetails.property;
-    var user = propertyDetails.user;
-    console.log(propertyDetails.propertyAddress);
+    var user = propertyDetail.user;
+    console.log(propertyDetail.propertyAddress);
     console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
@@ -48,7 +48,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             msg: 'Changes have been updated.'
           });
       console.log($scope.propertyDetail);
-      adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
+      adminResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
           $scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
@@ -73,51 +73,51 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
       detail: [], identity: [], pass: []
     };
     $scope.propertyDetail = {
-      propertyType: propertyDetails.propertyType,
-      residentialUnit: propertyDetails.residentialUnit,
-      residentialContent: propertyDetails.residentialContent,
-      residentialOther: propertyDetails.residentialOther,
-      commercialContent: propertyDetails.commercialContent,
-      commercialOther: propertyDetails.commercialOther,
-      landBuild: propertyDetails.landBuild,
-      submittedOn: propertyDetails.submittedOn,
-      propertyAddress: propertyDetails.propertyAddress,
-      propertyCity: propertyDetails.propertyCity,
-      propertyState: propertyDetails.propertyState,
-      propertyZip: propertyDetails.propertyZip,
-      propertyCounty: propertyDetails.propertyCounty,
-      ownerFirstName: propertyDetails.ownerFirstName,
-      ownerLastName: propertyDetails.ownerLastName,
-      ownerPhone: propertyDetails.ownerPhone,
-      ownerCell: propertyDetails.ownerCell,
-      ownerEmail: propertyDetails.ownerEmail,
-      beds: propertyDetails.beds,
-      baths: propertyDetails.baths,
-      askingPrice: propertyDetails.askingPrice,
-      propertyPrice: propertyDetails.propertyPrice,
-      modifyPrice: propertyDetails.modifyPrice,
-      repairs: propertyDetails.repairs,
-      Roof: propertyDetails.Roof,
-      Kitchen: propertyDetails.Kitchen,
-      Bath: propertyDetails.Bath,
-      Paint: propertyDetails.Paint,
-      Carpet: propertyDetails.Carpet,
-      Windows: propertyDetails.Windows,
-      Furnance: propertyDetails.Furnance,
-      Drywall: propertyDetails.Drywall,
-      Plumbing: propertyDetails.Plumbing,
-      Electrical: propertyDetails.Electrical,
-      repairs: propertyDetails.repairs,
-      otherRepairDetail: propertyDetails.otherRepairDetail,
-      occupancy: propertyDetails.occupancy,  
-      listedOnMLS: propertyDetails.listedOnMLS,
-      propertyOnMLS: propertyDetails.propertyOnMLS,
-      propertyDetail: propertyDetails.propertyDetail,
-      taxRecordLink: propertyDetails.taxRecordLink,
-      zillowLink: propertyDetails.zillowLink,
-      offerAmountAccepted: propertyDetails.offerAmountAccepted,    
-      approxARV: propertyDetails.approxARV,
-      status: propertyDetails.status
+      propertyType: propertyDetail.propertyType,
+      residentialUnit: propertyDetail.residentialUnit,
+      residentialContent: propertyDetail.residentialContent,
+      residentialOther: propertyDetail.residentialOther,
+      commercialContent: propertyDetail.commercialContent,
+      commercialOther: propertyDetail.commercialOther,
+      landBuild: propertyDetail.landBuild,
+      submittedOn: propertyDetail.submittedOn,
+      propertyAddress: propertyDetail.propertyAddress,
+      propertyCity: propertyDetail.propertyCity,
+      propertyState: propertyDetail.propertyState,
+      propertyZip: propertyDetail.propertyZip,
+      propertyCounty: propertyDetail.propertyCounty,
+      ownerFirstName: propertyDetail.ownerFirstName,
+      ownerLastName: propertyDetail.ownerLastName,
+      ownerPhone: propertyDetail.ownerPhone,
+      ownerCell: propertyDetail.ownerCell,
+      ownerEmail: propertyDetail.ownerEmail,
+      beds: propertyDetail.beds,
+      baths: propertyDetail.baths,
+      askingPrice: propertyDetail.askingPrice,
+      propertyPrice: propertyDetail.propertyPrice,
+      modifyPrice: propertyDetail.modifyPrice,
+      repairs: propertyDetail.repairs,
+      Roof: propertyDetail.Roof,
+      Kitchen: propertyDetail.Kitchen,
+      Bath: propertyDetail.Bath,
+      Paint: propertyDetail.Paint,
+      Carpet: propertyDetail.Carpet,
+      Windows: propertyDetail.Windows,
+      Furnance: propertyDetail.Furnance,
+      Drywall: propertyDetail.Drywall,
+      Plumbing: propertyDetail.Plumbing,
+      Electrical: propertyDetail.Electrical,
+      repairs: propertyDetail.repairs,
+      otherRepairDetail: propertyDetail.otherRepairDetail,
+      occupancy: propertyDetail.occupancy,  
+      listedOnMLS: propertyDetail.listedOnMLS,
+      propertyOnMLS: propertyDetail.propertyOnMLS,
+      propertyDetail: propertyDetail.propertyDetail,
+      taxRecordLink: propertyDetail.taxRecordLink,
+      zillowLink: propertyDetail.zillowLink,
+      offerAmountAccepted: propertyDetail.offerAmountAccepted,    
+      approxARV: propertyDetail.approxARV,
+      status: propertyDetail.status
 
 
     };
