@@ -39,26 +39,19 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
         controller: "Controller",
         resolve: temp
       }).then(function(modal) {
+    	console.log(modal);
         modal.element.modal();
+        console.log(modal.element.modal());
         modal.close.then(function(result) {
           // close Progress Here
         });
       });
     };
     show();
-
-    // $scope.trustSrc = function(src) {
-    //   return $sce.trustAsResourceUrl(src);
-    // }
-    // $scope.videoURL = {src:data.welcomePageURL};
-
- 
-
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src);
     }
     $scope.videoURL = {src:temp.welcomePageURL};
-
 }]);

@@ -2,6 +2,7 @@ angular.module('services.utility', []).factory('utility', [function () {
 
   var utility = {};
   utility.hasError = function(ngModelCtrl){
+	console.log("$Dirty Content:", ngModelCtrl.$dirty);
     return ngModelCtrl.$dirty && ngModelCtrl.$invalid;
   };
   utility.showError = function(ngModelCtrl, err){
