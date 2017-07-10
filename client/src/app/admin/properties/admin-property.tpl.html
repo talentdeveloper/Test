@@ -317,7 +317,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairs)}">
                             <label class="col-md-3 control-label" for="repairs">Repairs:*</label>
                             <div class="col-md-5">
-                                <input type="number" name="repairs" id="notific8_text" min="1" class="form-control" ng-model="propertyDetail.repairs" required>
+                                <input type="number" name="repairs" id="notific8_text" min="1" class="form-control" ng-model="propertyDetail.repairs" ng-change="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)" required>
                                 <span class="help-block" ng-show="showError(detailForm.repairs, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -363,7 +363,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherRepairDetail)}">
                             <label class="col-md-3 control-label" for="otherRepairDetail">Other Repairs/Detail:*</label>
                             <div class="col-md-5">
-                                <textarea type="text" name="otherRepairDetail" id="textarea" rows="15" class="form-control" ng-model="propertyDetail.otherRepairDetail" ng-keydown="limitRows()" required></textarea>
+                                <textarea type="text" name="otherRepairDetail" id="textarea" rows="15" class="form-control" ng-model="propertyDetail.otherRepairDetail" required></textarea>
                                 <span class="help-block" ng-show="showError(detailForm.otherRepairDetail, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -415,15 +415,25 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.offerAmountAccepted)}">
                             <label class="col-md-3 control-label" for="offerAmountAccepted">Offer Amount Accepted:*</label>
                             <div class="col-md-5">
-                                <input type="number" name="offerAmountAccepted" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.offerAmountAccepted" required>
+                                <input type="number" name="offerAmountAccepted" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.offerAmountAccepted" ng-change="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)" required>
                                 <span class="help-block" ng-show="showError(detailForm.offerAmountAccepted, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.approxARV)}">
                             <label class="col-md-3 control-label" for="approxARV">ARV:*</label>
                             <div class="col-md-5">
-                                <input type="number" name="approxARV" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.approxARV" required>
+                                <input type="number" name="approxARV" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.approxARV" ng-change="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)" style="margin-bottom: 10px" required>
                                 <span class="help-block" ng-show="showError(detailForm.approxARV, 'required')">This field is required</span>
+                                <div ng-show="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)">
+                                	<label>In order for us to purchase properties, they need to make investment sense. Would you like to override and still submit?</label>
+			                       	<div class="input-group">
+			                       		<input type="radio" ng-model="propertyDetail.selectCalculate" name="selectCalculate" value="Yes" required>&nbsp;&nbsp;Yes
+			                       		<input type="radio" ng-model="propertyDetail.selectCalculate" name=selectCalculate value="No" style="margin-left: 5px" required>&nbsp;&nbsp;No
+			                       		<div id="propertyCalculate" ng-show="propertyDetail.selectCalculate == 'Yes'">
+			                       			<input type="text" name="propertyCalculate" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyCalculate">
+			                       		</div>
+			                       	</div>
+                                </div>
                             </div>
                         </div>
 

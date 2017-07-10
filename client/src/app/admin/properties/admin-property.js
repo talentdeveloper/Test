@@ -49,6 +49,26 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 		}
 	};
 	
+	// calculate ARV
+	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
+		if(paramARV == '') {
+			paramARV = 0;
+		}
+		if(paramRepairs == '') {
+			paramRepairs = 0;
+		}
+		if(paramAmount == '') {
+			paramAmount = 0;
+		}
+		var value1 = 0.65 * paramARV;
+		var value2 = value1 - paramRepairs;
+		if(value2 > paramAmount) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+	
     var user = propertyDetails.user;
     console.log(propertyDetails.propertyAddress);
     console.log(user);
@@ -128,9 +148,9 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       zillowLink: propertyDetails.zillowLink,
       offerAmountAccepted: propertyDetails.offerAmountAccepted,    
       approxARV: propertyDetails.approxARV,
-      status: propertyDetails.status
-
-
+      status: propertyDetails.status,
+      selectCalculate: propertyDetails.selectCalculate,
+      propertyCalculate: propertyDetails.propertyCalculate
     };
     $scope.user = {
       username: user.name,

@@ -216,6 +216,8 @@ var property = {
         zillowLink: req.body.zillowLink,
         offerAmountAccepted: req.body.offerAmountAccepted,
         status: req.body.status,
+        selectCalculate: req.body.selectCalculate,
+        propertyCalculate: req.body.propertyCalculate,
         search: [
           req.body.propertyAddress,
           req.body.propertyCity,
