@@ -16,21 +16,7 @@
 
 <div class="row">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
-            <div class="dashboard-stat blue">
-                <div class="visual">
-                    <i class="fa fa-comments"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.submitted }} </div>
-                    <div class="desc"> Properties Submitted </div>
-                </div>
-                <!-- <a class="more" href="#"> View more
-                    <i class="m-icon-swapright m-icon-white"></i>
-                </a> -->
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat red">
                 <div class="visual">
                     <i class="fa fa-bar-chart-o"></i>
@@ -44,7 +30,7 @@
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat green">
                 <div class="visual">
                     <i class="fa fa-shopping-cart"></i>
@@ -58,35 +44,35 @@
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat purple">
                 <div class="visual">
                     <i class="fa fa-globe"></i>
                 </div>
                 <div class="details">
                     <div class="number" style="padding-top: 10px;"> {{ stats.offerAccepted }} </div>
-                    <div class="desc"> Offers Accepted </div>
+                    <div class="desc" style="padding-left: 5px;"> Offers Accepted </div>
                 </div>
                 <!-- <a class="more" href="#"> View more
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat green">
                 <div class="visual">
                     <i class="fa fa-shopping-cart"></i>
                 </div>
                 <div class="details">
                     <div class="number" style="padding-top: 10px;"> {{ stats.offerRejected }} </div>
-                    <div class="desc"> Offers Rejected </div>
+                    <div class="desc" style="padding-left: 5px;"> Offers Rejected </div>
                 </div>
                 <!-- <a class="more" href="#"> View more
                     <i class="m-icon-swapright m-icon-white"></i>
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat purple">
                 <div class="visual">
                     <i class="fa fa-globe"></i>
@@ -100,7 +86,7 @@
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat blue">
                 <div class="visual">
                     <i class="fa fa-comments"></i>
@@ -114,7 +100,7 @@
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat red">
                 <div class="visual">
                     <i class="fa fa-bar-chart-o"></i>
@@ -128,7 +114,7 @@
                 </a> -->
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat purple">
                 <div class="visual">
                     <i class="fa fa-globe"></i>
@@ -287,85 +273,7 @@
                                 <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
                                 <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
                             </div>                            
-                        </div>                                                
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.address)}">
-                            <label class="col-md-3 control-label" for="address">Address:*</label>
-                            <div class="col-md-5">
-                                <input type="text" name="address" id="notific8_text" class="form-control" ng-model="user.address" required>
-                                <span class="help-block" ng-show="showError(detailForm.address, 'required')">This field is required</span>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.city)}">
-                            <label class="col-md-3 control-label" for="city">City:*</label>
-                            <div class="col-md-5">
-                                <input type="text" name="city" id="notific8_text" class="form-control" ng-model="user.city" required>
-                                <span class="help-block" ng-show="showError(detailForm.city, 'required')">This field is required</span>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
-                            <label class="col-md-3 control-label" for="state">State:*</label>
-                            <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="user.state" required>
-                                    <option value="AL">AL</option>
-                                    <option value="AK">AK</option>
-                                    <option value="AZ">AZ</option>
-                                    <option value="AR">AR</option>
-                                    <option value="CA">CA</option>
-                                    <option value="CO">CO</option>
-                                    <option value="CT">CT</option>
-                                    <option value="DE">DE</option>
-                                    <option value="FL">FL</option>
-                                    <option value="GA">GA</option>
-                                    <option value="HI">HI</option>
-                                    <option value="ID">ID</option>
-                                    <option value="IL">IL</option>
-                                    <option value="IN">IN</option>
-                                    <option value="IA">IA</option>
-                                    <option value="KS">KS</option>
-                                    <option value="KY">KY</option>
-                                    <option value="LA">LA</option>
-                                    <option value="ME">ME</option>
-                                    <option value="MD">MD</option>
-                                    <option value="MA">MA</option>
-                                    <option value="MI">MI</option>
-                                    <option value="MN">MN</option>
-                                    <option value="MS">MS</option>
-                                    <option value="MO">MO</option>
-                                    <option value="MT">MT</option>
-                                    <option value="NE">NE</option>
-                                    <option value="NV">NV</option>
-                                    <option value="NH">NH</option>
-                                    <option value="NJ" selected="selected">NJ</option>
-                                    <option value="NM">NM</option>
-                                    <option value="NY">NY</option>
-                                    <option value="NC">NC</option>
-                                    <option value="ND">ND</option>
-                                    <option value="OH">OH</option>
-                                    <option value="OK">OK</option>
-                                    <option value="OR">OR</option>
-                                    <option value="PA">PA</option>
-                                    <option value="RI">RI</option>
-                                    <option value="SC">SC</option>
-                                    <option value="SD">SD</option>
-                                    <option value="TN">TN</option>
-                                    <option value="TX">TX</option>
-                                    <option value="UT">UT</option>
-                                    <option value="VT">VT</option>
-                                    <option value="VA">VA</option>
-                                    <option value="WA">WA</option>
-                                    <option value="WV">WV</option>
-                                    <option value="WI">WI</option>
-                                    <option value="WY">WY</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.zip)}">
-                            <label class="col-md-3 control-label" for="zip">Zip:*</label>
-                            <div class="col-md-5">
-                                <input type="text" name="zip" id="notific8_text" class="form-control" ng-model="user.zip" required>
-                                <span class="help-block" ng-show="showError(detailForm.zip, 'required')">This field is required</span>
-                            </div>
-                        </div>
+                        </div> 
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
                             <label class="col-md-3 control-label" for="phone">Phone:*</label>
                             <div class="col-md-5">
@@ -373,30 +281,6 @@
                                 <span class="help-block" ng-show="showError(detailForm.phone, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.paypal)}">
-                            <label class="col-md-3 control-label" for="paypal">Paypal Email:</label>
-                            <div class="col-md-5">
-                                <input type="text" name="paypal" id="notific8_text" class="form-control" ng-model="user.paypal">
-                            </div>
-                        </div>  
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
-                            <label class="col-md-3 control-label" for="occupation">Occupation:</label>
-                            <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="user.occupation">                                                      
-                                    <option value="agentbroker">Real Estate Agent/Broker</option>
-                                    <option value="mortgage">Mortgage/Loan Professional</option>
-                                    <option value="accountant">Accountant</option>
-                                    <option value="attorney">Attorney</option>
-                                    <option value="other" selected="selected">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherSpecify)}">
-                            <label class="col-md-3 control-label" for="otherSpecify">(if other, please specify):</label>
-                            <div class="col-md-5">
-                                <input type="text" name="otherSpecify" id="notific8_text" class="form-control" ng-model="user.otherSpecify">
-                            </div>
-                        </div> 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="markets">Your Markets:</label>
                             
@@ -502,7 +386,7 @@
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.whereHeardUs)}">
-                            <label class="col-md-3 control-label" for="whereHeardUs">Where did you hear about us?:</label>
+                            <label class="col-md-3 control-label" for="whereHeardUs">How did you hear about us?:</label>
                             <div class="col-md-5">
                                 <input type="text" name="whereHeardUs" id="notific8_text" class="form-control" ng-model="user.whereHeardUs">
                             </div>
