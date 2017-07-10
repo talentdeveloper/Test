@@ -317,7 +317,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairs)}">
                             <label class="col-md-3 control-label" for="repairs">Repairs:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="repairs" id="notific8_text" class="form-control" ng-model="propertyDetail.repairs" required>
+                                <input type="number" name="repairs" id="notific8_text" min="1" class="form-control" ng-model="propertyDetail.repairs" required>
                                 <span class="help-block" ng-show="showError(detailForm.repairs, 'required')">This field is required</span>
                             </div>
                         </div>
