@@ -28,8 +28,8 @@ angular.module('account.index').config(['$routeProvider', 'securityAuthorization
     });
 }]);
 var temp = '';
-angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoURL', '$sce', 'ModalService',
-  function($scope, data, $sce, ModalService){
+angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoURL', '$sce', 'ModalService', 'accountResource',
+  function($scope, data, $sce, ModalService, accountResource){
     console.log(data.welcomePageURL);
     temp = data;
 
@@ -44,7 +44,14 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
         console.log(modal.element.modal());
         modal.close.then(function(result) {
           // close Progress Here
+          quote();
         });
+      });
+    };
+
+    var quote = function() {
+      accountResource.getQuote().then(funtion(result) {
+
       });
     };
     show();
