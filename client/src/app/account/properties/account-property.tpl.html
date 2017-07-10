@@ -80,6 +80,9 @@
                     <div class="col-md-5">
                         <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Upload </button>
                     </div>
+                    <div ng-show="propertyDetail.photoURL != null">
+	                   	<label>+1 pt</label>
+                   	</div>
                 </div>
             </form>
 
@@ -180,6 +183,9 @@
                                 <input type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyAddress" required>
                                 <span class="help-block" ng-show="showError(detailForm.propertyAddress, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.propertyAddress != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>                        
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyCity)}">
                             <label class="col-md-3 control-label" for="propertyCity">City:*</label>
@@ -286,6 +292,9 @@
                                 <input type="text" name="ownerFirstName" id="notific8_text" class="form-control" ng-model="propertyDetail.ownerFirstName" required>
                                 <span class="help-block" ng-show="showError(detailForm.ownerFirstName, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.ownerFirstName != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.ownerLastName)}">
                             <label class="col-md-3 control-label" for="ownerLastName">Owner Last Name:*</label>
@@ -293,6 +302,9 @@
                                 <input type="text" name="ownerLastName" id="notific8_text" class="form-control" ng-model="propertyDetail.ownerLastName" required>
                                 <span class="help-block" ng-show="showError(detailForm.ownerLastName, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.ownerLastName != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.ownerPhone)}">
                             <label class="col-md-3 control-label" for="ownerPhone">Owner Phone:*</label>
@@ -300,6 +312,9 @@
                                 <input type="text" name="ownerPhone" id="notific8_text" class="form-control" ng-model="propertyDetail.ownerPhone" required>
                                 <span class="help-block" ng-show="showError(detailForm.ownerPhone, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.ownerPhone != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.ownerCell)}">
                             <label class="col-md-3 control-label" for="ownerCell">Owner Cell:*</label>
@@ -314,6 +329,9 @@
                                 <input type="email" name="ownerEmail" id="notific8_text" class="form-control" ng-model="propertyDetail.ownerEmail" required>
                                 <span class="help-block" ng-show="showError(detailForm.ownerEmail, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.ownerEmail != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.beds)}">
                             <label class="col-md-3 control-label" for="beds">Beds:*</label>
@@ -335,11 +353,14 @@
                                 <input type="text" name="askingPrice" id="notific8_text" class="form-control" value="" ng-model="propertyDetail.askingPrice" required>
                                 <span class="help-block" ng-show="showError(detailForm.askingPrice, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.askingPrice != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group">
                        	 	<label class="col-md-3 control-label" for="askingPrice"></label>
                             <div class="col-md-5">
-                            	<div ng-show="showError(detailForm.askingPrice, 'required') != ''">
+                            	<div ng-show="propertyDetail.askingPrice != null">
                                 	<label>Does this fit our cash offer BUY formula:</label>
                                 	<label>ARV X 65% - repairs = Good Deal?</label>
                                 	<div class="input-group">
@@ -359,6 +380,9 @@
                                 <input type="number" name="repairs" id="notific8_text" min="1" class="form-control" ng-model="propertyDetail.repairs" ng-change="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)" required>
                                 <span class="help-block" ng-show="showError(detailForm.repairs, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.repairs != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairNeed)}">
                             <label class="col-md-3 control-label" for="repairNeed">Repair Needed:*</label>
@@ -488,6 +512,9 @@
                                 <textarea type="text" name="propertyDetail" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyDetail" required></textarea>
                                 <span class="help-block" ng-show="showError(detailForm.propertyDetail, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.propertyDetail != null">
+                            	<label>+1 pt</label>
+                            </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.taxRecordLink)}">
                             <label class="col-md-3 control-label" for="taxRecordLink">Tax Record Link:*</label>
@@ -509,6 +536,9 @@
                                 <input type="number" name="offerAmountAccepted" id="notific8_text" class="form-control" min="1" ng-model="propertyDetail.offerAmountAccepted" ng-change="calcFunc(propertyDetail.approxARV, propertyDetail.repairs, propertyDetail.offerAmountAccepted)" required>
                                 <span class="help-block" ng-show="showError(detailForm.offerAmountAccepted, 'required')">This field is required</span>
                             </div>
+                            <div ng-show="propertyDetail.offerAmountAccepted != null">
+			                   	<label>+1 pt</label>
+		                   	</div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.approxARV)}">
                             <label class="col-md-3 control-label" for="approxARV">ARV:*</label>
