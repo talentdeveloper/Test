@@ -54,6 +54,25 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 			angular.element('#textarea').val(modifiedText.join('\n'));
 		}
 	};
+	// calculate ARV
+	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
+		if(paramARV == '') {
+			paramARV = 0;
+		}
+		if(paramRepairs == '') {
+			paramRepairs = 0;
+		}
+		if(paramAmount == '') {
+			paramAmount = 0;
+		}
+		var value1 = 0.65 * paramARV;
+		var value2 = value1 - paramRepairs;
+		if(value2 > paramAmount) {
+			return true;
+		} else {
+			return false;
+		}
+	};
     //local vars
    // $scope.getFileDetails = function (e) {
 

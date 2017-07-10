@@ -50,6 +50,8 @@ exports = module.exports = function(app, mongoose) {
     zillowLink: { type: String, default: '' },
     offerAmountAccepted: { type: Number, default: '' },    
     approxARV: { type: Number, default: '' },
+    selectCalculate: { type: String, default: '' },
+    propertyCalculate: { type: String, default: '' },
     status: { type: String, default: ''},
     photoURL: {type: String, default: ''}
     

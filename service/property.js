@@ -144,6 +144,8 @@ var property = {
         zillowLink: req.body.zillowLink,
         offerAmountAccepted: req.body.offerAmountAccepted,    
         approxARV: req.body.approxARV,
+        selectCalculate: req.body.selectCalculate,
+        propertyCalculate: req.body.propertyCalculate,
         status: 'new',
         search: [
           req.body.user,
