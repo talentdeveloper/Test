@@ -55,10 +55,13 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     console.log('jojojojojojojojojo');
     return $http.get(baseUrl + '/resources/training').then(processResponse, processError);
   };
+  resourece.getQuote = funtion() {
+    return $http.get(baseUrl + '/getquote').then(processResponse, processError);
+  };
 
   resource.getPropertyStatuses = function() {
     return $http.get(baseUrl + '/account/propertystatuses').then(processResponse, processError);
-  }
+  };
 
   resource.resendVerification = function(email){
     return $http.post(baseUrl + '/account/verification', {email: email}).then(processResponse, processError);

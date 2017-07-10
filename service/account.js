@@ -104,6 +104,15 @@ var account = {
       res.status(200).json(propertyStatuses);
     });
   },
+
+  getQuote: function(req, res, next) {
+    req.app.db.models.Quote.find({}).exec(function(err, quotes){
+      if (err) {
+        return err;
+      }
+      res.status(200).json(quotes);
+    });
+  },
   
   getAccountDetails: function(req, res, next){
     var outcome = {};
