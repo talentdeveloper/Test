@@ -746,6 +746,22 @@ var user = {
     });
 
     workflow.emit('validate');
-  }
+  },
+
+  getSubmittedProperties: function(req, res, next) {
+    console.log(req.params.id);
+  
+    req.app.db.models.Property.find({ "user.id" : req.params.id }).exec(function(err, property) {
+      if (err) {
+        console.log('Error occured');
+        return next(err);
+      }
+      console.log(property);
+      res.status(200).json(property);
+      
+    });
+
+
+  } 
 };
 module.exports = user;

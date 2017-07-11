@@ -305,5 +305,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     var url = adminPropertiesUrl + '/' + _id;
     return $http.delete(url).then(processResponse, processError);
   };
+
+  resource.getSubmittedProperties = function(_id) {
+    var url = userUrl + '/' + _id + '/submitted';
+    return $http.get(url).then(processResponse, processError);
+  };
   return resource;
 }]);

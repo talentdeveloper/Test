@@ -37,7 +37,7 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
   function($scope, $route, $location, utility, adminResource, user) {
     // local vars
     adminResource.getAccountPropertyStats(user._id).then(function(accountPropertyStats) {
-      console.log(accountPropertyStats['PropertySubmitted']);
+     
       $scope.status = {
         submitted: accountPropertyStats['PropertySubmitted'],
         new: accountPropertyStats['New'],
@@ -52,7 +52,7 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
     });
 
 
-    console.log(user);
+    
     var closeAlert = function(alert, ind){
       alert.splice(ind, 1);
     };
@@ -206,8 +206,37 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
         });
       }
     };
+    $scope.deleteProperty = function(id) {
+      $scope.deleteAlerts = [];
+      if(confirm('Are you sure?')){
+        adminResource.deleteProperty(id).then(function(result){
+          if(result.success){
+            // redirect to admin users index page
+            $location.path('/admin/users/' + user._id);
+            $route.reload();
+          }else{
+            //error due to server side validation
+            angular.forEach(result.errors, function(err, index){
+              $scope.deleteAlerts.push({ type: 'danger', msg: err});
+            });
+          }
+        }, function(x){
+          $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting property: ' + x });
+        });
+      }
+    };
     //initialize
     $scope.user = user; //from resolved data
     $scope.user.isActive = $scope.user.isActive || null;
+
+    var getProperty = function() {
+      console.log(user._id);
+      adminResource.getSubmittedProperties(user._id).then(function(result) {
+        $scope.properties = result;
+      })
+    };
+
+
+    getProperty();
   }
 ]);

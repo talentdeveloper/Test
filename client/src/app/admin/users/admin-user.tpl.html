@@ -147,10 +147,10 @@
     <div class="col-md-12">
         <div class="profile-sidebar">
         	<div class="profile-userpic">
-        		<img class="img-responsive" alt="" src="/img/property/1499794873894_profile_user.jpg">
+        		<img class="img-responsive" alt="" ng-src="{{ user.photoURL }}">
         	</div>
         	<div class="profile-usertitle">
-        		<div class="profile-usertitle-name">Marcus Doe</div>
+        		<div class="profile-usertitle-name">{{ user.roles.account.name.full }}</div>
         	</div>
         </div>
         <div class="col-md-6">
@@ -168,16 +168,16 @@
         			</thead>
         			<tbody style="padding: 7px">
         				<tr style="padding: 7px">
-        					<td style="padding: 7px">Name:</td>
-        					<td style="padding: 7px">Jack</td>
+        					<td style="padding: 7px"> Username:</td>
+        					<td style="padding: 7px">{{ user.username }}</td>
         				</tr>
         				<tr style="padding: 7px">
         					<td style="padding: 7px">Email:</td>
-        					<td style="padding: 7px">aaa@email.com</td>
+        					<td style="padding: 7px">{{ user.email }}</td>
         				</tr>
         				<tr style="padding: 7px">
         					<td style="padding: 7px">Phone:</td>
-        					<td style="padding: 7px">123456789</td>
+        					<td style="padding: 7px">{{ user.phone }}</td>
         				</tr>
         				<tr style="padding: 7px">
         					<td style="padding: 7px">Social Profile Links:</td>
@@ -192,13 +192,7 @@
        		<div class="portlet-body">
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
 					<thead>
-                    	<tr>
-                        	<th>
-                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                	<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                	<span></span>
-                                </label>
-                            </th>
+                    	<tr>                        	
                             <th> Member Rank </th>
                             <th> Badge </th>
                             <th> Joined Date </th>
@@ -206,17 +200,11 @@
                          </tr>
                     </thead>
                     <tbody>
-                    	<tr class="odd gradeX">
-                    		<td>
-                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                	<input type="checkbox" class="checkboxes" value="1" />
-                                    <span></span>
-                                </label>
-                            </td>
-                            <td> Chihuahua </td>
-                            <td> Adv Birddog </td>
-                            <td style="text-align: center"> 2/3/2016 </td>
-                            <td style="text-align: center"> 1 </td>
+                    	<tr class="odd gradeX">                    		
+                            <td> {{ user.memberRanking }} </td>
+                            <td> {{ user.badge }} </td>
+                            <td style="text-align: center"> {{ user.timeCreated }} </td>
+                            <td style="text-align: center"> {{ user.probationStrike }} </td>
                     	</tr>
                     </tbody>
 				</table>
@@ -321,7 +309,7 @@
                             <button type="button" class="btn btn-circle green-haze btn-sm">Kick Out of Program</button>        
                         </li>
                         <li style="float: left; width: 33%;">
-                            <button type="button" class="btn btn-circle btn-danger btn-sm">Delete User</button>        
+                            <button type="button" class="btn btn-circle btn-danger btn-sm" ng-click="deleteUser()">Delete User</button>        
                         </li>    
                     </ul>
                 </div>       
@@ -334,13 +322,7 @@
         	<div class="portlet-body">
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
 					<thead>
-                    	<tr>
-                        	<th>
-                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                	<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                	<span></span>
-                                </label>
-                            </th>
+                    	<tr>                        
                             <th> Thumbnail </th>
                             <th> Address </th>
                             <th> City </th>
@@ -350,23 +332,15 @@
                          </tr>
                     </thead>
                     <tbody>
-                    	<tr class="odd gradeX">
-                    		<td>
-                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                	<input type="checkbox" class="checkboxes" value="1" />
-                                    <span></span>
-                                </label>
-                            </td>
-                            <td> <img src="{{settings.layoutPath}}/img/logo-big.png" alt="logo" class="logo-default"> </td>
-                            <td> 123 Main St </td>
-                            <td> Rockaway </td>
-                            <td><span class="label label-sm label-success"> Actively Working </span></td>
-                            <td style="text-align: center"> 12 Jan 2012 </td>
-                            <td>
-                               	<div style="margin-bottom: 5px">
-                                   	<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-edit"></i> Edit </button>
-                               	</div>
-                               	<button class="btn btn-sm red filter-cancel"><i class="fa fa-remove"></i> Delete </button>
+                    	<tr class="odd gradeX" ng-repeat="property in properties">                    		
+                            <td> <img ng-src="{{ property.photoURL}}" height="80" width="80"> </td>
+                            <td ng-bind="property.propertyAddress"></td>
+                            <td ng-bind="property.propertyCity"></td>
+                            <td ng-bind="property.status"></td>
+                            <td style="text-align: center"  ng-bind="property.submittedOn"></td>
+                            <td>                               	
+                                <a class="btn btn-default btn-sm" ng-href="/admin/properties/{{property._id}}"> Edit </a>                              
+                               	<button type="button" class="btn btn-danger" ng-click="deleteProperty(property._id)">Delete</button>
                            	</td>
                     	</tr>
                     </tbody>
