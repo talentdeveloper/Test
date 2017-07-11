@@ -117,7 +117,9 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 			return false;
 		}
 	};
+	// get data sum point
 	$scope.sumPoint = propertyDetails.sumPoint;
+	
     var user = propertyDetails.user;
     console.log(propertyDetails.propertyAddress);
     console.log(user);
