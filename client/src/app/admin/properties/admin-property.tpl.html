@@ -66,43 +66,22 @@
 	                            	<select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.propertyType" style="margin-bottom: 15px"> 
 	                                	<option value=""></option>                                                     
 	                                    <option value="residential">Residential</option>
+	                                    <option value="multi-family">Multi-Family</option>
 	                                    <option value="commercial">Commercial</option>
 	                                    <option value="land">Land</option>                                    
 	                                </select>
                             	</div>
-                            	<!-- Select Residential -->
-                                <div ng-show="propertyDetail.propertyType == 'residential'">
+                            	<!-- Select multi-family -->
+                                <div ng-show="propertyDetail.propertyType == 'multi-family'">
                                 	<div id="selectUnit">
-                                		<label>How Many Units?</label>
-		                                <select class="form-control" ng-model="propertyDetail.residentialUnit" style="width: 70px; margin-bottom: 10px">
-		                                	<option value="1">1</option>
+		                                <select class="form-control" ng-model="propertyDetail.multiFamilyUnit" style="width: 70px; margin-bottom: 10px">
 		                                	<option value="2">2</option>
 		                                	<option value="3">3</option>
 		                                	<option value="4">4</option>
 		                                </select>
                                 	</div>
-                                	<div ng-show="propertyDetail.residentialUnit == '1'">
-                                		<div id="selectUnitContent">
-	                                		<select class="form-control" ng-model="propertyDetail.residentialContent" style="width: 175px; margin-bottom: 10px">
-			                                	<option value="Cape">Cape</option>
-			                                	<option value="Colonial">Colonial</option>
-			                                	<option value="Condo/Townhouse">Condo/Townhouse</option>
-			                                	<option value="Detached">Detached</option>
-			                                	<option value="Ranch">Ranch</option>
-			                                	<option value="Bi-Level">Bi-Level</option>
-			                                	<option value="Duplex">Duplex</option>
-			                                	<option value="Triplex">Triplex</option>
-			                                	<option value="Victorian">Victorian</option>  
-			                                	<option value="Other">Other</option>                                                   
-			                                </select>
-                                		</div>
-                                		<div id="textOther" ng-show="propertyDetail.residentialContent == 'Other'">
-		                                	<input type="text" name="residentialOther" class="form-control" ng-model="propertyDetail.residentialOther" style="width: 175px;">
-		                                	<span class="help-block" ng-show="showError(detailForm.residentialOther, 'required')">This field is required</span>
-	                                	</div>
-                                	</div>
                                 </div>
-                                <!-- End Residential -->
+                                <!-- End multi-family -->
                                 <!-- Select Commercial -->
                                 <div ng-show="propertyDetail.propertyType == 'commercial'">
 	                                <div id="selectContent">
@@ -112,6 +91,10 @@
 			                               	<option value="Other">Other</option>                                                   
 		                               	</select>
 	                           		</div>
+	                           		<div id="textOther" ng-show="propertyDetail.commercialContent == 'Apt Complex'">
+	                                	<input type="number" name="commercialComplex" class="form-control" ng-model="propertyDetail.commercialComplex" min="1" style="width: 175px;">
+	                                	<span class="help-block" ng-show="showError(detailForm.commercialComplex, 'required')">This field is required</span>
+                                	</div>
 	                           		<div id="textOther" ng-show="propertyDetail.commercialContent == 'Other'">
 	                                	<input type="text" name="commercialOther" class="form-control" ng-model="propertyDetail.commercialOther" style="width: 175px;">
 	                                	<span class="help-block" ng-show="showError(detailForm.commercialOther, 'required')">This field is required</span>

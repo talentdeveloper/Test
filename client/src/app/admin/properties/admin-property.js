@@ -105,10 +105,9 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
     };
     $scope.propertyDetail = {
       propertyType: propertyDetails.propertyType,
-      residentialUnit: propertyDetails.residentialUnit,
-      residentialContent: propertyDetails.residentialContent,
-      residentialOther: propertyDetails.residentialOther,
+      multiFamilyUnit: propertyDetails.multiFamilyUnit,
       commercialContent: propertyDetails.commercialContent,
+      commercialComplex: propertyDetails.commercialComplex,
       commercialOther: propertyDetails.commercialOther,
       landBuild: propertyDetails.landBuild,
       submittedOn: propertyDetails.submittedOn,
