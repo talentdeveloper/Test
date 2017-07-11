@@ -38,6 +38,55 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
     // local vars
     //var property = propertyDetails.property;
 	
+	// Address automatic Complete
+	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+		$scope.propertyDetail = {};
+		var componentForm = {
+	        street_number: 'short_name',
+	        route: 'long_name',
+	        locality: 'long_name',
+	        administrative_area_level_1: 'short_name',
+	        country: 'long_name',
+	        postal_code: 'short_name'
+		};
+		
+		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
+			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
+			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+			switch (addressType) {
+			case 'postal_code': // zip code
+				$scope.propertyDetail.propertyZip = val;
+				break;
+			case 'street_number': // address1
+				$scope.propertyDetail.propertyAddress = val;
+				break;
+			case 'route': // address2
+				if ($scope.propertyDetail.propertyAddress == undefined) {
+					$scope.propertyDetail.propertyAddress = "";
+				}
+				$scope.propertyDetail.propertyAddress += " " + val;
+				break;
+			case 'locality': // city
+				$scope.propertyDetail.propertyCity = val;
+				break;
+			case 'administrative_area_level_1': // state
+				$scope.propertyDetail.propertyState = val;
+				break;
+			case 'administrative_area_level_2': // county
+				$scope.propertyDetail.propertyCounty = val;
+				break;
+			case 'administrative_area_level_3':
+				break;
+			case 'country':
+				break;
+			}
+		}
+//		var location = $scope.autocomplete.getPlace().geometry.location;
+//	    $scope.lat = location.lat();
+//	    $scope.lng = location.lng();
+	    $scope.$apply();
+	});
+	
 	// textarea row fixed 15 lines
 	$scope.limitRows = function() {
 		var rows = angular.element('#textarea').val().split('\n').length;
@@ -68,7 +117,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 			return false;
 		}
 	};
-	
+	$scope.sumPoint = propertyDetails.sumPoint;
     var user = propertyDetails.user;
     console.log(propertyDetails.propertyAddress);
     console.log(user);
@@ -149,7 +198,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       approxARV: propertyDetails.approxARV,
       status: propertyDetails.status,
       selectCalculate: propertyDetails.selectCalculate,
-      propertyCalculate: propertyDetails.propertyCalculate
+      propertyCalculate: propertyDetails.propertyCalculate,
     };
     $scope.user = {
       username: user.name,

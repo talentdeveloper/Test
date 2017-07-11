@@ -175,7 +175,8 @@ var property = {
           req.body.approxARV,
           req.body.status,
         ],
-        photoURL: req.body.photoURL
+        photoURL: req.body.photoURL,
+        sumPoint: req.body.sumPoint
       };
       console.log(req.body.beds);
       console.log(req.body.photoURL);

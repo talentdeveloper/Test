@@ -20,7 +20,6 @@ angular.module('account.properties.submit').config(['$routeProvider', 'securityA
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       }
@@ -92,7 +91,40 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	    $scope.lat = location.lat();
 	    $scope.lng = location.lng();
 	    $scope.$apply();
-	}); 
+	});
+	// function sum Point
+	var sumPoint = function() {
+		var sum = 0;
+		if ($scope.propertyDetail.photoURL != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.propertyAddress != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerFirstName != null && $scope.propertyDetail.ownerLastName != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerPhone != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerEmail != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.askingPrice != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.repairs != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.propertyDetail != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.offerAmountAccepted != null) {
+			sum += 2;
+		}
+		
+		return sum;
+	};
 	// textarea row fixed 15 lines
 	$scope.limitRows = function() {
 		var rows = angular.element('#textarea').val().split('\n').length;
@@ -105,13 +137,13 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	};
 	// calculate ARV
 	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
-		if(paramARV == '') {
+		if(paramARV == null) {
 			paramARV = 0;
 		}
-		if(paramRepairs == '') {
+		if(paramRepairs == null) {
 			paramRepairs = 0;
 		}
-		if(paramAmount == '') {
+		if(paramAmount == null) {
 			paramAmount = 0;
 		}
 		var value1 = 0.65 * paramARV;
@@ -160,8 +192,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
    $scope.file = {};
    var propertyURL = '';
     var submitPhotoForm = function() {
-        console.log($scope.file);
-        console.log('$scope.file');
         $scope.uploading = true;
         restResource.propertyUpload($scope.file).then(function(data) {
           if (data.data.success) {
@@ -169,11 +199,8 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
             $scope.alert = 'alert alert-success';
             $scope.message = data.data.message;
             $scope.file = {};
-            console.log(data.data.photoURL);
-            // console.log($scope.propertyDetail);
    
             propertyURL = data.data.photoURL;
-            console.log($scope.propertyDetail);
           } else {
             $scope.uploading = false;
             $scope.alert = 'alert alert-danger';
@@ -196,7 +223,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         });
     };
     $scope.photoChanged = function(files) {
-      console.log(files);
       if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
         $scope.uploading = true;
         var file = files[0];
@@ -222,11 +248,10 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
       username: propertyDetails.user.username,
       email:    propertyDetails.user.email
     };
-    console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
-      console.log($scope.propertyDetail);
       $scope.propertyDetail.photoURL = propertyURL;
+      $scope.propertyDetail.sumPoint = sumPoint();
       restResource.addAccountProperty($scope.propertyDetail).then(function(data){
         if(data.success){
           $scope.alerts.detail.push({
@@ -255,7 +280,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
-    console.log(user);
     // $scope.propertyDetail = {
 
   		// propertyType: property.propertyType,
@@ -290,8 +314,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     //   username: user.username,
     //   email:    user.email
     // };
-    console.log($scope.user);
-    console.log(user);
     $scope.pass = {};
     $scope.social = null;
     if(!angular.equals({}, SOCIAL)){
@@ -336,10 +358,8 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
       switch (ngFormCtrl.$name){
         case 'detailForm':
           submitDetailForm();
-          console.log('button pressed');
           break;
         case 'photoForm':
-        console.log('button pressed');
           submitPhotoForm();
           break;
         case 'passwordForm':

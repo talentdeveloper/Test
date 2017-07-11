@@ -52,7 +52,8 @@ exports = module.exports = function(app, mongoose) {
     selectCalculate: { type: String, default: '' },
     propertyCalculate: { type: String, default: '' },
     status: { type: String, default: ''},
-    photoURL: {type: String, default: ''}
+    photoURL: {type: String, default: ''},
+    sumPoint: {type: Number, default: ''}
   });
 
   propertySchema.plugin(require('./plugins/pagedFind'));
