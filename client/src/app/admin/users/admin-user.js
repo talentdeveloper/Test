@@ -1,4 +1,4 @@
-angular.module('admin.users.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'directives.serverError', 'ui.bootstrap']);
+angular.module('admin.users.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource']);
 angular.module('admin.users.detail').config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when('/admin/users/:id', {
