@@ -38,10 +38,10 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
   function($scope, $route, $location, utility, accountResource, propertyDetail) {
     // local vars
     //var property = propertyDetails.property;
-	
+	$scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		$scope.propertyDetail = {};
+		
 		var componentForm = {
 	        street_number: 'short_name',
 	        route: 'long_name',

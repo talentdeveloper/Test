@@ -41,15 +41,28 @@ angular.module('account.settings').directive('fileModel', ['$parse', function($p
   };
 }]);
 
-angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL', '$http',
-  function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http){
+angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL', '$http', '$sce',
+  function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
     console.log(user._id);
 
     
     var getZillowURL = function() {
-      $http.jsonp('https://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA?callback=JSON_CALLBACK')
+      // var url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA";
+      // var trustedUrl = $sce.trustAsResourceUrl(url);
+      // $http.jsonp(trustedUrl, {jsonpCallbackParam: 'callback'})
+      // .success(function (result) {
+      //   $scope.mortgageLocation = result;
+      //   console.log('success!');
+      //   console.log(result);
+      // })
+      // .error(function (data, status) {
+      //   console.log('error!');
+      //   console.log(data);
+      // });
+
+      $http.jsonp('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA&output=jsonp&callback=JSONP_CALLBACK')
       .success(function (result) {
         $scope.mortgageLocation = result;
         console.log('success!');

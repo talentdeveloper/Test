@@ -44,9 +44,10 @@ angular.module('account.properties.submit').directive('fileModel', ['$parse', fu
 angular.module('account.properties.submit').controller('AccountPropertySubmitCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyDetails', 'SOCIAL', '$timeout',
 	function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
 	
+  $scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		$scope.propertyDetail = {};
+		
 		var componentForm = {
 	        street_number: 'short_name',
 	        route: 'long_name',
