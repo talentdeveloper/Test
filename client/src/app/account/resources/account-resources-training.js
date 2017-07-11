@@ -18,12 +18,10 @@ angular.module('account.resoureces.training').config(['$routeProvider', 'securit
               return $q.reject();
             })
             .catch(function(){
-             // console.log('hererererererereer');
               redirectUrl = redirectUrl || '/account';
               $location.path(redirectUrl);
               return $q.reject();
             });
-console.log('hererererererereer');
           return promise;
         }]
 
@@ -32,9 +30,11 @@ console.log('hererererererereer');
 }]);
 angular.module('account.resoureces.training').controller('instructionCtrl', [ '$scope', 'getinstructionURL', '$sce',
   function($scope, data, $sce){
+	console.log(data);
     $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   }
-    $scope.instructionURL = {src:data.instructionURL};
-    $scope.description = data.description;
+    $scope.instructionURL = {src:data[0].videoURL};
+    $scope.description = data[0].videoDescription;
+    $scope.thumbnail = data[0].thumbnailURL;
 }]);

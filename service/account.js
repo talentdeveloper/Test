@@ -615,7 +615,7 @@ var account = {
   },
   findTrainingVideoURL: function (req, res, next) {
     console.log('logged here asdfasdfasd');
-    req.app.db.models.Video.findOne({"videoURL": 'yes'}).exec(function(err, insdata) {
+    req.app.db.models.InstructionVideo.find({}).exec(function(err, insdata) {
       console.log(insdata);
       if (err) {
         console.log('errorrrr');

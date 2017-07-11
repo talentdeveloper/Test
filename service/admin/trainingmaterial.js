@@ -60,7 +60,8 @@ var trainingmaterial = {
     workflow.on('createVideoURL', function () {
       var fieldsToSet = {        
        videoURL: req.body.videoURL,
-       videoDescription: req.body.videoDescription
+       videoDescription: req.body.videoDescription,
+       thumbnailURL: req.body.thumbnailURL
       };
       console.log("Body:::", req.body);
       req.app.db.models.InstructionVideo.create(fieldsToSet, function(err, instructionVideo) {

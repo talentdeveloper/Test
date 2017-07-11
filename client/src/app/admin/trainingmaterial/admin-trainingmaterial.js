@@ -47,13 +47,20 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 	};
 	
 	// youtube Instruction Video URL parssing
+	var instructID = '';
 	var parseInstructVideoURL = function() {
-		var instructURL = $scope.videoURL.instructionURL;
+		var instructURL = $scope.newVideo.videoURL;
 		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
 		
 		var matches = regex.exec(instructURL);
-		var instructID = matches[1];
+		instructID = matches[1];
 		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
+		
+		return url;
+	};
+	// youtube Instruction Video Thumbnail URL parsing
+	var getThumbURL = function() {
+		var url = 'http://img.youtube.com/vi/' + instructID + '/default.jpg';
 		
 		return url;
 	};
@@ -96,6 +103,8 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
     };
 
     $scope.addVideo = function(){
+      $scope.newVideo.videoURL = parseInstructVideoURL();
+      $scope.newVideo.thumbnailURL = getThumbURL();
       adminResource.addVideo($scope.newVideo).then(function(data){
         console.log("trying to add videos");  
         console.log($scope.newVideo);
