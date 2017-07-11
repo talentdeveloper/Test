@@ -47,7 +47,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		console.log("Address:!!!!!!!!!!!", $scope.autocomplete.getPlace().address_components);
 		$scope.propertyDetail = {};
 		var componentForm = {
 	        street_number: 'short_name',
@@ -62,29 +61,30 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
 			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
 			switch (addressType) {
-			case 'postal_code':
+			case 'postal_code': // zip code
 				$scope.propertyDetail.propertyZip = val;
 				break;
-			case 'street_number':
+			case 'street_number': // address1
 				$scope.propertyDetail.propertyAddress = val;
 				break;
-			case 'route':
-				
+			case 'route': // address2
+				if ($scope.propertyDetail.propertyAddress == undefined) {
+					$scope.propertyDetail.propertyAddress = "";
+				}
+				$scope.propertyDetail.propertyAddress += " " + val;
 				break;
-			case 'locality':
+			case 'locality': // city
 				$scope.propertyDetail.propertyCity = val;
 				break;
-			case 'administrative_area_level_1':
+			case 'administrative_area_level_1': // state
 				$scope.propertyDetail.propertyState = val;
 				break;
-			case 'administrative_area_level_2':
+			case 'administrative_area_level_2': // county
 				$scope.propertyDetail.propertyCounty = val;
 				break;
 			case 'administrative_area_level_3':
-				
 				break;
 			case 'country':
-				
 				break;
 			}
 		}
