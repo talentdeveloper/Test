@@ -17,6 +17,7 @@ exports = module.exports = function(app, mongoose) {
   require('./schema/Video')(app, mongoose);
   require('./schema/StatusType')(app, mongoose);
   require('./schema/Quote')(app, mongoose);
-
+  require('./schema/InstructionVideo')(app, mongoose);
+  
   
 };

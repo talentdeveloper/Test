@@ -10,6 +10,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   var adminPropertiesUrl = baseUrl + '/admin/properties';
   var adminTrainingURL = baseUrl + '/admin/trainingmaterial';
   var adminStatusConfiguresURL = baseUrl + '/admin/statusconfigures';
+  var adminInstructionVideosURL = baseUrl + '/admin/instructionvideos';
 
 
 
@@ -163,6 +164,26 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.findVideoURL = function() {
     return $http.get(adminTrainingURL).then(processResponse, processError);
   };
+  
+  resource.findInstructionVideos = function() {
+    console.log("trying to connect node ");
+    return $http.get(adminInstructionVideosURL).then(processResponse, processError);
+  };
+  resource.addVideo = function(data) {
+    console.log(data);
+    return $http.post(adminInstructionVideosURL, data).then(processResponse, processError);
+  }
+  resource.deleteVideo = function(_id) {
+    return $http.delete(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
+  }
+  resource.findInstructionVideo = function(_id) {
+    return $http.get(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
+  }
+  resource.updateInstructionVideo = function(_id, data) {
+    return $http.put(adminInstructionVideosURL + '/' + _id, data).then(processResponse, processError);
+  }
+
+
   resource.findStatusConfigures = function() {
 
     return $http.get(adminStatusConfiguresURL).then(processResponse, processError);

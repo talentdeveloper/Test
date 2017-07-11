@@ -61,20 +61,6 @@ var statusconfigure = {
       workflow.emit('createStatusType');
     });
 
-    workflow.on('duplicateUsernameCheck', function () {
-      req.app.db.models.User.findOne({username: req.body.username}, function (err, user) {
-        if (err) {
-          return workflow.emit('exception', err);
-        }
-
-        if (user) {
-          workflow.outcome.errors.push('That username is already taken.');
-          return workflow.emit('response');
-        }
-
-        workflow.emit('createUser');
-      });
-    });
 
     workflow.on('createStatusType', function () {
       var fieldsToSet = {        

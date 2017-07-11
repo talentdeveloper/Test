@@ -260,6 +260,13 @@ exports = module.exports = function(app, passport) {
   app.get('/api/admin/trainingmaterial', adminTraining.findVideoURL);
   app.put('/api/admin/trainingmaterial', adminTraining.updateVideo);
 
+  app.get('/api/admin/instructionvideos', adminTraining.find);
+  app.get('/api/admin/instructionvideos/:id', adminTraining.read);
+  app.put('/api/admin/instructionvideos/:id', adminTraining.update);
+  app.post('/api/admin/instructionvideos', adminTraining.create);
+  app.delete('/api/admin/instructionvideos/:id', adminTraining.delete);
+
+
   //admin > statusconfigure
   app.get('/api/admin/statusconfigures', adminStatusConfigures.find);
   app.post('/api/admin/statusconfigures', adminStatusConfigures.create);

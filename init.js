@@ -178,6 +178,11 @@ workflow.on('initDb', function(){
     });
   },function(cb){
     //insert one video doc
+    db.collection('instructionvideos').insert({ videoURL: '', videoDescription: ''}, function(err, res){
+      return err? cb(err): cb();
+    });
+  },function(cb){
+    //insert one video doc
     db.collection('statustypes').insert({ statusName: '', statusDetail: ''}, function(err, res){
       return err? cb(err): cb();
     });
