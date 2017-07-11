@@ -1,19 +1,36 @@
+<style>
+	.profile-userpic img {
+		float: none;
+		margin: 0 auto;
+		width: 50%;
+		height: 50%;
+		border-radius: 50% !important;
+	}
+	.profile-sidebar {
+		float: left;
+		width: 260px;
+		margin-right: 20px;
+		margin-top: 50px;
+		margin-bottom: 40px;
+	}
+	.profile-usertitle {
+		text-align: center;
+		margin-top: 20px;
+	}
+	.profile-usertitle-name {
+		color: #5a7391;
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 7px;
+	}
+	.portlet.light {
+		padding: 12px 20px 15px;
+		background-color: #fff;
+		margin-top: 50px;
+	}
+</style>
 <div class="row" id="admin-users-detail">
     <div class="row">
-        <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 11%;">
-            <div class="dashboard-stat blue">
-                <div class="visual">
-                    <i class="fa fa-comments"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ status.submitted }} </div>
-                    <div class="desc"> Properties Submitted </div>
-                </div> -->
-                <!-- <a class="more" href="#"> View more
-                    <i class="m-icon-swapright m-icon-white"></i>
-                </a> -->
-           <!--  </div>
-        </div> -->
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat red">
                 <div class="visual">
@@ -127,35 +144,122 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12">
-        <div class="page-header">
-            <h1><a ng-href="/admin/users">Users</a> / {{user.username}}</h1>
+    <div class="col-md-12">
+        <div class="profile-sidebar">
+        	<div class="profile-userpic">
+        		<img class="img-responsive" alt="" src="/img/property/1499794873894_profile_user.jpg">
+        	</div>
+        	<div class="profile-usertitle">
+        		<div class="profile-usertitle-name">Marcus Doe</div>
+        	</div>
         </div>
-        <form name="identityForm"><fieldset>
-            <legend>Identity</legend>
-            <alert ng-repeat="alert in identityAlerts" type="{{alert.type}}" close="closeIdentityAlert($index)">{{alert.msg}}</alert>
-            <div class="form-group" ng-class="{'has-error': hasError(identityForm.isActive)}">
-                <label class="control-label" for="isActive">Is Active:</label>
-                <select name="isActive" id="isActive" class="form-control" ng-model="user.isActive" ng-options="active for active in isActives" server-error></select>
-                <span class="help-block" ng-show="showError(identityForm.isActive, 'server')">{{errfor.isActive}}</span>
-            </div>
-            <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
-                <label class="control-label" for="username">Username:</label>
-                <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required server-error>
-                <span class="help-block" ng-show="showError(identityForm.username, 'required')">This field is required</span>
-                <span class="help-block" ng-show="showError(identityForm.username, 'server')">{{errfor.username}}</span>
-            </div>
-            <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
-                <label class="control-label" for="email">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" ng-model="user.email" required server-error>
-                <span class="help-block" ng-show="showError(identityForm.email, 'required')">This field is required</span>
-                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
-                <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" ng-disabled="!canSave(identityForm)" ng-click="updateIdentity()">Update</button>
-            </div>
-        </fieldset></form>
+        <div class="col-md-6">
+        	<div class="portlet light">
+        		<table style="border: 0 !important; width: 100%; margin: 0; background-color: #fff; padding: 7px">
+        			<colgroup>
+						<col width="50%">
+						<col width="*">
+					</colgroup>
+        			<thead>
+        				<tr>
+        					<th></th>
+        					<th></th>
+        				</tr>
+        			</thead>
+        			<tbody style="padding: 7px">
+        				<tr style="padding: 7px">
+        					<td style="padding: 7px">Name:</td>
+        					<td style="padding: 7px">Jack</td>
+        				</tr>
+        				<tr style="padding: 7px">
+        					<td style="padding: 7px">Email:</td>
+        					<td style="padding: 7px">aaa@email.com</td>
+        				</tr>
+        				<tr style="padding: 7px">
+        					<td style="padding: 7px">Phone:</td>
+        					<td style="padding: 7px">123456789</td>
+        				</tr>
+        				<tr style="padding: 7px">
+        					<td style="padding: 7px">Social Profile Links:</td>
+        					<td style="padding: 7px">&nbsp</td>
+        				</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        </div>
+        <form name="orderDetailsForm">
+       		<legend>Other Details</legend>
+       		<div class="portlet-body">
+       			<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+								<button id="sample_editable_1_new" class="btn sbold green"> Add New
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+					<thead>
+                    	<tr>
+                        	<th>
+                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
+                                	<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                	<span></span>
+                                </label>
+                            </th>
+                            <th> Member Rank </th>
+                            <th> Badge </th>
+                            <th> Joined Date </th>
+                            <th> Probation Strikes </th>                                            
+                         </tr>
+                    </thead>
+                    <tbody>
+                    	<tr class="odd gradeX">
+                    		<td>
+                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
+                                	<input type="checkbox" class="checkboxes" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td> Chihuahua </td>
+                            <td> Adv Birddog </td>
+                            <td style="text-align: center"> 2/3/2016 </td>
+                            <td style="text-align: center"> 1 </td>
+                    	</tr>
+                    </tbody>
+				</table>
+       		</div>
+        </form>
+        <form name="identityForm">
+        	<fieldset>
+	            <legend>Identity</legend>
+	            <alert ng-repeat="alert in identityAlerts" type="{{alert.type}}" close="closeIdentityAlert($index)">{{alert.msg}}</alert>
+	            <div class="form-group" ng-class="{'has-error': hasError(identityForm.isActive)}">
+	                <label class="control-label" for="isActive">Is Active:</label>
+	                <select name="isActive" id="isActive" class="form-control" ng-model="user.isActive" ng-options="active for active in isActives" server-error></select>
+	                <span class="help-block" ng-show="showError(identityForm.isActive, 'server')">{{errfor.isActive}}</span>
+	            </div>
+	            <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
+	                <label class="control-label" for="username">Username:</label>
+	                <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required server-error>
+	                <span class="help-block" ng-show="showError(identityForm.username, 'required')">This field is required</span>
+	                <span class="help-block" ng-show="showError(identityForm.username, 'server')">{{errfor.username}}</span>
+	            </div>
+	            <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
+	                <label class="control-label" for="email">Email:</label>
+	                <input type="email" name="email" id="email" class="form-control" ng-model="user.email" required server-error>
+	                <span class="help-block" ng-show="showError(identityForm.email, 'required')">This field is required</span>
+	                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
+	                <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
+	            </div>
+	            <div class="form-group">
+	                <button type="button" class="btn btn-primary" ng-disabled="!canSave(identityForm)" ng-click="updateIdentity()">Update</button>
+	            </div>
+        	</fieldset>
+        </form>
         <form name="roleForm"><fieldset>
             <legend>Roles</legend>
             <alert ng-repeat="alert in roleAlerts" type="{{alert.type}}" close="closeRoleAlert($index)">{{alert.msg}}</alert>
@@ -215,75 +319,11 @@
                 <button type="button" class="btn btn-primary" ng-disabled="!canSave(passwordForm)" ng-click="setPassword()">Set Password</button>
             </div>
         </fieldset></form>
-        <form name="deleteForm"><fieldset>
-            <legend>Danger Zone</legend>
-            <alert ng-repeat="alert in deleteAlerts" type="{{alert.type}}" close="closeDeleteAlert($index)">{{alert.msg}}</alert>
-            <div class="form-group">
-                <span class="help-block">
-                    <span class="label label-danger">If you do this, it cannot be undone.</span>&nbsp;<span class="text-muted">You may also create orphaned document relationships too.</span>
-                </span>
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-danger" ng-click="deleteUser()">Delete</button>
-            </div>
-        </fieldset></form>
-    </div>
-
-    <div class="col-md-12">
-        <!-- BEGIN PROFILE SIDEBAR -->
-        <div class="profile-sidebar">
-            <!-- PORTLET MAIN -->
-            <div class="portlet light profile-sidebar-portlet" style="height: 400px;">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img ng-src="{{ user.photoURL }}" class="img-responsive" alt=""> </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name"> {{ user.name }} </div>
-                    <!-- <div class="profile-usertitle-job"> Developer </div> -->
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                
-                <!-- SIDEBAR MENU -->
-                
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- END MENU -->
-            </div>
-            <!-- END PORTLET MAIN -->
-        </div>
-        <!-- END BEGIN PROFILE SIDEBAR -->
-        <!-- BEGIN PROFILE CONTENT -->
-        <div  class="profile-content"> 
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                    <div class="portlet light bordered" style="height: 400px;">
-                        <div class="portlet-title">
-                            <div class="caption font-dark">
-                                <i class="icon-settings font-dark"></i>
-                                <span class="caption-subject bold uppercase"> Member Information</span>
-                            </div>
-                        </div>  
-                        <div class="profile-usermenu">
-                    <ul class="nav">
-                        <li> Email: {{ user.email }}
-                        </li>
-                        <li> Phone: {{ user.phone }}
-                        </li>                            
-                        <li> Member Rank: {{ user.memberranking }}
-                        </li>
-                        <li> Badge: {{ user.badge }}
-                        </li>
-                        <li> Joined Date: {{ user.joindate }}
-                        </li>
-                        <li> Probation Strikes: {{ user.probationStrikes }}
-                        </li>                            
-                    </ul>
-                </div>
-
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
+        <form name="deleteForm">
+        	<fieldset>
+            	<legend>Danger Zone</legend>
+            	<alert ng-repeat="alert in deleteAlerts" type="{{alert.type}}" close="closeDeleteAlert($index)">{{alert.msg}}</alert>
+            	<div class="profile-userbuttons">
                     <ul class="nav">
                         <li style="float: left; width: 33%;">
                             <button type="button" class="btn btn-circle green-haze btn-sm">Put On Probation</button>        
@@ -295,94 +335,66 @@
                             <button type="button" class="btn btn-circle btn-danger btn-sm">Delete User</button>        
                         </li>    
                     </ul>
-                </div>                          
-                    </div>
-                    <!-- END EXAMPLE TABLE PORTLET-->    
-                </div>
-            </div>
-            <!-- END MAIN CONTENT -->
-            <!-- BEGIN MAIN JS -->
-            <script>
-                
-            </script>
-        </div>
-        <!-- END PROFILE CONTENT -->
-        <div> 
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption font-dark">
-                                <i class="icon-settings font-dark"></i>
-                                <span class="caption-subject bold uppercase"> Property List</span>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="table-toolbar">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="btn-group">
-                                            <button id="sample_editable_1_new" class="btn sbold green"> Add New
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                                <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th> Thumbnail </th>
-                                        <th> Address </th>
-                                        <th> City </th>
-                                        <th> Status </th>
-                                        <th> Submitted On </th>                                            
-                                        <th> Action </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>
-                                            <label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
-                                                <input type="checkbox" class="checkboxes" value="1" />
-                                                <span></span>
-                                            </label>
-                                        </td>
-                                        <td> <img src="{{settings.layoutPath}}/img/logo-big.png" alt="logo" class="logo-default"> </td>
-                                        <td> 123 Main St </td>
-                                        <td> Rockaway </td>
-                                        <td>
-                                            <span class="label label-sm label-success"> Actively Working </span>
-                                        </td>
-                                        <td class="center"> 12 Jan 2012 </td>                                            
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <button class="btn btn-sm yellow filter-submit margin-bottom">
-                                                    <i class="fa fa-edit"></i> Edit</button>
-                                            </div>
-                                            <button class="btn btn-sm red filter-cancel">
-                                                <i class="fa fa-remove"></i> Delete</button>
-                                        </td>
-                                    </tr>                        
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- END EXAMPLE TABLE PORTLET-->    
-                </div>
-            </div>
-            <!-- END MAIN CONTENT -->
-            <!-- BEGIN MAIN JS -->
-            <script>
-                
-            </script>
+                </div>       
+        	</fieldset>
+        </form>
+    </div>
+
+    <div class="col-md-12">
+        <div id="propertyList">
+        	<legend>Property List</legend>
+        	<div class="portlet-body">
+       			<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+								<button id="sample_editable_1_new" class="btn sbold green"> Add New
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+					<thead>
+                    	<tr>
+                        	<th>
+                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
+                                	<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                	<span></span>
+                                </label>
+                            </th>
+                            <th> Thumbnail </th>
+                            <th> Address </th>
+                            <th> City </th>
+                            <th> Status </th>
+                            <th> Submitted On </th>                                            
+                            <th> Action </th>                                            
+                         </tr>
+                    </thead>
+                    <tbody>
+                    	<tr class="odd gradeX">
+                    		<td>
+                            	<label class="mt-checkbox mt-checkbox-outline mt-checkbox-single">
+                                	<input type="checkbox" class="checkboxes" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td> <img src="{{settings.layoutPath}}/img/logo-big.png" alt="logo" class="logo-default"> </td>
+                            <td> 123 Main St </td>
+                            <td> Rockaway </td>
+                            <td><span class="label label-sm label-success"> Actively Working </span></td>
+                            <td style="text-align: center"> 12 Jan 2012 </td>
+                            <td>
+                               	<div style="margin-bottom: 5px">
+                                   	<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-edit"></i> Edit </button>
+                               	</div>
+                               	<button class="btn btn-sm red filter-cancel"><i class="fa fa-remove"></i> Delete </button>
+                           	</td>
+                    	</tr>
+                    </tbody>
+				</table>
+       		</div>
         </div>
         <!-- END PROFILE CONTENT -->
     </div>

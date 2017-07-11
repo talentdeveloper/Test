@@ -60,7 +60,7 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 	
     $scope.submitVideoForm = function(){
     	$scope.videoURL.welcomePageURL = parseWelcomeVideoURL();
-    	$scope.videoURL.instructionURL = parseInstructVideoURL();
+//    	$scope.videoURL.instructionURL = parseInstructVideoURL();
     	console.log('update');
     	adminResource.updateVideo($scope.videoURL).then(function(result){
     		if(result.success){
@@ -71,12 +71,12 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
     });
   };
 
-    /*$scope.videoURL = {
+    $scope.videoURL = {
       welcomePageURL: data.welcomePageURL,
       instructionURL: data.instructionURL,
       description: data.description
-    };*/
-    
+    };
+  
     $scope.submit = function(ngFormCtrl){
       console.log("update submit");
       switch (ngFormCtrl.$name){
