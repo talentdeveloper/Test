@@ -33,49 +33,65 @@ angular.module('admin.trainingmaterial.index').config(['$routeProvider', functio
     });
 }]);
 angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'trainingmaterial',
-  function($scope, $route, $location, $log, utility, adminResource, data){
-    // local var
-    
-    console.log(data);
+  function($scope, $route, $location, $log, utility, adminResource, data) {
+	// youtube Welcome Video URL passing
+	var parseWelcomeVideoURL = function () {
+		var welcomeURL = $scope.videoURL.welcomePageURL;
+		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+		
+		var matches = regex.exec(welcomeURL);
+		var welcomeID = matches[1];
+		var url = 'https://www.youtube.com/embed/' + welcomeID + '?rel=0&show-info=0';
+		
+		return url;
+	};
+	
+	// youtube Instruction Video URL parssing
+	var parseInstructVideoURL = function() {
+		var instructURL = $scope.videoURL.instructionURL;
+		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+		
+		var matches = regex.exec(instructURL);
+		var instructID = matches[1];
+		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
+		
+		return url;
+	};
+	
     $scope.submitVideoForm = function(){
-     
-      console.log('update');
-      adminResource.updateVideo($scope.videoURL).then(function(result){
-        if(result.success){
-          console.log('success');
-           
-        }else{
-         
-          
-        }
-      }, function(x){
+    	$scope.videoURL.welcomePageURL = parseWelcomeVideoURL();
+    	$scope.videoURL.instructionURL = parseInstructVideoURL();
+    	console.log('update');
+    	adminResource.updateVideo($scope.videoURL).then(function(result){
+    		if(result.success){
+    			console.log('success');
+    		}
+    }, function(x) {
         
-      });
-    };
+    });
+  };
 
-    $scope.videoURL = {
+    /*$scope.videoURL = {
       welcomePageURL: data.welcomePageURL,
       instructionURL: data.instructionURL,
       description: data.description
-    };
-
+    };*/
+    
     $scope.submit = function(ngFormCtrl){
       console.log("update submit");
       switch (ngFormCtrl.$name){
         case 'videoForm':
           submitVideoForm();
           break;
-        
         default:
           return;
       }
     };
 
     var getInstructionVideos = function() {
-      
       adminResource.findInstructionVideos().then(function(result) {
         $scope.instructionVideos = result;
-        console.log(result);
+        console.log("Get Videos:", result);
       });
     };
 
@@ -97,7 +113,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
         $log.error(e);
       });
     };
-
     
     // $scope vars
     //select elements and their associating optio
