@@ -128,17 +128,20 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       //   console.log('error!');
       //   console.log(data);
       // });
-
-      $http.jsonp('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA')
-      .success(function (result) {
-        //$scope.mortgageLocation = result.greeting;
-        console.log('success!');
-        console.log(result);
+      $http.get('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA').then(function(){
+        console.log(response.data);
       })
-      .error(function (data, status) {
-        console.log('error!');
-        console.log(data);
-      });
+
+      // $http.jsonp('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA')
+      // .success(function (result) {
+      //   //$scope.mortgageLocation = result.greeting;
+      //   console.log('success!');
+      //   console.log(result);
+      // })
+      // .error(function (data, status) {
+      //   console.log('error!');
+      //   console.log(data);
+      // });
     };
 
     restResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
