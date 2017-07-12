@@ -29,12 +29,16 @@ angular.module('account.resoureces.training').config(['$routeProvider', 'securit
     });
 }]);
 angular.module('account.resoureces.training').controller('instructionCtrl', [ '$scope', 'getinstructionURL', '$sce',
-  function($scope, data, $sce){
-	console.log(data);
-    $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  }
-    $scope.instructionURL = {src:data[0].videoURL};
-    $scope.description = data[0].videoDescription;
-    $scope.thumbnail = data[0].thumbnailURL;
+	function($scope, data, $sce){
+	$scope.instructionURL = {src:data[0].videoURL};
+    $scope.data = data;
+    
+	$scope.trustSrc = function(src) {
+		return $sce.trustAsResourceUrl(src);
+	}
+	
+	$scope.selectKey = function(val) {
+		var url = val + '&autoplay=1';
+		$scope.instructionURL = {src:url};
+	}
 }]);
