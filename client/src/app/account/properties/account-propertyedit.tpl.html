@@ -11,7 +11,44 @@
         <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
     </div>
 </div>
+<div class="col-md-12">
+    <div class="portlet light memberupdate">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-green-sharp sbold">Photo Upload</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form name="photoForm" class="form-horizontal">
+                <div class="form-group">
+                	<input type="hidden" name="approxARV" id="notific8_text" class="form-control" ng-model="propertyDetail.photoURL" >
+                    <div class="col-md-3 control-label" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3">
+                        <span>Drop Image Here</span>
+                    </div>
+                    <div class="col-md-5">
+                        <img ng-src={{image}} />
+                        <span class="file-name">{{ imageFileName }}</span>
+                    </div>  
+                    <div class="col-md-5">
+                        <input type="file" name="propertyImage" file-model="file.upload" ng-disabled="uploading" onchange="angular.element(this).scope().photoChanged(this.files)" style="margin-bottom: 10px;">
+                        <img ng-src="{{ thumbnail.dataUrl || propertyDetail.photoURL }}" height="300" width="400">
+                        <!-- <img src="file:///C:/Users/User/Pictures/minion_in_despicable_me_2-wide.jpg" height="200" width="200"> -->
+                    </div>
+                </div>                        
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="setPhoto"></label>
+                    <div class="col-md-5">
+                        <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Upload </button>
+                    </div>
+                    <div ng-show="propertyDetail.photoURL != null">
+	                   	<label>+1 pt</label>
+                   	</div>
+                </div>
+            </form>
 
+        </div>
+    </div>
+</div>
 <div class="page-content-inner">
     <div class="row">
         <div class="col-md-12">
@@ -432,7 +469,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="title"></label>
-                            <div class="col-md-5">
+                            <div class="col-md-5" align="right">
                                 <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-disabled="!canSave(detailForm)" ng-click="submit(detailForm)"> Update </button>
                             </div>
                         </div>

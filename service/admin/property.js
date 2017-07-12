@@ -217,6 +217,7 @@ var property = {
         status: req.body.status,
         selectCalculate: req.body.selectCalculate,
         propertyCalculate: req.body.propertyCalculate,
+        photoURL: req.body.photoURL,
         search: [
           req.body.propertyAddress,
           req.body.propertyCity,

@@ -34,8 +34,8 @@ angular.module('account.properties.edit').config(['$routeProvider', 'securityAut
       }
     });
 }]);
-angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', ['$scope', '$route', '$location', 'utility', 'accountResource', 'propertyDetail',
-  function($scope, $route, $location, utility, accountResource, propertyDetail) {
+angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', ['$scope', '$route', '$location', 'utility', 'accountResource', 'propertyDetail', '$timeout',
+  function($scope, $route, $location, utility, restResource, propertyDetail, $timeout) {
     // local vars
     //var property = propertyDetails.property;
 	$scope.propertyDetail = {};
@@ -133,13 +133,13 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	
 	// calculate ARV
 	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
-		if(paramARV == '') {
+		if(paramARV == null) {
 			paramARV = 0;
 		}
-		if(paramRepairs == '') {
+		if(paramRepairs == null) {
 			paramRepairs = 0;
 		}
-		if(paramAmount == '') {
+		if(paramAmount == null) {
 			paramAmount = 0;
 		}
 		var value1 = 0.65 * paramARV;
@@ -151,9 +151,60 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 		}
 	};
 	
+	 $scope.file = {};
+	   var propertyURL = '';
+	    var submitPhotoForm = function() {
+	        $scope.uploading = true;
+	        restResource.propertyUpload($scope.file).then(function(data) {
+	          if (data.data.success) {
+	            $scope.uploading = false;
+	            $scope.alert = 'alert alert-success';
+	            $scope.message = data.data.message;
+	            $scope.file = {};
+	   
+	            propertyURL = data.data.photoURL;
+	          } else {
+	            $scope.uploading = false;
+	            $scope.alert = 'alert alert-danger';
+	            $scope.message = data.data.message;
+	            $scope.file = {};
+	          }
+	        });
+	        restResource.propertyUploadDist($scope.file).then(function(data) {
+	          if (data.data.success) {
+	            $scope.uploading = false;
+	            $scope.alert = 'alert alert-success';
+	            $scope.message = data.data.message;
+	            $scope.file = {};
+	          } else {
+	            $scope.uploading = false;
+	            $scope.alert = 'alert alert-danger';
+	            $scope.message = data.data.message;
+	            $scope.file = {};
+	          }
+	        });
+	    };
+	    $scope.photoChanged = function(files) {
+	      if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+	        $scope.uploading = true;
+	        var file = files[0];
+	        var fileReader = new FileReader();
+	        fileReader.readAsDataURL(file);
+	        fileReader.onload = function(e) {
+	           $timeout(function() {
+	            $scope.thumbnail = {};
+	            $scope.thumbnail.dataUrl = e.target.result;           
+	            $scope.uploading = false;
+	            $scope.message = false;
+	           });
+	        };
+	      } else {
+	        $scope.thumbnail = {};
+	        $scope.message = false;
+	      }
+	    };
+	
     var user = propertyDetail.user;
-    console.log(propertyDetail.propertyAddress);
-    console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
       $scope.propertyDetail.sumPoint = sumPoint();
@@ -161,7 +212,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             type: 'success',
             msg: 'Changes have been updated.'
           });
-      console.log($scope.propertyDetail);
+      console.log("SUBMIT", $scope.propertyDetail);
       adminResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
@@ -188,10 +239,9 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
     };
     $scope.propertyDetail = {
       propertyType: propertyDetail.propertyType,
-      residentialUnit: propertyDetail.residentialUnit,
-      residentialContent: propertyDetail.residentialContent,
-      residentialOther: propertyDetail.residentialOther,
+      multiFamilyUnit: propertyDetail.multiFamilyUnit,
       commercialContent: propertyDetail.commercialContent,
+      commercialComplex: propertyDetail.commercialComplex,
       commercialOther: propertyDetail.commercialOther,
       landBuild: propertyDetail.landBuild,
       submittedOn: propertyDetail.submittedOn,
@@ -233,7 +283,8 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
       approxARV: propertyDetail.approxARV,
       status: propertyDetail.status,
       selectCalculate: propertyDetail.selectCalculate,
-      propertyCalculate: propertyDetail.propertyCalculate
+      propertyCalculate: propertyDetail.propertyCalculate,
+      photoURL: propertyDetail.photoURL
     };
     $scope.user = {
       username: user.name,
@@ -264,6 +315,9 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
         case 'passwordForm':
           submitPasswordForm();
           break;
+        case 'photoForm':
+            submitPhotoForm();
+            break;
         default:
           return;
       }

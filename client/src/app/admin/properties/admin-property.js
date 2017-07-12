@@ -33,8 +33,8 @@ angular.module('admin.properties.detail').config(['$routeProvider', function($ro
       }
     });
 }]);
-angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'propertyDetails',
-  function($scope, $route, $location, utility, adminResource, propertyDetails) {
+angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'propertyDetails', '$timeout',
+  function($scope, $route, $location, utility, adminResource, propertyDetails, $timeout) {
     // local vars
     //var property = propertyDetails.property;
 	$scope.propertyDetail = {};
@@ -117,19 +117,107 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 			return false;
 		}
 	};
+	// function sum Point
+	var sumPoint = function() {
+		var sum = 0;
+		if ($scope.propertyDetail.photoURL != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.propertyAddress != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerFirstName != null && $scope.propertyDetail.ownerLastName != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerPhone != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.ownerEmail != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.askingPrice != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.repairs != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.propertyDetail != null) {
+			sum++;
+		}
+		if ($scope.propertyDetail.offerAmountAccepted != null) {
+			sum += 2;
+		}
+		
+		return sum;
+	};
 	// get data sum point
 	$scope.sumPoint = propertyDetails.sumPoint;
+	
+	$scope.file = {};
+	var propertyURL = '';
+    var submitPhotoForm = function() {
+        $scope.uploading = true;
+        adminResource.propertyUpload($scope.file).then(function(data) {
+          if (data.data.success) {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-success';
+            $scope.message = data.data.message;
+            $scope.file = {};
+   
+            propertyURL = data.data.photoURL;
+          } else {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-danger';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          }
+        });
+        adminResource.propertyUploadDist($scope.file).then(function(data) {
+          if (data.data.success) {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-success';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          } else {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-danger';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          }
+        });
+    };
+    $scope.photoChanged = function(files) {
+      if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+        $scope.uploading = true;
+        var file = files[0];
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = function(e) {
+           $timeout(function() {
+            $scope.thumbnail = {};
+            $scope.thumbnail.dataUrl = e.target.result;           
+            $scope.uploading = false;
+            $scope.message = false;
+           });
+        };
+      } else {
+        $scope.thumbnail = {};
+        $scope.message = false;
+      }
+    };
 	
     var user = propertyDetails.user;
     console.log(propertyDetails.propertyAddress);
     console.log(user);
     var submitDetailForm = function(){
+      $scope.propertyDetail.photoURL = propertyURL;
+      $scope.propertyDetail.sumPoint = sumPoint();
       $scope.alerts.detail = [];
       $scope.alerts.detail.push({
             type: 'success',
             msg: 'Changes have been updated.'
           });
-      console.log($scope.propertyDetail);
+      console.log("UPDATE", $scope.propertyDetails);
       adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
@@ -201,6 +289,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       status: propertyDetails.status,
       selectCalculate: propertyDetails.selectCalculate,
       propertyCalculate: propertyDetails.propertyCalculate,
+      photoURL: propertyDetails.photoURL
     };
     $scope.user = {
       username: user.name,
@@ -231,6 +320,9 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
         case 'passwordForm':
           submitPasswordForm();
           break;
+        case 'photoForm':
+            submitPhotoForm();
+            break;
         default:
           return;
       }

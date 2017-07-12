@@ -310,5 +310,46 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     var url = userUrl + '/' + _id + '/submitted';
     return $http.get(url).then(processResponse, processError);
   };
+  
+  resource.upload = function(file) {
+    var fd = new FormData();
+    fd.append('myfile', file.upload);
+    console.log('passed upload accountResource');
+    return $http.post('/upload', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
+
+  resource.uploadDist = function(file) {
+    var fd = new FormData();
+    fd.append('myfileDist', file.upload);
+    console.log('passed uploadDist accountResource');
+    return $http.post('/uploadDist', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
+
+  resource.propertyUpload = function(file) {
+    var fd = new FormData();
+    fd.append('propertyImage', file.upload);
+    console.log('passed upload accountResource');
+    return $http.post('/propertyupload', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
+
+  resource.propertyUploadDist = function(file) {
+    var fd = new FormData();
+    fd.append('propertyImageDist', file.upload);
+    console.log('passed uploadDist accountResource');
+    return $http.post('/propertyuploadDist', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
+	  
   return resource;
 }]);

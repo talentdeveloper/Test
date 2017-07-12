@@ -190,8 +190,8 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
    //      objXhr.send(data);
    //  }
 
-   $scope.file = {};
-   var propertyURL = '';
+	$scope.file = {};
+	var propertyURL = '';
     var submitPhotoForm = function() {
         $scope.uploading = true;
         restResource.propertyUpload($scope.file).then(function(data) {
