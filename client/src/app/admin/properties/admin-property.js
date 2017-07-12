@@ -100,13 +100,13 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	
 	// calculate ARV
 	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
-		if(paramARV == '') {
+		if(paramARV == null) {
 			paramARV = 0;
 		}
-		if(paramRepairs == '') {
+		if(paramRepairs == null) {
 			paramRepairs = 0;
 		}
-		if(paramAmount == '') {
+		if(paramAmount == null) {
 			paramAmount = 0;
 		}
 		var value1 = 0.65 * paramARV;

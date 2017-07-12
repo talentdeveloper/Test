@@ -45,8 +45,75 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
-    console.log(user._id);
 
+    var objMarkets = {};
+    $scope.changeCheck = function(index) {
+    	switch (index) {
+		case 0:
+			objMarkets.Atlantic = $scope.user.markets.Atlantic;
+			break;
+		case 1:
+			objMarkets.Gloucester = $scope.user.markets.Gloucester;
+			break;
+		case 2:
+			objMarkets.Ocean = $scope.user.markets.Ocean;
+			break;
+		case 3:
+			objMarkets.Bergen = $scope.user.markets.Bergen;
+			break;
+		case 4:
+			objMarkets.Hudson = $scope.user.markets.Hudson;
+			break;
+		case 5:
+			objMarkets.Passaic = $scope.user.markets.Passaic;
+			break;
+		case 6:
+			objMarkets.Burlington = $scope.user.markets.Burlington;
+			break;
+		case 7:
+			objMarkets.Hunterdon = $scope.user.markets.Hunterdon;
+			break;
+		case 8:
+			objMarkets.Salem = $scope.user.markets.Salem;
+			break;
+		case 9:
+			objMarkets.Camden = $scope.user.markets.Camden;
+			break;
+		case 10:
+			objMarkets.Merser = $scope.user.markets.Merser;
+			break;
+		case 11:
+			objMarkets.Somerset = $scope.user.markets.Somerset;
+			break;
+		case 12:
+			objMarkets.Capemay = $scope.user.markets.Capemay;
+			break;
+		case 13:
+			objMarkets.Middlesex = $scope.user.markets.Middlesex;
+			break;
+		case 14:
+			objMarkets.Sussex = $scope.user.markets.Sussex;
+			break;
+		case 15:
+			objMarkets.Cumberland = $scope.user.markets.Cumberland;
+			break;
+		case 16:
+			objMarkets.Monmouth = $scope.user.markets.Monmouth;
+			break;
+		case 17:
+			objMarkets.Union = $scope.user.markets.Union;
+			break;
+		case 18:
+			objMarkets.Essex = $scope.user.markets.Essex;
+			break;
+		case 19:
+			objMarkets.Morris = $scope.user.markets.Morris;
+			break;
+		case 20:
+			objMarkets.Warren = $scope.user.markets.Warren;
+			break;
+		}
+    };
     
     var getZillowURL = function() {
       // var url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA";
@@ -142,14 +209,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         $scope.message = false;
       }
     };
-
-
-
-
-
-
     //local vars
-    
     console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
@@ -177,6 +237,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
 
     var submitIdentityForm = function(){
       $scope.alerts.identity = [];
+      $scope.user.markets = objMarkets;
       restResource.setIdentity($scope.user).then(function(data){
         if(data.success){
           $scope.alerts.identity.push({
@@ -260,8 +321,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.userDetail = {
       first:  account.name.first,
       last:   account.name.last,
-      
-
     };
     $scope.user = {
       username: user.username,
@@ -277,7 +336,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       whereHeardUs: user.whereHeardUs,
       photoURL: user.photoURL
     };
-    console.log(user.photoURL);
+    
     $scope.pass = {};
     $scope.social = null;
     if(!angular.equals({}, SOCIAL)){
