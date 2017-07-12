@@ -41,8 +41,30 @@ angular.module('admin.statusconfigures.detail').controller('trainingmaterialDeta
     //var property = propertyDetails.property;
     // var statusName = statusConfigDetails.statusName;
     // console.log(statusName);
+	// youtube Instruction Video URL parssing
+	console.log(trainingmaterialDetails);
+	var instructID = '';
+	var parseInstructVideoURL = function() {
+		var instructURL = $scope.instructionVideoDetail.videoURL
+		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+		
+		var matches = regex.exec(instructURL);
+		instructID = matches[1];
+		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
+		
+		return url;
+	};
+	// youtube Instruction Video Thumbnail URL parsing
+	var getThumbURL = function() {
+		var url = 'http://img.youtube.com/vi/' + instructID + '/default.jpg';
+		return url;
+	};
+	
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
+      $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
+      $scope.instructionVideoDetail.thumbnailURL = getThumbURL();
+      console.log("URL", $scope.instructionVideoDetail.thumbnailURL);
       adminResource.updateInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
         console.log(result);
          $scope.alerts.detail.push({

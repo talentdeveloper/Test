@@ -112,7 +112,8 @@ var trainingmaterial = {
     workflow.on('updateInstructionVideo', function() {
       var fieldsToSet = {
         videoURL: req.body.videoURL,
-        videoDescription: req.body.videoDescription
+        videoDescription: req.body.videoDescription,
+        thumbnailURL: req.body.thumbnailURL
       };
       var options = { new: true };
 
