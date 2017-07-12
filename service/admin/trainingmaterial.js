@@ -108,7 +108,6 @@ var trainingmaterial = {
 
       workflow.emit('updateInstructionVideo');
     });
-
     workflow.on('updateInstructionVideo', function() {
       var fieldsToSet = {
         videoURL: req.body.videoURL,

@@ -42,7 +42,7 @@ angular.module('admin.statusconfigures.detail').controller('trainingmaterialDeta
     // var statusName = statusConfigDetails.statusName;
     // console.log(statusName);
 	// youtube Instruction Video URL parssing
-	console.log(trainingmaterialDetails);
+	
 	var instructID = '';
 	var parseInstructVideoURL = function() {
 		var instructURL = $scope.instructionVideoDetail.videoURL
@@ -64,7 +64,6 @@ angular.module('admin.statusconfigures.detail').controller('trainingmaterialDeta
       $scope.alerts.detail = [];
       $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
       $scope.instructionVideoDetail.thumbnailURL = getThumbURL();
-      console.log("URL", $scope.instructionVideoDetail.thumbnailURL);
       adminResource.updateInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
         console.log(result);
          $scope.alerts.detail.push({
