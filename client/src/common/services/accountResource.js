@@ -51,6 +51,11 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     var url = baseUrl + '/account/propertylist/' + _id;
     return $http.delete(url).then(processResponse, processError);
   };
+
+  resource.updateProperty = function(_id, data) {
+    var url = baseUrl + '/account/propertyedit/' + _id;
+    return $http.put(url, data).then(processResponse, processError);
+  };
   resource.findVideoURL = function() {
     return $http.get(baseUrl + '/account').then(processResponse, processError);
   };

@@ -213,7 +213,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             msg: 'Changes have been updated.'
           });
       console.log("SUBMIT", $scope.propertyDetail);
-      adminResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
+      restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
           $scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
