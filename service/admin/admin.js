@@ -2,33 +2,18 @@
 
 // public api
 var admin = {
+  findRecent: function(req, res, next) {
+    req.app.db.models.Property.find({}).sort('submittedOn').exec(function (err, results) {
+        if (err) {
+          return done(err, null);
+        }
+        res.status(200).json(results);
+      });
+  },
   getStats: function(req, res, next){
     var counts = {};
     var statuses = ['PropertySubmitted', 'New', 'ActivelyWorking', 'OfferAccepted', 'OfferRejected', 'UCSeller', 'UCBuyer', 'Closed','DeadLeads'];
     var queries = [];
-
-    // collections.forEach(function(collection, i, arr){
-    //   queries.push(function(done){
-    //     req.app.db.models[collection].count({}, function(err, count){
-    //       if(err){
-    //         return done(err);
-    //       }
-    //       counts[collection] = count;
-    //       done();
-    //     });
-    //     console.log('here');
-    //     // if(collection == 'Property'){
-    //     //   console.log('getin');
-    //     //   req.app.db.models[collection].count({}, function(err, count){
-    //     //     if(err){
-    //     //       return done(err);
-    //     //     }
-    //     //     counts[collection] = count;
-    //     //     console.log(count);
-    //     //     done();
-    //     //   });
-    //     // }
-    //   });
     statuses.forEach(function(status, i, arr){
       queries.push(function(done){
         switch (status){
@@ -118,14 +103,6 @@ var admin = {
         
       });
     });
-    // req.app.db.models.Property.count({}, function(err, count){
-    //       if(err){
-    //         return done(err);
-    //       }
-    //       //counts[Property] = count;
-    //       res.status(200).json(count);
-    //     });
-    //     console.log('here');
    
     var asyncFinally = function(err, results){
       if(err){

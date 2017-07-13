@@ -210,7 +210,12 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     var url = adminStatusConfiguresURL + '/' + _id;
     console.log("try to delete status");
     return $http.delete(url).then(processResponse, processError);
-  }
+  };
+
+  resource.recentlyAddedProperties = function() {
+    var url = '/api/admin/recentlyadded';
+    return $http.get(url).then(processResponse, processError);
+  };
 
   
 

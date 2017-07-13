@@ -4,31 +4,31 @@
 var statusconfigure = {
   find: function (req, res, next) {
 
-    console.log('accessed node service');
-    req.query.user = req.query.user ? req.query.user : '';
-    req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
-    req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
-    req.query.sort = req.query.sort ? req.query.sort : '_id';
-    req.query.status = req.query.status ? req.query.status : '';
+    // console.log('accessed node service');
+    // req.query.user = req.query.user ? req.query.user : '';
+    // req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
+    // req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
+    // req.query.sort = req.query.sort ? req.query.sort : '_id';
+    // req.query.status = req.query.status ? req.query.status : '';
 
-    var filters = {};
-    if (req.query.user) {
-      filters.user = new RegExp('^.*?' + req.query.user + '.*$', 'i');
-    }
+    // var filters = {};
+    // if (req.query.user) {
+    //   filters.user = new RegExp('^.*?' + req.query.user + '.*$', 'i');
+    // }
 
-    if (req.query.status) {
-        filters['status.id'] = req.query.status;
-      }
-
+    // if (req.query.status) {
+    //     filters['status.id'] = req.query.status;
+    //   }
     req.app.db.models.StatusType.find({
     }, function (err, results) {
       if (err) {
         return next(err);
       }
-      results.filters = req.query;
+      // results.filters = req.query;
       res.status(200).json(results);
     });
   },
+
 
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);

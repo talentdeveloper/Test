@@ -190,6 +190,7 @@ exports = module.exports = function(app, passport) {
   app.all('/api/admin*', apiEnsureAuthenticated);
   app.all('/api/admin*', apiEnsureAdmin);
   app.get('/api/admin', admin.getStats);
+  app.get('/api/admin/recentlyadded', admin.findRecent);
 
   //admin > users
   app.get('/api/admin/users', adminUser.find);

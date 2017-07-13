@@ -27,8 +27,8 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
       reloadOnSearch: false
     });
 }]);
-angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats',
-  function($scope, $log, stats){
+angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats', 'adminResource',
+  function($scope, $log, stats, adminResource){
     console.log(stats);
     $scope.user = {
       // users: stats['User'],
@@ -60,4 +60,10 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
     		isFlg = 0;
     	}
     };
+    var showRecentlyAddedProperties = function() {
+      adminResource.recentlyAddedProperties().then(function(result) {
+        $scope.recentlyProperties = result;
+      });
+    };
+    showRecentlyAddedProperties();
   }]);

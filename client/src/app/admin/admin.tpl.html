@@ -116,22 +116,14 @@
 			<col width="40%">
 			<col width="*">
 		</colgroup>
-		<tbody>
+		<tbody ng-repeat="recentlyProperty in recentlyProperties">
 			<tr>
-				<td><img alt="" src="#" width="80" height="80" style="border-radius: 50%"></td>
-				<td>123 Main Rockaway</td>
-				<td>Submitted By Jack</td>
+				<td><img alt="" ng-src="{{ recentlyProperty.photoURL }}" width="80" height="80" style="border-radius: 50%"></td>
+				<td>{{ recentlyProperty.propertyAddress + recentlyProperty.propertyAddress }}</td>
+				<td>Submitted By {{recentlyProperty.user.name }}</td>
 			</tr>
-			<tr>
-				<td><img alt="" src="#" width="80" height="80" style="border-radius: 50%"></td>
-				<td>123 Main Rockaway</td>
-				<td>Submitted By Jack</td>
-			</tr>
-			<tr>
-				<td><img alt="" src="#" width="80" height="80" style="border-radius: 50%"></td>
-				<td>123 Main Rockaway</td>
-				<td>Submitted By Jackp</td>
-			</tr>
+			
+			
 		</tbody>
 	</table>
 </div>
