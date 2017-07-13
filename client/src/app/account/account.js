@@ -74,7 +74,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     	    $scope.hourOfDay = moment().format('H');*/
     	});
     };
-    show();
+//    show();
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {
     $scope.trustSrc = function(src) {
