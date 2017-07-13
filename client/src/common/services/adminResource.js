@@ -184,7 +184,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.put(adminInstructionVideosURL + '/' + _id, data).then(processResponse, processError);
   };
   resource.getClosingStats = function() {
-	  alert("asdsadasd");
 	  return $http.get(adminClosingStatsURL).then(processResponse, processError);
   };
 
