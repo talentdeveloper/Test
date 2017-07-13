@@ -174,11 +174,11 @@
                 <div class="portlet-body">
                     <form name="passwordForm" class="form-horizontal">
                         <alert ng-repeat="alert in alerts.pass" type="{{alert.type}}" close="closeAlert('pass', $index)">{{alert.msg}}</alert>
-                        <div class="form-group" ng-class="{'has-error': hasError(passwordForm.password)}">
-                            <label class="col-md-3 control-label" for="password">New Password:</label>
+                        <div class="form-group" ng-class="{'has-error': hasError(passwordForm.newPassword)}">
+                            <label class="col-md-3 control-label" for="newPassword">New Password:</label>
                             <div class="col-md-5">
-                                <input type="text" name="password" id="notific8_text" class="form-control" ng-model="pass.newPassword" required>
-                                <span class="help-block" ng-show="showError(passwordForm.password, 'required')">This field is required</span>
+                                <input type="text" name="newPassword" id="notific8_text" class="form-control" ng-model="pass.newPassword" required>
+                                <span class="help-block" ng-show="showError(passwordForm.newPassword, 'required')">This field is required</span>
                             </div>                            
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(passwordForm.confirm)}">
@@ -263,11 +263,11 @@
                                 <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
                             </div>                            
                         </div> 
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.phone)}">
                             <label class="col-md-3 control-label" for="phone">Phone:*</label>
                             <div class="col-md-5">
                                 <input type="text" name="phone" id="notific8_text" class="form-control" ng-model="user.phone" required>
-                                <span class="help-block" ng-show="showError(detailForm.phone, 'required')">This field is required</span>
+                                <span class="help-block" ng-show="showError(identityForm.phone, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -373,10 +373,11 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.whereHeardUs)}">
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.whereHeardUs)}">
                             <label class="col-md-3 control-label" for="whereHeardUs">How did you hear about us?:</label>
                             <div class="col-md-5">
                                 <input type="text" name="whereHeardUs" id="notific8_text" class="form-control" ng-model="user.whereHeardUs">
+                                <span class="help-block" ng-show="showError(identityForm.whereHeardUs, 'required')">This field is required</span>
                             </div>
                         </div>  
                         <div class="form-group">
@@ -398,7 +399,7 @@
         </div>
     </div>
 </div>  
-<div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
+<div class="form-group">
     <label class="col-md-3 control-label" for="phone">Phone:*</label>
     <div class="col-md-5">
         <input type="text" name="phone" id="notific8_text" class="form-control" ng-model="user.phone" style="margin-bottom: 10px">

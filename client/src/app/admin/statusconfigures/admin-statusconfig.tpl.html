@@ -14,21 +14,18 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-
                     <form name="editStatusForm" class="form-horizontal">
                         <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.address)}">
+                        <div class="form-group">
                             <label class="col-md-3 control-label" for="statusName">Status Name:</label>
                             <div class="col-md-5">
                                 <input type="text" name="statusName" id="notific8_text" class="form-control" ng-model="statusDetail.statusName">
-                                
                             </div>
                         </div>                        
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.statusDetail)}">
+                        <div class="form-group">
                             <label class="col-md-3 control-label" for="statusDetail">Status Detail:</label>
                             <div class="col-md-5">
-                                <textarea type="text" name="statusDetail" id="notific8_text" class="form-control" ng-model="statusDetail.statusDetail">
-                                </textarea>
+                                <textarea type="text" name="statusDetail" id="notific8_text" class="form-control" ng-model="statusDetail.statusDetail"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,21 +34,21 @@
                                 <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show"  ng-click="submitDetailForm()"> Update </button>
                             </div>
                         </div>                                                                       
-                        
                     </form>
-
-                    <form name="deleteForm"><fieldset>
-                        <legend>Danger Zone</legend>
-                        <alert ng-repeat="alert in deleteAlerts" type="{{alert.type}}" close="closeDeleteAlert($index)">{{alert.msg}}</alert>
-                        <div class="form-group">
-                            <span class="help-block">
-                                <span class="label label-danger">If you do this, it cannot be undone.</span>&nbsp;<span class="text-muted">You may also create orphaned document relationships too.</span>
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-danger" ng-click="deleteStatus()">Delete</button>
-                        </div>
-                    </fieldset></form>
+                    <form name="deleteForm">
+                    	<fieldset>
+	                        <legend>Danger Zone</legend>
+	                        <alert ng-repeat="alert in deleteAlerts" type="{{alert.type}}" close="closeDeleteAlert($index)">{{alert.msg}}</alert>
+	                        <div class="form-group">
+	                            <span class="help-block">
+	                                <span class="label label-danger">If you do this, it cannot be undone.</span>&nbsp;<span class="text-muted">You may also create orphaned document relationships too.</span>
+	                            </span>
+	                        </div>
+	                        <div class="form-group">
+	                            <button type="button" class="btn btn-danger" ng-click="deleteStatus()">Delete</button>
+	                        </div>
+                    	</fieldset>
+                    </form>
                 </div>
             </div>
         </div>
