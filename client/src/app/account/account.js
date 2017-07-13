@@ -74,6 +74,18 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     	    $scope.hourOfDay = moment().format('H');*/
     	});
     };
+    var showClosingStatsTitle = function() {
+      showClosingStats();  
+      accountResource.getClosingStatsTitle().then(function(result){
+        $scope.closingStatsTitle = result;
+      });
+    };
+    var showClosingStats = function() {
+      accountResource.getClosingStats().then(function(result){
+        $scope.closingStats = result;
+      });
+    };
+    showClosingStatsTitle();
 //    show();
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {

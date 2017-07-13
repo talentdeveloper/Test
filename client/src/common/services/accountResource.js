@@ -92,7 +92,14 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
   resource.getUserPropertyStats = function(_id) {
     return $http.get(baseUrl + '/account/getstats/' + _id).then(processResponse, processError);
-  }
+  };
+  resource.getClosingStatsTitle = function() {
+    return $http.get(baseUrl + '/account/getclosingtitle').then(processResponse, processError);
+  };
+  resource.getClosingStats = function() {
+    return $http.get(baseUrl + '/account/getclosingstats').then(processResponse, processError);
+  };
+
 
   resource.upload = function(file) {
     var fd = new FormData();

@@ -622,7 +622,7 @@ var account = {
         return err;
       }
        res.status(200).json(insdata);
-    })
+    });
   },
 
   getUserPropertyStats: function(req, res, next) {
@@ -727,7 +727,24 @@ var account = {
     };
 
     require('async').parallel(queries, asyncFinally);
-  }
-  
+  },
+  getClosingStatsTitle: function(req, res, next) {
+    req.app.db.models.ClosingTitle.find({}).exec(function(err, result) {
+      
+      if (err) {
+        return err;
+      }
+       res.status(200).json(result);
+    });
+  },
+  getClosingStats: function(req, res, next) {
+    req.app.db.models.ClosingStats.find({}).exec(function(err, results) {
+      
+      if (err) {
+        return err;
+      }
+       res.status(200).json(results);
+    })
+  }  
 };
 module.exports = account;
