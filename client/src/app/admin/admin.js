@@ -49,4 +49,15 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
     //   categories: stats['Category'],
     //   statuses: stats['Status']
     // };
+    var isFlg = 0;
+    $scope.btnText = 'Closing Stats On';
+    $scope.clickChange = function() {
+    	if(isFlg == 0) {
+    		$scope.btnText = 'Closing Stats Off';
+    		isFlg = 1;
+    	} else {
+    		$scope.btnText = 'Closing Stats On';
+    		isFlg = 0;
+    	}
+    };
   }]);

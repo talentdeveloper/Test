@@ -8,6 +8,6 @@ angular.module('admin', [
   'admin.categories',
   'admin.properties',
   'admin.trainingmaterial',
-  'admin.statusconfigures'
-
+  'admin.statusconfigures',
+  'admin.closing'
 ]);

@@ -11,6 +11,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   var adminTrainingURL = baseUrl + '/admin/trainingmaterial';
   var adminStatusConfiguresURL = baseUrl + '/admin/statusconfigures';
   var adminInstructionVideosURL = baseUrl + '/admin/instructionvideos';
+  var adminClosingStatsURL = baseUrl + '/admin/closing';
 
 
 
@@ -172,17 +173,20 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.addVideo = function(data) {
     console.log(data);
     return $http.post(adminInstructionVideosURL, data).then(processResponse, processError);
-  }
+  };
   resource.deleteVideo = function(_id) {
     return $http.delete(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
-  }
+  };
   resource.findInstructionVideo = function(_id) {
     return $http.get(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
-  }
+  };
   resource.updateInstructionVideo = function(_id, data) {
     return $http.put(adminInstructionVideosURL + '/' + _id, data).then(processResponse, processError);
-  }
-
+  };
+  resource.getClosingStats = function() {
+	  alert("asdsadasd");
+	  return $http.get(adminClosingStatsURL).then(processResponse, processError);
+  };
 
   resource.findStatusConfigures = function() {
 

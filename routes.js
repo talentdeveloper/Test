@@ -14,6 +14,7 @@ var adminCategory = require('./service/admin/category');
 var adminProperty = require('./service/admin/property');
 var adminTraining = require('./service/admin/trainingmaterial');
 var adminStatusConfigures = require('./service/admin/statusconfigure');
+var adminClosingStats = require('./service/admin/closingstats');
 //var accountTraining = require('./service/resources/training');
 
 var fullFilePathForAvata = '';
@@ -275,6 +276,13 @@ exports = module.exports = function(app, passport) {
   app.get('/api/admin/statusconfigures/:id', adminStatusConfigures.read);
   app.put('/api/admin/statusconfigures/:id', adminStatusConfigures.update);
   app.delete('/api/admin/statusconfigures/:id', adminStatusConfigures.delete);
+  
+  //admin > statusconfigure
+  app.get('/api/admin/closing', adminClosingStats.find);
+  app.post('/api/admin/closing', adminClosingStats.create);
+  app.get('/api/admin/closing/:id', adminClosingStats.read);
+  app.put('/api/admin/closing/:id', adminClosingStats.update);
+  app.delete('/api/admin/closing/:id', adminClosingStats.delete);
 
   //******** END OF NEW JSON API ********
 
