@@ -11,43 +11,6 @@
         <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
     </div>
 </div>
-
-<!-- <div class="page-content-inner">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet light memberupdate">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <span class="caption-subject font-green-sharp sbold">Identity</span>
-                    </div>
-                </div>
-                <div class="portlet-body">
-
-                    <form name="identityForm" class="form-horizontal">
-                        
-                        <alert ng-repeat="alert in alerts.identity" type="{{alert.type}}" close="closeAlert('identity', $index)">{{alert.msg}}</alert>
-                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
-                            <label class="col-md-3 control-label" for="username">Username:</label>
-                            <div class="col-md-5">
-                                <input type="text" name="username" id="notific8_text" class="form-control" ng-model="user.username" required server-error>
-                                
-                            </div>                            
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
-                            <label class="col-md-3 control-label" for="email">Email:</label>
-                            <div class="col-md-5">
-                                <label type="text" name="email" id="notific8_text" class="form-control">{{ user.email }}</label>
-                                
-                            </div>                            
-                        </div>                                                                       
-                        
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>        -->    
-
 <div class="col-md-12">
     <div class="portlet light memberupdate">
         <div class="portlet-title">
@@ -99,17 +62,18 @@
                 <div class="portlet-body">
                     <form class="form-horizontal" name="detailForm">
                         <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyType)}">
                             <label class="col-md-3 control-label" for="propertyType">Property Type:</label>
                             <div class="col-md-5">
                             	<div id="inputType">
-	                            	<select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.propertyType" style="margin-bottom: 15px"> 
+	                            	<select id="notific8_life" name="propertyType" class="form-control input-medium" ng-model="propertyDetail.propertyType" style="margin-bottom: 15px" required> 
 	                                	<option value=""></option>                                                     
 	                                    <option value="residential">Residential</option>
 	                                    <option value="multi-family">Multi-Family</option>
 	                                    <option value="commercial">Commercial</option>
 	                                    <option value="land">Land</option>                                    
 	                                </select>
+	                                <span class="help-block" ng-show="showError(detailForm.propertyType, 'required')">This field is required</span>
                             	</div>
                             	<!-- Select multi-family -->
                                 <div ng-show="propertyDetail.propertyType == 'multi-family'">
@@ -133,11 +97,9 @@
 	                           		</div>
 	                           		<div id="textOther" ng-show="propertyDetail.commercialContent == 'Apt Complex'">
 	                                	<input type="number" name="commercialComplex" class="form-control" ng-model="propertyDetail.commercialComplex" min="1" style="width: 175px;">
-	                                	<span class="help-block" ng-show="showError(detailForm.commercialComplex, 'required')">This field is required</span>
                                 	</div>
 	                           		<div id="textOther" ng-show="propertyDetail.commercialContent == 'Other'">
 	                                	<input type="text" name="commercialOther" class="form-control" ng-model="propertyDetail.commercialOther" style="width: 175px;">
-	                                	<span class="help-block" ng-show="showError(detailForm.commercialOther, 'required')">This field is required</span>
                                 	</div>
                                 </div>
                                 <!-- End Commercial -->
@@ -157,14 +119,14 @@
                                 <!-- End Land -->
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.phone)}">
-			                <label class="col-md-3 control-label" for="phone">AutoAddress:*</label>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.autocomplete)}">
+			                <label class="col-md-3 control-label" for="autocomplete">AutoAddress:*</label>
 			                <div class="col-md-5">
-			                    <!-- <input type="text" gm-places-autocomplete ng-model="autocomplete"> -->
-			                    <input type="text" id="notific8_text" class="form-control" gm-places-autocomplete ng-model="autocomplete">
+			                    <input type="text" name="autocomplete" id="notific8_text" class="form-control" gm-places-autocomplete ng-model="autocomplete">
+			                    <span class="help-block" ng-show="showError(detailForm.autocomplete, 'required')">This field is required</span>
 			                </div>
 			            </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.address)}">
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyAddress)}">
                             <label class="col-md-3 control-label" for="propertyAddress">Property Address:*</label>
                             <div class="col-md-5">
                                 <input type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyAddress" required>
@@ -184,7 +146,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyState)}">
                             <label class="col-md-3 control-label" for="propertyState">State:*</label>
                             <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.propertyState" required>
+                                <select id="notific8_life" name="propertyState" class="form-control input-medium" ng-model="propertyDetail.propertyState" required>
                                     <option value="AL">AL</option>
                                     <option value="AK">AK</option>
                                     <option value="AZ">AZ</option>
@@ -236,6 +198,7 @@
                                     <option value="WI">WI</option>
                                     <option value="WY">WY</option>
                                 </select>
+                                <span class="help-block" ng-show="showError(detailForm.propertyState, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyZip)}">
@@ -248,7 +211,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyCounty)}">
                             <label class="col-md-3 control-label" for="propertyCounty">County:*</label>
                             <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.propertyCounty" required>
+                                <select id="notific8_life" name="propertyCounty" class="form-control input-medium" ng-model="propertyDetail.propertyCounty" required>
                                     <option value="Atlantic">Atlantic</option>
                                     <option value="Bergen">Bergen</option>
                                     <option value="Burlington">Burlington</option>
@@ -271,6 +234,7 @@
                                     <option value="Union">Union</option>
                                     <option value="Warren">Warren</option>                                
                                 </select>
+                                <span class="help-block" ng-show="showError(detailForm.propertyCounty, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.ownerFirstName)}">
@@ -368,97 +332,55 @@
 			                   	<label>+1 pt</label>
 		                   	</div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.repairNeed)}">
+                        <div class="form-group">
                             <label class="col-md-3 control-label" for="repairNeed">Repair Needed:*</label>
                             <div class="col-md-5">
                             	<div class="col-lg-6">
                             		<div class="input-group">
-                            			<input type="checkbox" name="Roof" value="Roof" ng-model="propertyDetail.Roof">&nbsp;&nbsp;Roof
+                            			<input type="checkbox" name="Roof" value="Roof" ng-model="propertyDetail.Roof">
+                            			<label for="repairNeed">&nbsp;&nbsp;Roof</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Kitchen" value="Kitchen" ng-model="propertyDetail.Kitchen">&nbsp;&nbsp;Kitchen
+                            			<input type="checkbox" name="Kitchen" value="Kitchen" ng-model="propertyDetail.Kitchen">
+                            			<label for="repairNeed">&nbsp;&nbsp;Kitchen</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Bath" value="Bath" ng-model="propertyDetail.Bath">&nbsp;&nbsp;Bath(s)
+                            			<input type="checkbox" name="Bath" value="Bath" ng-model="propertyDetail.Bath">
+                            			<label for="repairNeed">&nbsp;&nbsp;Bath(s)</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Paint" value="Paint" ng-model="propertyDetail.Paint">&nbsp;&nbsp;Paint
+                            			<input type="checkbox" name="Paint" value="Paint" ng-model="propertyDetail.Paint">
+                            			<label for="repairNeed">&nbsp;&nbsp;Paint</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Carpet" value="Carpet" ng-model="propertyDetail.Carpet">&nbsp;&nbsp;Carpet
+                            			<input type="checkbox" name="Carpet" value="Carpet" ng-model="propertyDetail.Carpet">
+                            			<label for="repairNeed">&nbsp;&nbsp;Carpet</label>
                             		</div>
                             	</div>
                             	<div class="col-lg-6">
                             		<div class="input-group">
-                            			<input type="checkbox" name="Windows" value="Windows" ng-model="propertyDetail.Windows">&nbsp;&nbsp;Windows
+                            			<input type="checkbox" name="Windows" value="Windows" ng-model="propertyDetail.Windows">
+                            			<label for="repairNeed">&nbsp;&nbsp;Windows</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Furnance" value="Furnance" ng-model="propertyDetail.Furnance">&nbsp;&nbsp;Furnance
+                            			<input type="checkbox" name="Furnance" value="Furnance" ng-model="propertyDetail.Furnance">
+                            			<label for="repairNeed">&nbsp;&nbsp;Furnance</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Drywall" value="Drywall" ng-model="propertyDetail.Drywall">&nbsp;&nbsp;Drywall
+                            			<input type="checkbox" name="Drywall" value="Drywall" ng-model="propertyDetail.Drywall">
+                            			<label for="repairNeed">&nbsp;&nbsp;Drywall</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Plumbing" value="Plumbing" ng-model="propertyDetail.Plumbing">&nbsp;&nbsp;Plumbing
+                            			<input type="checkbox" name="Plumbing" value="Plumbing" ng-model="propertyDetail.Plumbing">
+                            			<label for="repairNeed">&nbsp;&nbsp;Plumbing</label>
                             		</div>
                             		<div class="input-group">
-                            			<input type="checkbox" name="Electrical" value="Electrical" ng-model="propertyDetail.Electrical">&nbsp;&nbsp;Electrical
+                            			<input type="checkbox" name="Electrical" value="Electrical" ng-model="propertyDetail.Electrical">
+                            			<label for="repairNeed">&nbsp;&nbsp;Electrical</label>
                             		</div>
                             	</div>
                             </div>
                         </div>
-                        <!-- <div class="form-group"> 
-                            <div class="mt-checkbox-list">
-                                <label class="col-md-3 control-label"> Roof
-                                    <input type="checkbox" value="roof" name="roof" />
-                                    <span></span>
-                                </label>
-                                <label class="col-md-3 control-label"> Kitchen
-                                    <input type="checkbox" value="kitchen" name="kitchen" />
-                                    <span></span>
-                                </label>
-                            </div><br>
-                            <div class="mt-checkbox-list">
-                                <label class="col-md-3 control-label"> Bath(s)
-                                    <input type="checkbox" value="bath" name="bath" />
-                                    <span></span>
-                                </label>
-                                <label class="col-md-3 control-label"> Paint
-                                    <input type="checkbox" value="paint" name="paint" />
-                                    <span></span>
-                                </label>
-                            </div><br>
-                            <div class="mt-checkbox-list">
-                                <label class="col-md-3 control-label"> Carpet
-                                    <input type="checkbox" value="carpet" name="carpet" />
-                                    <span></span>
-                                </label>
-                                <label class="col-md-3 control-label"> Windows
-                                    <input type="checkbox" value="windows" name="windows" />
-                                    <span></span>
-                                </label>
-                            </div><br>
-                            <div class="mt-checkbox-list">
-                                <label class="col-md-3 control-label"> Furnance
-                                    <input type="checkbox" value="furnance" name="furnance" />
-                                    <span></span>
-                                </label>
-                                <label class="col-md-3 control-label"> Drywall
-                                    <input type="checkbox" value="drywall" name="drywall" />
-                                    <span></span>
-                                </label>
-                            </div><br>
-                            <div class="mt-checkbox-list">                                
-                                <label class="col-md-3 control-label"> Plumbing
-                                    <input type="checkbox" value="plumbing" name="plumbing" />
-                                    <span></span>
-                                </label>
-                                <label class="col-md-3 control-label"> Eletrical
-                                    <input type="checkbox" value="eletrical" name="eletrical" />
-                                    <span></span>
-                                </label>
-                            </div><br>
-                        </div> -->
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.otherRepairDetail)}">
                             <label class="col-md-3 control-label" for="otherRepairDetail">Other Repairs/Detail:*</label>
                             <div class="col-md-5">
@@ -466,16 +388,15 @@
                                 <span class="help-block" ng-show="showError(detailForm.otherRepairDetail, 'required')">This field is required</span>
                             </div>
                         </div>
-                        
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.state)}">
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.occupancy)}">
                             <label class="col-md-3 control-label" for="occupancy">Occupancy:</label>
                             <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.occupancy">                                                      
+                                <select id="notific8_life" name="occupancy" class="form-control input-medium" ng-model="propertyDetail.occupancy" required>                                                      
                                     <option value="owner occupied">Owner Occupied</option>
                                     <option value="tenant occupied">Tenant Occupied</option>
                                     <option value="vacant">Vacant</option>
-                                    
                                 </select>
+                                <span class="help-block" ng-show="showError(detailForm.occupancy, 'required')">This field is required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.listedOnMLS)}">
@@ -484,6 +405,7 @@
                                 <div class="input-group">
                                		<input type="radio" ng-model="propertyDetail.listedOnMLS" name="listedOnMLS" value="Yes" required>&nbsp;&nbsp;Yes
                                		<input type="radio" ng-model="propertyDetail.listedOnMLS" name=listedOnMLS value="No" style="margin-left: 5px" required>&nbsp;&nbsp;No
+                               		<span class="help-block" ng-show="showError(detailForm.listedOnMLS, 'required')">This field is required</span>
                                		<div id="propertyMLS" ng-show="propertyDetail.listedOnMLS == 'Yes'">
                                			<input type="text" name="listedOnMLS" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyOnMLS">
                                		</div>

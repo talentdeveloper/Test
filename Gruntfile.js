@@ -306,6 +306,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('angular', ['copy', 'html2js', 'concat:angular', 'sass:dev']);
+//  grunt.registerTask('angular', ['copy', 'html2js', 'concat:angular']);
 
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('unitTest', ['clean', 'angular', 'karma:unit']);

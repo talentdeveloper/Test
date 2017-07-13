@@ -1,4 +1,4 @@
-angular.module('login.index', ['ngRoute', 'config', 'security.service', 'directives.serverError', 'services.utility', 'ui.bootstrap']);
+angular.module('login.index', ['ngRoute', 'config', 'security.service', 'directives.serverError', 'services.utility']);
 angular.module('login.index').config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when('/login', {
@@ -51,6 +51,7 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
     $scope.alerts = [];
     $scope.errfor = {};
     $scope.social = angular.equals({}, SOCIAL)? null: SOCIAL;
+    console.log("SOCIAL", SOCIAL);
 
     // method def
     $scope.hasError = utility.hasError;
