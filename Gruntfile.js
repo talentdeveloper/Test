@@ -23,6 +23,10 @@ module.exports = function(grunt) {
             src: ['jquery.js'], dest: '<%= distdir %>/vendor/'
           },
           {
+              expand: true, cwd: 'client/src/assets/global/plugins/',
+              src: ['jquery.min.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
             expand: true, cwd: 'client/bower_components/angular/',
             src: ['angular.js'], dest: '<%= distdir %>/vendor/'
           },
@@ -90,7 +94,14 @@ module.exports = function(grunt) {
             expand: true, cwd: 'client/src/assets/global/plugins/angularjs/plugins/',
             src: ['*'], dest: '<%= distdir %>/assets/global/plugins/angularjs/plugins/'
           },
-          
+          {
+        	  expand: true, cwd: 'client/src/assets/pages/scripts/',
+              src: ['charts-echarts.min.js'], dest: '<%= distdir %>/assets/pages/scripts/'
+          },
+          {
+        	  expand: true, cwd: 'client/src/assets/global/plugins/echarts/',
+              src: ['*'], dest: '<%= distdir %>/assets/global/plugins/echarts/'
+          },
         ]
       },
       asset: {
