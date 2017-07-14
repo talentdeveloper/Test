@@ -66,42 +66,6 @@ module.exports = function(grunt) {
             expand: true, cwd: 'client/bower_components/moment/',
             src: ['moment.js'], dest: '<%= distdir %>/vendor/'
           },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/bootstrap/js/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap/js/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/bootstrap-hover-dropdown/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap-hover-dropdown/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/jquery-slimscroll/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/jquery-slimscroll/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/bootstrap-switch/js/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap-switch/js/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/angularjs/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/angularjs/'
-          },
-          {
-            expand: true, cwd: 'client/src/assets/global/plugins/angularjs/plugins/',
-            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/angularjs/plugins/'
-          },
-          {
-        	  expand: true, cwd: 'client/src/assets/pages/scripts/',
-              src: ['charts-echarts.min.js'], dest: '<%= distdir %>/assets/pages/scripts/'
-          },
-          {
-        	  expand: true, cwd: 'client/src/assets/global/plugins/echarts/',
-              src: ['*'], dest: '<%= distdir %>/assets/global/plugins/echarts/'
-          },
         ]
       },
       asset: {
@@ -161,7 +125,47 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'client/src/assets/layouts/layout3/css/themes',
             src: ['*'], dest: '<%= distdir %>/assets/layouts/layout3/css/themes'
-          }
+          },
+          {
+        	expand: true, cwd: 'client/src/assets/global/plugins/',
+	        src: ['*'], dest: '<%= distdir %>/assets/global/plugins/'
+	      },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/bootstrap/js/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap/js/'
+	        },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/bootstrap-hover-dropdown/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap-hover-dropdown/'
+	        },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/jquery-slimscroll/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/jquery-slimscroll/'
+	        },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/bootstrap-switch/js/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/bootstrap-switch/js/'
+	        },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/angularjs/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/angularjs/'
+	        },
+	        {
+	          expand: true, cwd: 'client/src/assets/global/plugins/angularjs/plugins/',
+	          src: ['*'], dest: '<%= distdir %>/assets/global/plugins/angularjs/plugins/'
+	        },
+	        {
+	      	  expand: true, cwd: 'client/src/assets/pages/scripts/',
+	            src: ['charts-echarts.min.js'], dest: '<%= distdir %>/assets/pages/scripts/'
+	        },
+	        {
+	      	  expand: true, cwd: 'client/src/assets/global/plugins/echarts/',
+	            src: ['*'], dest: '<%= distdir %>/assets/global/plugins/echarts/'
+	        },
+	        {
+	      	  expand: true, cwd: 'client/src/assets/global/img/social/',
+	            src: ['*'], dest: '<%= distdir %>/assets/global/img/social/'
+	        },
         ]
       },
       index: {

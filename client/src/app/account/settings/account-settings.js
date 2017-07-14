@@ -45,76 +45,56 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
-
-    var objMarkets = {};
-    $scope.changeCheck = function(index) {
-    	switch (index) {
-		case 0:
-			objMarkets.Atlantic = $scope.user.markets.Atlantic;
-			break;
-		case 1:
-			objMarkets.Gloucester = $scope.user.markets.Gloucester;
-			break;
-		case 2:
-			objMarkets.Ocean = $scope.user.markets.Ocean;
-			break;
-		case 3:
-			objMarkets.Bergen = $scope.user.markets.Bergen;
-			break;
-		case 4:
-			objMarkets.Hudson = $scope.user.markets.Hudson;
-			break;
-		case 5:
-			objMarkets.Passaic = $scope.user.markets.Passaic;
-			break;
-		case 6:
-			objMarkets.Burlington = $scope.user.markets.Burlington;
-			break;
-		case 7:
-			objMarkets.Hunterdon = $scope.user.markets.Hunterdon;
-			break;
-		case 8:
-			objMarkets.Salem = $scope.user.markets.Salem;
-			break;
-		case 9:
-			objMarkets.Camden = $scope.user.markets.Camden;
-			break;
-		case 10:
-			objMarkets.Merser = $scope.user.markets.Merser;
-			break;
-		case 11:
-			objMarkets.Somerset = $scope.user.markets.Somerset;
-			break;
-		case 12:
-			objMarkets.Capemay = $scope.user.markets.Capemay;
-			break;
-		case 13:
-			objMarkets.Middlesex = $scope.user.markets.Middlesex;
-			break;
-		case 14:
-			objMarkets.Sussex = $scope.user.markets.Sussex;
-			break;
-		case 15:
-			objMarkets.Cumberland = $scope.user.markets.Cumberland;
-			break;
-		case 16:
-			objMarkets.Monmouth = $scope.user.markets.Monmouth;
-			break;
-		case 17:
-			objMarkets.Union = $scope.user.markets.Union;
-			break;
-		case 18:
-			objMarkets.Essex = $scope.user.markets.Essex;
-			break;
-		case 19:
-			objMarkets.Morris = $scope.user.markets.Morris;
-			break;
-		case 20:
-			objMarkets.Warren = $scope.user.markets.Warren;
-			break;
-		}
-    };
     
+    $scope.user = {};
+	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+		
+		var componentForm = {
+	        street_number: 'short_name',
+	        route: 'long_name',
+	        locality: 'long_name',
+	        administrative_area_level_1: 'short_name',
+	        country: 'long_name',
+	        postal_code: 'short_name'
+		};
+		
+		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
+			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
+			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+			switch (addressType) {
+			case 'postal_code': // zip code
+				$scope.user.Zip = val;
+				break;
+			case 'street_number': // address1
+				$scope.user.Address = val;
+				break;
+			case 'route': // address2
+				if ($scope.user.Address == undefined) {
+					$scope.user.Address = "";
+				}
+				$scope.user.Address += " " + val;
+				break;
+			case 'locality': // city
+				$scope.user.City = val;
+				break;
+			case 'administrative_area_level_1': // state
+				$scope.user.State = val;
+				break;
+			case 'administrative_area_level_2': // county
+				$scope.user.County = val;
+				break;
+			case 'administrative_area_level_3':
+				break;
+			case 'country':
+				break;
+			}
+		}
+		var location = $scope.autocomplete.getPlace().geometry.location;
+	    $scope.lat = location.lat();
+	    $scope.lng = location.lng();
+	    $scope.$apply();
+	});
+
     var getZillowURL = function() {
       // var url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA";
       // var trustedUrl = $sce.trustAsResourceUrl(url);
@@ -328,14 +308,13 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.user = {
       username: user.username,
       email:    user.email,
+      address:	user.Address,
+      city:		user.City,
+      state:	user.State,
+      zip:		user.Zip,
       phone:    user.phone,
-      zip:      user.zip,
-      address:  user.address,
-      city:     user.city,
-      state:    user.state,
       occupation: user.occupation,
       otherSpecify: user.otherSpecify,
-      markets:  user.markets,
       whereHeardUs: user.whereHeardUs,
       photoURL: user.photoURL
     };

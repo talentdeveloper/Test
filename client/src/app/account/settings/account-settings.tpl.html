@@ -11,9 +11,6 @@
         <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
     </div>
 </div>
-
-
-
 <div class="row">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
@@ -262,7 +259,93 @@
                                 <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
                                 <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
                             </div>                            
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.autocomplete)}">
+			                <label class="col-md-3 control-label" for="autocomplete">AutoAddress:*</label>
+			                <div class="col-md-5">
+			                    <input type="text" name="autocomplete" id="notific8_text" class="form-control" gm-places-autocomplete ng-model="autocomplete">
+			                    <span class="help-block" ng-show="showError(identityForm.autocomplete, 'required')">This field is required</span>
+			                </div>
+			            </div>
+			            <div class="form-group" ng-class="{'has-error': hasError(identityForm.Address)}">
+                            <label class="col-md-3 control-label" for="Address">Address:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="Address" id="notific8_text" class="form-control" ng-model="user.Address" required>
+                                <span class="help-block" ng-show="showError(identityForm.Address, 'required')">This field is required</span>
+                            </div>
                         </div> 
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.City)}">
+                            <label class="col-md-3 control-label" for="City">City:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="City" id="notific8_text" class="form-control" ng-model="user.City" required>
+                                <span class="help-block" ng-show="showError(identityForm.City, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.State)}">
+                            <label class="col-md-3 control-label" for="State">State:*</label>
+                            <div class="col-md-5">
+                                <select id="notific8_life" name="State" class="form-control input-medium" ng-model="user.State" required>
+                                    <option value="AL">AL</option>
+                                    <option value="AK">AK</option>
+                                    <option value="AZ">AZ</option>
+                                    <option value="AR">AR</option>
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="CT">CT</option>
+                                    <option value="DE">DE</option>
+                                    <option value="FL">FL</option>
+                                    <option value="GA">GA</option>
+                                    <option value="HI">HI</option>
+                                    <option value="ID">ID</option>
+                                    <option value="IL">IL</option>
+                                    <option value="IN">IN</option>
+                                    <option value="IA">IA</option>
+                                    <option value="KS">KS</option>
+                                    <option value="KY">KY</option>
+                                    <option value="LA">LA</option>
+                                    <option value="ME">ME</option>
+                                    <option value="MD">MD</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MI">MI</option>
+                                    <option value="MN">MN</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MO">MO</option>
+                                    <option value="MT">MT</option>
+                                    <option value="NE">NE</option>
+                                    <option value="NV">NV</option>
+                                    <option value="NH">NH</option>
+                                    <option value="NJ" selected="selected">NJ</option>
+                                    <option value="NM">NM</option>
+                                    <option value="NY">NY</option>
+                                    <option value="NC">NC</option>
+                                    <option value="ND">ND</option>
+                                    <option value="OH">OH</option>
+                                    <option value="OK">OK</option>
+                                    <option value="OR">OR</option>
+                                    <option value="PA">PA</option>
+                                    <option value="RI">RI</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SD">SD</option>
+                                    <option value="TN">TN</option>
+                                    <option value="TX">TX</option>
+                                    <option value="UT">UT</option>
+                                    <option value="VT">VT</option>
+                                    <option value="VA">VA</option>
+                                    <option value="WA">WA</option>
+                                    <option value="WV">WV</option>
+                                    <option value="WI">WI</option>
+                                    <option value="WY">WY</option>
+                                </select>
+                                <span class="help-block" ng-show="showError(identityForm.State, 'required')">This field is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.Zip)}">
+                            <label class="col-md-3 control-label" for="Zip">Zip:*</label>
+                            <div class="col-md-5">
+                                <input type="text" name="Zip" id="notific8_text" class="form-control" ng-model="user.Zip" required pattern="[0-9].{2,4}" required title="3 to 5 Digits Only">
+                                <span class="help-block" ng-show="showError(identityForm.Zip, 'required')">5 Digit Only</span>
+                            </div>
+                        </div>   
                         <div class="form-group" ng-class="{'has-error': hasError(identityForm.phone)}">
                             <label class="col-md-3 control-label" for="phone">Phone:*</label>
                             <div class="col-md-5">
@@ -276,99 +359,99 @@
                         <div class="form-group">
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Atlantic
-                                    <input type="checkbox" name="test" ng-model="user.markets.Atlantic" ng-change="changeCheck(0)">
+                                    <input type="checkbox" name="test" ng-model="user.Atlantic">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Hunterdon
-                                    <input type="checkbox" value="0" name="test" ng-model="user.markets.Hunterdon" ng-change="changeCheck(7)"/>
+                                    <input type="checkbox" value="0" name="test" ng-model="user.Hunterdon">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Sussex
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Sussex" ng-change="changeCheck(14)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Sussex">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Gloucester
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Gloucester" ng-change="changeCheck(1)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Gloucester">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Salem
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Salem" ng-change="changeCheck(8)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Salem">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Cumberland
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Cumberland" ng-change="changeCheck(15)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Cumberland">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Ocean
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Ocean" ng-change="changeCheck(2)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Ocean">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Camden
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Camden" ng-change="changeCheck(9)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Camden">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Monmouth
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Monmouth" ng-change="changeCheck(16)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Monmouth">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Bergen
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Bergen" ng-change="changeCheck(3)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Bergen">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Merser
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Merser" ng-change="changeCheck(10)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Merser">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Union
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Union" ng-change="changeCheck(17)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Union">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Hudson
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Hudson" ng-change="changeCheck(4)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Hudson">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Somerset
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Somerset" ng-change="changeCheck(11)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Somerset">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Essex
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Essex" ng-change="changeCheck(18)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Essex">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Passaic
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Passaic" ng-change="changeCheck(5)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Passaic">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Cape May
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.CapeMay" ng-change="changeCheck(12)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.CapeMay">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Morris
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Morris" ng-change="changeCheck(19)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Morris">
                                     <span></span>
                                 </label>
                             </div><br>
                             <div class="mt-checkbox-list">
                                 <label class="col-md-3 control-label"> Burlington
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Burlington" ng-change="changeCheck(6)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Burlington">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Middlesex
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Middlesex" ng-change="changeCheck(13)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Middlesex">
                                     <span></span>
                                 </label>
                                 <label class="col-md-3 control-label"> Warren
-                                    <input type="checkbox" value="1" name="test" ng-model="user.markets.Warren" ng-change="changeCheck(20)"/>
+                                    <input type="checkbox" value="1" name="test" ng-model="user.Warren"/>
                                     <span></span>
                                 </label>
                             </div>

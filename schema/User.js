@@ -27,7 +27,7 @@ exports = module.exports = function(app, mongoose) {
     state: { type: String, default: '' },
     occupation: { type: String, default: '' },
     otherSpecify: { type: String, default: '' },
-    markets: { type: String, default: '' },
+    markets: { type: Object, default: '' },
     whereHeardUs: { type: String, default: '' },
     memberRanking: { type: String, default: '' },
     badge: { type: String, default: '' },
