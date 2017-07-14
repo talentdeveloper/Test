@@ -29,6 +29,19 @@ var closingstats = {
         }
         console.log("success");
         workflow.outcome.record = result;
+        req.app.db.models.User.findOne({"username": fieldsToSet}, function (err, userResult){
+          if (err){
+            console.log("findone failed");
+            return err;
+          }
+          console.log("asd;fasdf", userResult);
+          req.app.db.models.ClosingStats.findOneAndUpdate({"usernameforclosing": fieldsToSet}, {"photoURL": userResult.photoURL}, function(err, photoURLResult){
+            if (err) {
+              return err;
+            }
+
+          });
+        });
         return workflow.emit('response');
       });
     });
