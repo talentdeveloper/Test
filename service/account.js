@@ -129,7 +129,7 @@ var account = {
     };
 
     var getUserData = function(callback) {
-      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL').exec(function(err, user) {
+      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL ataltic hunterdon sussex gloucester salem cumberland ocean camden monmouth bergen merser union hudson somerset essex passaic capemay morris burlington middlesex warren').exec(function(err, user) {
         if (err) {
           callback(err, null);
         }
