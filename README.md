@@ -4,15 +4,6 @@ A website and user system, implemented with [MongoDB](https://www.mongodb.org/),
 
 ## Features
 
- - Versatility because you can
-    - Hack your next awesome MEAN stack web app on top of [NJ-BirdDogs], or
-    - Use only the client as a non-trivial AngularJS project starter, or
-    - Use only the sever as a pure User Management JSON API server.
- - Stand alone RESTful API service capable of serving any http clients, including iOS and Android app.
- - Social Login enabled currently for __Facebook__ and __Google__.
- - Fully functional user life cycle management.
- - Admin panel provides full CRUD UI on all database entity.
- - Responsive web design supports Mobile-First Development.
 
 ## Technology
 
@@ -89,16 +80,6 @@ $ grunt
 ```
 
 Now [NJ-BirdDogs] should be up and running at `http://localhost:3000`.
-
-
-
-
-## Philosophy
-
- - MEAN stack web app starter with user management up and running in 5 minutes.
- - Carefully built on top of latest state-of-the-art javascript technologies.
- - RESTful API service that easily serves non-browser (iOS, Android, among others) clients.
- - [Single page web application](http://en.wikipedia.org/wiki/Single-page_application).
 
 
 ## Questions and contributing
