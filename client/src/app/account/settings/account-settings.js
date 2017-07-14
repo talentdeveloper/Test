@@ -45,6 +45,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
+    console.log(user);
     
     $scope.user = {};
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
@@ -63,25 +64,25 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
 			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
 			switch (addressType) {
 			case 'postal_code': // zip code
-				$scope.user.Zip = val;
+				$scope.user.zip = val;
 				break;
 			case 'street_number': // address1
-				$scope.user.Address = val;
+				$scope.user.address = val;
 				break;
 			case 'route': // address2
-				if ($scope.user.Address == undefined) {
-					$scope.user.Address = "";
+				if ($scope.user.address == undefined) {
+					$scope.user.address = "";
 				}
-				$scope.user.Address += " " + val;
+				$scope.user.address += " " + val;
 				break;
 			case 'locality': // city
-				$scope.user.City = val;
+				$scope.user.city = val;
 				break;
 			case 'administrative_area_level_1': // state
-				$scope.user.State = val;
+				$scope.user.state = val;
 				break;
 			case 'administrative_area_level_2': // county
-				$scope.user.County = val;
+				$scope.user.county = val;
 				break;
 			case 'administrative_area_level_3':
 				break;
@@ -220,7 +221,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
 
     var submitIdentityForm = function(){
       $scope.alerts.identity = [];
-      $scope.user.markets = objMarkets;
+      console.log($scope.user);
       restResource.setIdentity($scope.user).then(function(data){
         if(data.success){
           $scope.alerts.identity.push({
@@ -306,17 +307,39 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       last:   account.name.last,
     };
     $scope.user = {
-      username: user.username,
-      email:    user.email,
-      address:	user.Address,
-      city:		user.City,
-      state:	user.State,
-      zip:		user.Zip,
-      phone:    user.phone,
-      occupation: user.occupation,
+      username: 	user.username,
+      email:    	user.email,
+      phone:    	user.phone,
+      address:		user.address,
+      city:			user.city,
+      state:		user.state,
+      zip:			user.zip,
+      phone:    	user.phone,
+      atlantic: 	user.atlantic,
+      hunterdon:	user.hunterdon,
+      sussex:		user.sussex,
+      gloucester:	user.gloucester,
+      salem:		user.salem,
+      cumberland:	user.cumberland,
+      ocean:		user.ocean,
+      camden:		user.camden,
+      monmouth:		user.monmouth,
+      bergen:		user.bergen,
+      merser:		user.merser,
+      union:		user.union,
+      hudson:		user.hudson,
+      somerset:		user.somerset,
+      essex:		user.essex,
+      passaic:		user.passaic,
+      capemay:		user.capeMay,
+      morris:		user.morris,
+      burlington:	user.burlington,
+      middlesex:	user.middlesex,
+      warren:		user.warren,
+      occupation: 	user.occupation,
       otherSpecify: user.otherSpecify,
       whereHeardUs: user.whereHeardUs,
-      photoURL: user.photoURL
+      photoURL: 	user.photoURL
     };
     
     $scope.pass = {};
