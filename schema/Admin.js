@@ -18,7 +18,8 @@ exports = module.exports = function(app, mongoose) {
       permit: Boolean
     }],
     timeCreated: { type: Date, default: Date.now },
-    search: [String]
+    search: [String],
+    registeredClosingStats: { type: String, default: ''}
   });
   adminSchema.methods.hasPermissionTo = function(something) {
     //check group permissions

@@ -198,7 +198,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
   resource.addNewClosingStats = function(data) {
     console.log(data);
-    return $http.post(adminClosingStatsURL, data).then(processResponse, processError);
+    return $http.put(adminClosingStatsURL, data).then(processResponse, processError);
   };
   resource.deleteClosingStats = function(_id) {
     return $http.delete(adminClosingStatsURL + '/' + _id).then(processResponse, processError);

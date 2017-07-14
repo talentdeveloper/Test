@@ -7,7 +7,7 @@
                     <button type="button" class="btn btn-primary" style="margin-left: 20px;" ng-click="updateTitle()">Update</button>
                 </div>
                 <div class="input-group">
-                    <input name="newdescription" type="text" placeholder="Enter User Name" class="form-control" style="margin-left: 40px;" ng-model="newClosingStatsUsername.usernameforclosing">
+                    <input name="newdescription" type="text" placeholder="Enter User Name" class="form-control" style="margin-left: 40px;" ng-model="newClosingStatsUsername.username">
                     <button type="button" class="btn btn-primary"  style="margin-left: 20px" ng-click="addNewClosingStats()">Add New</button>
                 </div>
             </form>
@@ -24,9 +24,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="closingStat in closingStats">
-                    <td><img alt="" ng-src="closingStat.photoURL" width="80" height="80"></td>
-                    <td>{{ closingStat.usernameforclosing }}</td>
-                    <td>{{ closingStat.explanation }}</td>
+                    <td><img ng-src="{{ closingStat.photoURL }}" width="80" height="80"></td>
+                    <td>{{ closingStat.username }}</td>
+                    <td>{{ closingStat.closingStatsExplanation }}</td>
                     <td>
                     	<a class="btn btn-default btn-sm" ng-href="/admin/closing/{{closingStat._id}}">Edit</a>
                         <button type="button" class="btn btn-danger" ng-click="deleteClosingStats(closingStat._id)">Delete</button>           

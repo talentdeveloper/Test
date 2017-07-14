@@ -20,7 +20,8 @@ exports = module.exports = function(app, mongoose) {
       name: { type: String, default: '' },
       time: { type: Date, default: Date.now }
     },
-    search: [String]
+    search: [String],
+    registeredClosingStats: { type: String, default: ''}
   });
   accountSchema.plugin(require('./plugins/pagedFind'));
   accountSchema.index({ user: 1 });

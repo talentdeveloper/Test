@@ -228,7 +228,8 @@ workflow.on('initDb', function(){
             admin: admin._id,
             //account: account._id
             accountType: 'Admin'
-          }
+          },
+          registeredClosingStats: 'no'
         };
         db.collection('users').insert(user, function(err, res){
           return cb(err, admin._id, account._id);

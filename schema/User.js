@@ -63,7 +63,9 @@ exports = module.exports = function(app, mongoose) {
       closed: { type: String, default: '' },
       deadLeads: { type: String, default: '' },
     },
-    photoURL: { type: String, default:''}
+    photoURL: { type: String, default:''},
+    registeredClosingStats: { type: String, default:'no'},
+    closingStatsExplanation: {type: String, default:''}
   });
   userSchema.methods.isVerified = function(done){
     this.populate('roles.account', function(err, user){

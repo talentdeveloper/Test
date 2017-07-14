@@ -20,7 +20,7 @@ angular.module('admin.closing').config(['$routeProvider', function($routeProvide
               $location.path(redirectUrl);
               return $q.reject();
             });
-            // console.log(promise);
+             console.log(promise);
           return promise;
         }]
       },
@@ -35,15 +35,20 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
 
 
     var getTitle = function(){
+      
       adminResource.getClosingStatsTitle().then(function(result) {
         
         $scope.closingStatsTitle = result;
       });
     };
 
+    
+
     $scope.updateTitle = function() {
       adminResource.updateClosingStatsTitle($scope.closingStatsTitle).then(function(data){
+        console.log("asd;lfkja;ewlkfj;alskdf", data);
         alert('Closing Stats Title Updated.');
+
         if(data.success){
 
         }else if (data.errors && data.errors.length > 0){

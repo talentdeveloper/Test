@@ -2,12 +2,13 @@
 
 // public api
 var closingstats = {
-  
+
   find: function (req, res, next) {
-    req.app.db.models.ClosingStats.find({}, function (err, results) {
+    req.app.db.models.User.find({"registeredClosingStats": 'yes'}, function (err, results) {
       if (err) {
         return next(err);
       }
+      console.log(results);
       res.status(200).json(results);
     });
   },
@@ -19,29 +20,11 @@ var closingstats = {
     });
     workflow.on('createClosingStats', function () {
       console.log(req.body);
-      var fieldsToSet = {        
-       usernameforclosing: req.body.usernameforclosing
-      };
-      req.app.db.models.ClosingStats.create(fieldsToSet, function (err, result) {
+      req.app.db.models.User.findOneAndUpdate({"username": req.body.username}, {"registeredClosingStats": 'yes'}, function(err, result){
         if (err) {
-          console.log("fail");
           return workflow.emit('exception', err);
         }
-        console.log("success");
         workflow.outcome.record = result;
-        req.app.db.models.User.findOne({"username": fieldsToSet}, function (err, userResult){
-          if (err){
-            console.log("findone failed");
-            return err;
-          }
-          console.log("asd;fasdf", userResult);
-          req.app.db.models.ClosingStats.findOneAndUpdate({"usernameforclosing": fieldsToSet}, {"photoURL": userResult.photoURL}, function(err, photoURLResult){
-            if (err) {
-              return err;
-            }
-
-          });
-        });
         return workflow.emit('response');
       });
     });
@@ -49,7 +32,8 @@ var closingstats = {
   },
 
   read: function(req, res, next){
-    req.app.db.models.ClosingStats.findById(req.params.id).exec(function(err, result) {
+    
+    req.app.db.models.User.findById(req.params.id).exec(function(err, result) {
       if (err) {
         return next(err);
       }
@@ -59,7 +43,9 @@ var closingstats = {
 
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-
+    var fieldsToSet = {        
+       username: req.body.username
+    };
     console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
@@ -78,18 +64,12 @@ var closingstats = {
     });
 
     workflow.on('patchClosingStats', function() {
-      var fieldsToSet = {
-        usernameforclosing: req.body.usernameforclosing,
-        explanation: req.body.explanation
-      };
+      
       var options = { new: true };
-
-      req.app.db.models.ClosingStats.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, result) {
+      req.app.db.models.User.findByIdAndUpdate(req.params.id, {"closingStatsExplanation": req.body.closingStatsExplanation}, function(err, result){
         if (err) {
-          console.log("has some errors");
           return workflow.emit('exception', err);
         }
-
         workflow.outcome.property = result;
         console.log(result);
         
@@ -108,7 +88,7 @@ var closingstats = {
     });
 
     workflow.on('deleteClosingStats', function(err) {
-      req.app.db.models.ClosingStats.findByIdAndRemove(req.params.id, function(err, result) {
+      req.app.db.models.User.findByIdAndUpdate(req.params.id, {"closingStatsExplanation": '', "registeredClosingStats": 'no'}, function(err, result) {
         if (err) {
           return workflow.emit('exception', err);
         }

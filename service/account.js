@@ -778,7 +778,7 @@ var account = {
     });
   },
   getClosingStats: function(req, res, next) {
-    req.app.db.models.ClosingStats.find({}).exec(function(err, results) {
+    req.app.db.models.User.find({"registeredClosingStats": 'yes'}).exec(function(err, results) {
       
       if (err) {
         return err;

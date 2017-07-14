@@ -283,7 +283,7 @@ exports = module.exports = function(app, passport) {
   
   //admin > statusconfigure
   app.get('/api/admin/closing', adminClosingStats.find);
-  app.post('/api/admin/closing', adminClosingStats.create);
+  app.put('/api/admin/closing', adminClosingStats.create);
   app.get('/api/admin/closing/:id', adminClosingStats.read);
   app.put('/api/admin/closing/:id', adminClosingStats.update);
   app.delete('/api/admin/closing/:id', adminClosingStats.delete);
