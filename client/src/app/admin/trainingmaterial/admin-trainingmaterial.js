@@ -65,86 +65,86 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 		return url;
 	};
 	
-    $scope.submitVideoForm = function(){
-    	$scope.videoURL.welcomePageURL = parseWelcomeVideoURL();
+  $scope.submitVideoForm = function(){
+  	$scope.videoURL.welcomePageURL = parseWelcomeVideoURL();
 //    	$scope.videoURL.instructionURL = parseInstructVideoURL();
-    	console.log('update');
-    	adminResource.updateVideo($scope.videoURL).then(function(result){
-    		if(result.success){
-    			console.log('success');
-    		}
+  	console.log('update');
+  	adminResource.updateVideo($scope.videoURL).then(function(result){
+  		if(result.success){
+  			console.log('success');
+  		}
     }, function(x) {
-        
+      
     });
   };
 
-    $scope.videoURL = {
-      welcomePageURL: data.welcomePageURL,
-      instructionURL: data.instructionURL,
-      description: data.description
-    };
+  $scope.videoURL = {
+    welcomePageURL: data.welcomePageURL,
+    instructionURL: data.instructionURL,
+    description: data.description
+  };
+
+  $scope.submit = function(ngFormCtrl){
+    console.log("update submit");
+    switch (ngFormCtrl.$name){
+      case 'videoForm':
+        submitVideoForm();
+        break;
+      default:
+        return;
+    }
+  };
+
+  var getInstructionVideos = function() {
+    adminResource.findInstructionVideos().then(function(result) {
+      $scope.instructionVideos = result;
+      console.log("Get Videos:", result);
+    });
+  };
+
+  $scope.addVideo = function(){
+    $scope.newVideo.videoURL = parseInstructVideoURL();
+    $scope.newVideo.thumbnailURL = getThumbURL();
+    adminResource.addVideo($scope.newVideo).then(function(data){
+      console.log("trying to add videos");  
+      console.log($scope.newVideo);
+      $scope.newVideo = '';
+      if(data.success){
+        console.log('complete add clked');
+        $route.reload();
+      }else if (data.errors && data.errors.length > 0){
+        alert(data.errors[0]);
+      }else {
+        alert('unknown error.');
+      }
+    }, function(e){
+      $scope.statusConfigures = '';
+      $log.error(e);
+    });
+  };
   
-    $scope.submit = function(ngFormCtrl){
-      console.log("update submit");
-      switch (ngFormCtrl.$name){
-        case 'videoForm':
-          submitVideoForm();
-          break;
-        default:
-          return;
-      }
-    };
-
-    var getInstructionVideos = function() {
-      adminResource.findInstructionVideos().then(function(result) {
-        $scope.instructionVideos = result;
-        console.log("Get Videos:", result);
-      });
-    };
-
-    $scope.addVideo = function(){
-      $scope.newVideo.videoURL = parseInstructVideoURL();
-      $scope.newVideo.thumbnailURL = getThumbURL();
-      adminResource.addVideo($scope.newVideo).then(function(data){
-        console.log("trying to add videos");  
-        console.log($scope.newVideo);
-        $scope.newVideo = '';
-        if(data.success){
-          console.log('complete add clked');
+  // $scope vars
+  //select elements and their associating optio
+  $scope.deleteVideo = function(id){
+    $scope.deleteAlerts =[];
+    console.log(id);
+    if(confirm('Are you sure?')){
+      adminResource.deleteVideo(id).then(function(result){
+        if(result.success){
+          // redirect to admin users index page
+          $location.path('/admin/trainingmaterial');
           $route.reload();
-        }else if (data.errors && data.errors.length > 0){
-          alert(data.errors[0]);
-        }else {
-          alert('unknown error.');
+        }else{
+          //error due to server side validation
+          angular.forEach(result.errors, function(err, index){
+            $scope.deleteAlerts.push({ type: 'danger', msg: err});
+          });
         }
-      }, function(e){
-        $scope.statusConfigures = '';
-        $log.error(e);
+      }, function(x){
+        $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting user: ' + x });
       });
-    };
-    
-    // $scope vars
-    //select elements and their associating optio
-    $scope.deleteVideo = function(id){
-      $scope.deleteAlerts =[];
-      console.log(id);
-      if(confirm('Are you sure?')){
-        adminResource.deleteVideo(id).then(function(result){
-          if(result.success){
-            // redirect to admin users index page
-            $location.path('/admin/trainingmaterial');
-            $route.reload();
-          }else{
-            //error due to server side validation
-            angular.forEach(result.errors, function(err, index){
-              $scope.deleteAlerts.push({ type: 'danger', msg: err});
-            });
-          }
-        }, function(x){
-          $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting user: ' + x });
-        });
-      }
-    };
+    }
+  };
 
     getInstructionVideos();
   }

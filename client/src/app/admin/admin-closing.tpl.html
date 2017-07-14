@@ -3,12 +3,12 @@
 		<div>
 			<form class="form-inline pull-right" name="addUserForm">
                 <div class="input-group">
-                    <input name="newvideourl" type="text" placeholder="Enter Closing Stats Feature Title" class="form-control" style="width: 250px !important;">
-                    <button type="button" class="btn btn-primary" style="margin-left: 20px;">Update</button>
+                    <input name="newvideourl" type="text" placeholder="Enter Closing Stats Feature Title" class="form-control" style="width: 250px !important;" ng-model="closingStatsTitle.title">
+                    <button type="button" class="btn btn-primary" style="margin-left: 20px;" ng-click="updateTitle()">Update</button>
                 </div>
                 <div class="input-group">
-                    <input name="newdescription" type="text" placeholder="Enter User Name" class="form-control" style="margin-left: 40px;">
-                    <button type="button" class="btn btn-primary"  style="margin-left: 20px">Add New</button>
+                    <input name="newdescription" type="text" placeholder="Enter User Name" class="form-control" style="margin-left: 40px;" ng-model="newClosingStatsUsername.usernameforclosing">
+                    <button type="button" class="btn btn-primary"  style="margin-left: 20px" ng-click="addNewClosingStats()">Add New</button>
                 </div>
             </form>
             <h2 style="font-weight: 600">Closing Stat</h2>
@@ -23,16 +23,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><img alt="" src="#" width="80" height="80"></td>
-                    <td>Andrew Wilkins</td>
-                    <td>Received at the birddog fee of $300</td>
+                <tr ng-repeat="closingStat in closingStats">
+                    <td><img alt="" ng-src="closingStat.photoURL" width="80" height="80"></td>
+                    <td>{{ closingStat.usernameforclosing }}</td>
+                    <td>{{ closingStat.explanation }}</td>
                     <td>
-                    	<a class="btn btn-default btn-sm" ng-href="#">Edit</a>
-                        <button type="button" class="btn btn-danger" ng-click="#">Delete</button>           
+                    	<a class="btn btn-default btn-sm" ng-href="/admin/closing/{{closingStat._id}}">Edit</a>
+                        <button type="button" class="btn btn-danger" ng-click="deleteClosingStats(closingStat._id)">Delete</button>           
                     </td>
                 </tr>
-                <tr>
+                <tr ng-show="closingStats.length === 0">
                     <td colspan="5">no documents matched</td>
                 </tr>
             </tbody>

@@ -78,6 +78,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
       showClosingStats();  
       accountResource.getClosingStatsTitle().then(function(result){
         $scope.closingStatsTitle = result;
+        console.log(result);
       });
     };
     var showClosingStats = function() {

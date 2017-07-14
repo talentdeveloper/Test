@@ -18,13 +18,16 @@ var closingstats = {
       workflow.emit('createClosingStats');
     });
     workflow.on('createClosingStats', function () {
+      console.log(req.body);
       var fieldsToSet = {        
-       username: req.body.username
+       usernameforclosing: req.body.usernameforclosing
       };
       req.app.db.models.ClosingStats.create(fieldsToSet, function (err, result) {
         if (err) {
+          console.log("fail");
           return workflow.emit('exception', err);
         }
+        console.log("success");
         workflow.outcome.record = result;
         return workflow.emit('response');
       });
@@ -63,7 +66,7 @@ var closingstats = {
 
     workflow.on('patchClosingStats', function() {
       var fieldsToSet = {
-        username: req.body.username,
+        usernameforclosing: req.body.usernameforclosing,
         explanation: req.body.explanation
       };
       var options = { new: true };
@@ -92,7 +95,7 @@ var closingstats = {
     });
 
     workflow.on('deleteClosingStats', function(err) {
-      req.app.db.models.Property.findByIdAndRemove(req.params.id, function(err, result) {
+      req.app.db.models.ClosingStats.findByIdAndRemove(req.params.id, function(err, result) {
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -102,6 +105,27 @@ var closingstats = {
 
     workflow.emit('validate');
     
+  },
+
+  getClosingTitle: function(req, res, next) {
+    req.app.db.models.ClosingTitle.findOne({"isTitle": 'yes'}, function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json(results);
+    });
+  },
+  updateClosingTitle: function(req, res, next) {
+    console.log(req.body);  
+    var fieldsToSet = {
+      title: req.body.title
+    };
+    var options = { new: true };
+
+    req.app.db.models.ClosingTitle.findOneAndUpdate({"isTitle": 'yes'}, fieldsToSet).exec(function(err, result) {
+      if (err) return res.send(500, { error: err });
+      return res.send("succesfully saved");
+    });
   }
 };
 module.exports = closingstats;

@@ -186,6 +186,29 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.getClosingStats = function() {
 	  return $http.get(adminClosingStatsURL).then(processResponse, processError);
   };
+  resource.getClosingStatsTitle = function() {
+    return $http.get(adminClosingStatsURL + 'title').then(processResponse, processError);
+  };
+  resource.updateClosingStatsTitle = function(data) {
+    console.log(data);
+    return $http.put(adminClosingStatsURL + 'title', data).then(processResponse, processError);
+  };
+  resource.findClosingStats = function(_id) {
+    return $http.get(adminClosingStatsURL + '/' + _id).then(processResponse, processError);
+  };
+  resource.addNewClosingStats = function(data) {
+    console.log(data);
+    return $http.post(adminClosingStatsURL, data).then(processResponse, processError);
+  };
+  resource.deleteClosingStats = function(_id) {
+    return $http.delete(adminClosingStatsURL + '/' + _id).then(processResponse, processError);
+  };
+  resource.updateClosingStats = function(_id, data) {
+    return $http.put(adminClosingStatsURL + '/' + _id, data).then(processResponse, processError);
+  };
+
+
+
 
   resource.findStatusConfigures = function() {
 

@@ -729,8 +729,8 @@ var account = {
     require('async').parallel(queries, asyncFinally);
   },
   getClosingStatsTitle: function(req, res, next) {
-    req.app.db.models.ClosingTitle.find({}).exec(function(err, result) {
-      
+    req.app.db.models.ClosingTitle.findOne({"isTitle": 'yes'}).exec(function(err, result) {
+      console.log(result);
       if (err) {
         return err;
       }

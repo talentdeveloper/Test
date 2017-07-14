@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-header"><h1>Closing Stats Settings</h1></div>
+    </div>
+</div>
+
+<div class="page-content-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light memberupdate">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green-sharp sbold">Edit Closing Stats</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form name="editStatusForm" class="form-horizontal">
+                        <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="statusName">Username:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="statusName" id="notific8_text" class="form-control" ng-model="closingStats.usernameforclosing">
+                            </div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="statusDetail">Explanation:</label>
+                            <div class="col-md-5">
+                                <textarea type="text" name="statusDetail" id="notific8_text" class="form-control" ng-model="closingStats.explanation"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="title"></label>
+                            <div class="col-md-5">
+                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show"  ng-click="submitDetailForm()"> Update </button>
+                            </div>
+                        </div>                                                                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      

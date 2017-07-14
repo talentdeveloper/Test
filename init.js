@@ -187,6 +187,11 @@ workflow.on('initDb', function(){
       return err? cb(err): cb();
     });
   },function(cb){
+    //insert one video doc
+    db.collection('closingtitles').insert({ title: '', isTitle: 'yes'}, function(err, res){
+      return err? cb(err): cb();
+    });
+  },function(cb){
     // insert one admin doc
     var admins = db.collection('admins');
     admins.insert({ name: {first: 'Root', last: 'Admin', full: 'Root Admin'}, groups: ['root'] }, function(err, res){
