@@ -65,6 +65,7 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
       $scope.alerts.splice(ind, 1);
     };
     $scope.submit = function(){
+    	console.log("Recaptcha:", $scope.response);
     	if($scope.response != '') {
     		$scope.alerts = [];
         	security.login($scope.user.username, $scope.user.password).then(loginSuccess, loginError);

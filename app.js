@@ -14,6 +14,7 @@ var config = require('./config'),
     helmet = require('helmet'),
     csrf = require('csurf'),
     multer = require('multer'),
+    schedule = require('node-schedule'),
     storage = multer.diskStorage({
       destination: function(req, file, cb) {
         cb(null, '/upload/images/');
@@ -103,6 +104,9 @@ app.utility = {};
 app.utility.sendmail = require('./util/sendmail');
 app.utility.slugify = require('./util/slugify');
 app.utility.workflow = require('./util/workflow');
+
+// setup schedule
+require('./schedule')(app, schedule);
 
 
 //listen up
