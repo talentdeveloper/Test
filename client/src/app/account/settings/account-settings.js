@@ -45,7 +45,9 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
-    console.log(user);
+    user.firstName = account.name.first;
+    user.lastName = account.name.last;
+    console.log(account);
     
     $scope.user = {};
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
@@ -218,6 +220,8 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         });
       });
     };
+    //$scope.user.lastName = ADetail.last;
+    // $scope.user.firstName = $socpe.userDetail.first;
 
     var submitIdentityForm = function(){
       $scope.alerts.identity = [];
@@ -339,7 +343,9 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       occupation: 	user.occupation,
       otherSpecify: user.otherSpecify,
       whereHeardUs: user.whereHeardUs,
-      photoURL: 	user.photoURL
+      photoURL: 	user.photoURL,
+      firstName: user.firstName,
+      lastName: user.lastName
     };
     
     $scope.pass = {};

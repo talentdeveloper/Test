@@ -10,6 +10,10 @@ exports = module.exports = function(app, mongoose) {
       account: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
       accountType: {type: String, default:''}
     },
+    firstName: { type: String, default: ''},
+    lastName: { type: String, default: ''},
+    sendMailCounts:{ type: Number, default: 0},
+    isCompletedProfile: {type: String, default: 'no'},
     isActive: String,
     timeCreated: { type: Date, default: Date.now },
     resetPasswordToken: String,

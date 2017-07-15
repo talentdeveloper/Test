@@ -302,6 +302,8 @@ var account = {
         middlesex:  		req.body.middlesex,
         warren:  			req.body.warren,
         whereHeardUs: 		req.body.whereHeardUs,
+        firstName:    req.body.firstName,
+        lastName:     req.body.lastName,
         search: [
           req.body.username,
           req.body.email,

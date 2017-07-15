@@ -260,6 +260,24 @@
                                 <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
                             </div>                            
                         </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.firstName)}">
+                            <label class="col-md-3 control-label" for="firstName">FirstName</label>
+                            <div class="col-md-5">
+                                <input type="text" name="firstName" id="notific8_text" class="form-control" ng-model="user.firstName" required server-error>
+                                <span class="help-block" ng-show="showError(identityForm.firstName, 'required')">This field is required</span>
+                                <span class="help-block" ng-show="showError(identityForm.firstName, 'firstName')">Please enter a valid firstName</span>
+                                <span class="help-block" ng-show="showError(identityForm.firstName, 'server')">{{errfor.firstName}}</span>
+                            </div>                            
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': hasError(identityForm.lastName)}">
+                            <label class="col-md-3 control-label" for="firstName">LastName:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="lastName" id="notific8_text" class="form-control" ng-model="user.lastName" required server-error>
+                                <span class="help-block" ng-show="showError(identityForm.lastName, 'required')">This field is required</span>
+                                <span class="help-block" ng-show="showError(identityForm.lastName, 'lastName')">Please enter a valid lastName</span>
+                                <span class="help-block" ng-show="showError(identityForm.lastName, 'server')">{{errfor.lastName}}</span>
+                            </div>                            
+                        </div>                        
                         <div class="form-group" ng-class="{'has-error': hasError(identityForm.autocomplete)}">
 			                <label class="col-md-3 control-label" for="autocomplete">AutoAddress:*</label>
 			                <div class="col-md-5">

@@ -422,6 +422,11 @@ var administrator = {
     });
 
     workflow.emit('validate');
+  },
+  remarkSystem: function(req, res, next) {
+    req.app.db.models.User.where("age").gte(1).lte(4).exec(function (err, kittens) {  
+    // Do stuff
+    });
   }
 };
 module.exports = administrator;
