@@ -358,11 +358,12 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     $scope.submit = function(ngFormCtrl){
       switch (ngFormCtrl.$name){
         case 'detailForm':
+          submitPhotoForm(); 	
           submitDetailForm();
           break;
-        case 'photoForm':
-          submitPhotoForm();
-          break;
+//        case 'photoForm':
+//          submitPhotoForm();
+//          break;
         case 'passwordForm':
           submitPasswordForm();
           break;

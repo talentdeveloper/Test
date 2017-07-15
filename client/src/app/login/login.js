@@ -1,5 +1,8 @@
-angular.module('login.index', ['ngRoute', 'config', 'security.service', 'directives.serverError', 'services.utility']);
-angular.module('login.index').config(['$routeProvider', function($routeProvider){
+angular.module('login.index', ['ngRoute', 'config', 'security.service', 'directives.serverError', 'services.utility', 'vcRecaptcha']);
+angular.module('login.index').config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider){
+	$httpProvider.defaults.useXDomain = true;
+	$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $routeProvider
     .when('/login', {
       templateUrl: 'login/login.tpl.html',
@@ -18,8 +21,9 @@ angular.module('login.index').config(['$routeProvider', function($routeProvider)
       }
     });
 }]);
-angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'SOCIAL',
-  function($scope, $location, $log, security, utility, SOCIAL){
+angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'SOCIAL','$http',
+  function($scope, $location, $log, security, utility, SOCIAL, $http){
+	$scope.response = ''; // recaptcha response value;
     // local variable
     var loginSuccess = function(data){
       if(data.success){
@@ -61,7 +65,9 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
       $scope.alerts.splice(ind, 1);
     };
     $scope.submit = function(){
-      $scope.alerts = [];
-      security.login($scope.user.username, $scope.user.password).then(loginSuccess, loginError);
+    	if($scope.response != '') {
+    		$scope.alerts = [];
+        	security.login($scope.user.username, $scope.user.password).then(loginSuccess, loginError);
+    	}
     };
   }]);

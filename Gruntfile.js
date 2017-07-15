@@ -66,6 +66,10 @@ module.exports = function(grunt) {
             expand: true, cwd: 'client/bower_components/moment/',
             src: ['moment.js'], dest: '<%= distdir %>/vendor/'
           },
+          {
+              expand: true, cwd: 'node_modules/angular-recaptcha/release/',
+              src: ['*'], dest: '<%= distdir %>/vendor/'
+          },
         ]
       },
       asset: {
