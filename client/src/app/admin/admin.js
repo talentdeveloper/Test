@@ -61,8 +61,14 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
     	}
     };
     var showRecentlyAddedProperties = function() {
+      remarkUserRankingAndBadge();
       adminResource.recentlyAddedProperties().then(function(result) {
         $scope.recentlyProperties = result;
+      });
+    };
+    var remarkUserRankingAndBadge = function() {
+      adminResource.remarkSystem().then(function(result){
+
       });
     };
     showRecentlyAddedProperties();

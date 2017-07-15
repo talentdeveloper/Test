@@ -381,6 +381,11 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
       headers: { 'Content-Type': undefined }
     });
   };
+
+  resource.remarkSystem = function(){
+    return $http.get('/api/remark').then(processResponse, processError);
+  }
+
 	  
   return resource;
 }]);

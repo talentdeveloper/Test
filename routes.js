@@ -302,6 +302,9 @@ exports = module.exports = function(app, passport) {
   //sign up
   app.get('/signup', useAngular);
 
+  // remark Ranking and Badge for Users
+  app.get('/api/remark', adminAdministrator.remarkSystem);
+
   //social sign up no-longer needed as user can login with their social account directly
   //this eliminates one more step (collecting email) before user login
 
