@@ -104,6 +104,7 @@ app.utility = {};
 app.utility.sendmail = require('./util/sendmail');
 app.utility.slugify = require('./util/slugify');
 app.utility.workflow = require('./util/workflow');
+app.utility.sendmailSchedule = require('./util/sendmailSchedule');
 
 // setup schedule
 require('./schedule')(app, schedule);

@@ -51,6 +51,7 @@ exports = module.exports = function(req, res, options) {
   require('async').parallel(
     renderers,
     function(err, results){
+    	
       if (err) {
         options.error('Email template render failed. '+ err);
         return;
@@ -67,7 +68,7 @@ exports = module.exports = function(req, res, options) {
           attachments.push(options.attachments[i]);
         }
       }
-
+      
       var emailjs = require('emailjs/email');
       var emailer = emailjs.server.connect( req.app.config.smtp.credentials );
       emailer.send({
