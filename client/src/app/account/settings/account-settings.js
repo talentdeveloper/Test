@@ -126,9 +126,10 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       //   console.log(data);
       // });
     };
-
+    var tmpStats = {};
     restResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
       console.log(accountPropertyStats['PropertySubmitted']);
+      tmpStats = accountPropertyStats;
       $scope.stats = {
         submitted: accountPropertyStats['PropertySubmitted'],
         new: accountPropertyStats['New'],
@@ -140,7 +141,9 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         closed: accountPropertyStats['Closed'],
         deadLeads: accountPropertyStats['DeadLeads']
       };
+
     });
+    console.log(tmpStats);
 
     
 
@@ -345,9 +348,19 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       whereHeardUs: user.whereHeardUs,
       photoURL: 	user.photoURL,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
+      status: {        
+        submitted: tmpStats['PropertySubmitted'],
+        new: tmpStats['New'],
+        inProgress: tmpStats['ActivelyWorking'],
+        offerAccepted: tmpStats['OfferAccepted'],
+        offerRejected: tmpStats['OfferRejected'],
+        ucSeller: tmpStats['UCSeller'],
+        ucBuyer: tmpStats['UCBuyer'],
+        closed: tmpStats['Closed'],
+        deadLeads: tmpStats['DeadLeads']
+      }
     };
-    
     $scope.pass = {};
     $scope.social = null;
     if(!angular.equals({}, SOCIAL)){

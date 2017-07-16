@@ -268,7 +268,7 @@ var account = {
         workflow.emit('patchUser');
       });
     });
-
+    console.log(req.body.status);
     workflow.on('patchUser', function() {
       var fieldsToSet = {
         username: 			req.body.username,
