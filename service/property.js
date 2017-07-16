@@ -1,4 +1,7 @@
 'use strict';
+
+var Zillow  = require('node-zillow'); 
+
 var getCallbackUrl = function(hostname, provider){
   return 'http://' + hostname + '/account/properties/' + provider + '/callback';
 };
@@ -94,6 +97,16 @@ var property = {
     });
 
     workflow.on('createProperty', function () {
+      
+      var zwsid ="X1-ZWz1fwa3vw3aq3_1vfab";
+      var zillow = new Zillow(zwsid);
+
+
+      zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyState})
+      .then(function(results) {
+       console.log(results.response.results.result[0].links[0].homedetails);
+        return results;
+      });
       var fieldsToSet = {
         
         user: {

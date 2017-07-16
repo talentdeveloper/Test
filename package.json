@@ -38,6 +38,8 @@
     "mongoose": "^4.8.5",
     "morgan": "^1.x.x",
     "multer": "^1.3.0",
+    "node-schedule": "^1.2.3",
+    "node-zillow": "^1.0.1",
     "passport": "^0.2.x",
     "passport-facebook": "^2.x.x",
     "passport-github": "^0.1.x",

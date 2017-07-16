@@ -304,6 +304,7 @@ var account = {
         whereHeardUs: 		req.body.whereHeardUs,
         firstName:    req.body.firstName,
         lastName:     req.body.lastName,
+        status:       req.body.status,
         search: [
           req.body.username,
           req.body.email,

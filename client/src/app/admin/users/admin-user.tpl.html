@@ -193,15 +193,13 @@
 				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
 					<thead>
                     	<tr>                        	
-                            <th> Member Rank </th>
-                            <th> Badge </th>
+                            <th> Member Rank And Badge</th>                            
                             <th> Joined Date </th>
                             <th> Probation Strikes </th>                                            
                          </tr>
                     </thead>
                     <tbody>
-                    	<tr class="odd gradeX">                    		
-                            <td> {{ user.memberRanking }} </td>
+                    	<tr class="odd gradeX">                    		                            
                             <td> {{ user.badge }} </td>
                             <td style="text-align: center"> {{ user.timeCreated }} </td>
                             <td style="text-align: center"> {{ user.probationStrike }} </td>

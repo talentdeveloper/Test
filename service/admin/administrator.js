@@ -424,8 +424,35 @@ var administrator = {
     workflow.emit('validate');
   },
   remarkSystem: function(req, res, next) {
-    req.app.db.models.User.where("age").gte(1).lte(4).exec(function (err, kittens) {  
-    // Do stuff
+    req.app.db.models.User.find({}, function(err, result){
+      for (var $i = 0; $i < result.length; $i ++) {
+        if (result[$i].status.submitted > 0 && result[$i].status.submitted <= 5 && result[$i].status.closed < 1)
+          req.app.db.models.User.findByIdAndUpdate(result[$i]._id, { "badge": 'Chihuahua'}, function(err, result){
+            if (err)
+              return err;
+          });
+        else if ((result[$i].status.submitted > 5 && result[$i].status.submitted <= 10) || result[$i].status.closed == 1)
+          req.app.db.models.User.findByIdAndUpdate(result[$i]._id, { "badge": 'Puggle'}, function(err, result){
+            if (err)
+              return err;
+          });
+        else if ((result[$i].status.submitted > 10 && result[$i].status.submitted <= 20) || (result[$i].status.closed > 1 && result[$i].status.closed < 5))
+          req.app.db.models.User.findByIdAndUpdate(result[$i]._id, { "badge": 'Boxer'}, function(err, result){
+            if (err)
+              return err;
+          });
+        else if ((result[$i].status.submitted > 20) || (result[$i].status.closed > 4 && result[$i].status.closed < 10))
+          req.app.db.models.User.findByIdAndUpdate(result[$i]._id, { "badge": 'Golden Retriever'}, function(err, result){
+            if (err)
+              return err;
+          });
+        else if (result[$i].status.closed > 9)
+          req.app.db.models.User.findByIdAndUpdate(result[$i]._id, { "badge": 'PitBull'}, function(err, result){
+            if (err)
+              return err;
+          });
+
+      }
     });
   }
 };

@@ -50,86 +50,106 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     console.log(account);
     
     $scope.user = {};
-	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		
-		var componentForm = {
-	        street_number: 'short_name',
-	        route: 'long_name',
-	        locality: 'long_name',
-	        administrative_area_level_1: 'short_name',
-	        country: 'long_name',
-	        postal_code: 'short_name'
-		};
-		
-		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
-			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
-			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
-			switch (addressType) {
-			case 'postal_code': // zip code
-				$scope.user.zip = val;
-				break;
-			case 'street_number': // address1
-				$scope.user.address = val;
-				break;
-			case 'route': // address2
-				if ($scope.user.address == undefined) {
-					$scope.user.address = "";
-				}
-				$scope.user.address += " " + val;
-				break;
-			case 'locality': // city
-				$scope.user.city = val;
-				break;
-			case 'administrative_area_level_1': // state
-				$scope.user.state = val;
-				break;
-			case 'administrative_area_level_2': // county
-				$scope.user.county = val;
-				break;
-			case 'administrative_area_level_3':
-				break;
-			case 'country':
-				break;
-			}
-		}
-		var location = $scope.autocomplete.getPlace().geometry.location;
-	    $scope.lat = location.lat();
-	    $scope.lng = location.lng();
-	    $scope.$apply();
-	});
-
-    var getZillowURL = function() {
-      // var url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA";
-      // var trustedUrl = $sce.trustAsResourceUrl(url);
-      // $http.jsonp(trustedUrl, {jsonpCallbackParam: 'callback'})
-      // .success(function (result) {
-      //   $scope.mortgageLocation = result;
-      //   console.log('success!');
-      //   console.log(result);
-      // })
-      // .error(function (data, status) {
-      //   console.log('error!');
-      //   console.log(data);
-      // });
-      $http.get('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1fwa3vw3aq3_1vfab&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA').then(function(response){
-        console.log(response);
-      })
-
-      // $http.jsonp('http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1ft20wfj30r_94p25&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA')
-      // .success(function (result) {
-      //   //$scope.mortgageLocation = result.greeting;
-      //   console.log('success!');
-      //   console.log(result);
-      // })
-      // .error(function (data, status) {
-      //   console.log('error!');
-      //   console.log(data);
-      // });
-    };
-    var tmpStats = {};
+  	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+  		
+  		var componentForm = {
+  	        street_number: 'short_name',
+  	        route: 'long_name',
+  	        locality: 'long_name',
+  	        administrative_area_level_1: 'short_name',
+  	        country: 'long_name',
+  	        postal_code: 'short_name'
+  		};
+  		
+  		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
+  			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
+  			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+  			switch (addressType) {
+  			case 'postal_code': // zip code
+  				$scope.user.zip = val;
+  				break;
+  			case 'street_number': // address1
+  				$scope.user.address = val;
+  				break;
+  			case 'route': // address2
+  				if ($scope.user.address == undefined) {
+  					$scope.user.address = "";
+  				}
+  				$scope.user.address += " " + val;
+  				break;
+  			case 'locality': // city
+  				$scope.user.city = val;
+  				break;
+  			case 'administrative_area_level_1': // state
+  				$scope.user.state = val;
+  				break;
+  			case 'administrative_area_level_2': // county
+  				$scope.user.county = val;
+  				break;
+  			case 'administrative_area_level_3':
+  				break;
+  			case 'country':
+  				break;
+  			}
+  		}
+  		var location = $scope.autocomplete.getPlace().geometry.location;
+  	    $scope.lat = location.lat();
+  	    $scope.lng = location.lng();
+  	    $scope.$apply();
+  	});
+    var tmpStats = '';
     restResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
       console.log(accountPropertyStats['PropertySubmitted']);
-      tmpStats = accountPropertyStats;
+      var tmpStats = accountPropertyStats;
+      console.log("aefdf", tmpStats);
+      $scope.user = {
+        username:   user.username,
+        email:      user.email,
+        phone:      user.phone,
+        address:    user.address,
+        city:     user.city,
+        state:    user.state,
+        zip:      user.zip,
+        phone:      user.phone,
+        atlantic:   user.atlantic,
+        hunterdon:  user.hunterdon,
+        sussex:   user.sussex,
+        gloucester: user.gloucester,
+        salem:    user.salem,
+        cumberland: user.cumberland,
+        ocean:    user.ocean,
+        camden:   user.camden,
+        monmouth:   user.monmouth,
+        bergen:   user.bergen,
+        merser:   user.merser,
+        union:    user.union,
+        hudson:   user.hudson,
+        somerset:   user.somerset,
+        essex:    user.essex,
+        passaic:    user.passaic,
+        capemay:    user.capeMay,
+        morris:   user.morris,
+        burlington: user.burlington,
+        middlesex:  user.middlesex,
+        warren:   user.warren,
+        occupation:   user.occupation,
+        otherSpecify: user.otherSpecify,
+        whereHeardUs: user.whereHeardUs,
+        photoURL:   user.photoURL,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        status: {        
+          submitted: tmpStats['PropertySubmitted'],
+          new: tmpStats['New'],
+          inProgress: tmpStats['ActivelyWorking'],
+          offerAccepted: tmpStats['OfferAccepted'],
+          offerRejected: tmpStats['OfferRejected'],
+          ucSeller: tmpStats['UCSeller'],
+          ucBuyer: tmpStats['UCBuyer'],
+          closed: tmpStats['Closed'],
+          deadLeads: tmpStats['DeadLeads']
+        }
+      };
       $scope.stats = {
         submitted: accountPropertyStats['PropertySubmitted'],
         new: accountPropertyStats['New'],
@@ -143,7 +163,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       };
 
     });
-    console.log(tmpStats);
+    console.log("aosdkfj;efasdf", tmpStats);
 
     
 
@@ -313,54 +333,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       first:  account.name.first,
       last:   account.name.last,
     };
-    $scope.user = {
-      username: 	user.username,
-      email:    	user.email,
-      phone:    	user.phone,
-      address:		user.address,
-      city:			user.city,
-      state:		user.state,
-      zip:			user.zip,
-      phone:    	user.phone,
-      atlantic: 	user.atlantic,
-      hunterdon:	user.hunterdon,
-      sussex:		user.sussex,
-      gloucester:	user.gloucester,
-      salem:		user.salem,
-      cumberland:	user.cumberland,
-      ocean:		user.ocean,
-      camden:		user.camden,
-      monmouth:		user.monmouth,
-      bergen:		user.bergen,
-      merser:		user.merser,
-      union:		user.union,
-      hudson:		user.hudson,
-      somerset:		user.somerset,
-      essex:		user.essex,
-      passaic:		user.passaic,
-      capemay:		user.capeMay,
-      morris:		user.morris,
-      burlington:	user.burlington,
-      middlesex:	user.middlesex,
-      warren:		user.warren,
-      occupation: 	user.occupation,
-      otherSpecify: user.otherSpecify,
-      whereHeardUs: user.whereHeardUs,
-      photoURL: 	user.photoURL,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      status: {        
-        submitted: tmpStats['PropertySubmitted'],
-        new: tmpStats['New'],
-        inProgress: tmpStats['ActivelyWorking'],
-        offerAccepted: tmpStats['OfferAccepted'],
-        offerRejected: tmpStats['OfferRejected'],
-        ucSeller: tmpStats['UCSeller'],
-        ucBuyer: tmpStats['UCBuyer'],
-        closed: tmpStats['Closed'],
-        deadLeads: tmpStats['DeadLeads']
-      }
-    };
+    
     $scope.pass = {};
     $scope.social = null;
     if(!angular.equals({}, SOCIAL)){
@@ -424,6 +397,5 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         disconnect(provider);
       }
     };
-    getZillowURL();
   }
 ]);
