@@ -97,8 +97,8 @@ var connectSocial = function(provider, req, res, next){
 // public api
 var account = {
   setProfileCompleted: function(req, res, next){
-    console.log("reqbody", req.body);
-    req.app.db.model.User.findOneAndUpdate({"username": req.body.username}, {"isCompletedProfile": 'yes'}).exec(function(err, result){
+    console.log("reqbody", req.body.username);
+    req.app.db.models.User.findOneAndUpdate({"username": req.body.username}, {"isCompletedProfile": 'yes'}).exec(function(err, result){
       if (err)
         return err;
     });

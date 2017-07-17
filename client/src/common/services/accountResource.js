@@ -102,11 +102,11 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.getCompleteInfo = function(_id) {
     console.log(_id);
     return $http.get(baseUrl + '/account/getcompleteinfo/' + _id).then(processResponse, processError);
-  }
+  };
   resource.setProfileCompleted = function(data) {
     console.log(data);
     return $http.put(baseUrl + '/account/setprofilecompleted', data).then(processResponse, processError);
-  }
+  };
 
 
   resource.upload = function(file) {

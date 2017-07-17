@@ -55,7 +55,7 @@ exports = module.exports = function(app, mongoose) {
     whereHeardUs: { type: String, default: '' },
     memberRanking: { type: String, default: '' },
     badge: { type: String, default: '' },
-    probationStrike: { type: String, default: '' },
+    probationStrike: { type: Number, default: 0 },
     status: {
       submitted: { type: Number, default: '' },
       new: { type: Number, default: '' },
