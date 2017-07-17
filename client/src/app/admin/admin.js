@@ -29,7 +29,7 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
 }]);
 angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats', 'adminResource',
   function($scope, $log, stats, adminResource){
-    console.log(stats);
+    console.log("STATE", adminResource.getClosingStatsTitle());
     $scope.user = {
       // users: stats['User'],
       // accounts: stats['Account'],

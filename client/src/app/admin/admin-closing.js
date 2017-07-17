@@ -7,11 +7,11 @@ angular.module('admin.closing').config(['$routeProvider', function($routeProvide
       title: 'Closing Stats Area',
       resolve: {
         closingStats: ['$q', '$location', 'securityAuthorization', 'adminResource', function($q, $location, securityAuthorization, adminResource){
-          //get app stats only for admin-user, otherwise redirect to /account
+          // get app stats only for admin-user, otherwise redirect to /account
           var redirectUrl;
           var promise = securityAuthorization.requireAdminUser()
             .then(adminResource.getClosingStats, function(reason){
-              //rejected either user is un-authorized or un-authenticated
+              // rejected either user is un-authorized or un-authenticated
               redirectUrl = reason === 'unauthorized-client'? '/account': '/login';
               return $q.reject();
             })
@@ -30,19 +30,13 @@ angular.module('admin.closing').config(['$routeProvider', function($routeProvide
 angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '$location', '$log', 'closingStats', 'adminResource',
   function($scope, $route, $location, $log, closingStats, adminResource){
     $scope.closingStats = closingStats;
-    console.log(closingStats);
-    
-
 
     var getTitle = function(){
-      
       adminResource.getClosingStatsTitle().then(function(result) {
-        
         $scope.closingStatsTitle = result;
+        console.log("CLOSING:", result);
       });
     };
-
-    
 
     $scope.updateTitle = function() {
       adminResource.updateClosingStatsTitle($scope.closingStatsTitle).then(function(data){
@@ -54,7 +48,7 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
         }else if (data.errors && data.errors.length > 0){
           alert(data.errors[0]);
         }else {
-          //alert('unknown error.');
+          // alert('unknown error.');
         }
       }, function(e){
        
@@ -87,7 +81,7 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
             $location.path('/admin/closing');
             $route.reload();
           }else{
-            //error due to server side validation
+            // error due to server side validation
             angular.forEach(result.errors, function(err, index){
               $scope.deleteAlerts.push({ type: 'danger', msg: err});
             });
