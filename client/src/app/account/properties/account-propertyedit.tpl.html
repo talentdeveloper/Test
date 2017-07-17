@@ -429,7 +429,7 @@
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.zillowLink)}">
                             <label class="col-md-3 control-label" for="zillowLink">Zillow Link:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="zillowLink" id="notific8_text" class="form-control" ng-model="propertyDetail.zillowLink" required>
+                                <input type="text" name="zillowLink" id="notific8_text" class="form-control" ng-model="propertyDetail.zillowLink" disabled>
                                 <span class="help-block" ng-show="showError(detailForm.zillowLink, 'required')">This field is required</span>
                             </div>
                         </div>
@@ -458,22 +458,6 @@
 			                       		</div>
 			                       	</div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="status">Status:*</label>
-                            <div class="col-md-5">
-                                <select id="notific8_life" class="form-control input-medium" ng-model="propertyDetail.status" Status>
-                                    <option value="new">New</option>
-                                    <option value="inProgress">Actively Working(In Progress)</option>
-                                    <option value="offerAccepted">Offer Accepted</option>
-                                    <option value="offerRejected">Offer Rejected</option>
-                                    <option value="ucSeller">UC Seller</option>
-                                    <option value="ucBuyer">UC Buyer</option>
-                                    <option value="closed">closed</option>
-                                    <option value="deadLeads">Dead Leads</option>                                    
-                                </select>
                             </div>
                         </div>
                         <div class="form-group">

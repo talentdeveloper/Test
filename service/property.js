@@ -70,7 +70,7 @@ var property = {
   },
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
-
+    var temp = '';
     workflow.on('validate', function () {
       if (!req.body.ownerFirstName) {
         workflow.outcome.errors.push('Please enter a ownerFirstName.');
@@ -91,6 +91,7 @@ var property = {
         workflow.outcome.errors.push('only use letters, numbers, -, _');
         return workflow.emit('response');
       }
+      
 
       //workflow.emit('duplicateUsernameCheck');
       workflow.emit('createProperty');
@@ -101,13 +102,13 @@ var property = {
       var zwsid ="X1-ZWz1fwa3vw3aq3_1vfab";
       var zillow = new Zillow(zwsid);
 
-
+      //temp = '';
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
-        console.log(results);
-       console.log(results.response.results.result[0].links[0].homedetails);
-      });
-      var fieldsToSet = {
+        //console.log(results);
+       //console.log(results.response.results.result[0].links[0].homedetails);
+       temp = results.response.results.result[0].links[0].homedetails;
+       var fieldsToSet = {
         
         user: {
           id: req.user._id,
@@ -153,7 +154,7 @@ var property = {
         propertyOnMLS: req.body.propertyOnMLS,
         propertyDetail: req.body.propertyDetail,
         taxRecordLink: req.body.taxRecordLink,
-        zillowLink: req.body.zillowLink,
+        zillowLink: temp,
         offerAmountAccepted: req.body.offerAmountAccepted,    
         approxARV: req.body.approxARV,
         selectCalculate: req.body.selectCalculate,
@@ -183,7 +184,6 @@ var property = {
           req.body.listedOnMLS,
           req.body.propertyDetail,
           req.body.taxRecordLink,
-          req.body.results.response.results.result[0].links[0].homedetails,
           req.body.offerAmountAccepted, 
           req.body.approxARV,
           req.body.status,
@@ -201,6 +201,8 @@ var property = {
         workflow.outcome.record = property;
         return workflow.emit('response');
       });
+      });
+      
     });
 
     workflow.emit('validate');

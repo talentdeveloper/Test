@@ -428,10 +428,9 @@
                                 <span class="help-block" ng-show="showError(detailForm.taxRecordLink, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.zillowLink)}">
-                            <label class="col-md-3 control-label" for="zillowLink">Zillow Link:*</label>
+                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.zillowLink)}">                            
                             <div class="col-md-5">
-                                <input type="text" name="zillowLink" id="notific8_text" class="form-control" ng-model="propertyDetail.zillowLink" required>
+                                <input type="hidden" name="zillowLink" id="notific8_text" class="form-control" ng-model="propertyDetail.zillowLink">
                                 <span class="help-block" ng-show="showError(detailForm.zillowLink, 'required')">This field is required</span>
                             </div>
                         </div>
