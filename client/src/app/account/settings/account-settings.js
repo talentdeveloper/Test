@@ -25,21 +25,97 @@ angular.module('account.settings').config(['$routeProvider', 'securityAuthorizat
       }
     });
 }]);
-angular.module('account.settings').directive('fileModel', ['$parse', function($parse) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      var parsedFile = $parse(attrs.fileModel);
-      var parsedFileSetter = parsedFile.assign;
-
-      element.bind('change', function() {
-        scope.$apply(function() {
-          parsedFileSetter(scope, element[0].files[0]);
-        });
-      });
-    }
-  };
+angular.module('account.settings').directive('fileUpdate', ['$parse', function($parse) {
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			var parsedFile = $parse(attrs.fileUpdate);
+			var parsedFileSetter = parsedFile.assign;
+			console.log(parsedFile);
+			element.bind('change', function(e) {
+				var fileObjectsArray = [];
+				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+			});
+		}
+	};
 }]);
+angular.module('account.settings').directive('fileDragzone', function() {
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			element.bind('dragover', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('dragenter', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('drop', function(e) {
+				element.attr('class', 'file-drop-zone');
+				if(e != null) {
+					e.preventDefault();
+				}
+				var fileObjectsArray = [];
+				if((e.originalEvent || e).dataTransfer.files.length > 1) {
+					alert("Only one file can be added.");
+					return;
+				}
+				angular.forEach((e.originalEvent || e).dataTransfer.files, function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+			});
+		}
+	};
+});
 
 angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL', '$http', '$sce',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){

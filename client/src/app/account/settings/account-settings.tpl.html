@@ -1,3 +1,20 @@
+<style type="text/css">
+	.file-drop-zone-over {
+		border: 2px dashed #aaa;
+		padding: 30px;
+		text-align: center;
+	}
+	.remove {
+		float: right;
+		color: green;
+	}
+	.remove:hover {
+		color: red;
+		cursor: pointer;
+		font-size: 16px;
+	}
+</style>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="page-header"><h1>Profile Settings</h1></div>
@@ -139,21 +156,17 @@
             <div class="portlet-body">
                 <form name="photoForm" class="form-horizontal">
                     <div class="form-group">
-                        <div class="col-md-3 control-label" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3">
-                            <span>Drop Image Here</span>
+                        <div class="file-drop-zone margin-bottom-20" file-dragzone="[image/png, image/jpeg, image/gif]" files-to-upload="files" style="margin-bottom: 10px">
+                        	<span>Drop Image Here</span>
                         </div>
-                        <div class="col-md-5">
-                            <img ng-src={{image}} />
-                            <span class="file-name">{{ imageFileName }}</span>
+                       	<div class="col-md-5" align="center">
+                       		<input class="file-browser" type="file" name="propertyImage" file-update="file.upload" files-to-upload="files" style="margin-bottom: 8px">
+                            <img src="{{files[0].preview}}" width="200" height="200">
+                            <span class="file-name">{{files[0].name}}</span>
                         </div>  
-                        <div class="col-md-5">
-                            <input type="file" name="myfile" file-model="file.upload" ng-disabled="uploading" onchange="angular.element(this).scope().photoChanged(this.files)" style="margin-bottom: 8px;">
-                            <img ng-src="{{ thumbnail.dataUrl || user.photoURL }}" height="200" width="200">
-                        </div>
                     </div>                        
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="setPhoto"></label>
-                        <div class="col-md-5">
+                        <div class="col-md-5" align="left">
                             <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Set Photo </button>
                         </div>
                     </div>
