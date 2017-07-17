@@ -75,8 +75,8 @@
                     <td ng-bind="user.email"></td>
                     <td ng-bind="user.roles.accountType"></td>
                     <td ng-bind="user.timeCreated"></td>
-                    <td ></td>
-                    <td></td>
+                    <td ng-bind="user.status.submitted"></td>
+                    <td ng-bind="user.badge"></td>
                     <!-- <td ng-bind="user.isActive"></td> -->
                     <!-- <td ng-bind="user._id"></td> -->
                     <td><a class="btn btn-default btn-sm" ng-href="/admin/users/{{user._id}}">Edit</a>

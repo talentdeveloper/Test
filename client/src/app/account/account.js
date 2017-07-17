@@ -35,7 +35,78 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
           //  $location.path('/account/settings');
+      } else if (result.user.isCompletedProfile == 'yes'){
+        var user = result.user;
+        var tmpStats = '';
+        accountResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
+          console.log(accountPropertyStats['PropertySubmitted']);
+          var tmpStats = accountPropertyStats;
+          var tmpData = {
+            username:   user.username,
+            email:      user.email,
+            phone:      user.phone,
+            address:    user.address,
+            city:     user.city,
+            state:    user.state,
+            zip:      user.zip,
+            phone:      user.phone,
+            atlantic:   user.atlantic,
+            hunterdon:  user.hunterdon,
+            sussex:   user.sussex,
+            gloucester: user.gloucester,
+            salem:    user.salem,
+            cumberland: user.cumberland,
+            ocean:    user.ocean,
+            camden:   user.camden,
+            monmouth:   user.monmouth,
+            bergen:   user.bergen,
+            merser:   user.merser,
+            union:    user.union,
+            hudson:   user.hudson,
+            somerset:   user.somerset,
+            essex:    user.essex,
+            passaic:    user.passaic,
+            capemay:    user.capeMay,
+            morris:   user.morris,
+            burlington: user.burlington,
+            middlesex:  user.middlesex,
+            warren:   user.warren,
+            occupation:   user.occupation,
+            otherSpecify: user.otherSpecify,
+            whereHeardUs: user.whereHeardUs,
+            photoURL:   user.photoURL,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            status: {        
+              submitted: tmpStats['PropertySubmitted'],
+              new: tmpStats['New'],
+              inProgress: tmpStats['ActivelyWorking'],
+              offerAccepted: tmpStats['OfferAccepted'],
+              offerRejected: tmpStats['OfferRejected'],
+              ucSeller: tmpStats['UCSeller'],
+              ucBuyer: tmpStats['UCBuyer'],
+              closed: tmpStats['Closed'],
+              deadLeads: tmpStats['DeadLeads']
+            }
+          };
+          accountResource.setIdentity(tmpData).then(function(data){
+            console.log(tmpData);
+
+            if(data.success){
+              
+            }else{
+              //error due to server side validation
+              
+            }
+          }, function(x){
+            $scope.alerts.identity.push({
+              type: 'danger',
+              msg: 'Error updating user identity: ' + x
+            });
+          });
+        });
       }
+      
     });
 
     var show = function() {
@@ -82,7 +153,6 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
       showClosingStats();  
       accountResource.getClosingStatsTitle().then(function(result){
         $scope.closingStatsTitle = result;
-        console.log(result);
       });
     };
     var showClosingStats = function() {

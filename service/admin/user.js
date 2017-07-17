@@ -133,7 +133,7 @@ var user = {
     req.app.db.models.User.pagedFind({
 
       filters: filters,
-      keys: 'username email isActive timeCreated roles memberRanking status photoURL',
+      keys: 'username email isActive timeCreated roles badge status photoURL',
       limit: req.query.limit,
       page: req.query.page,
       sort: req.query.sort
