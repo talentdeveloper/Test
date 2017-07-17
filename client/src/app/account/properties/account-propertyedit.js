@@ -40,7 +40,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
     //var property = propertyDetails.property;
 	restResource.getAccountDetails().then(function(result){
 		if (result.user.isCompletedProfile == 'no'){
-		      $location.path('/account/settings');
+		     // $location.path('/account/settings');
 		}
 	});
 	$scope.propertyDetail = {};

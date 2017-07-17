@@ -192,7 +192,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 
   restResource.getAccountDetails().then(function(result){
     if (result.user.isCompletedProfile == 'no'){
-          $location.path('/account/settings');
+          //$location.path('/account/settings');
     }
   });
 
