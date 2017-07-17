@@ -27,23 +27,109 @@ angular.module('account.properties.submit').config(['$routeProvider', 'securityA
 }]);
 
 angular.module('account.properties.submit').directive('fileModel', ['$parse', function($parse) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      var parsedFile = $parse(attrs.fileModel);
-      var parsedFileSetter = parsedFile.assign;
-
-      element.bind('change', function() {
-        scope.$apply(function() {
-          parsedFileSetter(scope, element[0].files[0]);
-        });
-      });
-    }
-  };
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			var parsedFile = $parse(attrs.fileModel);
+			var parsedFileSetter = parsedFile.assign;
+			console.log(parsedFile);
+			element.bind('change', function(e) {
+				var fileObjectsArray = [];
+				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+				console.log(scope.filesToUpload);
+			});
+		}
+	};
 }]);
+angular.module('account.properties.submit').directive('fileDropzone', function() {
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			element.bind('dragover', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('dragenter', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('drop', function(e) {
+				element.attr('class', 'file-drop-zone');
+				if(e != null) {
+					e.preventDefault();
+				}
+				var fileObjectsArray = [];
+				angular.forEach((e.originalEvent || e).dataTransfer.files, function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+				console.log(scope.filesToUpload);
+			});
+		}
+	};
+});
+
 angular.module('account.properties.submit').controller('AccountPropertySubmitCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyDetails', 'SOCIAL', '$timeout',
 	function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
-	
+	/************************* Files Drop ****************************/
+	$scope.files = [];
+	$scope.remove = function(index) {
+		var files = [];
+		angular.forEach($scope.files, function(file, key) {
+			if(index != key) {
+				files.push(file);
+			}
+		});
+		$scope.files = files;
+	};
+	/*****************************************************************/
 	// Address automatic Complete
 	$scope.propertyDetail = {};
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
@@ -229,7 +315,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
           }
         });
     };
-    $scope.photoChanged = function(files) {
+    /*$scope.photoChanged = function(files) {
       if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
         $scope.uploading = true;
         var file = files[0];
@@ -247,7 +333,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         $scope.thumbnail = {};
         $scope.message = false;
       }
-    };
+    };*/
 
     var property = propertyDetails.property;
     var user = propertyDetails.user;
@@ -364,12 +450,11 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     $scope.submit = function(ngFormCtrl){
       switch (ngFormCtrl.$name){
         case 'detailForm':
-          submitPhotoForm(); 	
           submitDetailForm();
           break;
-//        case 'photoForm':
-//          submitPhotoForm();
-//          break;
+        case 'photoForm':
+          submitPhotoForm();
+          break;
         case 'passwordForm':
           submitPasswordForm();
           break;

@@ -1,3 +1,20 @@
+<style type="text/css">
+	.file-drop-zone-over {
+		border: 2px dashed #aaa;
+		padding: 30px;
+		text-align: center;
+	}
+	.remove {
+		float: right;
+		color: green;
+	}
+	.remove:hover {
+		color: red;
+		cursor: pointer;
+		font-size: 16px;
+	}
+</style>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="page-header"><h1>Profile Settings</h1></div>
@@ -22,21 +39,29 @@
             <form name="photoForm" class="form-horizontal">
                 <div class="form-group">
                 	<input type="hidden" name="approxARV" id="notific8_text" class="form-control" ng-model="propertyDetail.photoURL" >
-                    <div class="col-md-3 control-label" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3">
-                        <span>Drop Image Here</span>
-                    </div>
-                    <div class="col-md-5">
-                        <img ng-src={{image}} />
-                        <span class="file-name">{{ imageFileName }}</span>
-                    </div>  
-                    <div class="col-md-5">
-                        <input type="file" name="propertyImage" file-model="file.upload" ng-disabled="uploading" onchange="angular.element(this).scope().photoChanged(this.files)" style="margin-bottom: 10px;">
-                        <img ng-src="{{ thumbnail.dataUrl || propertyDetail.photoURL }}" height="300" width="400">
-                    </div>
+                	<div class="col-md-12">
+                		<div class="col-md-5">
+	                        <div class="file-drop-zone margin-bottom-20" file-dropzone files-to-upload="files" style="margin-bottom: 10px">
+	                        	<span>Drop Image Here</span>
+	                        </div>
+	                    </div>  
+	                    <div class="col-md-5" align="center">
+	                        <input class="file-browser" type="file" name="propertyImage" file-model="file.upload" files-to-upload="files"  multiple="">
+	                    </div>
+                	</div>
+                    <div align="center" style="margin-left: 30px">
+	                   	<div ng-repeat="file in files"  style="width: 180px; height: 150px; float: left; margin-right: 10px; margin-bottom: 15px">
+	                   		<div>
+	                   			<span class="remove" ng-click="remove($index)">X</span>
+	                   			<img ng-src="{{file.preview}}" class="img-thumbnail" width="130" height="100">
+	                   		</div>
+	                   		<div>{{file.name}}</div>
+	                   	</div>
+                   	</div>
                 </div>                        
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="setPhoto"></label>
-                    <div class="col-md-5">
+                    <div class="col-md-5" align="right" style="margin-left: 155px">
                         <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Upload </button>
                     </div>
                     <div ng-show="thumbnail.dataUrl != null">
@@ -44,7 +69,6 @@
                    	</div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
