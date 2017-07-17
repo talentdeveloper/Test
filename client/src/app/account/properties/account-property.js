@@ -58,7 +58,6 @@ angular.module('account.properties.submit').directive('fileModel', ['$parse', fu
 					reader.readAsDataURL(file);
 				});
 				scope.filesToUpload = fileObjectsArray;
-				console.log(scope.filesToUpload);
 			});
 		}
 	};
@@ -110,7 +109,6 @@ angular.module('account.properties.submit').directive('fileDropzone', function()
 					reader.readAsDataURL(file);
 				});
 				scope.filesToUpload = fileObjectsArray;
-				console.log(scope.filesToUpload);
 			});
 		}
 	};
@@ -119,7 +117,6 @@ angular.module('account.properties.submit').directive('fileDropzone', function()
 angular.module('account.properties.submit').controller('AccountPropertySubmitCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyDetails', 'SOCIAL', '$timeout',
 	function($scope, $location, $log, security, utility, restResource, propertyDetails, SOCIAL, $timeout){
 	/************************* Files Drop ****************************/
-	$scope.files = [];
 	$scope.remove = function(index) {
 		var files = [];
 		angular.forEach($scope.files, function(file, key) {
@@ -282,7 +279,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     }
   });
 
-	$scope.file = {};
 	var propertyURL = '';
     var submitPhotoForm = function() {
         $scope.uploading = true;
