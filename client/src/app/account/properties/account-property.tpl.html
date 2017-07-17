@@ -38,7 +38,6 @@
         <div class="portlet-body">
             <form name="photoForm" class="form-horizontal">
                 <div class="form-group">
-                	<input type="hidden" name="approxARV" id="notific8_text" class="form-control" ng-model="propertyDetail.photoURL" >
                 	<div class="col-md-12">
                 		<div class="col-md-5">
 	                        <div class="file-drop-zone margin-bottom-20" file-dropzone files-to-upload="files" style="margin-bottom: 10px">
@@ -64,7 +63,7 @@
                     <div class="col-md-5" align="right" style="margin-left: 155px">
                         <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-click="submit(photoForm)"> Upload </button>
                     </div>
-                    <div ng-show="thumbnail.dataUrl != null">
+                    <div ng-show="files[0].name != null">
 	                   	<label>+1 pt</label>
                    	</div>
                 </div>
