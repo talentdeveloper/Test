@@ -34,8 +34,106 @@ angular.module('account.properties.edit').config(['$routeProvider', 'securityAut
       }
     });
 }]);
+
+angular.module('account.properties.edit').directive('fileModels', ['$parse', function($parse) {
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			var parsedFile = $parse(attrs.fileModels);
+			var parsedFileSetter = parsedFile.assign;
+			console.log(parsedFile);
+			element.bind('change', function(e) {
+				var fileObjectsArray = [];
+				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+			});
+		}
+	};
+}]);
+angular.module('account.properties.edit').directive('fileDropzones', function() {
+	return {
+		restrict: 'A',
+		scope : {
+			filesToUpload : '='
+		},
+		link: function(scope, element, attrs) {
+			element.bind('dragover', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('dragenter', function(e) {
+				if(e != null) {
+					e.preventDefault();
+				}
+				(e.originalEvent || e).dataTransfer.effectAllowed = 'copy';
+				element.attr('class', 'file-drop-zone-over');
+			});
+			element.bind('drop', function(e) {
+				element.attr('class', 'file-drop-zone');
+				if(e != null) {
+					e.preventDefault();
+				}
+				var fileObjectsArray = [];
+				angular.forEach((e.originalEvent || e).dataTransfer.files, function(file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						scope.$apply(function() {
+							var newFilePreview = e.target.result;
+							var newFileName = file.name;
+							var newFileSize = file.size;
+							
+							var fileObject = {
+								file : file,
+								name : newFileName,
+								size : newFileSize,
+								preview: newFilePreview
+							}
+							fileObjectsArray.push(fileObject);
+						});
+					}
+					reader.readAsDataURL(file);
+				});
+				scope.filesToUpload = fileObjectsArray;
+			});
+		}
+	};
+});
 angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', ['$scope', '$route', '$location', 'utility', 'accountResource', 'propertyDetail', '$timeout',
   function($scope, $route, $location, utility, restResource, propertyDetail, $timeout) {
+	/************************* Files Drop ****************************/
+	$scope.remove = function(index) {
+		var files = [];
+		angular.forEach($scope.files, function(file, key) {
+			if(index != key) {
+				files.push(file);
+			}
+		});
+		$scope.files = files;
+	};
     // local vars
     //var property = propertyDetails.property;
 	restResource.getAccountDetails().then(function(result){
@@ -95,7 +193,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	// function sum Point
 	var sumPoint = function() {
 		var sum = 0;
-		if ($scope.propertyDetail.photoURL != null) {
+		if ($scope.files[0].name != null) {
 			sum++;
 		}
 		if ($scope.propertyDetail.propertyAddress != null) {

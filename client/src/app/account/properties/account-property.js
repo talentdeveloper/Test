@@ -179,7 +179,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	// function sum Point
 	var sumPoint = function() {
 		var sum = 0;
-		if ($scope.propertyDetail.photoURL != null) {
+		if ($scope.files[0].name != null) {
 			sum++;
 		}
 		if ($scope.propertyDetail.propertyAddress != null) {
