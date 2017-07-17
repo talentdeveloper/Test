@@ -28,14 +28,18 @@ angular.module('account.index').config(['$routeProvider', 'securityAuthorization
     });
 }]);
 var temp = '';
-angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoURL', '$sce', 'ModalService', 'accountResource',
-  function($scope, data, $sce, ModalService, accountResource){
+angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location', 'getVideoURL', '$sce', 'ModalService', 'accountResource',
+  function($scope, $location, data, $sce, ModalService, accountResource){
     console.log(data.welcomePageURL);
     temp = data;
-    var value = '';
+    accountResource.getAccountDetails().then(function(result){
+      if (result.user.isCompletedProfile == 'no'){
+            $location.path('/account/settings');
+      }
+    });
 
     var show = function() {
-      quote();
+      
       ModalService.showModal({
         templateUrl: 'account/welcome.tpl.html',
         controller: "Controller",
@@ -88,6 +92,8 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', 'getVideoU
     };
     showClosingStatsTitle();
 //    show();
+    quote();
+
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {
     $scope.trustSrc = function(src) {

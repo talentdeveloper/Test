@@ -27,7 +27,12 @@ angular.module('account.properties.propertystatuses').config(['$routeProvider', 
       }
     });
 }]);
-angular.module('account.properties.propertystatuses').controller('PropertyStatusCtrl', [ '$scope', 'propertyStatusesResult',
-  function($scope, data){
+angular.module('account.properties.propertystatuses').controller('PropertyStatusCtrl', [ '$scope', '$location', 'propertyStatusesResult', 'accountResource',
+  function($scope, $location, data, accountResource){
     $scope.statusesResults = data;
+    accountResource.getAccountDetails().then(function(result){
+      if (result.user.isCompletedProfile == 'no'){
+            $location.path('/account/settings');
+      }
+    });
   }]);

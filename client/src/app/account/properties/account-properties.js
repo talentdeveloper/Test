@@ -59,5 +59,11 @@ angular.module('account.properties.list').controller('AccountPropertyListCtrl', 
       }
     };
 
+    restResource.getAccountDetails().then(function(result){
+    if (result.user.isCompletedProfile == 'no'){
+          $location.path('/account/settings');
+    }
+  });
+
   }
 ]);

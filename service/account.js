@@ -96,6 +96,21 @@ var connectSocial = function(provider, req, res, next){
 
 // public api
 var account = {
+  setProfileCompleted: function(req, res, next){
+    console.log("reqbody", req.body);
+    req.app.db.model.User.findOneAndUpdate({"username": req.body.username}, {"isCompletedProfile": 'yes'}).exec(function(err, result){
+      if (err)
+        return err;
+    });
+  },
+  getCompleteInfo: function(req, res, next) {
+    console.log(req.params.id);
+    req.app.db.models.User.findById(req.params.id).exec(function(err, result){
+      if (err)
+        return err;
+      res.status(200).json(result);
+    });
+  },
   getPropertyStatuses: function(req, res, next) {
     req.app.db.models.StatusType.find({}).exec(function(err, propertyStatuses){
       if (err) {
@@ -129,7 +144,7 @@ var account = {
     };
 
     var getUserData = function(callback) {
-      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL ataltic hunterdon sussex gloucester salem cumberland ocean camden monmouth bergen merser union hudson somerset essex passaic capemay morris burlington middlesex warren').exec(function(err, user) {
+      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL ataltic hunterdon sussex gloucester salem cumberland ocean camden monmouth bergen merser union hudson somerset essex passaic capemay morris burlington middlesex warren isCompletedProfile').exec(function(err, user) {
         if (err) {
           callback(err, null);
         }

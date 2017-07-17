@@ -190,6 +190,12 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
    //      objXhr.send(data);
    //  }
 
+  restResource.getAccountDetails().then(function(result){
+    if (result.user.isCompletedProfile == 'no'){
+          $location.path('/account/settings');
+    }
+  });
+
 	$scope.file = {};
 	var propertyURL = '';
     var submitPhotoForm = function() {
@@ -376,5 +382,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         disconnect(provider);
       }
     };
+
+
   }
 ]);

@@ -249,6 +249,11 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     var submitIdentityForm = function(){
       $scope.alerts.identity = [];
       console.log($scope.user);
+      if ($scope.user.firstName != '' && $scope.user.lastName != '' && $scope.user.address != '' && $scope.user.city !='' && $scope.user.state != '' && $scope.user.zip != '' && $scope.user.phone != '') {
+        restResource.setProfileCompleted($scope.user).then(function(){
+          
+        });
+      }
       restResource.setIdentity($scope.user).then(function(data){
         if(data.success){
           $scope.alerts.identity.push({

@@ -102,10 +102,10 @@ var property = {
       var zillow = new Zillow(zwsid);
 
 
-      zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyState})
+      zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
+        console.log(results);
        console.log(results.response.results.result[0].links[0].homedetails);
-        return results;
       });
       var fieldsToSet = {
         
@@ -183,7 +183,7 @@ var property = {
           req.body.listedOnMLS,
           req.body.propertyDetail,
           req.body.taxRecordLink,
-          req.body.zillowLink,
+          req.body.results.response.results.result[0].links[0].homedetails,
           req.body.offerAmountAccepted, 
           req.body.approxARV,
           req.body.status,
@@ -191,8 +191,8 @@ var property = {
         photoURL: req.body.photoURL,
         sumPoint: req.body.sumPoint
       };
-      console.log(req.body.beds);
-      console.log(req.body.photoURL);
+      // console.log(req.body.beds);
+      // console.log(req.body.photoURL);
       req.app.db.models.Property.create(fieldsToSet, function (err, property) {
         if (err) {
           return workflow.emit('exception', err);

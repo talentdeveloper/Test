@@ -38,6 +38,11 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
   function($scope, $route, $location, utility, restResource, propertyDetail, $timeout) {
     // local vars
     //var property = propertyDetails.property;
+	restResource.getAccountDetails().then(function(result){
+		if (result.user.isCompletedProfile == 'no'){
+		      $location.path('/account/settings');
+		}
+	});
 	$scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){

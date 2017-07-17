@@ -28,17 +28,24 @@ angular.module('account.resoureces.training').config(['$routeProvider', 'securit
       }
     });
 }]);
-angular.module('account.resoureces.training').controller('instructionCtrl', [ '$scope', 'getinstructionURL', '$sce',
-	function($scope, data, $sce){
+angular.module('account.resoureces.training').controller('instructionCtrl', [ '$scope', '$location', 'getinstructionURL', '$sce', 'accountResource',
+	function($scope, $location, data, $sce, accountResource){
 	$scope.instructionURL = {src:data[0].videoURL};
     $scope.data = data;
     
 	$scope.trustSrc = function(src) {
 		return $sce.trustAsResourceUrl(src);
-	}
+	};
 	
 	$scope.selectKey = function(val) {
 		var url = val + '&autoplay=1';
 		$scope.instructionURL = {src:url};
-	}
+	};
+
+  accountResource.getAccountDetails().then(function(result){
+    if (result.user.isCompletedProfile == 'no'){
+          $location.path('/account/settings');
+    }
+  });
+
 }]);

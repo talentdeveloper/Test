@@ -186,6 +186,9 @@ exports = module.exports = function(app, passport) {
   app.get('/api/account/getclosingtitle', account.getClosingStatsTitle);
   app.get('/api/account/getclosingstats', account.getClosingStats);
 
+  app.get('/api/account/getcompleteinfo/:id', account.getCompleteInfo);
+  app.put('/api/account/setprofilecompleted', account.setProfileCompleted);
+
 
   
   
