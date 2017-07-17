@@ -292,6 +292,7 @@ exports = module.exports = function(app, passport) {
   app.delete('/api/admin/closing/:id', adminClosingStats.delete);
   app.get('/api/admin/closingtitle', adminClosingStats.getClosingTitle);
   app.put('/api/admin/closingtitle', adminClosingStats.updateClosingTitle);
+  app.put('/api/admin/closingtitleshow', adminClosingStats.updateClosingTitleShow);
   
 
   //******** END OF NEW JSON API ********

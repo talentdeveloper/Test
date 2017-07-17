@@ -188,7 +188,7 @@ workflow.on('initDb', function(){
     });
   },function(cb){
     //insert one video doc
-    db.collection('closingtitles').insert({ title: '', isTitle: 'yes'}, function(err, res){
+    db.collection('closingtitles').insert({ title: '', isTitle: 'yes', isShow: 0}, function(err, res){
       return err? cb(err): cb();
     });
   },function(cb){

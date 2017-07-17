@@ -190,8 +190,11 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.get(adminClosingStatsURL + 'title').then(processResponse, processError);
   };
   resource.updateClosingStatsTitle = function(data) {
-    console.log(data);
     return $http.put(adminClosingStatsURL + 'title', data).then(processResponse, processError);
+  };
+  resource.updateClosingStatsTitleShow = function(data) {
+	  console.log(data);
+    return $http.put(adminClosingStatsURL + 'titleshow', data).then(processResponse, processError);
   };
   resource.findClosingStats = function(_id) {
     return $http.get(adminClosingStatsURL + '/' + _id).then(processResponse, processError);

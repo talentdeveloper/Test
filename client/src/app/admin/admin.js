@@ -29,12 +29,14 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
 }]);
 angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats', 'adminResource',
   function($scope, $log, stats, adminResource){
-    console.log("STATE", adminResource.getClosingStatsTitle());
+	$scope.closingStatsTitleShow = 0;
+	var getTitleShow = function(){
+		adminResource.getClosingStatsTitle().then(function(result) {
+			$scope.closingStatsTitleShow = result;
+	    });
+    };
+    getTitleShow();
     $scope.user = {
-      // users: stats['User'],
-      // accounts: stats['Account'],
-      // admins: stats['Admin'],
-      // groups: stats['AdminGroup'],
       submitted: stats['PropertySubmitted'],
       new: stats['New'],
       activelyWorking: stats['ActivelyWorking'],
@@ -45,21 +47,35 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
       closed: stats['Closed'],
       deadLeads: stats['DeadLeads']
     };
-    // $scope.pivoted = {
-    //   categories: stats['Category'],
-    //   statuses: stats['Status']
-    // };
     var isFlg = 0;
     $scope.btnText = 'Closing Stats On';
     $scope.clickChange = function() {
-    	if(isFlg == 0) {
+    	if($scope.closingStatsTitleShow.isShow == 0) {
     		$scope.btnText = 'Closing Stats Off';
-    		isFlg = 1;
+    		$scope.closingStatsTitleShow.isShow = 1;
+    		updateTitleShow($scope.closingStatsTitleShow);
     	} else {
     		$scope.btnText = 'Closing Stats On';
-    		isFlg = 0;
+    		$scope.closingStatsTitleShow.isShow = 0;
+    		updateTitleShow($scope.closingStatsTitleShow);
     	}
     };
+    
+    var updateTitleShow = function() {
+	    adminResource.updateClosingStatsTitleShow($scope.closingStatsTitleShow).then(function(data){
+	    
+	      if(data.success){
+	
+	      }else if (data.errors && data.errors.length > 0){
+	        alert(data.errors[0]);
+	      }else {
+	        
+	      }
+	    }, function(e){
+	      $log.error(e);
+	    });
+	  };
+      
     var showRecentlyAddedProperties = function() {
       remarkUserRankingAndBadge();
       adminResource.recentlyAddedProperties().then(function(result) {

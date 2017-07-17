@@ -119,6 +119,16 @@ var closingstats = {
       if (err) return res.send(500, { error: err });
       return res.send("succesfully saved");
     });
+  },
+  updateClosingTitleShow: function(req, res, next) {
+    console.log("Real body", req.body);  
+    var fieldsToSet = {
+      isShow: req.body.isShow
+    };
+    req.app.db.models.ClosingTitle.findOneAndUpdate({"isTitle": 'yes'}, {"isShow": req.body.isShow}).exec(function(err, result) {
+      if (err) return res.send(500, { error: err });
+      return res.send("succesfully saved");
+    });
   }
 };
 module.exports = closingstats;
