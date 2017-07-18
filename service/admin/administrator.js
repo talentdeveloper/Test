@@ -402,7 +402,6 @@ var administrator = {
         workflow.outcome.errors.push('You may not delete admins.');
         return workflow.emit('response');
       }
-      console.log(req.user);
       if (req.user.roles.admin._id + '' === req.params.id) { //convert ObjectId to String
         workflow.outcome.errors.push('You may not delete your own admin record.');
         return workflow.emit('response');

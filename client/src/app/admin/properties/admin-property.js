@@ -43,7 +43,6 @@ angular.module('admin.properties.detail').directive('fileInput', ['$parse', func
 		link: function(scope, element, attrs) {
 			var parsedFile = $parse(attrs.fileInput);
 			var parsedFileSetter = parsedFile.assign;
-			console.log(parsedFile);
 			element.bind('change', function(e) {
 				var fileObjectsArray = [];
 				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
@@ -134,12 +133,13 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 		$scope.files = files;
 	};
 	/*****************************************************************/
+	$scope.address = JSON.stringify(propertyDetails.propertyAddress);
     // local vars
     //var property = propertyDetails.property;
 	$scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		
+		var getPlace = $scope.propertyDetail.propertyAddress.getPlace().address_components;
 		var componentForm = {
 	        street_number: 'short_name',
 	        route: 'long_name',
@@ -148,10 +148,19 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	        country: 'long_name',
 	        postal_code: 'short_name'
 		};
+		if(getPlace == undefined) {
+			$scope.propertyDetail.propertyZip = '';
+			$scope.propertyDetail.propertyAddress = '';
+			$scope.propertyDetail.propertyCity = '';
+			$scope.propertyDetail.propertyState = '';
+			$scope.propertyDetail.propertyCounty = '';
+			
+			return;
+		}
 		
-		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
-			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
-			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+		for(var i = 0; i < getPlace.length; i++) {
+			var addressType = getPlace[i].types[0];
+			var val = getPlace[i][componentForm[addressType]];
 			switch (addressType) {
 			case 'postal_code': // zip code
 				$scope.propertyDetail.propertyZip = val;
@@ -217,10 +226,12 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 		}
 	};
 	// function sum Point
-	var sumPoint = function() {
+	$scope.sumPoint = function() {
 		var sum = 0;
-		if ($scope.files[0].name != null) {
-			sum++;
+		if ($scope.files != undefined) {
+			if($scope.files.length != 0) {
+				sum++;				
+			}
 		}
 		if ($scope.propertyDetail.propertyAddress != null) {
 			sum++;
@@ -249,8 +260,6 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 		
 		return sum;
 	};
-	// get data sum point
-	$scope.sumPoint = propertyDetails.sumPoint;
 	
 	$scope.file = {};
 	var propertyURL = '';
@@ -306,17 +315,14 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
     };
 	
     var user = propertyDetails.user;
-    console.log(propertyDetails.propertyAddress);
-    console.log(user);
     var submitDetailForm = function(){
       $scope.propertyDetail.photoURL = propertyURL;
-      $scope.propertyDetail.sumPoint = sumPoint();
+      $scope.propertyDetail.sumPoint = $scope.sumPoint();
       $scope.alerts.detail = [];
       $scope.alerts.detail.push({
             type: 'success',
             msg: 'Changes have been updated.'
           });
-      console.log("UPDATE", $scope.propertyDetail);
       adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model

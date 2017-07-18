@@ -20,7 +20,6 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       },

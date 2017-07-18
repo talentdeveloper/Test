@@ -35,7 +35,6 @@ angular.module('account.properties.submit').directive('fileModel', ['$parse', fu
 		link: function(scope, element, attrs) {
 			var parsedFile = $parse(attrs.fileModel);
 			var parsedFileSetter = parsedFile.assign;
-			console.log(parsedFile);
 			element.bind('change', function(e) {
 				var fileObjectsArray = [];
 				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
@@ -127,10 +126,11 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 		$scope.files = files;
 	};
 	/*****************************************************************/
+	$scope.address = '';
 	// Address automatic Complete
 	$scope.propertyDetail = {};
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-		
+		var getPlace = $scope.propertyDetail.propertyAddress.getPlace().address_components;
 		var componentForm = {
 	        street_number: 'short_name',
 	        route: 'long_name',
@@ -140,9 +140,19 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	        postal_code: 'short_name'
 		};
 		
-		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
-			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
-			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+		if(getPlace == undefined) {
+			$scope.address = '';
+			$scope.propertyDetail.propertyZip = '';
+			$scope.propertyDetail.propertyAddress = '';
+			$scope.propertyDetail.propertyCity = '';
+			$scope.propertyDetail.propertyState = '';
+			$scope.propertyDetail.propertyCounty = '';
+			
+			return;
+		}
+		for(var i = 0; i < getPlace.length; i++) {
+			var addressType = getPlace[i].types[0];
+			var val = getPlace[i][componentForm[addressType]];
 			switch (addressType) {
 			case 'postal_code': // zip code
 				$scope.propertyDetail.propertyZip = val;
@@ -155,6 +165,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 					$scope.propertyDetail.propertyAddress = "";
 				}
 				$scope.propertyDetail.propertyAddress += " " + val;
+				$scope.address = JSON.stringify($scope.propertyDetail.propertyAddress);
 				break;
 			case 'locality': // city
 				$scope.propertyDetail.propertyCity = val;
@@ -171,16 +182,15 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 				break;
 			}
 		}
-		var location = $scope.autocomplete.getPlace().geometry.location;
-	    $scope.lat = location.lat();
-	    $scope.lng = location.lng();
 	    $scope.$apply();
 	});
 	// function sum Point
-	var sumPoint = function() {
+	$scope.sumPoint = function() {
 		var sum = 0;
-		if ($scope.files[0].name != null) {
-			sum++;
+		if ($scope.files != undefined) {
+			if($scope.files.length != 0) {
+				sum++;				
+			}
 		}
 		if ($scope.propertyDetail.propertyAddress != null) {
 			sum++;
@@ -340,8 +350,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
       $scope.propertyDetail.photoURL = propertyURL;
-      $scope.propertyDetail.sumPoint = sumPoint();
-      console.log("clicked submit button");
+      $scope.propertyDetail.sumPoint = $scope.sumPoint();
       restResource.addAccountProperty($scope.propertyDetail).then(function(data){
         if(data.success){
           $scope.alerts.detail.push({

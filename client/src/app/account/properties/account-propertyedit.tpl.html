@@ -139,17 +139,10 @@
                                 <!-- End Land -->
                             </div>
                         </div>
-						<div class="form-group" ng-class="{'has-error': hasError(detailForm.autocomplete)}">
-			                <label class="col-md-3 control-label" for="autocomplete">AutoAddress:*</label>
-			                <div class="col-md-5">
-			                    <input type="text" name="autocomplete" id="notific8_text" class="form-control" gm-places-autocomplete ng-model="autocomplete">
-			                    <span class="help-block" ng-show="showError(detailForm.autocomplete, 'required')">This field is required</span>
-			                </div>
-			            </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyAddress)}">
                             <label class="col-md-3 control-label" for="propertyAddress">Property Address:*</label>
                             <div class="col-md-5">
-                                <input type="text" name="propertyAddress" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyAddress" required>
+                                <input type="text" name="propertyAddress" id="notific8_text" class="form-control" gm-places-autocomplete ng-value="{{address}}" ng-model="propertyDetail.propertyAddress" required>
                                 <span class="help-block" ng-show="showError(detailForm.propertyAddress, 'required')">This field is required</span>
                             </div>
                             <div ng-show="propertyDetail.propertyAddress != null">
@@ -163,62 +156,10 @@
                                 <span class="help-block" ng-show="showError(detailForm.propertyCity, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyState)}">
-                            <label class="col-md-3 control-label" for="propertyState">State:*</label>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="propertyState">State:</label>
                             <div class="col-md-5">
-                                <select id="notific8_life" name="propertyState" class="form-control input-medium" ng-model="propertyDetail.propertyState" required>
-                                    <option value="AL">AL</option>
-                                    <option value="AK">AK</option>
-                                    <option value="AZ">AZ</option>
-                                    <option value="AR">AR</option>
-                                    <option value="CA">CA</option>
-                                    <option value="CO">CO</option>
-                                    <option value="CT">CT</option>
-                                    <option value="DE">DE</option>
-                                    <option value="FL">FL</option>
-                                    <option value="GA">GA</option>
-                                    <option value="HI">HI</option>
-                                    <option value="ID">ID</option>
-                                    <option value="IL">IL</option>
-                                    <option value="IN">IN</option>
-                                    <option value="IA">IA</option>
-                                    <option value="KS">KS</option>
-                                    <option value="KY">KY</option>
-                                    <option value="LA">LA</option>
-                                    <option value="ME">ME</option>
-                                    <option value="MD">MD</option>
-                                    <option value="MA">MA</option>
-                                    <option value="MI">MI</option>
-                                    <option value="MN">MN</option>
-                                    <option value="MS">MS</option>
-                                    <option value="MO">MO</option>
-                                    <option value="MT">MT</option>
-                                    <option value="NE">NE</option>
-                                    <option value="NV">NV</option>
-                                    <option value="NH">NH</option>
-                                    <option value="NJ" selected="selected">NJ</option>
-                                    <option value="NM">NM</option>
-                                    <option value="NY">NY</option>
-                                    <option value="NC">NC</option>
-                                    <option value="ND">ND</option>
-                                    <option value="OH">OH</option>
-                                    <option value="OK">OK</option>
-                                    <option value="OR">OR</option>
-                                    <option value="PA">PA</option>
-                                    <option value="RI">RI</option>
-                                    <option value="SC">SC</option>
-                                    <option value="SD">SD</option>
-                                    <option value="TN">TN</option>
-                                    <option value="TX">TX</option>
-                                    <option value="UT">UT</option>
-                                    <option value="VT">VT</option>
-                                    <option value="VA">VA</option>
-                                    <option value="WA">WA</option>
-                                    <option value="WV">WV</option>
-                                    <option value="WI">WI</option>
-                                    <option value="WY">WY</option>
-                                </select>
-                                <span class="help-block" ng-show="showError(detailForm.propertyState, 'required')">This field is required</span>
+                                <input type="text" name="propertyState" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyState" required>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyZip)}">
@@ -228,33 +169,10 @@
                                 <span class="help-block" ng-show="showError(detailForm.propertyZip, 'required')">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.propertyCounty)}">
-                            <label class="col-md-3 control-label" for="propertyCounty">County:*</label>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="propertyCounty">County:</label>
                             <div class="col-md-5">
-                                <select id="notific8_life" name="propertyCounty" class="form-control input-medium" ng-model="propertyDetail.propertyCounty" required>
-                                    <option value="Atlantic">Atlantic</option>
-                                    <option value="Bergen">Bergen</option>
-                                    <option value="Burlington">Burlington</option>
-                                    <option value="Camden">Camden</option>
-                                    <option value="Cape May">Cape May</option>
-                                    <option value="Cumberland">Cumberland</option>
-                                    <option value="Essesx">Essesx</option>
-                                    <option value="Gloucester">Gloucester</option>
-                                    <option value="Hudson">Hudson</option>
-                                    <option value="Hunterdon">Hunterdon</option>
-                                    <option value="Mercer">Mercer</option>
-                                    <option value="Middlesex">Middlesex</option>
-                                    <option value="Monmouth">Monmouth</option>
-                                    <option value="Morris">Morris</option>
-                                    <option value="Ocean">Ocean</option>
-                                    <option value="Passaic">Passaic</option>
-                                    <option value="Salem">Salem</option>
-                                    <option value="Somerset">Somerset</option>
-                                    <option value="Sussex">Sussex</option>
-                                    <option value="Union">Union</option>
-                                    <option value="Warren">Warren</option>                                
-                                </select>
-                                <span class="help-block" ng-show="showError(detailForm.propertyCounty, 'required')">This field is required</span>
+                                <input type="text" name="propertyCounty" id="notific8_text" class="form-control" ng-model="propertyDetail.propertyCounty" required>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(detailForm.ownerFirstName)}">
@@ -492,7 +410,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="status">Total Point:</label>
                             <div class="col-md-5">
-                                <label class="col-md-1 control-label">{{sumPoint}}</label>
+                                <label class="col-md-1 control-label">{{sumPoint()}}</label>
                             </div>
                         </div>
                         <div class="form-group">

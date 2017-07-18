@@ -8,5 +8,4 @@ exports = module.exports = function(app, mongoose) {
   });
 
   app.db.model('ClosingTitle', closingTitleSchema);
-  console.log("passed schema");
 };

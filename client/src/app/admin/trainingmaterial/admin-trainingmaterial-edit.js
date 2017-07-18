@@ -12,7 +12,6 @@ angular.module('admin.trainingmaterial.detail').config(['$routeProvider', functi
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               var id = $route.current.params.id || '';
-              console.log(id);
               if(id){
                 return adminResource.findInstructionVideo(id);
               }else{
@@ -42,12 +41,21 @@ angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDeta
 	
   	var instructID = '';
   	var parseInstructVideoURL = function() {
-  		var instructURL = $scope.instructionVideoDetail.videoURL
+  		var url = '';
+  		var instructURL = $scope.instructionVideoDetail.videoURL;
   		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
   		
   		var matches = regex.exec(instructURL);
+  		if(instructURL != '') {
+  			if(matches == null) {
+  				url = instructURL;
+  				var tempID = instructURL.split('?')[0];
+  				instructID = tempID.split('https://www.youtube.com/embed/')[1];
+  				return url;
+  			}
+  		}
   		instructID = matches[1];
-  		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
+  		url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
   		
   		return url;
   	};
@@ -62,14 +70,11 @@ angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDeta
       $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
       $scope.instructionVideoDetail.thumbnailURL = getThumbURL();
       adminResource.updateInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
-        console.log(result);
          $scope.alerts.detail.push({
             type: 'success',
             msg: 'Current Video URL is updated.'
           });
         if(result.success){
-
-          console.log("trying to alert show");
           $scope.alerts.detail.push({
             type: 'success',
             msg: 'Current Video URL is updated.'
@@ -89,26 +94,20 @@ angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDeta
         });
       });
     };
-
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
     $scope.instructionVideoDetail = {
-
       videoURL: trainingmaterialDetails.videoURL,
       videoTitle: trainingmaterialDetails.videoTitle,
       videoDescription: trainingmaterialDetails.videoDescription
 
     };
     $scope.pass = {};
-
     //initial behavior
     var search = $location.search();
-
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -116,6 +115,5 @@ angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDeta
     $scope.closeAlert = function(key, ind){
       $scope.alerts[key].splice(ind, 1);
     };
-
   }
 ]);

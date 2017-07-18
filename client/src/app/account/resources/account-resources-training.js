@@ -13,7 +13,6 @@ angular.module('account.resoureces.training').config(['$routeProvider', 'securit
           var promise = securityAuthorization.requireVerifiedUser()
             .then(accountResource.findTrainingVideoURL, function(reason){
               //rejected either user is unverified or un-authenticated
-              //console.log('hererererererereer');
               redirectUrl = reason === 'unverified-client'? '/account/verification': '/login';
               return $q.reject();
             })

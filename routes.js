@@ -35,7 +35,6 @@ var storage = multer.diskStorage({
         } else {
           commonFileName = Date.now() + '_' + file.originalname; 
           cb(null, commonFileName);
-          console.log(file.originalname);
           fullFilePathForAvata = '';
           fullFilePathForAvata = '/img/avatar/' + commonFileName;
         }
@@ -52,7 +51,6 @@ var storageDist = multer.diskStorage({
           return cb(err);
         } else {
           cb(null, commonFileName);
-          console.log(file.originalname);
         }
       }
     });
@@ -69,7 +67,6 @@ var storageProperty = multer.diskStorage({
         } else {
           commonPropertyFileName = Date.now() + '_' + file.originalname; 
           cb(null, commonPropertyFileName);
-          console.log(file.originalname);
           fullFilePathForProperty = '';
           fullFilePathForProperty = '/img/property/' + commonPropertyFileName;
         }
@@ -86,7 +83,6 @@ var storagePropertyDist = multer.diskStorage({
           return cb(err);
         } else {
           cb(null, commonPropertyFileName);
-          console.log(file.originalname);
         }
       }
     });
@@ -408,25 +404,19 @@ exports = module.exports = function(app, passport) {
 
   app.post('/upload', function(req, res) {
     upload(req, res, function(err) {
-      console.log('called upload......');
-      console.log(fullFilePathForAvata);
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           res.json({ success: false, message: 'File size is too large. Max limit is 10MB'});
         } else if (err.code === 'filetype') {
           res.json({ success: false, message: 'File type is invalid. Must be ..'});
         } else {
-          console.log(err);
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
         if (!req.file) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.user.id);
-          console.log(req.body.photoURL);
           req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: fullFilePathForAvata }, function(err, user) {
-
           });
           res.json({ success: true, message: 'File was uploaded'});
         }
@@ -436,24 +426,18 @@ exports = module.exports = function(app, passport) {
 
   app.post('/uploadDist', function(req, res) {
     uploadDist(req, res, function(err) {
-      console.log('called uploadDist......');
-      console.log(fullFilePathForAvata);
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           res.json({ success: false, message: 'File size is too large. Max limit is 10MB'});
         } else if (err.code === 'filetype') {
           res.json({ success: false, message: 'File type is invalid. Must be ..'});
         } else {
-          console.log(err);
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
         if (!req.file) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.user.id);
-
-       
           res.json({ success: true, message: 'File was uploaded'});
         }
       }
@@ -462,23 +446,18 @@ exports = module.exports = function(app, passport) {
 
     app.post('/propertyupload', function(req, res) {
     uploadProperty(req, res, function(err) {
-      console.log('called upload......');
-      console.log(fullFilePathForProperty);
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           res.json({ success: false, message: 'File size is too large. Max limit is 10MB'});
         } else if (err.code === 'filetype') {
           res.json({ success: false, message: 'File type is invalid. Must be ..'});
         } else {
-          console.log(err);
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
         if (!req.file) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.body.id);
-          console.log(req.body.photoURL);
           req.app.db.models.Property.findByIdAndUpdate(req.body.id, { photoURL: fullFilePathForProperty }, function(err, user) {
 
           });
@@ -490,24 +469,18 @@ exports = module.exports = function(app, passport) {
 
   app.post('/propertyuploadDist', function(req, res) {
     uploadPropertyDist(req, res, function(err) {
-      console.log('called uploadDist......');
-      console.log(fullFilePathForProperty);
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           res.json({ success: false, message: 'File size is too large. Max limit is 10MB'});
         } else if (err.code === 'filetype') {
           res.json({ success: false, message: 'File type is invalid. Must be ..'});
         } else {
-          console.log(err);
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
         if (!req.file) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.user.id);
-
-       
           res.json({ success: true, message: 'File was uploaded'});
         }
       }

@@ -9,5 +9,4 @@ exports = module.exports = function(app, mongoose) {
   });
 
   app.db.model('Video', videoSchema);
-  console.log("passed schema");
 };

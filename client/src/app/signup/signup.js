@@ -20,6 +20,7 @@ angular.module('signup').config(['$routeProvider', function($routeProvider){
 }]);
 angular.module('signup').controller('SignupCtrl', [ '$scope', '$location', '$log', 'utility', 'security', 'SOCIAL',
   function($scope, $location, $log, utility, security, SOCIAL){
+	$scope.response = ''; // recaptcha response value;
     // local variable
     var signupSuccess = function(data){
       if(data.success){
@@ -54,6 +55,9 @@ angular.module('signup').controller('SignupCtrl', [ '$scope', '$location', '$log
       $scope.alerts.splice(ind, 1);
     };
     $scope.submit = function(){
-      security.signup($scope.user).then(signupSuccess, signupError);
+    	if($scope.response != '') {
+    		$scope.alerts = [];
+    		security.signup($scope.user).then(signupSuccess, signupError);
+    	}
     };
   }]);

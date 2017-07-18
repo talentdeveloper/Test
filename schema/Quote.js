@@ -5,7 +5,5 @@ exports = module.exports = function(app, mongoose) {
     quoteText: { type: String, default: '' },
     authorBy: { type: String, default: '' }
   });
-
   app.db.model('Quote', quoteSchema);
-  console.log("passed schema");
 };

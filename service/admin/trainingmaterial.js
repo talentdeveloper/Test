@@ -4,9 +4,7 @@
 var trainingmaterial = {
   findVideoURL: function (req, res, next) {
   	req.app.db.models.Video.findOne({"videoURL": 'yes'}).exec(function(err, data) {
-  		console.log(data);
   		if (err) {
-  			console.log('errorrrr');
   			return err;
   		}
   		res.status(200).json(data);
@@ -15,7 +13,6 @@ var trainingmaterial = {
 
   updateVideo: function(req, res, next) {
   	var query = {"videoURL": 'yes'};
-  	console.log(req.body);
   	req.app.db.models.Video.findOneAndUpdate({"videoURL": 'yes'}, { "welcomePageURL": req.body.welcomePageURL, "instructionURL": req.body.instructionURL, "description": req.body.description}).exec(function(err, doc){
       if (err) return res.send(500, { error: err });
       return res.send("succesfully saved");
@@ -23,9 +20,6 @@ var trainingmaterial = {
   },
 
   find: function (req, res, next) {
-    console.log("successfully connected with angular");
-
-    console.log('accessed node service');
     req.query.user = req.query.user ? req.query.user : '';
     req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
     req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
@@ -63,12 +57,10 @@ var trainingmaterial = {
        videoTitle: req.body.videoTitle,
        thumbnailURL: req.body.thumbnailURL
       };
-      console.log("Body:::", req.body);
       req.app.db.models.InstructionVideo.create(fieldsToSet, function(err, instructionVideo) {
         if (err) {
           return workflow.emit('exception', err);
         }
-        console.log("successfully successfully");
         workflow.outcome.record = instructionVideo;
         return workflow.emit('response');
       });
@@ -91,8 +83,6 @@ var trainingmaterial = {
 
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-
-    console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';
@@ -119,13 +109,10 @@ var trainingmaterial = {
 
       req.app.db.models.InstructionVideo.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, currentStatus) {
         if (err) {
-          console.log("has some errors");
           return workflow.emit('exception', err);
         }
 
         workflow.outcome.property = currentStatus;
-        console.log(currentStatus);
-        //console.log(response);
         return workflow.emit('response');
       });
     });
@@ -157,9 +144,6 @@ var trainingmaterial = {
   },
 
   findAdv: function (req, res, next) {
-    console.log("successfully connected with angular");
-
-    console.log('accessed node service');
     req.query.user = req.query.user ? req.query.user : '';
     req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
     req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
@@ -197,12 +181,10 @@ var trainingmaterial = {
        videoTitle: req.body.videoTitle,
        thumbnailURL: req.body.thumbnailURL
       };
-      console.log("Body:::", req.body);
       req.app.db.models.AdvInstructionVideo.create(fieldsToSet, function(err, instructionVideo) {
         if (err) {
           return workflow.emit('exception', err);
         }
-        console.log("successfully successfully");
         workflow.outcome.record = instructionVideo;
         return workflow.emit('response');
       });
@@ -225,8 +207,6 @@ var trainingmaterial = {
 
   updateAdv: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-
-    console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';
@@ -253,13 +233,10 @@ var trainingmaterial = {
 
       req.app.db.models.AdvInstructionVideo.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, currentStatus) {
         if (err) {
-          console.log("has some errors");
           return workflow.emit('exception', err);
         }
 
         workflow.outcome.property = currentStatus;
-        console.log(currentStatus);
-        //console.log(response);
         return workflow.emit('response');
       });
     });

@@ -20,7 +20,6 @@ angular.module('account.properties.list').config(['$routeProvider', 'securityAut
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       }
@@ -31,10 +30,7 @@ angular.module('account.properties.list').config(['$routeProvider', 'securityAut
 angular.module('account.properties.list').controller('AccountPropertyListCtrl', [ '$scope', '$route', '$location', '$log', 'security', 'utility', 'accountResource', 'propertyList',
   function($scope, $route, $location, $log, security, utility, restResource, data){
     var user = data.user;
-    console.log(user);
-
     restResource.findPropertyList(user._id).then(function(list){
-      console.log("List All", list);
       $scope.properties = list;
     });
 

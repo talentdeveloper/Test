@@ -164,18 +164,15 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.delete(url).then(processResponse, processError);
   };
   resource.updateVideo = function(data){
-    console.log(data);
     return $http.put(adminTrainingURL, data).then(processResponse, processError);
   };
   resource.findVideoURL = function() {
     return $http.get(adminTrainingURL).then(processResponse, processError);
   };
   resource.findInstructionVideos = function() {
-    console.log("trying to connect node ");
     return $http.get(adminInstructionVideosURL).then(processResponse, processError);
   };
   resource.findAdvInstructionVideos = function() {
-    console.log("trying to connect node ");
     return $http.get(adminAdvInstructionVideosURL).then(processResponse, processError);
   };
   resource.addVideo = function(data) {
@@ -213,14 +210,12 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.put(adminClosingStatsURL + 'title', data).then(processResponse, processError);
   };
   resource.updateClosingStatsTitleShow = function(data) {
-	  console.log(data);
     return $http.put(adminClosingStatsURL + 'titleshow', data).then(processResponse, processError);
   };
   resource.findClosingStats = function(_id) {
     return $http.get(adminClosingStatsURL + '/' + _id).then(processResponse, processError);
   };
   resource.addNewClosingStats = function(data) {
-    console.log(data);
     return $http.put(adminClosingStatsURL, data).then(processResponse, processError);
   };
   resource.deleteClosingStats = function(_id) {
@@ -238,12 +233,9 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.get(adminStatusConfiguresURL).then(processResponse, processError);
   };
   resource.addStatusConfig = function(data) {
-
-    console.log(data);
     return $http.post(adminStatusConfiguresURL, {statusName: data.name, statusDetail: data.detail}).then(processResponse, processError);
   };
   resource.findStatusConfigure = function(_id) {
-    console.log('access servece');
     var url = adminStatusConfiguresURL + '/' + _id;
     return $http.get(url).then(processResponse, processError);
   };
@@ -253,7 +245,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
   resource.deleteStatusConfig = function(_id) {
     var url = adminStatusConfiguresURL + '/' + _id;
-    console.log("try to delete status");
     return $http.delete(url).then(processResponse, processError);
   };
 
@@ -368,7 +359,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.upload = function(file) {
     var fd = new FormData();
     fd.append('myfile', file.upload);
-    console.log('passed upload accountResource');
     return $http.post('/upload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -378,7 +368,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.uploadDist = function(file) {
     var fd = new FormData();
     fd.append('myfileDist', file.upload);
-    console.log('passed uploadDist accountResource');
     return $http.post('/uploadDist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -388,7 +377,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.propertyUpload = function(file) {
     var fd = new FormData();
     fd.append('propertyImage', file.upload);
-    console.log('passed upload accountResource');
     return $http.post('/propertyupload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -398,7 +386,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.propertyUploadDist = function(file) {
     var fd = new FormData();
     fd.append('propertyImageDist', file.upload);
-    console.log('passed uploadDist accountResource');
     return $http.post('/propertyuploadDist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }

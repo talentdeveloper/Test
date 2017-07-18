@@ -8,7 +8,6 @@ var closingstats = {
       if (err) {
         return next(err);
       }
-      console.log(results);
       res.status(200).json(results);
     });
   },
@@ -19,7 +18,6 @@ var closingstats = {
       workflow.emit('createClosingStats');
     });
     workflow.on('createClosingStats', function () {
-      console.log(req.body);
       req.app.db.models.User.findOneAndUpdate({"username": req.body.username}, {"registeredClosingStats": 'yes'}, function(err, result){
         if (err) {
           return workflow.emit('exception', err);
@@ -46,7 +44,6 @@ var closingstats = {
     var fieldsToSet = {        
        username: req.body.username
     };
-    console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';
@@ -71,8 +68,6 @@ var closingstats = {
           return workflow.emit('exception', err);
         }
         workflow.outcome.property = result;
-        console.log(result);
-        
         return workflow.emit('response');
       });
     });
@@ -109,7 +104,6 @@ var closingstats = {
     });
   },
   updateClosingTitle: function(req, res, next) {
-    console.log(req.body);  
     var fieldsToSet = {
       title: req.body.title
     };
@@ -121,7 +115,6 @@ var closingstats = {
     });
   },
   updateClosingTitleShow: function(req, res, next) {
-    console.log("Real body", req.body);  
     var fieldsToSet = {
       isShow: req.body.isShow
     };

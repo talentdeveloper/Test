@@ -8,5 +8,4 @@ exports = module.exports = function(app, mongoose) {
   });
 
   app.db.model('ClosingStats', closingStatsSchema);
-  console.log("passed schema");
 };

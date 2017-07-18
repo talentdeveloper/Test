@@ -12,7 +12,6 @@ angular.module('admin.closingdetail').config(['$routeProvider', function($routeP
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               var id = $route.current.params.id || '';
-              console.log(id);
               if(id){
                 return adminResource.findClosingStats(id);
               }else{
@@ -39,18 +38,14 @@ angular.module('admin.closingdetail').controller('closingDetailCtrl', ['$scope',
   function($scope, $route, $location, utility, adminResource, closingStatsDetails) {
     // local vars
    // var statusName = statusConfigDetails.statusName;
-   console.log(closingStatsDetails);
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
       adminResource.updateClosingStats(closingStatsDetails._id, $scope.closingStats).then(function(result){
-        console.log(result);
          $scope.alerts.detail.push({
             type: 'success',
             msg: 'Closing Stats is updated.'
           });
         if(result.success){
-
-          console.log("trying to alert show");
           $scope.alerts.detail.push({
             type: 'success',
             msg: 'ClosingStats is updated.'

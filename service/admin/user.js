@@ -3,7 +3,6 @@
 // public api
 var user = {
   getAccountPropertyStats: function(req, res, next) {
-    console.log("logged hererererererere");
     var counts = {};
     var statuses = ['PropertySubmitted', 'New', 'ActivelyWorking', 'OfferAccepted', 'OfferRejected', 'UCSeller', 'UCBuyer', 'Closed','DeadLeads'];
     var queries = [];
@@ -129,7 +128,6 @@ var user = {
     if (req.query.roles && req.query.roles === 'account') {
       filters['roles.account'] = {$exists: true};
     }
-    console.log(filters);
     req.app.db.models.User.pagedFind({
 
       filters: filters,
@@ -148,8 +146,6 @@ var user = {
 
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
-    console.log(req.body);
-
     workflow.on('validate', function () {
       if (!req.body.username) {
         workflow.outcome.errors.push('Please enter a username.');
@@ -771,19 +767,13 @@ var user = {
   },
 
   getSubmittedProperties: function(req, res, next) {
-    console.log(req.params.id);
-  
     req.app.db.models.Property.find({ "user.id" : req.params.id }).exec(function(err, property) {
       if (err) {
-        console.log('Error occured');
         return next(err);
       }
-      console.log(property);
       res.status(200).json(property);
       
     });
-
-
   } 
 };
 module.exports = user;

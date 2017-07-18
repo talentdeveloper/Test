@@ -7,5 +7,4 @@ exports = module.exports = function(app, mongoose) {
   });
 
   app.db.model('StatusType', statusTypeSchema);
-  console.log("passed schema");
 };

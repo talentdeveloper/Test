@@ -105,8 +105,6 @@ var property = {
       //temp = '';
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
-        //console.log(results);
-       //console.log(results.response.results.result[0].links[0].homedetails);
          temp = results.response.results.result[0].links[0].homedetails;
          var fieldsToSet = {
           
@@ -191,8 +189,6 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
-        // console.log(req.body.beds);
-        // console.log(req.body.photoURL);
         req.app.db.models.Property.create(fieldsToSet, function (err, property) {
           if (err) {
             return workflow.emit('exception', err);
@@ -226,8 +222,6 @@ var property = {
       if (err) {
         return next(err);
       }
-      console.log("id:" + req.params.id);
-      console.log("user:" + user);
       res.status(200).json(user);
     });
     // { "user": { "id" : req.params.id } }
@@ -272,12 +266,8 @@ var property = {
   },
 
   deleteProperty: function(req, res, next){
-
-    console.log("try to deleteProperty in nodejs");
     var workflow = req.app.utility.workflow(req, res);
-
     workflow.on('validate', function() {
-
       workflow.emit('deleteProperty');
     });
 
@@ -286,7 +276,6 @@ var property = {
         if (err) {
           return workflow.emit('exception', err);
         }
-
         workflow.emit('response');
       });
     });

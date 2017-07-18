@@ -21,7 +21,6 @@ angular.module('account.properties.propertystatuses').config(['$routeProvider', 
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       }

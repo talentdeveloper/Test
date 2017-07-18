@@ -61,7 +61,6 @@ angular.module('security.service', [
   });
 
   function processResponse(res){
-	console.log(res);
     return res.data;
   }
 
@@ -152,7 +151,6 @@ angular.module('security.service', [
     },
 
     loginForgot: function(data){
-      console.log(data);
       return $http.post('/api/login/forgot', data).then(processResponse, processError);
     },
 

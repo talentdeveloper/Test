@@ -12,7 +12,6 @@ angular.module('admin.statusconfigures.detail').config(['$routeProvider', functi
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               var id = $route.current.params.id || '';
-              console.log(id);
               if(id){
                 return adminResource.findStatusConfigure(id);
               }else{
@@ -40,18 +39,14 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
     // local vars
     //var property = propertyDetails.property;
     var statusName = statusConfigDetails.statusName;
-    console.log(statusName);
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
       adminResource.updateStatusConfig(statusConfigDetails._id, $scope.statusDetail).then(function(result){
-        console.log(result);
          $scope.alerts.detail.push({
             type: 'success',
             msg: 'Status is updated.'
           });
         if(result.success){
-
-          console.log("trying to alert show");
           $scope.alerts.detail.push({
             type: 'success',
             msg: 'Status is updated.'

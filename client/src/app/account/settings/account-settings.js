@@ -34,7 +34,6 @@ angular.module('account.settings').directive('fileUpdate', ['$parse', function($
 		link: function(scope, element, attrs) {
 			var parsedFile = $parse(attrs.fileUpdate);
 			var parsedFileSetter = parsedFile.assign;
-			console.log(parsedFile);
 			element.bind('change', function(e) {
 				var fileObjectsArray = [];
 				angular.forEach(parsedFileSetter(scope, element[0].files), function(file) {
@@ -123,8 +122,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     var user = accountDetails.user;
     user.firstName = account.name.first;
     user.lastName = account.name.last;
-    console.log(account);
-    
     $scope.user = {};
   	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
   		
@@ -175,9 +172,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   	});
     var tmpStats = '';
     restResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
-      console.log(accountPropertyStats['PropertySubmitted']);
       var tmpStats = accountPropertyStats;
-      console.log("aefdf", tmpStats);
       $scope.user = {
         username:   user.username,
         email:      user.email,
@@ -239,13 +234,8 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       };
 
     });
-    console.log("aosdkfj;efasdf", tmpStats);
-
-    
-
     $scope.file = {};
     var submitPhotoForm = function() {
-        console.log($scope.file);
         $scope.uploading = true;
         restResource.upload($scope.file).then(function(data) {
           if (data.data.success) {
@@ -275,7 +265,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         });
     };
     $scope.photoChanged = function(files) {
-      console.log(files);
       if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
         $scope.uploading = true;
         var file = files[0];
@@ -295,7 +284,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       }
     };
     //local vars
-    console.log(user);
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
       restResource.setAccountDetails($scope.userDetail).then(function(data){
@@ -324,7 +312,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
 
     var submitIdentityForm = function(){
       $scope.alerts.identity = [];
-      console.log($scope.user);
       if ($scope.user.firstName != '' && $scope.user.lastName != '' && $scope.user.address != '' && $scope.user.city !='' && $scope.user.state != '' && $scope.user.zip != '' && $scope.user.phone != '') {
         restResource.setProfileCompleted($scope.user).then(function(){
           

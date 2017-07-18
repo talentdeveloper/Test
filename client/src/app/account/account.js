@@ -30,7 +30,6 @@ angular.module('account.index').config(['$routeProvider', 'securityAuthorization
 var temp = '';
 angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location', 'getVideoURL', '$sce', 'ModalService', 'accountResource',
   function($scope, $location, data, $sce, ModalService, accountResource){
-    console.log(data.welcomePageURL);
     temp = data;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
@@ -39,7 +38,6 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
         var user = result.user;
         var tmpStats = '';
         accountResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
-          console.log(accountPropertyStats['PropertySubmitted']);
           var tmpStats = accountPropertyStats;
           var tmpData = {
             username:   user.username,
@@ -90,13 +88,10 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
             }
           };
           accountResource.setIdentity(tmpData).then(function(data){
-            console.log(tmpData);
-
             if(data.success){
               
             }else{
               //error due to server side validation
-              
             }
           }, function(x){
             $scope.alerts.identity.push({
@@ -116,9 +111,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
         controller: "Controller",
         resolve: temp
       }).then(function(modal) {
-    	console.log(modal);
         modal.element.modal();
-        console.log(modal.element.modal());
         modal.close.then(function(result) {
           // close Progress Here
           quote();

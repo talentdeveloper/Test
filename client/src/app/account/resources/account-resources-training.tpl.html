@@ -18,7 +18,6 @@
 		height: 100%;
 	}
 </style>
-
 <div class="row">
     <div>
         <div class="page-header">
@@ -29,12 +28,12 @@
         </div>
         <div class="media">
             <div class="col-md-2" align="center" ng-repeat="video in data" style="margin-bottom: 30px">
-            	<img class="img-responsive" alt="" ng-src="{{video.thumbnailURL}}" style="width: 200px; height=200px; cursor: pointer;" ng-click="selectKey(video.videoURL)">
+           		<img class="img-responsive" alt="" ng-src="{{video.thumbnailURL}}" style="width: 200px; height=200px; cursor: pointer;" ng-click="selectKey(video.videoURL)">
                 <label style="margin-top: 7px; font-size: 15px; font-weight: 600">{{video.videoTitle}}</label>
             	<label style="margin-top: 7px; font-size: 15px; font-weight: 600">{{video.videoDescription}}</label>
             </div>
         </div>
-        <br>
+       	<br>
         <br>
         <div class="media text-right">
             <div class="media-body">
@@ -54,6 +53,5 @@
                 <p>A: Each lead is time-stamped in our system, and the team member who submits the lead first will receive credit.</p>
             </div>
         </div>
-
     </div>
 </div>

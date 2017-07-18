@@ -37,10 +37,8 @@ angular.module('admin.statusconfigures.index').controller('statusConfiguresIndex
  
     $scope.addStatusConfig = function(){
       adminResource.addStatusConfig($scope.newStatus).then(function(data){
-        console.log($scope.newStatus);
         $scope.newStatus = '';
         if(data.success){
-          console.log('complete add clked');
           $route.reload();
         }else if (data.errors && data.errors.length > 0){
           alert(data.errors[0]);
@@ -58,7 +56,6 @@ angular.module('admin.statusconfigures.index').controller('statusConfiguresIndex
     //select elements and their associating optio
     $scope.deleteStatus = function(id){
       $scope.deleteAlerts =[];
-      console.log(id);
       if(confirm('Are you sure?')){
         adminResource.deleteStatusConfig(id).then(function(result){
           if(result.success){

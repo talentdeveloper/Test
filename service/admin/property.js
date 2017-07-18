@@ -50,7 +50,6 @@ var property = {
     if (req.query.status && req.query.status === 'dead') {
       filters['status'] = 'dead';
     }
-    console.log(filters);
     req.app.db.models.Property.pagedFind({
       filters: filters,
       keys: 'user.name propertyAddress propertyCity status submittedOn photoURL',
@@ -62,8 +61,6 @@ var property = {
         return next(err);
       }
       results.filters = req.query;
-      console.log(results.filters)
-      console.log(results);
       res.status(200).json(results);
     });
   },
@@ -144,7 +141,6 @@ var property = {
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
     var temp = '';
-    console.log('passed update node part');
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';

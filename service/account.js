@@ -97,14 +97,12 @@ var connectSocial = function(provider, req, res, next){
 // public api
 var account = {
   setProfileCompleted: function(req, res, next){
-    console.log("reqbody", req.body.username);
     req.app.db.models.User.findOneAndUpdate({"username": req.body.username}, {"isCompletedProfile": 'yes'}).exec(function(err, result){
       if (err)
         return err;
     });
   },
   getCompleteInfo: function(req, res, next) {
-    console.log(req.params.id);
     req.app.db.models.User.findById(req.params.id).exec(function(err, result){
       if (err)
         return err;
@@ -183,7 +181,6 @@ var account = {
   },
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-    console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';
@@ -283,7 +280,6 @@ var account = {
         workflow.emit('patchUser');
       });
     });
-    console.log(req.body.status);
     workflow.on('patchUser', function() {
       var fieldsToSet = {
         username: 			req.body.username,
@@ -663,19 +659,15 @@ var account = {
   findVideoURL: function (req, res, next) {
 
     req.app.db.models.Video.findOne({"videoURL": 'yes'}).exec(function(err, data) {
-      console.log(data);
       if (err) {
-        console.log('errorrrr');
         return err;
       }
       res.status(200).json(data);
     })
   },
   findTrainingVideoURL: function (req, res, next) {
-    console.log('logged here asdfasdfasd');
     req.app.db.models.InstructionVideo.find({}).sort('videoTitle').exec(function(err, insdata) {
       if (err) {
-        console.log('errorrrr');
         return err;
       }
        res.status(200).json(insdata);
@@ -691,7 +683,6 @@ var account = {
   },
 
   getUserPropertyStats: function(req, res, next) {
-    console.log("logged hererererererere");
     var counts = {};
     var statuses = ['PropertySubmitted', 'New', 'ActivelyWorking', 'OfferAccepted', 'OfferRejected', 'UCSeller', 'UCBuyer', 'Closed','DeadLeads'];
     var queries = [];
@@ -795,7 +786,6 @@ var account = {
   },
   getClosingStatsTitle: function(req, res, next) {
     req.app.db.models.ClosingTitle.findOne({"isTitle": 'yes'}).exec(function(err, result) {
-      console.log(result);
       if (err) {
         return err;
       }

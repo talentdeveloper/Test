@@ -9,7 +9,6 @@ angular.module('login.forgot').config(['$routeProvider', function($routeProvider
 }]);
 angular.module('login.forgot').controller('LoginForgotCtrl', [ '$scope', '$location', '$log', 'security', 'utility',
   function($scope, $location, $log, security, utility){
-	console.log(security);
     // local variable
     var resetSuccess = function(data){
       $scope.loginForgotForm.$setPristine();

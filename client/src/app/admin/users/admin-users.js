@@ -24,7 +24,6 @@ angular.module('admin.users.index').config(['$routeProvider', function($routePro
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       },
@@ -34,26 +33,22 @@ angular.module('admin.users.index').config(['$routeProvider', function($routePro
 angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'users',
   function($scope, $route, $location, $log, utility, adminResource, data){
     // local var
-    console.log(data);
     var deserializeData = function(data){
       $scope.items = data.items;
       $scope.pages = data.pages;
       $scope.filters = data.filters;
       $scope.users = data.data;
-      console.log(data.data);
     };
 
     var fetchUsers = function(){
       adminResource.findUsers($scope.filters).then(function(data){
         deserializeData(data);
-
         // update url in browser addr bar
         $location.search($scope.filters);
       }, function(e){
         $log.error(e);
       });
     };
-
     // $scope methods
     $scope.canSave = utility.canSave;
     $scope.filtersUpdated = function(){
@@ -87,7 +82,6 @@ angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$ro
 
     $scope.deleteUser = function(id) {
       $scope.deleteAlerts =[];
-      console.log(id);
       if(confirm('Are you sure?')){
         adminResource.deleteUser(id).then(function(result) {
         

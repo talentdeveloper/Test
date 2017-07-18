@@ -12,7 +12,6 @@ angular.module('admin.advtrainingmaterial.detail').config(['$routeProvider', fun
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               var id = $route.current.params.id || '';
-              console.log(id);
               if(id){
                 return adminResource.findAdvInstructionVideo(id);
               }else{
@@ -46,6 +45,14 @@ angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmateri
   		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
   		
   		var matches = regex.exec(instructURL);
+  		if(instructURL != '') {
+  			if(matches == null) {
+  				url = instructURL;
+  				var tempID = instructURL.split('?')[0];
+  				instructID = tempID.split('https://www.youtube.com/embed/')[1];
+  				return url;
+  			}
+  		}
   		instructID = matches[1];
   		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
   		
@@ -62,14 +69,11 @@ angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmateri
       $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
       $scope.instructionVideoDetail.thumbnailURL = getThumbURL();
       adminResource.updateAdvInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
-        console.log(result);
          $scope.alerts.detail.push({
             type: 'success',
             msg: 'Current Video URL is updated.'
           });
         if(result.success){
-
-          console.log("trying to alert show");
           $scope.alerts.detail.push({
             type: 'success',
             msg: 'Current Video URL is updated.'

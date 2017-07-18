@@ -246,13 +246,10 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
     $scope.user.isActive = $scope.user.isActive || null;
 
     var getProperty = function() {
-      console.log(user._id);
       adminResource.getSubmittedProperties(user._id).then(function(result) {
         $scope.properties = result;
       })
     };
-
-
     getProperty();
   }
 ]);

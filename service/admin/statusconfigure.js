@@ -4,7 +4,6 @@
 var statusconfigure = {
   find: function (req, res, next) {
 
-    // console.log('accessed node service');
     // req.query.user = req.query.user ? req.query.user : '';
     // req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
     // req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
@@ -32,10 +31,6 @@ var statusconfigure = {
 
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
-
-    console.log(req.body);
-
-
     workflow.on('validate', function () {
       // if (!req.body.ownerFirstName) {
       //   workflow.outcome.errors.push('Please enter a ownerFirstName.');
@@ -67,7 +62,6 @@ var statusconfigure = {
        statusName: req.body.statusName,
        statusDetail: req.body.statusDetail
       };
-      console.log(req.body);
       req.app.db.models.StatusType.create(fieldsToSet, function (err, statusType) {
         if (err) {
           return workflow.emit('exception', err);
@@ -95,8 +89,6 @@ var statusconfigure = {
 
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-
-    console.log(workflow);
     workflow.on('validate', function() {
       if (!req.body.first) {
         workflow.outcome.errfor.first = 'required';
@@ -122,13 +114,9 @@ var statusconfigure = {
 
       req.app.db.models.StatusType.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, currentStatus) {
         if (err) {
-          console.log("has some errors");
           return workflow.emit('exception', err);
         }
-
         workflow.outcome.property = currentStatus;
-        console.log(currentStatus);
-        //console.log(response);
         return workflow.emit('response');
       });
     });

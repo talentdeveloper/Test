@@ -9,7 +9,6 @@ angular.module('admin.trainingmaterial.index').config(['$routeProvider', functio
         trainingmaterial: ['$q', '$location', '$log', 'securityAuthorization', 'adminResource', function($q, $location, $log, securityAuthorization, adminResource){
           //get app stats only for admin-user, otherwise redirect to /account
           var redirectUrl;
-          console.log('passted');
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               //handles url with query(search) parameter
@@ -25,7 +24,6 @@ angular.module('admin.trainingmaterial.index').config(['$routeProvider', functio
               $location.path(redirectUrl);
               return $q.reject();
             });
-          console.log(promise);
           return promise;
         }]
       },
@@ -40,6 +38,12 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
 		
 		var matches = regex.exec(welcomeURL);
+		if(welcomeURL != '') {
+  			if(matches == null) {
+  				url = welcomeURL;
+  				return url;
+  			}
+  		}
 		var welcomeID = matches[1];
 		var url = 'https://www.youtube.com/embed/' + welcomeID + '?rel=0&show-info=0';
 		
@@ -53,6 +57,7 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 		var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
 		
 		var matches = regex.exec(instructURL);
+		
 		instructID = matches[1];
 		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
 		
@@ -86,7 +91,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
   $scope.submitVideoForm = function(){
   	$scope.videoURL.welcomePageURL = parseWelcomeVideoURL();
 //    	$scope.videoURL.instructionURL = parseInstructVideoURL();
-  	console.log('update');
   	adminResource.updateVideo($scope.videoURL).then(function(result){
   		if(result.success){
   			console.log('success');
@@ -103,7 +107,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
   };
 
   $scope.submit = function(ngFormCtrl){
-    console.log("update submit");
     switch (ngFormCtrl.$name){
       case 'videoForm':
         submitVideoForm();
@@ -116,14 +119,12 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
   var getInstructionVideos = function() {
     adminResource.findInstructionVideos().then(function(result) {
       $scope.instructionVideos = result;
-      console.log("Get Videos:", result);
     });
   };
 
   var getAdvInstructionVideos = function() {
     adminResource.findAdvInstructionVideos().then(function(result) {
       $scope.advInstructionVideos = result;
-      console.log("Get Videos:", result);
     });
   };
 
@@ -131,11 +132,8 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
     $scope.newVideo.videoURL = parseInstructVideoURL();
     $scope.newVideo.thumbnailURL = getThumbURL();
     adminResource.addVideo($scope.newVideo).then(function(data){
-      console.log("trying to add videos");  
-      console.log($scope.newVideo);
       $scope.newVideo = '';
       if(data.success){
-        console.log('complete add clked');
         $route.reload();
       }else if (data.errors && data.errors.length > 0){
         alert(data.errors[0]);
@@ -152,11 +150,8 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
     $scope.newAdvVideo.videoURL = parseAdvInstructVideoURL();
     $scope.newAdvVideo.thumbnailURL = getAdvThumbURL();
     adminResource.addAdvVideo($scope.newAdvVideo).then(function(data){
-      console.log("trying to add videos");  
-      console.log($scope.newAdvVideo);
       $scope.newAdvVideo = '';
       if(data.success){
-        console.log('complete add clked');
         $route.reload();
       }else if (data.errors && data.errors.length > 0){
         alert(data.errors[0]);
@@ -173,7 +168,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
   //select elements and their associating optio
   $scope.deleteVideo = function(id){
     $scope.deleteAlerts =[];
-    console.log(id);
     if(confirm('Are you sure?')){
       adminResource.deleteVideo(id).then(function(result){
         if(result.success){
@@ -194,7 +188,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 
   $scope.deleteAdvVideo = function(id){
     $scope.deleteAlerts =[];
-    console.log(id);
     if(confirm('Are you sure?')){
       adminResource.deleteAdvVideo(id).then(function(result){
         if(result.success){
@@ -212,7 +205,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
       });
     }
   };
-
     getInstructionVideos();
     getAdvInstructionVideos();
   }

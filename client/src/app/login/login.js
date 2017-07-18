@@ -23,7 +23,6 @@ angular.module('login.index').config(['$routeProvider', '$httpProvider', functio
 }]);
 angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'SOCIAL','$http',
   function($scope, $location, $log, security, utility, SOCIAL, $http){
-	$scope.response = ''; // recaptcha response value;
     // local variable
     var loginSuccess = function(data){
       if(data.success){
@@ -55,7 +54,6 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
     $scope.alerts = [];
     $scope.errfor = {};
     $scope.social = angular.equals({}, SOCIAL)? null: SOCIAL;
-    console.log("SOCIAL", SOCIAL);
 
     // method def
     $scope.hasError = utility.hasError;
@@ -65,10 +63,7 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
       $scope.alerts.splice(ind, 1);
     };
     $scope.submit = function(){
-    	console.log("Recaptcha:", $scope.response);
-    	if($scope.response != '') {
-    		$scope.alerts = [];
-        	security.login($scope.user.username, $scope.user.password).then(loginSuccess, loginError);
-    	}
+    	$scope.alerts = [];
+    	security.login($scope.user.username, $scope.user.password).then(loginSuccess, loginError);
     };
   }]);
