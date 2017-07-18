@@ -341,6 +341,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
       $scope.alerts.detail = [];
       $scope.propertyDetail.photoURL = propertyURL;
       $scope.propertyDetail.sumPoint = sumPoint();
+      console.log("clicked submit button");
       restResource.addAccountProperty($scope.propertyDetail).then(function(data){
         if(data.success){
           $scope.alerts.detail.push({

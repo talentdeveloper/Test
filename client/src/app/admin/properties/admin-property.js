@@ -316,7 +316,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
             type: 'success',
             msg: 'Changes have been updated.'
           });
-      console.log("UPDATE", $scope.propertyDetails);
+      console.log("UPDATE", $scope.propertyDetail);
       adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model

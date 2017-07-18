@@ -316,6 +316,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             msg: 'Changes have been updated.'
           });
       console.log("SUBMIT", $scope.propertyDetail);
+      console.log("SUBMIT", propertyDetail._id);
       restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model

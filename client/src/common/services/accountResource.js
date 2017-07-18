@@ -52,6 +52,7 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
 
   resource.updateProperty = function(_id, data) {
+    console.log("logged here", data, _id);
     var url = baseUrl + '/account/propertyedit/' + _id;
     return $http.put(url, data).then(processResponse, processError);
   };
