@@ -11,6 +11,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   var adminTrainingURL = baseUrl + '/admin/trainingmaterial';
   var adminStatusConfiguresURL = baseUrl + '/admin/statusconfigures';
   var adminInstructionVideosURL = baseUrl + '/admin/instructionvideos';
+  var adminAdvInstructionVideosURL = baseUrl + '/admin/advinstructionvideos';
   var adminClosingStatsURL = baseUrl + '/admin/closing';
 
 
@@ -169,23 +170,38 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.findVideoURL = function() {
     return $http.get(adminTrainingURL).then(processResponse, processError);
   };
-  
   resource.findInstructionVideos = function() {
     console.log("trying to connect node ");
     return $http.get(adminInstructionVideosURL).then(processResponse, processError);
   };
+  resource.findAdvInstructionVideos = function() {
+    console.log("trying to connect node ");
+    return $http.get(adminAdvInstructionVideosURL).then(processResponse, processError);
+  };
   resource.addVideo = function(data) {
-    console.log(data);
     return $http.post(adminInstructionVideosURL, data).then(processResponse, processError);
   };
+  resource.addAdvVideo = function(data) {
+    return $http.post(adminAdvInstructionVideosURL, data).then(processResponse, processError);
+  };
+
   resource.deleteVideo = function(_id) {
     return $http.delete(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
+  };
+  resource.deleteAdvVideo = function(_id) {
+    return $http.delete(adminAdvInstructionVideosURL + '/' + _id).then(processResponse, processError);
   };
   resource.findInstructionVideo = function(_id) {
     return $http.get(adminInstructionVideosURL + '/' + _id).then(processResponse, processError);
   };
+  resource.findAdvInstructionVideo = function(_id) {
+    return $http.get(adminAdvInstructionVideosURL + '/' + _id).then(processResponse, processError);
+  };
   resource.updateInstructionVideo = function(_id, data) {
     return $http.put(adminInstructionVideosURL + '/' + _id, data).then(processResponse, processError);
+  };
+  resource.updateAdvInstructionVideo = function(_id, data) {
+    return $http.put(adminAdvInstructionVideosURL + '/' + _id, data).then(processResponse, processError);
   };
   resource.getClosingStats = function() {
 	  return $http.get(adminClosingStatsURL).then(processResponse, processError);

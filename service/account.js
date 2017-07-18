@@ -673,13 +673,20 @@ var account = {
   },
   findTrainingVideoURL: function (req, res, next) {
     console.log('logged here asdfasdfasd');
-    req.app.db.models.InstructionVideo.find({}).exec(function(err, insdata) {
-      console.log(insdata);
+    req.app.db.models.InstructionVideo.find({}).sort('videoTitle').exec(function(err, insdata) {
       if (err) {
         console.log('errorrrr');
         return err;
       }
        res.status(200).json(insdata);
+    });
+  },
+  findAdvTrainingVideoURL: function (req, res, next){
+    req.app.db.models.AdvInstructionVideo.find({}).sort('videoTitle').exec(function(err, results){
+      if (err) {
+        return err;
+      }
+       res.status(200).json(results);
     });
   },
 

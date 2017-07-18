@@ -1,17 +1,17 @@
 angular.module('account.resoureces.advtraining', ['ngRoute', 'security.authorization']);
 angular.module('account.resoureces.advtraining').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
-    .when('/resources/training', {
-      templateUrl: 'account/resources/account-resources-training.tpl.html',
+    .when('/resources/advtraining', {
+      templateUrl: 'account/resources/account-resources-advtraining.tpl.html',
       controller: 'instructionCtrl',
-      title: 'Training Area',
+      title: 'Adv Training Area',
       resolve: {
         authenticatedUser: securityAuthorizationProvider.requireAuthenticatedUser,
         getinstructionURL: ['$q', '$location', 'securityAuthorization', 'accountResource' ,function($q, $location, securityAuthorization, accountResource){
           //get account details only for verified-user, otherwise redirect to /account/verification
           var redirectUrl;
           var promise = securityAuthorization.requireVerifiedUser()
-            .then(accountResource.findTrainingVideoURL, function(reason){
+            .then(accountResource.findAdvTrainingVideoURL, function(reason){
               //rejected either user is unverified or un-authenticated
               //console.log('hererererererereer');
               redirectUrl = reason === 'unverified-client'? '/account/verification': '/login';

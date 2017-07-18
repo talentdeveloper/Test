@@ -47,7 +47,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     return $http.get(url).then(processResponse, processError);
   }; 
   resource.deleteProperty = function(_id){
-    console.log("try to delete propertylist in angualr");
     var url = baseUrl + '/account/propertylist/' + _id;
     return $http.delete(url).then(processResponse, processError);
   };
@@ -60,9 +59,11 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     return $http.get(baseUrl + '/account').then(processResponse, processError);
   };
   resource.findTrainingVideoURL = function() {
-    console.log('jojojojojojojojojo');
     return $http.get(baseUrl + '/resources/training').then(processResponse, processError);
   };
+  resource.findAdvTrainingVideoURL = function() {
+    return $http.get(baseUrl + '/resource/advtraining').then(processResponse, processError);
+  }
   resource.getQuote = function() {
     return $http.get(baseUrl + '/getquote').then(processResponse, processError);
   };
@@ -100,11 +101,9 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     return $http.get(baseUrl + '/account/getclosingstats').then(processResponse, processError);
   };
   resource.getCompleteInfo = function(_id) {
-    console.log(_id);
     return $http.get(baseUrl + '/account/getcompleteinfo/' + _id).then(processResponse, processError);
   };
   resource.setProfileCompleted = function(data) {
-    console.log(data);
     return $http.put(baseUrl + '/account/setprofilecompleted', data).then(processResponse, processError);
   };
 
@@ -112,7 +111,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.upload = function(file) {
     var fd = new FormData();
     fd.append('myfile', file.upload);
-    console.log('passed upload accountResource');
     return $http.post('/upload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -122,7 +120,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.uploadDist = function(file) {
     var fd = new FormData();
     fd.append('myfileDist', file.upload);
-    console.log('passed uploadDist accountResource');
     return $http.post('/uploadDist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -132,7 +129,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.propertyUpload = function(file) {
     var fd = new FormData();
     fd.append('propertyImage', file.upload);
-    console.log('passed upload accountResource');
     return $http.post('/propertyupload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -142,7 +138,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.propertyUploadDist = function(file) {
     var fd = new FormData();
     fd.append('propertyImageDist', file.upload);
-    console.log('passed uploadDist accountResource');
     return $http.post('/propertyuploadDist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }

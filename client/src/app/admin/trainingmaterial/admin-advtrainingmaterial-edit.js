@@ -1,10 +1,10 @@
-angular.module('admin.trainingmaterial.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'directives.serverError', 'ui.bootstrap']);
-angular.module('admin.trainingmaterial.detail').config(['$routeProvider', function($routeProvider){
+angular.module('admin.advtrainingmaterial.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'directives.serverError', 'ui.bootstrap']);
+angular.module('admin.advtrainingmaterial.detail').config(['$routeProvider', function($routeProvider){
   $routeProvider
-    .when('/admin/trainingmaterial/:id', {
-      templateUrl: 'admin/trainingmaterial/admin-trainingmaterial-edit.tpl.html',
-      controller: 'trainingmaterialDetailCtrl',
-      title: 'Trainingmaterial / Details',
+    .when('/admin/advtrainingmaterial/:id', {
+      templateUrl: 'admin/trainingmaterial/admin-advtrainingmaterial-edit.tpl.html',
+      controller: 'advtrainingmaterialDetailCtrl',
+      title: 'Adv Trainingmaterial / Details',
       resolve: {
         trainingmaterialDetails: ['$q', '$route', '$location', 'securityAuthorization', 'adminResource', function($q, $route, $location, securityAuthorization, adminResource){
           //get app stats only for admin-user, otherwise redirect to /account
@@ -14,7 +14,7 @@ angular.module('admin.trainingmaterial.detail').config(['$routeProvider', functi
               var id = $route.current.params.id || '';
               console.log(id);
               if(id){
-                return adminResource.findInstructionVideo(id);
+                return adminResource.findAdvInstructionVideo(id);
               }else{
                 redirectUrl = '/admin/trainingmaterial';
                 return $q.reject();
@@ -35,7 +35,7 @@ angular.module('admin.trainingmaterial.detail').config(['$routeProvider', functi
       }
     });
 }]);
-angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'trainingmaterialDetails',
+angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'trainingmaterialDetails',
   function($scope, $route, $location, utility, adminResource, trainingmaterialDetails) {
     // local vars
 	// youtube Instruction Video URL parssing
@@ -61,7 +61,7 @@ angular.module('admin.trainingmaterial.detail').controller('trainingmaterialDeta
       $scope.alerts.detail = [];
       $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
       $scope.instructionVideoDetail.thumbnailURL = getThumbURL();
-      adminResource.updateInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
+      adminResource.updateAdvInstructionVideo(trainingmaterialDetails._id, $scope.instructionVideoDetail).then(function(result){
         console.log(result);
          $scope.alerts.detail.push({
             type: 'success',

@@ -154,6 +154,140 @@ var trainingmaterial = {
     });
 
     workflow.emit('validate');
+  },
+
+  findAdv: function (req, res, next) {
+    console.log("successfully connected with angular");
+
+    console.log('accessed node service');
+    req.query.user = req.query.user ? req.query.user : '';
+    req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
+    req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
+    req.query.sort = req.query.sort ? req.query.sort : '_id';
+    req.query.status = req.query.status ? req.query.status : '';
+
+    var filters = {};
+    if (req.query.user) {
+      filters.user = new RegExp('^.*?' + req.query.user + '.*$', 'i');
+    }
+
+    if (req.query.status) {
+        filters['status.id'] = req.query.status;
+      }
+
+    req.app.db.models.AdvInstructionVideo.find({
+    }, function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      results.filters = req.query;
+      res.status(200).json(results);
+    });
+  },
+
+  createAdv: function (req, res, next) {
+    var workflow = req.app.utility.workflow(req, res);
+
+    workflow.on('validate', function () {
+      workflow.emit('createVideoURL');
+    });
+    workflow.on('createVideoURL', function () {
+      var fieldsToSet = {        
+       videoURL: req.body.videoURL,
+       videoTitle: req.body.videoTitle,
+       thumbnailURL: req.body.thumbnailURL
+      };
+      console.log("Body:::", req.body);
+      req.app.db.models.AdvInstructionVideo.create(fieldsToSet, function(err, instructionVideo) {
+        if (err) {
+          return workflow.emit('exception', err);
+        }
+        console.log("successfully successfully");
+        workflow.outcome.record = instructionVideo;
+        return workflow.emit('response');
+      });
+    });
+
+    workflow.emit('validate');
+  },
+
+  readAdv: function(req, res, next){
+    req.app.db.models.AdvInstructionVideo.findById(req.params.id).exec(function(err, selectedVideo) {
+      if (err) {
+        return next(err);
+      }
+
+      res.status(200).json(selectedVideo);
+    });
+  },
+
+
+
+  updateAdv: function(req, res, next){
+    var workflow = req.app.utility.workflow(req, res);
+
+    console.log(workflow);
+    workflow.on('validate', function() {
+      if (!req.body.first) {
+        workflow.outcome.errfor.first = 'required';
+      }
+
+      if (!req.body.last) {
+        workflow.outcome.errfor.last = 'required';
+      }
+
+      if (workflow.hasErrors()) {
+        //return workflow.emit('response');
+      }
+
+      workflow.emit('updateInstructionVideo');
+    });
+    workflow.on('updateInstructionVideo', function() {
+      var fieldsToSet = {
+        videoURL: req.body.videoURL,
+        videoTitle: req.body.videoTitle,
+        videoDescription: req.body.videoDescription,
+        thumbnailURL: req.body.thumbnailURL
+      };
+      var options = { new: true };
+
+      req.app.db.models.AdvInstructionVideo.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, currentStatus) {
+        if (err) {
+          console.log("has some errors");
+          return workflow.emit('exception', err);
+        }
+
+        workflow.outcome.property = currentStatus;
+        console.log(currentStatus);
+        //console.log(response);
+        return workflow.emit('response');
+      });
+    });
+
+    workflow.emit('validate');
+  },
+
+  
+
+  deleteAdv: function(req, res, next){
+    var workflow = req.app.utility.workflow(req, res);
+
+    workflow.on('validate', function() {
+
+      workflow.emit('deleteInstrunctionVideo');
+    });
+
+    workflow.on('deleteInstrunctionVideo', function(err) {
+      req.app.db.models.AdvInstructionVideo.findByIdAndRemove(req.params.id, function(err, currentStatusConfigure) {
+        if (err) {
+          return workflow.emit('exception', err);
+        }
+
+        workflow.emit('response');
+      });
+    });
+
+    workflow.emit('validate');
   }
 };
 module.exports = trainingmaterial;
