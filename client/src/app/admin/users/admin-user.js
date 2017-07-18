@@ -188,6 +188,22 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
         $scope.passwordAlerts.push({ type: 'danger', msg: 'Error updating password: ' + x });
       });
     };
+    $scope.strike = function(){
+      $scope.deleteAlerts =[];
+      if(confirm('Are you sure?')){
+        adminResource.strikeUser($scope.user._id).then(function(result){
+          if(result.success){
+            // redirect to admin users index page
+            $location.path('/admin/users');
+          }else{
+            //error due to server side validation
+            $location.path('/admin/users');
+          }
+        }, function(x){
+          $scope.deleteAlerts.push({ type: 'danger', msg: 'Error deleting user: ' + x });
+        });
+      }
+    };
     $scope.deleteUser = function(){
       $scope.deleteAlerts =[];
       if(confirm('Are you sure?')){

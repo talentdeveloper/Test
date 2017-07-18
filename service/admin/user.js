@@ -717,6 +717,28 @@ var user = {
     workflow.emit('validate');
   },
 
+  strikeUser: function(req, res, next) {
+    var workflow = req.app.utility.workflow(req, res);
+    workflow.on('patchProbationStrike', function() {
+      req.app.db.models.User.findById(req.params.id).exec(function(err, result){
+        if (result.probationStrike < 3){
+          req.app.db.models.User.findByIdAndUpdate(req.params.id, {"probationStrike": result.probationStrike + 1}, function(err, strike){
+          });    
+        }
+      });
+      workflow.emit('makeNonActive');
+    });
+    workflow.on('makeNonActive', function() {
+      req.app.db.models.User.findById(req.params.id).exec(function(err, result){
+        if (result.probationStrike == 3) {
+          req.app.db.models.User.findByIdAndUpdate(req.params.id, {"isActive": 'no'}, function(err, strike){
+          });
+        }
+      });
+      workflow.emit('response');
+    });
+    workflow.emit('patchProbationStrike');    
+  },
   delete: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
 

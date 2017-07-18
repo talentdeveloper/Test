@@ -80,6 +80,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     var url = userUrl + '/stat/' + _id;
     return $http.get(url).then(processResponse, processError);
   }
+  resource.strikeUser = function(_id){
+    var url = userUrl + '/strike/' + _id;
+    return $http.put(url).then(processResponse, processError);
+  }
 
   // ----- accounts api -----
   resource.findAccounts = function(filters){

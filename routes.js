@@ -211,6 +211,7 @@ exports = module.exports = function(app, passport) {
   app.delete('/api/admin/users/:id', adminUser.delete);
   app.get('/api/admin/users/stat/:id', adminUser.getAccountPropertyStats);
   app.get('/api/admin/users/:id/submitted', adminUser.getSubmittedProperties);
+  app.put('/api/admin/users/strike/:id', adminUser.strikeUser);
 
   //admin > administrators
   app.get('/api/admin/administrators', adminAdministrator.find);
