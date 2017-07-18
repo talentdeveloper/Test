@@ -7,7 +7,7 @@ exports.mongodb = {
 };
 exports.companyName = 'Arthur Kao';
 exports.projectName = 'Angular Drywall';
-exports.systemEmail = 'a@email.com';
+exports.systemEmail = 'g@ema.com';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
   forIp: 50,
@@ -18,7 +18,7 @@ exports.requireAccountVerification = false;
 exports.smtp = {
   from: {
     name: process.env.SMTP_FROM_NAME || exports.projectName +' Website',
-    address: process.env.SMTP_FROM_ADDRESS || 'a@email.com'
+    address: process.env.SMTP_FROM_ADDRESS || 'g@ema.com'
   },
   credentials: {
     user: process.env.SMTP_USERNAME || '',

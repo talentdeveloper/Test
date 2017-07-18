@@ -99,6 +99,7 @@ angular.module('admin.statusconfigures.detail').controller('trainingmaterialDeta
     $scope.instructionVideoDetail = {
 
       videoURL: trainingmaterialDetails.videoURL,
+      videoTitle: trainingmaterialDetails.videoTitle,
       videoDescription: trainingmaterialDetails.videoDescription
 
     };

@@ -30,6 +30,7 @@
         <div class="media">
             <div class="col-md-2" align="center" ng-repeat="video in data" style="margin-bottom: 30px">
             	<img class="img-responsive" alt="" ng-src="{{video.thumbnailURL}}" style="width: 200px; height=200px; cursor: pointer;" ng-click="selectKey(video.videoURL)">
+                <label style="margin-top: 7px; font-size: 15px; font-weight: 600">{{video.videoTitle}}</label>
             	<label style="margin-top: 7px; font-size: 15px; font-weight: 600">{{video.videoDescription}}</label>
             </div>
         </div>

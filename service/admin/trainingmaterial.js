@@ -60,7 +60,7 @@ var trainingmaterial = {
     workflow.on('createVideoURL', function () {
       var fieldsToSet = {        
        videoURL: req.body.videoURL,
-       videoDescription: req.body.videoDescription,
+       videoTitle: req.body.videoTitle,
        thumbnailURL: req.body.thumbnailURL
       };
       console.log("Body:::", req.body);
@@ -111,6 +111,7 @@ var trainingmaterial = {
     workflow.on('updateInstructionVideo', function() {
       var fieldsToSet = {
         videoURL: req.body.videoURL,
+        videoTitle: req.body.videoTitle,
         videoDescription: req.body.videoDescription,
         thumbnailURL: req.body.thumbnailURL
       };

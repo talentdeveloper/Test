@@ -247,7 +247,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 		}
 		var value1 = 0.65 * paramARV;
 		var value2 = value1 - paramRepairs;
-		if(value2 > paramAmount) {
+		if(value2 < paramAmount) {
 			return true;
 		} else {
 			return false;

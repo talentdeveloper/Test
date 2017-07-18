@@ -42,7 +42,7 @@
                     <input name="newvideourl" type="text" placeholder="Enter VideoURL" class="form-control" ng-model="newVideo.videoURL" required>
                 </div>
                 <div class="input-group">
-                    <input name="newdescription" type="text" placeholder="Enter Description" class="form-control" ng-model="newVideo.videoDescription" required>
+                    <input name="newdescription" type="text" placeholder="Enter Title" class="form-control" ng-model="newVideo.videoTitle" required>
                     <button type="button" class="btn btn-primary"  ng-click="addVideo()">Add New</button>
                 </div>
             </form>
@@ -53,7 +53,8 @@
             <thead>
                 <tr role="row" class="heading">
                     <th width="40%"> Video URL </th>
-                    <th width="45%"> Description </th>
+                    <th width="5%"> Title </th>
+                    <th width="40%"> Description </th>                    
                     <th width="15%"> Action </th>
                 </tr>
             </thead>
@@ -61,6 +62,7 @@
                 <tr ng-repeat="instructionVideo in instructionVideos">
                                       
                     <td ng-bind="instructionVideo.videoURL"></td>
+                    <td ng-bind="instructionVideo.videoTitle"></td>
                     <td ng-bind="instructionVideo.videoDescription"></td>
                                     
                     <td><a class="btn btn-default btn-sm" ng-href="/admin/trainingmaterial/{{instructionVideo._id}}">Edit</a>
