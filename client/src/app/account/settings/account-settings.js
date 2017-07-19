@@ -237,7 +237,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.file = {};
     var submitPhotoForm = function() {
         $scope.uploading = true;
-        restResource.upload($scope.file).then(function(data) {
+        restResource.upload($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';
@@ -250,7 +250,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
             $scope.file = {};
           }
         });
-        restResource.uploadDist($scope.file).then(function(data) {
+        restResource.uploadDist($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';

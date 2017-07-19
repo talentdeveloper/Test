@@ -383,12 +383,12 @@ exports = module.exports = function(app, passport) {
   var upload = multer({
       storage: storage,
       limits: { fileSize: 10000000 }
-    }).single('myfile');
+    }).array('myfile', 1);
 
   var uploadDist = multer({
       storage: storageDist,
       limits: {fileSize: 100000000 }
-  }).single('myfileDist');
+  }).array('myfileDist', 1);
 
   var uploadProperty = multer({
       storage: storageProperty,
@@ -413,7 +413,7 @@ exports = module.exports = function(app, passport) {
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
-        if (!req.file) {
+        if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
           req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: fullFilePathForAvata }, function(err, user) {
@@ -435,7 +435,7 @@ exports = module.exports = function(app, passport) {
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
-        if (!req.file) {
+        if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
           res.json({ success: true, message: 'File was uploaded'});
