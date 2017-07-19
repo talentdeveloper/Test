@@ -983,7 +983,7 @@ workflow.on('complete', function(){
   if(workflow.db){
     workflow.db.close();
   }
-  console.log('=====Angular-Drywall initialization complete=====');
+  console.log('=====NJBirddogs initialization complete=====');
   process.exit(0);
 });
 

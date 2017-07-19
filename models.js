@@ -21,7 +21,6 @@ exports = module.exports = function(app, mongoose) {
   require('./schema/AdvInstructionVideo')(app, mongoose);
   require('./schema/ClosingStats')(app, mongoose);
   require('./schema/ClosingTitle')(app, mongoose);
-  
-  
-  
+  require('./schema/DownloadMaterial')(app, mongoose);
+  require('./schema/SiteLink')(app, mongoose);
 };

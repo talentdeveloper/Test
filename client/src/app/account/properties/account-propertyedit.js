@@ -331,10 +331,10 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
           
         }
       }, function(x){
-        $scope.identityAlerts.push({
-          type: 'danger',
-          msg: 'Error updating user identity: ' + x
-        });
+        // $scope.identityAlerts.push({
+        //   type: 'danger',
+        //   msg: 'Error updating user identity: ' + x
+        // });
       });
     };
 

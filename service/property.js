@@ -99,9 +99,9 @@ var property = {
 
     workflow.on('createProperty', function () {
       
-      var zwsid ="X1-ZWz1fwa3vw3aq3_1vfab";
+      var zwsid ="X1-ZWz194cb4rnkzv_93aho";
       var zillow = new Zillow(zwsid);
-
+      console.log("logged here!!!!!!!!!!!!!", req.body)
       //temp = '';
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
@@ -189,11 +189,108 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
+        console.log("herreererererer");
         req.app.db.models.Property.create(fieldsToSet, function (err, property) {
           if (err) {
+            console.log("has some erre");
             return workflow.emit('exception', err);
           }
-
+          console.log('commpletteeere');
+          workflow.outcome.record = property;
+          return workflow.emit('response');
+        });
+      }).catch(function (err){
+        console.log("there is no zillow api");
+        var fieldsToSet = {
+          
+          user: {
+            id: req.user._id,
+            name: req.user.username, 
+            email: req.user.email         
+          },
+          propertyType: req.body.propertyType,
+          multiFamilyUnit: req.body.multiFamilyUnit,
+          commercialContent: req.body.commercialContent,
+          commercialComplex: req.body.commercialComplex,
+          commercialOther: req.body.commercialOther,
+          landBuild: req.body.landBuild,
+          submittedOn: req.body.submittedOn,
+          propertyAddress: req.body.propertyAddress,
+          propertyCity: req.body.propertyCity,
+          propertyState: req.body.propertyState,
+          propertyZip: req.body.propertyZip,
+          propertyCounty: req.body.propertyCounty,
+          ownerFirstName: req.body.ownerFirstName,
+          ownerLastName: req.body.ownerLastName,
+          ownerPhone: req.body.ownerPhone,
+          ownerCell: req.body.ownerCell,
+          ownerEmail: req.body.ownerEmail,
+          beds: req.body.beds,
+          baths: req.body.baths,
+          askingPrice: req.body.askingPrice,
+          propertyPrice: req.body.propertyPrice,
+          modifyPrice: req.body.modifyPrice,
+          repairs: req.body.repairs,
+          Roof: req.body.Roof,
+          Kitchen: req.body.Kitchen,
+          Bath: req.body.Bath,
+          Paint: req.body.Paint,
+          Carpet: req.body.Carpet,
+          Windows: req.body.Windows,
+          Furnance: req.body.Furnance,
+          Drywall: req.body.Drywall,
+          Plumbing: req.body.Plumbing,
+          Electrical: req.body.Electrical,
+          otherRepairDetail: req.body.otherRepairDetail,
+          occupancy: req.body.occupancy,
+          listedOnMLS: req.body.listedOnMLS,
+          propertyOnMLS: req.body.propertyOnMLS,
+          propertyDetail: req.body.propertyDetail,
+          taxRecordLink: req.body.taxRecordLink,
+          zillowLink: 'Zillow Link Does Not Exist.',
+          offerAmountAccepted: req.body.offerAmountAccepted,    
+          approxARV: req.body.approxARV,
+          selectCalculate: req.body.selectCalculate,
+          propertyCalculate: req.body.propertyCalculate,
+          status: 'new',
+          search: [
+            req.body.user,
+            req.body.propertyType,
+            req.body.submittedOn,
+            req.body.propertyAddress,
+            req.body.propertyCity,
+            req.body.propertyState,
+            req.body.propertyZip,
+            req.body.propertyCounty,
+            req.body.ownerFirstName,
+            req.body.ownerLastName,
+            req.body.ownerPhone,
+            req.body.ownerCell,
+            req.body.ownerEmail,
+            req.body.beds,
+            req.body.baths,
+            req.body.askingPrice,
+            req.body.repairs,
+            req.body.repairNeed,
+            req.body.otherRepairDetail,
+            req.body.occupancy,
+            req.body.listedOnMLS,
+            req.body.propertyDetail,
+            req.body.taxRecordLink,
+            req.body.offerAmountAccepted, 
+            req.body.approxARV,
+            req.body.status,
+          ],
+          photoURL: req.body.photoURL,
+          sumPoint: req.body.sumPoint
+        };
+        console.log("herreererererer");
+        req.app.db.models.Property.create(fieldsToSet, function (err, property) {
+          if (err) {
+            console.log("has some erre");
+            return workflow.emit('exception', err);
+          }
+          console.log('commpletteeere');
           workflow.outcome.record = property;
           return workflow.emit('response');
         });
@@ -303,13 +400,14 @@ var property = {
     });
 
     workflow.on('patchProperty', function() {
-      var zwsid ="X1-ZWz1fwa3vw3aq3_1vfab";
+      var zwsid ="X1-ZWz194cb4rnkzv_93aho";
       var zillow = new Zillow(zwsid);
 
       //temp = '';
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
         temp = results.response.results.result[0].links[0].homedetails;
+        console.log("sdfjfa;sdlfkjasdf", temp);
         var fieldsToSet = {
           propertyType: req.body.propertyType,
           multiFamilyUnit: req.body.multiFamilyUnit,
@@ -363,7 +461,7 @@ var property = {
           propertyOnMLS: req.body.propertyOnMLS,
           propertyDetail: req.body.propertyDetail,
           taxRecordLink: req.body.taxRecordLink,
-          zillowLink: req.body.zillowLink,
+          zillowLink: temp,
           offerAmountAccepted: req.body.offerAmountAccepted,
           status: req.body.status,
           selectCalculate: req.body.selectCalculate,
@@ -399,6 +497,100 @@ var property = {
           ],
           sumPoint: req.body.sumPoint
         };
+        var options = { new: true };
+        req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
+          if (err) {
+            return workflow.emit('exception', err);
+          }
+          workflow.outcome.property = property;
+          return workflow.emit('response');
+        });
+      }).catch(function (err){
+        console.log("there is no zillow api");
+        var fieldsToSet = {
+          
+          user: {
+            id: req.user._id,
+            name: req.user.username, 
+            email: req.user.email         
+          },
+          propertyType: req.body.propertyType,
+          multiFamilyUnit: req.body.multiFamilyUnit,
+          commercialContent: req.body.commercialContent,
+          commercialComplex: req.body.commercialComplex,
+          commercialOther: req.body.commercialOther,
+          landBuild: req.body.landBuild,
+          submittedOn: req.body.submittedOn,
+          propertyAddress: req.body.propertyAddress,
+          propertyCity: req.body.propertyCity,
+          propertyState: req.body.propertyState,
+          propertyZip: req.body.propertyZip,
+          propertyCounty: req.body.propertyCounty,
+          ownerFirstName: req.body.ownerFirstName,
+          ownerLastName: req.body.ownerLastName,
+          ownerPhone: req.body.ownerPhone,
+          ownerCell: req.body.ownerCell,
+          ownerEmail: req.body.ownerEmail,
+          beds: req.body.beds,
+          baths: req.body.baths,
+          askingPrice: req.body.askingPrice,
+          propertyPrice: req.body.propertyPrice,
+          modifyPrice: req.body.modifyPrice,
+          repairs: req.body.repairs,
+          Roof: req.body.Roof,
+          Kitchen: req.body.Kitchen,
+          Bath: req.body.Bath,
+          Paint: req.body.Paint,
+          Carpet: req.body.Carpet,
+          Windows: req.body.Windows,
+          Furnance: req.body.Furnance,
+          Drywall: req.body.Drywall,
+          Plumbing: req.body.Plumbing,
+          Electrical: req.body.Electrical,
+          otherRepairDetail: req.body.otherRepairDetail,
+          occupancy: req.body.occupancy,
+          listedOnMLS: req.body.listedOnMLS,
+          propertyOnMLS: req.body.propertyOnMLS,
+          propertyDetail: req.body.propertyDetail,
+          taxRecordLink: req.body.taxRecordLink,
+          zillowLink: 'Zillow Link Does Not Exist.',
+          offerAmountAccepted: req.body.offerAmountAccepted,    
+          approxARV: req.body.approxARV,
+          selectCalculate: req.body.selectCalculate,
+          propertyCalculate: req.body.propertyCalculate,
+          status: req.body.status,
+          search: [
+            req.body.user,
+            req.body.propertyType,
+            req.body.submittedOn,
+            req.body.propertyAddress,
+            req.body.propertyCity,
+            req.body.propertyState,
+            req.body.propertyZip,
+            req.body.propertyCounty,
+            req.body.ownerFirstName,
+            req.body.ownerLastName,
+            req.body.ownerPhone,
+            req.body.ownerCell,
+            req.body.ownerEmail,
+            req.body.beds,
+            req.body.baths,
+            req.body.askingPrice,
+            req.body.repairs,
+            req.body.repairNeed,
+            req.body.otherRepairDetail,
+            req.body.occupancy,
+            req.body.listedOnMLS,
+            req.body.propertyDetail,
+            req.body.taxRecordLink,
+            req.body.offerAmountAccepted, 
+            req.body.approxARV,
+            req.body.status,
+          ],
+          photoURL: req.body.photoURL,
+          sumPoint: req.body.sumPoint
+        };
+        console.log("herreererererer");
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
           if (err) {

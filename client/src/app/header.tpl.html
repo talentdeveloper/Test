@@ -18,9 +18,6 @@
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/about')}"><a href="/about">About</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign Up</a></li>
                 <li ng-if="!isAuthenticated()" ng-class="{active: isActive('/contact')}"><a href="/contact">Contact</a></li>
-                <!-- <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account')}"><a href="/account">My Account</a></li>
-                <li ng-if="isAuthenticated()" ng-class="{active: isActive('/account/settings')}"><a href="/account/settings">Settings</a></li> -->
-
                 <li class="dropdown" dropdown is-open="status.isopen" ng-if="isAuthenticated()">
                     <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>Properties&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -66,24 +63,19 @@
         </div>
         <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
             <ul class="nav navbar-nav">
-                <!-- <li class="dropdown" dropdown is-open="status.isopen">
-                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>System&nbsp;<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-header">Pivoted Settings</li>
-                        <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
-                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">User Admin</li>
-                        <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
-                        <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
-                        <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>
-                        <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Admin Groups</a></li>
-                    </ul>
-                </li> -->
                 <li ng-class="{active: isActive('/faq')}"><a href="/admin">Dashboard</a></li>
                 <li ng-class="{active: isActive('/faq')}"><a href="/admin/properties">Properties</a></li>
                 <li ng-class="{active: isActive('/faq')}"><a href="/admin/users">Members</a></li>
-                <li ng-class="{active: isActive('/faq')}"><a href="/admin/trainingmaterial">Training Material</a></li>
+                
+                <li class="dropdown" dropdown is-open="status.isopen" ng-if="isAuthenticated()">
+                    <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>Resources<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/trainingmaterial">Training Material</a></li>
+                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/downloadmaterial">Download Material</a></li>
+                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/linksmaterial">Links Material</a></li>
+                    </ul>
+                </li>
                 <li ng-class="{active: isActive('/faq')}"><a href="/admin/statusconfigures">Status Config</a></li>
                 <!-- <li ng-class="{active: isActive('/faq')}"><a href="/account">Profile</a></li> -->
             </ul>
