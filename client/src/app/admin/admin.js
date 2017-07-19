@@ -28,10 +28,15 @@ angular.module('admin.index').config(['$routeProvider', function($routeProvider)
 }]);
 angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats', 'adminResource',
   function($scope, $log, stats, adminResource){
-	$scope.closingStatsTitleShow = 0;
+	$scope.closingStatsTitleShow = {};
 	var getTitleShow = function(){
 		adminResource.getClosingStatsTitle().then(function(result) {
 			$scope.closingStatsTitleShow = result;
+			if(result.isShow == 0) {
+		    	$scope.btnText = 'Closing Stats On';
+		    } else {
+		    	$scope.btnText = 'Closing Stats Off';
+		    }
 	    });
     };
     getTitleShow();
@@ -46,8 +51,6 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
       closed: stats['Closed'],
       deadLeads: stats['DeadLeads']
     };
-    var isFlg = 0;
-    $scope.btnText = 'Closing Stats On';
     $scope.clickChange = function() {
     	if($scope.closingStatsTitleShow.isShow == 0) {
     		$scope.btnText = 'Closing Stats Off';
