@@ -2,7 +2,7 @@ angular.module('admin.linkmaterial.index', ['ngRoute', 'security.authorization',
 angular.module('admin.linkmaterial.index').config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when('/admin/linkmaterial', {
-      templateUrl: 'admin/linkmaterial/admin-linkmaterial.tpl.html',
+      templateUrl: 'admin/trainingmaterial/admin-linkmaterials.tpl.html',
       controller: 'linkCtrl',
       title: 'Links',
       resolve: {
@@ -12,7 +12,7 @@ angular.module('admin.linkmaterial.index').config(['$routeProvider', function($r
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               //handles url with query(search) parameter
-              return adminResource.findStatusConfigures();
+              return adminResource.findLinkMaterials();
             }, function(reason){
               //rejected either user is un-authorized or un-authenticated
               redirectUrl = reason === 'unauthorized-client'? '/account': '/login';              

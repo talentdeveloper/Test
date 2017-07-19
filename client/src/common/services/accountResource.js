@@ -64,6 +64,9 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.findAdvTrainingVideoURL = function() {
     return $http.get(baseUrl + '/resource/advtraining').then(processResponse, processError);
   }
+  resource.getLinkMaterials = function() {
+    return $http.get(baseUrl + '/resource/links').then(processResponse, processError);
+  }
   resource.getQuote = function() {
     return $http.get(baseUrl + '/getquote').then(processResponse, processError);
   };

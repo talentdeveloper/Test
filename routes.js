@@ -149,6 +149,7 @@ exports = module.exports = function(app, passport) {
   app.get('/api/account', account.findVideoURL);
   app.get('/api/resources/training', account.findTrainingVideoURL);
   app.get('/api/resource/advtraining', account.findAdvTrainingVideoURL);
+  app.get('/api/resource/links', account.findLinks);
   
 
   app.get('/api/account/verification', account.upsertVerification);
@@ -280,6 +281,19 @@ exports = module.exports = function(app, passport) {
   app.put('/api/admin/advinstructionvideos/:id', adminTraining.updateAdv);
   app.post('/api/admin/advinstructionvideos', adminTraining.createAdv);
   app.delete('/api/admin/advinstructionvideos/:id', adminTraining.deleteAdv);
+
+  app.get('/api/admin/linkmaterials', adminTraining.findLinks);
+  app.get('/api/admin/linkmaterials/:id', adminTraining.readLinks);
+  app.put('/api/admin/linkmaterials/:id', adminTraining.updateLinks);
+  app.post('/api/admin/linkmaterials', adminTraining.createLinks);
+  app.delete('/api/admin/linkmaterials/:id', adminTraining.deleteLinks);
+
+  app.get('/api/admin/downloadMaterials', adminTraining.findDownloads);
+  app.get('/api/admin/downloadMaterials/:id', adminTraining.readDownloads);
+  app.put('/api/admin/downloadMaterials/:id', adminTraining.updateDownloads);
+  app.post('/api/admin/downloadMaterials', adminTraining.createDownloads);
+  app.delete('/api/admin/downloadMaterials/:id', adminTraining.deleteDownloads);
+
 
 
   //admin > statusconfigure

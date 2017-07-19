@@ -34,7 +34,7 @@
                         <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Downloads</a></li>
                         <li><a href="/resources/training" ng-click="closeAdminMenu()">Training</a></li>
                         <li><a href="/resources/advtraining" ng-click="closeAdminMenu()">Adv. Training</a></li>
-                        <li><a href="/admin/categories" ng-click="closeAdminMenu()">Links</a></li>                        
+                        <li><a href="/resources/links" ng-click="closeAdminMenu()">Links</a></li>                        
                     </ul>
                 </li>
                 <li ng-if="isAuthenticated()" ng-class="{active: isActive('/faq')}"><a href="/faq">FAQ's</a></li>
@@ -72,8 +72,8 @@
                     <ul class="dropdown-menu">
                         <li class="divider"></li>
                         <li ng-class="{active: isActive('/faq')}"><a href="/admin/trainingmaterial">Training Material</a></li>
-                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/downloadmaterial">Download Material</a></li>
-                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/linksmaterial">Links Material</a></li>
+                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/downloadmaterial">Downloads Material</a></li>
+                        <li ng-class="{active: isActive('/faq')}"><a href="/admin/linkmaterial">Links Material</a></li>
                     </ul>
                 </li>
                 <li ng-class="{active: isActive('/faq')}"><a href="/admin/statusconfigures">Status Config</a></li>

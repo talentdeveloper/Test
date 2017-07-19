@@ -3,7 +3,7 @@
 // public api
 var admin = {
   findRecent: function(req, res, next) {
-    req.app.db.models.Property.find({}).sort('submittedOn').exec(function (err, results) {
+    req.app.db.models.Property.find({}).sort('-submittedOn').exec(function (err, results) {
         if (err) {
           return done(err, null);
         }

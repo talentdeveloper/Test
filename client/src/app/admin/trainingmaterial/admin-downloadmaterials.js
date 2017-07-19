@@ -2,8 +2,8 @@ angular.module('admin.downloadmaterial.index', ['ngRoute', 'security.authorizati
 angular.module('admin.downloadmaterial.index').config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when('/admin/downloadmaterial', {
-      templateUrl: 'admin/trainingmaterial/admin-downloadmaterial.tpl.html',
-      controller: 'linkCtrl',
+      templateUrl: 'admin/trainingmaterial/admin-downloadmaterials.tpl.html',
+      controller: 'downloadCtrl',
       title: 'Links',
       resolve: {
         downloadmaterial: ['$q', '$location', '$log', 'securityAuthorization', 'adminResource', function($q, $location, $log, securityAuthorization, adminResource){
@@ -30,14 +30,14 @@ angular.module('admin.downloadmaterial.index').config(['$routeProvider', functio
       reloadOnSearch: false
     });
 }]);
-angular.module('admin.downloadmaterial.index').controller('linkCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'downloadmaterial',
+angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'downloadmaterial',
   function($scope, $route, $location, $log, utility, adminResource, data){
     // local var
     
  
-    $scope.addSiteLink = function(){
-      adminResource.addSiteLink($scope.newLinks).then(function(data){
-        $scope.newLinks = '';
+    $scope.addDownloadMaterial = function(){
+      adminResource.addDownloadMaterial($scope.newDownload).then(function(data){
+        $scope.newDownload = '';
         if(data.success){
           $route.reload();
         }else if (data.errors && data.errors.length > 0){
@@ -46,21 +46,21 @@ angular.module('admin.downloadmaterial.index').controller('linkCtrl', ['$scope',
           alert('unknown error.');
         }
       }, function(e){
-        $scope.newLinks = '';
+        $scope.newDownload = '';
         $log.error(e);
       });
     };
 
-    $scope.siteLinks = data;
+    $scope.downloadMaterials = data;
     // $scope vars
     //select elements and their associating optio
-    $scope.deleteSiteLink = function(id){
+    $scope.deleteDownloadMaterial = function(id){
       $scope.deleteAlerts =[];
       if(confirm('Are you sure?')){
-        adminResource.deleteSiteLink(id).then(function(result){
+        adminResource.deleteDownloadMaterial(id).then(function(result){
           if(result.success){
             // redirect to admin users index page
-            $location.path('/admin/linkmaterial');
+            $location.path('/admin/downloadmaterial');
             $route.reload();
           }else{
             //error due to server side validation

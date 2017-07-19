@@ -161,7 +161,7 @@
                         </div>
                        	<div class="col-md-5" align="center">
                        		<input class="file-browser" type="file" name="propertyImage" file-update="file.upload" files-to-upload="files" style="margin-bottom: 8px">
-                            <img src="{{files[0].preview}}" width="200" height="200">
+                            <img src="{{files[0].preview || user.photoURL }}" width="200" height="200">
                             <span class="file-name">{{files[0].name}}</span>
                         </div>  
                     </div>                        

@@ -681,6 +681,13 @@ var account = {
        res.status(200).json(results);
     });
   },
+  findLinks: function(req, res, next) {
+    req.app.db.models.SiteLink.find({}).exec(function(err, results){
+      if (err)
+        return err;
+      res.status(200).json(results);
+    })
+  },
 
   getUserPropertyStats: function(req, res, next) {
     var counts = {};
