@@ -265,7 +265,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	var propertyURL = '';
     var submitPhotoForm = function() {
         $scope.uploading = true;
-        adminResource.propertyUpload($scope.file).then(function(data) {
+        adminResource.propertyUpload($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';
@@ -280,7 +280,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
             $scope.file = {};
           }
         });
-        adminResource.propertyUploadDist($scope.file).then(function(data) {
+        adminResource.propertyUploadDist($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';

@@ -267,7 +267,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	   var propertyURL = '';
 	    var submitPhotoForm = function() {
 	        $scope.uploading = true;
-	        restResource.propertyUpload($scope.file).then(function(data) {
+	        restResource.propertyUpload($scope.files).then(function(data) {
 	          if (data.data.success) {
 	            $scope.uploading = false;
 	            $scope.alert = 'alert alert-success';
@@ -282,7 +282,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	            $scope.file = {};
 	          }
 	        });
-	        restResource.propertyUploadDist($scope.file).then(function(data) {
+	        restResource.propertyUploadDist($scope.files).then(function(data) {
 	          if (data.data.success) {
 	            $scope.uploading = false;
 	            $scope.alert = 'alert alert-success';
