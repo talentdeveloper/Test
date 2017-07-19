@@ -127,21 +127,25 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
 
   resource.propertyUpload = function(file) {
-    var fd = new FormData();
-    fd.append('propertyImage', file.upload);
-    return $http.post('/propertyupload', fd, {
-      transformRequest: angular.identity,
-      headers: { 'Content-Type': undefined }
-    });
+	  var fd = new FormData();
+	  angular.forEach(file, function(val, key) {
+		  fd.append('propertyImage', val.file);
+	  });
+	  return $http.post('/propertyupload', fd, {
+		  transformRequest: angular.identity,
+		  headers: { 'Content-Type': undefined }
+	  });
   };
 
   resource.propertyUploadDist = function(file) {
-    var fd = new FormData();
-    fd.append('propertyImageDist', file.upload);
-    return $http.post('/propertyuploadDist', fd, {
-      transformRequest: angular.identity,
-      headers: { 'Content-Type': undefined }
-    });
+	  var fd = new FormData();
+	  angular.forEach(file, function(val, key) {
+		  fd.append('propertyImageDist', val.file);
+	  });
+	  return $http.post('/propertyuploadDist', fd, {
+		  transformRequest: angular.identity,
+		  headers: { 'Content-Type': undefined }
+	  });
   };
   
   return resource;

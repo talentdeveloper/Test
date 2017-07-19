@@ -189,32 +189,41 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 		var sum = 0;
 		if ($scope.files != undefined) {
 			if($scope.files.length != 0) {
-				sum++;				
+				sum++;
+				console.log("1", sum);
 			}
 		}
-		if ($scope.propertyDetail.propertyAddress != null) {
+		if ($scope.address != '') {
 			sum++;
+			console.log("2", sum);
 		}
 		if ($scope.propertyDetail.ownerFirstName != null && $scope.propertyDetail.ownerLastName != null) {
 			sum++;
+			console.log("3", sum);
 		}
 		if ($scope.propertyDetail.ownerPhone != null) {
 			sum++;
+			console.log("4", sum);
 		}
 		if ($scope.propertyDetail.ownerEmail != null) {
 			sum++;
+			console.log("5", sum);
 		}
 		if ($scope.propertyDetail.askingPrice != null) {
 			sum++;
+			console.log("6", sum);
 		}
 		if ($scope.propertyDetail.repairs != null) {
 			sum++;
+			console.log("7", sum);
 		}
 		if ($scope.propertyDetail.propertyDetail != null) {
 			sum++;
+			console.log("8", sum);
 		}
 		if ($scope.propertyDetail.offerAmountAccepted != null) {
 			sum += 2;
+			console.log("9", sum);
 		}
 		
 		return sum;
@@ -292,7 +301,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	var propertyURL = '';
     var submitPhotoForm = function() {
         $scope.uploading = true;
-        restResource.propertyUpload($scope.file).then(function(data) {
+        restResource.propertyUpload($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';
@@ -307,7 +316,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
             $scope.file = {};
           }
         });
-        restResource.propertyUploadDist($scope.file).then(function(data) {
+        restResource.propertyUploadDist($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
             $scope.alert = 'alert alert-success';

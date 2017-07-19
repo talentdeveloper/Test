@@ -392,13 +392,13 @@ exports = module.exports = function(app, passport) {
 
   var uploadProperty = multer({
       storage: storageProperty,
-      limits: { fileSize: 10000000 }
-    }).single('propertyImage');
+      limits: { fileSize: 50000000 }
+    }).array('propertyImage', 20);
 
   var uploadPropertyDist = multer({
       storage: storagePropertyDist,
-      limits: {fileSize: 100000000 }
-  }).single('propertyImageDist');
+      limits: {fileSize: 500000000 }
+  }).array('propertyImageDist', 20);
 
   
 
@@ -455,7 +455,7 @@ exports = module.exports = function(app, passport) {
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
-        if (!req.file) {
+        if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
           req.app.db.models.Property.findByIdAndUpdate(req.body.id, { photoURL: fullFilePathForProperty }, function(err, user) {
@@ -478,7 +478,7 @@ exports = module.exports = function(app, passport) {
           res.json({ success: false, message: 'File was not able to be upload.'});
         }
       } else {
-        if (!req.file) {
+        if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
           res.json({ success: true, message: 'File was uploaded'});

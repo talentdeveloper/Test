@@ -40,21 +40,21 @@
                 <div class="form-group">
                 	<div class="col-md-12">
                 		<div class="col-md-5">
-	                        <div class="file-drop-zone margin-bottom-20" file-dropzone files-to-upload="files" style="margin-bottom: 10px">
+	                        <div class="file-drop-zone margin-bottom-20" file-dropzone="file.upload" files-to-upload="files" style="margin-bottom: 10px">
 	                        	<span>Drop Image Here</span>
 	                        </div>
-	                    </div>  
+	                    </div>
 	                    <div class="col-md-5" align="center">
-	                        <input class="file-browser" type="file" name="propertyImage" file-model="file.upload" files-to-upload="files"  multiple="">
+	                        <input class="file-browser" type="file" name="propertyImage" file-model="file.upload" files-to-upload="files" ng-disabled="uploading" multiple>
 	                    </div>
                 	</div>
-                    <div align="center" style="margin-left: 30px">
-	                   	<div ng-repeat="file in files"  style="width: 180px; height: 150px; float: left; margin-right: 10px; margin-bottom: 15px">
+                    <div class="col-md-12" align="center">
+	                   	<div ng-repeat="file in files"  style="position: relative; float: left; width: 200px; height: 200px; margin-right: 20px; margin-bottom: 50px">
 	                   		<div>
 	                   			<span class="remove" ng-click="remove($index)">X</span>
-	                   			<img ng-src="{{file.preview}}" class="img-thumbnail" width="130" height="100">
+	                   			<img ng-src="{{file.preview}}" class="img-thumbnail" style="display: block; width: 200px; height: 200px;">
 	                   		</div>
-	                   		<div>{{file.name}}</div>
+	                   		<div style="margin-top: 10px;">{{file.name}}</div>
 	                   	</div>
                    	</div>
                 </div>                        
