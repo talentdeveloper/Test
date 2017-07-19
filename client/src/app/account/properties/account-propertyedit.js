@@ -296,7 +296,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	          }
 	        });
 	    };
-	    $scope.photoChanged = function(files) {
+	    /*$scope.photoChanged = function(files) {
 	      if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
 	        $scope.uploading = true;
 	        var file = files[0];
@@ -314,7 +314,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	        $scope.thumbnail = {};
 	        $scope.message = false;
 	      }
-	    };
+	    };*/
 	
     var user = propertyDetail.user;
     var submitDetailForm = function(){
