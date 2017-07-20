@@ -23,6 +23,7 @@ angular.module('login.index').config(['$routeProvider', '$httpProvider', functio
 }]);
 angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '$log', 'security', 'utility', 'SOCIAL','$http',
   function($scope, $location, $log, security, utility, SOCIAL, $http){
+	console.log(SOCIAL);
     // local variable
     var loginSuccess = function(data){
       if(data.success){
@@ -54,6 +55,7 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
     $scope.alerts = [];
     $scope.errfor = {};
     $scope.social = angular.equals({}, SOCIAL)? null: SOCIAL;
+    console.log("FACEBOOK:", $scope.social);
 
     // method def
     $scope.hasError = utility.hasError;

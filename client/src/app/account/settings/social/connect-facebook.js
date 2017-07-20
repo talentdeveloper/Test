@@ -4,6 +4,7 @@ angular.module('account.settings.social.facebook').config(['$routeProvider', fun
     .when('/account/settings/facebook/callback', {
       resolve: {
         connect: ['$log', '$q', '$location', '$route', 'security', function($log, $q, $location, $route, security){
+        	console.log("fdsfasfasfasdfasfasfasdfasd");
           var code = $route.current.params.code || '';
           var search = {};
           var promise = security.socialConnect('facebook', code)

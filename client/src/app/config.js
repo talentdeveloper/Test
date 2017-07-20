@@ -2,10 +2,10 @@
 angular.module('config', []);
 angular.module('config')
   .constant('ENABLE_SOCIAL', {
-    facebook: false,
-    google: false
+    facebook: true,
+    google: true
   })
-  .constant('REQUIRE_ACCOUNT_VERIFICATION', false)
+  .constant('REQUIRE_ACCOUNT_VERIFICATION', true)
 ;
 //----- end of configuration -----
 angular.module('config')
@@ -26,6 +26,7 @@ angular.module('config')
   })
 ;
 angular.module('config').config(['$provide', 'ENABLE_SOCIAL', function($provide, ENABLE_SOCIAL){
+	console.log(ENABLE_SOCIAL);
   var setting = {
     'facebook': {
       text: 'Facebook',

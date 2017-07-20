@@ -511,6 +511,7 @@ var security = {
     return socialLogin('google', req, res, next);
   },
   loginFacebook: function(req, res, next){
+	  console.log("dfsfafsad");
     return socialLogin('facebook', req, res, next);
   },
   forgotPassword: function(req, res, next){
