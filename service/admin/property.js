@@ -266,11 +266,6 @@ var property = {
         console.log("there is no zillow api");
         var fieldsToSet = {
           
-          user: {
-            id: req.user._id,
-            name: req.user.username, 
-            email: req.user.email         
-          },
           propertyType: req.body.propertyType,
           multiFamilyUnit: req.body.multiFamilyUnit,
           commercialContent: req.body.commercialContent,

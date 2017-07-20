@@ -4,5 +4,5 @@ angular.module('account', [
   'account.verification',
   'account.properties',
   'account.faq',
-  'account.resoureces'
+  'account.resources'
 ]);

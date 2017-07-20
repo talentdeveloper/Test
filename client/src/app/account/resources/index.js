@@ -1,7 +1,7 @@
-angular.module('account.resoureces', [
-	'account.resoureces.training',
-	'account.resoureces.advtraining',
-	'account.resoureces.links',
+angular.module('account.resources', [
+	'account.resources.training',
+	'account.resources.advtraining',
+	'account.resources.links',
 	// 'account.resoureces.downloads'
 
 

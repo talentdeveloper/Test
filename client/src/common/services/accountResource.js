@@ -21,6 +21,7 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     return $http.get(baseUrl + '/account/settings').then(processResponse, processError);
   };
   resource.setAccountDetails = function(data){
+    console.log("dfkjeif;ajldf", data.lastName);
     return $http.put(baseUrl + '/account/settings', data).then(processResponse, processError);
   };
   resource.setIdentity = function(data){

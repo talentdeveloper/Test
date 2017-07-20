@@ -1,8 +1,8 @@
-angular.module('account.resoureces.links', ['ngRoute', 'security.authorization']);
-angular.module('account.resoureces.links').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
+angular.module('account.resources.links', ['ngRoute', 'security.authorization']);
+angular.module('account.resources.links').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/resources/links', {
-      templateUrl: 'account/properties/resources/account-links.tpl.html',
+      templateUrl: 'account/resources/account-resources-links.tpl.html',
       controller: 'linksCtrl',
       title: 'Links Area',
       resolve: {
@@ -26,9 +26,10 @@ angular.module('account.resoureces.links').config(['$routeProvider', 'securityAu
       }
     });
 }]);
-angular.module('account.resoureces.links').controller('linksCtrl', [ '$scope', '$location', 'linkMaterials', 'accountResource',
-  function($scope, $location, data, accountResource){
-    $scope.linkMaterials = data;
+angular.module('account.resources.links').controller('linksCtrl', [ '$scope', '$location', 'linkMaterials', 'accountResource',
+  function($scope, $location, linkMaterials, accountResource){
+    console.log(linkMaterials);
+    $scope.linkMaterials = linkMaterials;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
            // $location.path('/account/settings');

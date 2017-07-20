@@ -52,7 +52,7 @@ exports = module.exports = function(app, mongoose) {
     selectCalculate: { type: String, default: '' },
     propertyCalculate: { type: String, default: '' },
     status: { type: String, default: ''},
-    photoURL: {type: String, default: ''},
+    photoURL: [],
     sumPoint: {type: Number, default: ''}
   });
 

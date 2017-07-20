@@ -120,8 +120,8 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
     var account = accountDetails.account;
     var user = accountDetails.user;
-    user.firstName = account.name.first;
-    user.lastName = account.name.last;
+    //user.firstName = account.name.first;
+    //user.lastName = account.name.last;
     $scope.user = {};
   	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
   		
@@ -286,19 +286,12 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     //local vars
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
-      restResource.setAccountDetails($scope.userDetail).then(function(data){
+      console.log("logged herererer", $scope.user.lastName);
+      restResource.setAccountDetails($scope.user).then(function(data){
         if(data.success){
-          $scope.alerts.detail.push({
-            type: 'success',
-            msg: 'Account detail is updated.'
-          });
+          
         }else{
-          angular.forEach(data.errors, function(err, index){
-            $scope.alerts.detail.push({
-              type: 'danger',
-              msg: err
-            });
-          });
+          
         }
       }, function(x){
         $scope.alerts.detail.push({
@@ -311,6 +304,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     // $scope.user.firstName = $socpe.userDetail.first;
 
     var submitIdentityForm = function(){
+      submitDetailForm();
       $scope.alerts.identity = [];
       if ($scope.user.firstName != '' && $scope.user.lastName != '' && $scope.user.address != '' && $scope.user.city !='' && $scope.user.state != '' && $scope.user.zip != '' && $scope.user.phone != '') {
         restResource.setProfileCompleted($scope.user).then(function(){
@@ -342,6 +336,8 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
           msg: 'Error updating user identity: ' + x
         });
       });
+
+      
     };
 
     var submitPasswordForm = function(){
@@ -397,10 +393,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
-    $scope.userDetail = {
-      first:  account.name.first,
-      last:   account.name.last,
-    };
+
     
     $scope.pass = {};
     $scope.social = null;
@@ -444,9 +437,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     };
     $scope.submit = function(ngFormCtrl){
       switch (ngFormCtrl.$name){
-        case 'detailForm':
-          submitDetailForm();
-          break;
         case 'identityForm':
           submitIdentityForm();
           break;

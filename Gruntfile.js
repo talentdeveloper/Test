@@ -84,11 +84,11 @@ module.exports = function(grunt) {
           },
           {
             expand: true, cwd: 'upload/images/avatar/',
-            src: ['*.png', '*.gif', '*.jpg'], dest: '<%= distdir %>/img/avatar/'
+            src: ['*.png', '*.gif', '*.jpg'], dest: '<%= distdir %>/upload/images/avatar/'
           },
           {
             expand: true, cwd: 'upload/images/property/',
-            src: ['*.png', '*.gif', '*.jpg'], dest: '<%= distdir %>/img/property/'
+            src: ['*.png', '*.gif', '*.jpg'], dest: '<%= distdir %>/upload/images/property/'
           },
           {
             expand: true, cwd: 'client/bower_components/font-awesome/fonts/',

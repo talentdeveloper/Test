@@ -206,39 +206,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="portlet light memberupdate">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <span class="caption-subject font-green-sharp sbold">Name Information</span>
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <form class="form-horizontal" name="detailForm">
-                        <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.first)}">
-                            <label class="col-md-3 control-label" for="first">First Name:*</label>
-                            <div class="col-md-5">
-                                <input type="text" name="first" id="notific8_text" class="form-control" ng-model="userDetail.first" required>
-                                <span class="help-block" ng-show="showError(detailForm.first, 'required')">This field is required</span>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': hasError(detailForm.last)}">
-                            <label class="col-md-3 control-label" for="last">Last Name:*</label>
-                            <div class="col-md-5">
-                                <input type="text" name="last" id="notific8_text" class="form-control" ng-model="userDetail.last" required>
-                                <span class="help-block" ng-show="showError(detailForm.last, 'required')">This field is required</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="title"></label>
-                            <div class="col-md-5">
-                                <button type="button" class="btn red btn-outline sbold uppercase btn-lg" id="notific8_show" ng-disabled="!canSave(detailForm)" ng-click="submit(detailForm)"> Update </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </div>            
         </div>
     </div>
 </div> 

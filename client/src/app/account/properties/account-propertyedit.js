@@ -324,6 +324,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             type: 'success',
             msg: 'Changes have been updated.'
           });
+      console.log($scope.propertyDetail);
       restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
         	console.log("Update Success!");

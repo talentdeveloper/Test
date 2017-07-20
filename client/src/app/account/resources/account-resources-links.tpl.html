@@ -6,7 +6,7 @@
     <div class="portlet-body"  ng-repeat="linkMaterial in linkMaterials">
         <div class="note note-success">
             <h3 class="block">{{linkMaterial.siteName}}</h3>
-            <p> {{linkMaterial.siteURL}} </p>
+            <a ng-src="{{linkMaterial.siteURL}}"><p>{{linkMaterial.siteURL}}</p></a>
             <h4> {{ linkMaterial.siteDescription }} </h4>
         </div>
     </div>

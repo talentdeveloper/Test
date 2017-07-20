@@ -17,8 +17,7 @@ var adminStatusConfigures = require('./service/admin/statusconfigure');
 var adminClosingStats = require('./service/admin/closingstats');
 //var accountTraining = require('./service/resources/training');
 
-var fullFilePathForAvata = '';
-var fullFilePathForProperty = '';
+
 var commonFileName = '';
 var commonPropertyFileName = '';
 
@@ -35,14 +34,13 @@ var storage = multer.diskStorage({
         } else {
           commonFileName = Date.now() + '_' + file.originalname; 
           cb(null, commonFileName);
-          fullFilePathForAvata = '';
-          fullFilePathForAvata = '/img/avatar/' + commonFileName;
+        
         }
       }
     });
 var storageDist = multer.diskStorage({
       destination: function(req, file, cb) {
-        cb(null, './client/dist/img/avatar/');
+        cb(null, './client/dist/upload/images/avatar/');
       },
       filename: function(req, file, cb) {
         if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
@@ -67,14 +65,13 @@ var storageProperty = multer.diskStorage({
         } else {
           commonPropertyFileName = Date.now() + '_' + file.originalname; 
           cb(null, commonPropertyFileName);
-          fullFilePathForProperty = '';
-          fullFilePathForProperty = '/img/property/' + commonPropertyFileName;
+     
         }
       }
     });
 var storagePropertyDist = multer.diskStorage({
       destination: function(req, file, cb) {
-        cb(null, './client/dist/img/property/');
+        cb(null, './client/dist/upload/images/property/');
       },
       filename: function(req, file, cb) {
         if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
@@ -430,7 +427,7 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: fullFilePathForAvata }, function(err, user) {
+          req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: req.files.path }, function(err, user) {
           });
           res.json({ success: true, message: 'File was uploaded'});
         }
@@ -458,7 +455,7 @@ exports = module.exports = function(app, passport) {
     });
   });
 
-    app.post('/propertyupload', function(req, res) {
+  app.post('/propertyupload', function(req, res) {
     uploadProperty(req, res, function(err) {
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
@@ -472,10 +469,14 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          req.app.db.models.Property.findByIdAndUpdate(req.body.id, { photoURL: fullFilePathForProperty }, function(err, user) {
+          console.log("^o^");
+           var results = [];
+          for (var i = 0; i < req.files.length; i++) {
+            results[i] = '\\' + req.files[i].path;
+          }
 
-          });
-          res.json({ success: true, message: 'File was uploaded', photoURL: fullFilePathForProperty});
+        
+          res.json({ success: true, message: 'File was uploaded', photoURL: results });
         }
       }
     });

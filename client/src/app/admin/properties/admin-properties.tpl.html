@@ -85,7 +85,7 @@
             <tbody>
                 <tr ng-repeat="property in properties">
                     <!-- <td></td> -->
-                    <td><img ng-src="{{ property.photoURL }}" height="80" width="80"></td>                    
+                    <td><img ng-src="{{ property.photoURL[0] }}" height="80" width="80"></td>                    
                     <td ng-bind="property.propertyAddress"></td>
                     <td ng-bind="property.propertyCity"></td>
                     <td ng-bind="property.status"></td>

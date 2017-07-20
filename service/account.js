@@ -142,7 +142,7 @@ var account = {
     };
 
     var getUserData = function(callback) {
-      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL ataltic hunterdon sussex gloucester salem cumberland ocean camden monmouth bergen merser union hudson somerset essex passaic capemay morris burlington middlesex warren isCompletedProfile').exec(function(err, user) {
+      req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify markets whereHeardUs photoURL ataltic hunterdon sussex gloucester salem cumberland ocean camden monmouth bergen merser union hudson somerset essex passaic capemay morris burlington middlesex warren isCompletedProfile firstName lastName').exec(function(err, user) {
         if (err) {
           callback(err, null);
         }
@@ -182,11 +182,11 @@ var account = {
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
     workflow.on('validate', function() {
-      if (!req.body.first) {
+      if (!req.body.firstName) {
         workflow.outcome.errfor.first = 'required';
       }
 
-      if (!req.body.last) {
+      if (!req.body.lastName) {
         workflow.outcome.errfor.last = 'required';
       }
 
@@ -198,18 +198,19 @@ var account = {
     });
 
     workflow.on('patchAccount', function() {
+      console.log("as;dflkej;flaksdjf;laksdj;flkasdf", req.body.lastName);
       var fieldsToSet = {
         name: {
-          first: req.body.first,
+          first: req.body.firstName,
           middle: req.body.middle,
-          last: req.body.last,
+          last: req.body.lastName,
           full: req.body.first +' '+ req.body.last
         },
         
         search: [
-          req.body.first,
+          req.body.firstName,
           req.body.middle,
-          req.body.last
+          req.body.lastName
         ]
       };
       var options = { select: 'name' };
@@ -682,11 +683,11 @@ var account = {
     });
   },
   findLinks: function(req, res, next) {
-    req.app.db.models.SiteLink.find({}).exec(function(err, results){
+    req.app.db.models.SiteLink.find({}).exec(function(err, urlResult){
       if (err)
         return err;
-      res.status(200).json(results);
-    })
+      res.status(200).json(urlResult);
+    });
   },
 
   getUserPropertyStats: function(req, res, next) {

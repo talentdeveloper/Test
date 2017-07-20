@@ -22,6 +22,7 @@ angular.module('signup').controller('SignupCtrl', [ '$scope', '$location', '$log
   function($scope, $location, $log, utility, security, SOCIAL){
 	$scope.response = ''; // recaptcha response value;
     // local variable
+    console.log(SOCIAL);
     var signupSuccess = function(data){
       if(data.success){
         //account/user created, redirect...

@@ -1,5 +1,5 @@
-angular.module('account.resoureces.advtraining', ['ngRoute', 'security.authorization']);
-angular.module('account.resoureces.advtraining').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
+angular.module('account.resources.advtraining', ['ngRoute', 'security.authorization']);
+angular.module('account.resources.advtraining').config(['$routeProvider', 'securityAuthorizationProvider', function($routeProvider, securityAuthorizationProvider){
   $routeProvider
     .when('/resources/advtraining', {
       templateUrl: 'account/resources/account-resources-advtraining.tpl.html',
@@ -27,7 +27,7 @@ angular.module('account.resoureces.advtraining').config(['$routeProvider', 'secu
       }
     });
 }]);
-angular.module('account.resoureces.advtraining').controller('instructionCtrl', [ '$scope', '$location', 'getinstructionURL', '$sce', 'accountResource',
+angular.module('account.resources.advtraining').controller('instructionCtrl', [ '$scope', '$location', 'getinstructionURL', '$sce', 'accountResource',
 	function($scope, $location, data, $sce, accountResource){
 	$scope.instructionURL = {src:data[0].videoURL};
     $scope.data = data;

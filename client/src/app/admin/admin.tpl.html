@@ -97,7 +97,7 @@
 </div>
 <div class="col-md-6">
 	<div class="portlet-body">
-		<div id="sparkline_bar" style="height: 500px;">
+		<div id="sparkline_bar" style="height: 500px; margin-top: 70px;">
 			<img alt="" src="/assets/global/img/social/chat.png" width="500" height="500">
 		</div>
 	</div>
@@ -112,20 +112,22 @@
 	<div style="margin-top: 30px;">
 		<h4 style="font-weight: 400">Recently Added Properties</h4>
 	</div>
-	<table class="table table-striped table-bordered table-hover table-checkable">
-		<colgroup>
-			<col width="20%">
-			<col width="40%">
-			<col width="*">
-		</colgroup>
-		<tbody ng-repeat="recentlyProperty in recentlyProperties">
-			<tr>
-				<td><img alt="" ng-src="{{ recentlyProperty.photoURL }}" width="80" height="80" style="border-radius: 50%"></td>
-				<td>{{ recentlyProperty.propertyAddress + recentlyProperty.propertyAddress }}</td>
-				<td>Submitted By {{ recentlyProperty.user.name }}</td>
-			</tr>
-			
-			
-		</tbody>
-	</table>
+    <div  style="height: 480px; overflow: auto;">
+    	<table class="table table-striped table-bordered table-hover table-checkable">
+    		<colgroup>
+    			<col width="20%">
+    			<col width="40%">
+    			<col width="*">
+    		</colgroup>
+    		<tbody ng-repeat="recentlyProperty in recentlyProperties">
+    			<tr>
+    				<td><img alt="" ng-src="{{ recentlyProperty.photoURL[0] }}" width="80" height="80" style="border-radius: 50%"></td>
+    				<td>{{ recentlyProperty.propertyAddress }}</td>
+    				<td>Submitted By {{ recentlyProperty.user.name }}</td>
+    			</tr>
+    			
+    			
+    		</tbody>
+    	</table>
+    </div>
 </div>

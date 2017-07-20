@@ -248,40 +248,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 			return false;
 		}
 	};
-    //local vars
-   // $scope.getFileDetails = function (e) {
-
-   //      $scope.files = [];
-   //      $scope.$apply(function () {
-
-   //        $scope.fileCounts = e.files.length;
-   //          // STORE THE FILE OBJECT IN AN ARRAY.
-   //          for (var i = 0; i < e.files.length; i++) {
-   //              $scope.files.push(e.files[i])
-   //          }
-
-   //      });
-   //  };
-
-   //  // NOW UPLOAD THE FILES.
-   //  var submitPhotoForm = function () {
-
-   //      //FILL FormData WITH FILE DETAILS.
-   //      var data = new FormData();
-
-   //      for (var i in $scope.files) {
-   //          data.append("uploadedFile", $scope.files[i]);
-   //      }
-
-   //      // ADD LISTENERS.
-   //      var objXhr = new XMLHttpRequest();
-   //      objXhr.addEventListener("progress", updateProgress, false);
-   //      objXhr.addEventListener("load", transferComplete, false);
-
-   //      // SEND FILE DETAILS TO THE API.
-   //      objXhr.open("POST", "/api/fileupload/");
-   //      objXhr.send(data);
-   //  }
 
   restResource.getAccountDetails().then(function(result){
     if (result.user.isCompletedProfile == 'no'){
@@ -300,6 +266,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
             $scope.file = {};
    
             propertyURL = data.data.photoURL;
+            console.log(propertyURL);
           } else {
             $scope.uploading = false;
             $scope.alert = 'alert alert-danger';
