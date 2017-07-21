@@ -123,6 +123,7 @@ angular.module('account.properties.edit').directive('fileDropzones', function() 
 });
 angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', ['$scope', '$route', '$location', 'utility', 'accountResource', 'propertyDetail', '$timeout',
   function($scope, $route, $location, utility, restResource, propertyDetail, $timeout) {
+	var isEnterAddress = 0;
 	/************************* Files Drop ****************************/
 	$scope.remove = function(index) {
 		var files = [];
@@ -144,6 +145,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	$scope.address = JSON.stringify(propertyDetail.propertyAddress);
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+		isEnterAddress = 1;
 		var getPlace = $scope.propertyDetail.propertyAddress.getPlace().address_components;
 		var componentForm = {
 	        street_number: 'short_name',
@@ -324,7 +326,9 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             type: 'success',
             msg: 'Changes have been updated.'
           });
-      console.log($scope.propertyDetail);
+      if(isEnterAddress == 0) {
+    	  $scope.propertyDetail.propertyAddress = propertyDetail.propertyAddress;
+      }
       restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
         	console.log("Update Success!");
