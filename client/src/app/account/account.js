@@ -33,7 +33,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
     temp = data;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
-           $location.path('/account/settings');
+          //  $location.path('/account/settings');
       } else if (result.user.isCompletedProfile == 'yes'){
         var user = result.user;
         var tmpStats = '';

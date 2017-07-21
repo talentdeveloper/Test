@@ -34,8 +34,8 @@ exports.oauth = {
     secret: process.env.TWITTER_OAUTH_SECRET || ''
   },
   facebook: {
-    key: process.env.FACEBOOK_OAUTH_KEY || '',
-    secret: process.env.FACEBOOK_OAUTH_SECRET || ''
+    key: process.env.FACEBOOK_OAUTH_KEY || '1881596042095186',
+    secret: process.env.FACEBOOK_OAUTH_SECRET || '7af725399f608a9a1bb890f919efd967'
   },
   github: {
     // Not yet implemented
