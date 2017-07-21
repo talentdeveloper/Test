@@ -32,7 +32,7 @@ angular.module('account.resources.links').controller('linksCtrl', [ '$scope', '$
     $scope.linkMaterials = linkMaterials;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
-           // $location.path('/account/settings');
+           $location.path('/account/settings');
       }
     });
   }]);

@@ -427,7 +427,8 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: req.files.path }, function(err, user) {
+          console.log(req.files);
+          req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: '\\' + req.files[0].path }, function(err, user) {
           });
           res.json({ success: true, message: 'File was uploaded'});
         }

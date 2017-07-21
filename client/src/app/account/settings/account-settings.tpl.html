@@ -227,18 +227,13 @@
                         <div class="form-group" ng-class="{'has-error': hasError(identityForm.username)}">
                             <label class="col-md-3 control-label" for="username">Username:</label>
                             <div class="col-md-5">
-                                <input type="text" name="username" id="notific8_text" class="form-control" ng-model="user.username" required server-error>
-                                <span class="help-block" ng-show="showError(identityForm.username, 'required')">This field is required</span>
-                                <span class="help-block" ng-show="showError(identityForm.username, 'server')">{{errfor.username}}</span>
+                                <lable type="text" name="username" id="notific8_text" class="form-control" >{{ user.username }}</lable>                               
                             </div>                            
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(identityForm.email)}">
                             <label class="col-md-3 control-label" for="email">Email:</label>
                             <div class="col-md-5">
-                                <input type="text" name="email" id="notific8_text" class="form-control" ng-model="user.email" required server-error>
-                                <span class="help-block" ng-show="showError(identityForm.email, 'required')">This field is required</span>
-                                <span class="help-block" ng-show="showError(identityForm.email, 'email')">Please enter a valid email</span>
-                                <span class="help-block" ng-show="showError(identityForm.email, 'server')">{{errfor.email}}</span>
+                                <label type="text" name="email" id="notific8_text" class="form-control">{{ user.email }}</label>                             
                             </div>                            
                         </div>
                         <div class="form-group" ng-class="{'has-error': hasError(identityForm.firstName)}">
