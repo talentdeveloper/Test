@@ -118,13 +118,18 @@ angular.module('account.settings').directive('fileDragzone', function() {
 
 angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope', '$location', '$log', '$timeout', 'security', 'utility', 'accountResource', 'accountDetails', 'SOCIAL', '$http', '$sce',
   function($scope, $location, $log, $timeout, security, utility, restResource, accountDetails, SOCIAL, $http, $sce){
+	var isEnterAddress = 0;
     var account = accountDetails.account;
     var user = accountDetails.user;
+    console.log(user);
     //user.firstName = account.name.first;
     //user.lastName = account.name.last;
     $scope.user = {};
+    $scope.address = JSON.stringify(accountDetails.user.address);
+    console.log($scope.address);
   	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-  		
+  		isEnterAddress = 1;
+  		var getPlace = $scope.user.address.getPlace().address_components;
   		var componentForm = {
   	        street_number: 'short_name',
   	        route: 'long_name',
@@ -134,9 +139,9 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   	        postal_code: 'short_name'
   		};
   		
-  		for(var i = 0; i < $scope.autocomplete.getPlace().address_components.length; i++) {
-  			var addressType = $scope.autocomplete.getPlace().address_components[i].types[0];
-  			var val = $scope.autocomplete.getPlace().address_components[i][componentForm[addressType]];
+  		for(var i = 0; i < getPlace.length; i++) {
+  			var addressType = getPlace[i].types[0];
+  			var val = getPlace[i][componentForm[addressType]];
   			switch (addressType) {
   			case 'postal_code': // zip code
   				$scope.user.zip = val;
@@ -165,9 +170,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
   				break;
   			}
   		}
-  		var location = $scope.autocomplete.getPlace().geometry.location;
-  	    $scope.lat = location.lat();
-  	    $scope.lng = location.lng();
   	    $scope.$apply();
   	});
     var tmpStats = '';
@@ -311,6 +313,10 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
           
         });
       }
+      if(isEnterAddress == 0) {
+    	  $scope.user.address = accountDetails.user.address;
+      }
+      console.log($scope.user.address);
       restResource.setIdentity($scope.user).then(function(data){
         if(data.success){
           $scope.alerts.identity.push({

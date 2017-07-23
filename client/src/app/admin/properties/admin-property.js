@@ -122,6 +122,7 @@ angular.module('admin.properties.detail').directive('fileDraginput', function() 
 });
 angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'propertyDetails', '$timeout',
   function($scope, $route, $location, utility, adminResource, propertyDetails, $timeout) {
+	var isEnterAddress = 0;
 	/************************* Files Drop ****************************/
 	$scope.remove = function(index) {
 		var files = [];
@@ -139,6 +140,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	$scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+		isEnterAddress = 1;
 		var getPlace = $scope.propertyDetail.propertyAddress.getPlace().address_components;
 		var componentForm = {
 	        street_number: 'short_name',
@@ -323,6 +325,9 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
             type: 'success',
             msg: 'Changes have been updated.'
           });
+      if(isEnterAddress == 0) {
+    	  $scope.propertyDetail.propertyAddress = propertyDetails.propertyAddress;
+      }
       adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
         if(result.success){
           $scope.user = result.user; //update $scope user model
