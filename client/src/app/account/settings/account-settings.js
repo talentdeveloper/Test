@@ -239,6 +239,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.file = {};
     var submitPhotoForm = function() {
         $scope.uploading = true;
+        console.log($scope.files);
         restResource.upload($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;

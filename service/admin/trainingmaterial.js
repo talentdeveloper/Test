@@ -456,26 +456,13 @@ var trainingmaterial = {
   updateDownloads: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
     workflow.on('validate', function() {
-      if (!req.body.first) {
-        workflow.outcome.errfor.first = 'required';
-      }
 
-      if (!req.body.last) {
-        workflow.outcome.errfor.last = 'required';
-      }
-
-      if (workflow.hasErrors()) {
-        //return workflow.emit('response');
-      }
-
-      workflow.emit('updateInstructionVideo');
+      workflow.emit('updateDownload');
     });
-    workflow.on('updateInstructionVideo', function() {
+    workflow.on('updateDownload', function() {
+      console.log(req.body.fileDescription);
       var fieldsToSet = {
-        videoURL: req.body.videoURL,
-        videoTitle: req.body.videoTitle,
-        videoDescription: req.body.videoDescription,
-        thumbnailURL: req.body.thumbnailURL
+        fileDescription: req.body.fileDescription
       };
       var options = { new: true };
 
@@ -499,10 +486,10 @@ var trainingmaterial = {
 
     workflow.on('validate', function() {
 
-      workflow.emit('deleteInstrunctionVideo');
+      workflow.emit('deleteDownload');
     });
 
-    workflow.on('deleteInstrunctionVideo', function(err) {
+    workflow.on('deleteDownload', function(err) {
       req.app.db.models.DownloadMaterial.findByIdAndRemove(req.params.id, function(err, result) {
         if (err) {
           return workflow.emit('exception', err);

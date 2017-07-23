@@ -22,17 +22,11 @@
                     <form name="editStatusForm" class="form-horizontal">
                         <alert ng-repeat="alert in alerts.detail" type="{{alert.type}}" close="closeAlert('detail', $index)">{{alert.msg}}</alert>
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="statusName">Site Name:</label>
+                            <label class="col-md-3 control-label" for="statusName">File Description:</label>
                             <div class="col-md-5">
-                                <input type="text" name="statusName" id="notific8_text" class="form-control" ng-model="downloadMaterial.fileName">
+                                <textarea type="text" name="statusName" id="notific8_text" class="form-control" ng-model="downloadMaterial.fileDescription"></textarea>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="statusTitle">Site URL:</label>
-                            <div class="col-md-5">
-                                <input type="text" name="statusTitle" id="notific8_text" class="form-control" ng-model="downloadMaterial.fileURL">
-                            </div>
-                        </div>   
+                        </div>                        
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="title"></label>
                             <div class="col-md-5">

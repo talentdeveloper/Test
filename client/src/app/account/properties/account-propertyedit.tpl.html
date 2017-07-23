@@ -20,14 +20,14 @@
         <div class="page-header"><h1>Profile Settings</h1></div>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-3" ng-if="social">
         <legend>Social Connections</legend>
         <alert ng-repeat="alert in socialAlerts" type="{{alert.type}}" close="closeSocialAlert($index)">{{alert.msg}}</alert>
         <a ng-repeat-start="(provider, property) in social" ng-if="property.connected" ng-click="disconnect(provider)" class="btn btn-block btn-danger"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Disconnect {{property.text}}</a>
         <a ng-repeat-end target="_self" href="{{property.connect}}" ng-if="!property.connected" class="btn btn-block btn-default"><i ng-class="'fa ' + property.icon + ' fa-lg'"></i> Connect {{property.text}}</a>
     </div>
-</div>
+</div> -->
 <div class="col-md-12">
     <div class="portlet light memberupdate">
         <div class="portlet-title">

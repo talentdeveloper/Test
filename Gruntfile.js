@@ -91,6 +91,10 @@ module.exports = function(grunt) {
             src: ['*.png', '*.gif', '*.jpg'], dest: '<%= distdir %>/upload/images/property/'
           },
           {
+            expand: true, cwd: 'upload/files/',
+            src: ['*'], dest: '<%= distdir %>/upload/files/'
+          },
+          {
             expand: true, cwd: 'client/bower_components/font-awesome/fonts/',
             src: ['*'], dest: '<%= distdir %>/fonts/'
           },

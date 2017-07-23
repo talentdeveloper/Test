@@ -1,7 +1,7 @@
 angular.module('admin.downloadmaterial.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'directives.serverError', 'ui.bootstrap']);
 angular.module('admin.downloadmaterial.detail').config(['$routeProvider', function($routeProvider){
   $routeProvider
-    .when('/admin/downloadmaterials/:id', {
+    .when('/admin/downloadmaterial/:id', {
       templateUrl: 'admin/trainingmaterial/admin-downloadmaterial.tpl.html',
       controller: 'downloadMaterialDetailCtrl',
       title: 'SiteLink / Details',
@@ -34,22 +34,23 @@ angular.module('admin.downloadmaterial.detail').config(['$routeProvider', functi
       }
     });
 }]);
-angular.module('admin.downloadmaterial.detail').controller('downloadMaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'downloadMaterial',
-  function($scope, $route, $location, utility, adminResource, downloadMaterial) {
+angular.module('admin.downloadmaterial.detail').controller('downloadMaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'downloadmaterials',
+  function($scope, $route, $location, utility, adminResource, downloadmaterials) {
     // local vars
     //var property = propertyDetails.property;
-
+    console.log(downloadmaterials);
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
-      adminResource.updateDownloadMaterial(downloadMaterial._id, $scope.downloadMaterial).then(function(result){
-         $scope.alerts.detail.push({
-            type: 'success',
-            msg: 'Status is updated.'
-          });
+      console.log($scope.downloadMaterial);
+      adminResource.updateDownloadMaterial(downloadmaterials._id, $scope.downloadMaterial).then(function(result){
+         // $scope.alerts.detail.push({
+         //    type: 'success',
+         //    msg: 'File description is updated.'
+         //  });
         if(result.success){
           $scope.alerts.detail.push({
             type: 'success',
-            msg: 'Status is updated.'
+            msg: 'File description is updated.'
           });
         }else{
           angular.forEach(result.errors, function(err, index){
@@ -66,18 +67,15 @@ angular.module('admin.downloadmaterial.detail').controller('downloadMaterialDeta
         });
       });
     };
-
-
+    $scope.downloadMaterial = {
+      fileDescription: downloadmaterials.fileDescription
+    };
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
-    $scope.downloadMaterial = {
-      fileURL: downloadMaterial.fileURL,
-      fileName: downloadMaterial.fileName,
-      
-    };
+
     $scope.pass = {};
 
     //initial behavior

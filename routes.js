@@ -20,6 +20,7 @@ var adminClosingStats = require('./service/admin/closingstats');
 
 var commonFileName = '';
 var commonPropertyFileName = '';
+var commonUploadFileName = '';
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -83,6 +84,29 @@ var storagePropertyDist = multer.diskStorage({
         }
       }
     });
+var storageFileUpload = multer.diskStorage({
+      destination: function(req, file, cb) {
+        cb(null, './upload/files/');
+      },
+      filename: function(req, file, cb) {
+        
+        commonUploadFileName = Date.now() + '_' + file.originalname; 
+        cb(null, commonUploadFileName);
+        
+        
+      }
+    });
+var storageFileUploadDist = multer.diskStorage({
+      destination: function(req, file, cb) {
+        cb(null, './client/dist/upload/files/');
+      },
+      filename: function(req, file, cb) {
+        
+        cb(null, commonUploadFileName);
+        
+      }
+    });
+
 function useAngular(req, res, next){
   res.sendFile(require('path').join(__dirname, './client/dist/index.html'));
 }
@@ -393,12 +417,12 @@ exports = module.exports = function(app, passport) {
 
   var upload = multer({
       storage: storage,
-      limits: { fileSize: 10000000 }
+      limits: { fileSize: 100000000 }
     }).array('myfile', 1);
 
   var uploadDist = multer({
       storage: storageDist,
-      limits: {fileSize: 100000000 }
+      limits: { fileSize: 100000000 }
   }).array('myfileDist', 1);
 
   var uploadProperty = multer({
@@ -408,8 +432,18 @@ exports = module.exports = function(app, passport) {
 
   var uploadPropertyDist = multer({
       storage: storagePropertyDist,
-      limits: {fileSize: 500000000 }
+      limits: { fileSize: 500000000 }
   }).array('propertyImageDist', 20);
+
+  var uploadFiles = multer({
+      storage: storageFileUpload,
+      limits: { fileSize: 20000000 }
+  }).array('uploadFile', 1);
+
+  var uploadFilesDist = multer({
+      storage: storageFileUploadDist,
+      limits: { fileSize: 20000000 }
+  }).array('uploadFileDist', 1);
 
   
 
@@ -436,7 +470,7 @@ exports = module.exports = function(app, passport) {
     });
   });
 
-  app.post('/uploadDist', function(req, res) {
+  app.post('/uploaddist', function(req, res) {
     uploadDist(req, res, function(err) {
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
@@ -488,6 +522,53 @@ exports = module.exports = function(app, passport) {
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           res.json({ success: false, message: 'File size is too large. Max limit is 10MB'});
+        } else if (err.code === 'filetype') {
+          res.json({ success: false, message: 'File type is invalid. Must be ..'});
+        } else {
+          res.json({ success: false, message: 'File was not able to be upload.'});
+        }
+      } else {
+        if (!req.files) {
+          res.json({ success: false, message:'No file was selected.'});
+        } else {
+          res.json({ success: true, message: 'File was uploaded'});
+        }
+      }
+    });
+  });
+
+    app.post('/uploadfile', function(req, res) {
+    uploadFiles(req, res, function(err) {
+      if (err) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+          res.json({ success: false, message: 'File size is too large. Max limit is 20MB'});
+        } else if (err.code === 'filetype') {
+          res.json({ success: false, message: 'File type is invalid. Must be ..'});
+        } else {
+          res.json({ success: false, message: 'File was not able to be upload.'});
+        }
+      } else {
+        if (!req.files) {
+          res.json({ success: false, message:'No file was selected.'});
+        } else {
+          console.log(req.files);
+          var fieldsToSet = {
+            fileURL: '\\' + req.files[0].path,
+            fileName: req.files[0].originalname
+          };
+          req.app.db.models.DownloadMaterial.create(fieldsToSet, function(err, user) {
+          });
+          res.json({ success: true, message: 'File was uploaded'});
+        }
+      }
+    });
+  });
+
+  app.post('/uploadfiledist', function(req, res) {
+    uploadFilesDist(req, res, function(err) {
+      if (err) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+          res.json({ success: false, message: 'File size is too large. Max limit is 20MB'});
         } else if (err.code === 'filetype') {
           res.json({ success: false, message: 'File type is invalid. Must be ..'});
         } else {

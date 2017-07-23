@@ -287,6 +287,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.delete(url + '/' + _id).then(processResponse, processError)
   };
   resource.updateDownloadMaterial = function(_id, data) {
+    console.log(_id, data);
     var url = '/api/admin/downloadMaterials';
     return $http.put(url + '/' + _id, data).then(processResponse, processError)
   };
@@ -432,7 +433,29 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
 
   resource.remarkSystem = function(){
     return $http.get('/api/remark').then(processResponse, processError);
-  }
+  };
+
+  resource.uploadFile = function(file) {
+    var fd = new FormData();
+    angular.forEach(file, function(val, key) {
+      fd.append('uploadFile', val.file);
+    });
+    return $http.post('/uploadfile', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
+
+  resource.uploadFileDist = function(file) {
+    var fd = new FormData();
+    angular.forEach(file, function(val, key) {
+      fd.append('uploadFileDist', val.file);
+    });
+    return $http.post('/uploadfiledist', fd, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined }
+    });
+  };
 
 	  
   return resource;
