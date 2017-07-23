@@ -110,6 +110,9 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.setProfileCompleted = function(data) {
     return $http.put(baseUrl + '/account/setprofilecompleted', data).then(processResponse, processError);
   };
+  resource.getDownloadMaterials = function(_id) {
+    return $http.get(baseUrl + '/account/downloadmaterial').then(processResponse, processError);
+  }
 
 
   resource.upload = function(file) {

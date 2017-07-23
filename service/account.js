@@ -689,6 +689,13 @@ var account = {
       res.status(200).json(urlResult);
     });
   },
+  getDownloadMaterials: function(req, res, next) {
+    req.app.db.models.DownloadMaterial.find({}).exec(function(err, results) {
+      if (err)
+        return err;
+      res.status(200).json(results);
+    })
+  },
 
   getUserPropertyStats: function(req, res, next) {
     var counts = {};

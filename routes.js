@@ -209,6 +209,8 @@ exports = module.exports = function(app, passport) {
   app.get('/api/account/getcompleteinfo/:id', account.getCompleteInfo);
   app.put('/api/account/setprofilecompleted', account.setProfileCompleted);
 
+  app.get('/api/account/downloadmaterial', account.getDownloadMaterials);
+
 
   
   
