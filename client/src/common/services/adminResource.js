@@ -425,7 +425,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.propertyUploadDist = function(file) {
     var fd = new FormData();
     fd.append('propertyImageDist', file.upload);
-    return $http.post('/propertyuploadDist', fd, {
+    return $http.post('/propertyuploadist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
     });

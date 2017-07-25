@@ -131,7 +131,7 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
     angular.forEach(file, function(val, key) {
 		  fd.append('myfileDist', val.file);
 	  });
-    return $http.post('/uploadDist', fd, {
+    return $http.post('/uploaddist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
     });
@@ -153,7 +153,7 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
 	  angular.forEach(file, function(val, key) {
 		  fd.append('propertyImageDist', val.file);
 	  });
-	  return $http.post('/propertyuploadDist', fd, {
+	  return $http.post('/propertyuploaddist', fd, {
 		  transformRequest: angular.identity,
 		  headers: { 'Content-Type': undefined }
 	  });

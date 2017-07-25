@@ -519,7 +519,7 @@ exports = module.exports = function(app, passport) {
     });
   });
 
-  app.post('/propertyuploadDist', function(req, res) {
+  app.post('/propertyuploaddist', function(req, res) {
     uploadPropertyDist(req, res, function(err) {
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
