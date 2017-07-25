@@ -26,7 +26,7 @@ angular.module('account.properties.submit').config(['$routeProvider', 'securityA
     });
 }]);
 
-angular.module('account.properties.submit').directive('fileModel', ['$parse', function($parse) {
+angular.module('account.properties.submit').directive('photoModel', ['$parse', function($parse) {
 	return {
 		restrict: 'A',
 		scope : {
