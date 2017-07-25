@@ -26,8 +26,8 @@ angular.module('account.resoureces.downloads').config(['$routeProvider', 'securi
       }
     });
 }]);
-angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$scope', '$location', 'downloadMaterials', 'accountResource', '$window'
-  function($scope, $location, downloadMaterials, accountResource, $window){
+angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$scope', '$location', 'downloadMaterials', 'accountResource',
+  function($scope, $location, downloadMaterials, accountResource){
     console.log(downloadMaterials);
     $scope.downloadMaterials = downloadMaterials;
     accountResource.getAccountDetails().then(function(result){
@@ -37,8 +37,6 @@ angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$s
     });
 
     $scope.submitDownload = function(result) {
-      // window.location.assign('http://127.0.0.1:3000' + result);
-      var url = $window.URL || $window.webkitURL;
-      $scope.fileUrl = url.createObjectURL(blob);
+      window.location.assign('http://127.0.0.1:3000' + result);
     };
 }]);

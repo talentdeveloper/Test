@@ -71,21 +71,7 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
     // local var
     
  
-    $scope.addDownloadMaterial = function(){
-      adminResource.addDownloadMaterial($scope.newDownload).then(function(data){
-        $scope.newDownload = '';
-        if(data.success){
-          $route.reload();
-        }else if (data.errors && data.errors.length > 0){
-          alert(data.errors[0]);
-        }else {
-          alert('unknown error.');
-        }
-      }, function(e){
-        $scope.newDownload = '';
-        $log.error(e);
-      });
-    };
+
 
     $scope.downloadMaterials = data;
     // $scope vars
@@ -119,6 +105,8 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
             $scope.alert = 'alert alert-success';
             $scope.message = data.data.message;
             $scope.file = {};
+            $location.path('/admin/downloadmaterial');
+            $route.reload();
           } else {
             $scope.uploading = false;
             $scope.alert = 'alert alert-danger';

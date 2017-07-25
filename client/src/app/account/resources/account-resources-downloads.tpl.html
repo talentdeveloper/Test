@@ -17,7 +17,7 @@
                     <td ng-bind="downloadMaterial.fileName"></td>
                     <td ng-bind="downloadMaterial.fileDescription"></td>
                     <td>
-                        <a type="button" class="btn btn-danger" ng-href="{{ fileURL }}" download="downloadMaterial.fileName">Download</a>           
+                        <button type="button" class="btn btn-danger" ng-click="submitDownload(downloadMaterial.fileURL)" download>Download</button>           
                     </td>
                 </tr>
                 <tr ng-show="downloadMaterials.length === 0">
