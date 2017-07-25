@@ -37,6 +37,6 @@ angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$s
     });
 
     $scope.submitDownload = function(result) {
-      window.location.assign('http://127.0.0.1:3000' + result);
+      window.location.assign($location.protocol() + "://" + $location.host() + ":" + $location.port() + result);
     };
 }]);

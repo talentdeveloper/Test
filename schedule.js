@@ -11,7 +11,7 @@ exports = module.exports = function(app, schedule) {
 		// query users table from MongoDB where not completed Profile.
 		app.db.models.User.find({ $or: [{"phone": ''}, {"address": ''}, {"city": ''}, {"zip": ''}, {"state": ''}, {"firstName": ''}, {"lastName": ''}, ]}).exec(function(err, result) {
 			if (err) throw err;
-			for(var i = 0; i < 3; i++) {
+			for(var i = 0; i < result.length; i++) {
 				if(result[i].sendMailCounts < 7) {
 					app.utility.sendmailSchedule(app, {
 						from : app.config.smtp.from.name + ' <' + app.config.smtp.from.address + '>',
@@ -21,7 +21,7 @@ exports = module.exports = function(app, schedule) {
 						htmlPath : 'signup/email-html',
 						locals : {
 							username : "Administrator",
-							email : "zhangguang0522@gmail.com",
+							email : "griswaldyan@email.com",
 							loginURL : "http://127.0.0.1:3000/",
 							projectName : app.config.projectName
 						},
