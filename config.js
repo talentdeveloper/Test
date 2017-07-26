@@ -1,13 +1,13 @@
 'use strict';
 
 exports.hostname = process.env.hostname || 'localhost';
-exports.port = process.env.PORT || 3000;
+exports.port = process.env.PORT || 80;
 exports.mongodb = {
   uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/angular-drywall'
 };
 exports.companyName = 'Arthur Kao';
 exports.projectName = 'Angular Drywall';
-exports.systemEmail = 'griswaldyan@email.com';
+exports.systemEmail = 'e@email.com';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
   forIp: 50,
@@ -18,12 +18,12 @@ exports.requireAccountVerification = false;
 exports.smtp = {
   from: {
     name: process.env.SMTP_FROM_NAME || exports.projectName +' Website',
-    address: process.env.SMTP_FROM_ADDRESS || 'griswaldyan@email.com'
+    address: process.env.SMTP_FROM_ADDRESS || 'e@email.com'
   },
   credentials: {
-    user: process.env.SMTP_USERNAME || 'griswaldyan@email.com',
-    password: process.env.SMTP_PASSWORD || '123',
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    user: process.env.SMTP_USERNAME || '',
+    password: process.env.SMTP_PASSWORD || '',
+    host: process.env.SMTP_HOST || '',
     ssl: true
   }
 };
