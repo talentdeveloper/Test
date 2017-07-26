@@ -28,7 +28,6 @@ angular.module('admin.statusconfigures.detail').config(['$routeProvider', functi
               $location.path(redirectUrl);
               return $q.reject();
             });
-
           return promise;
         }]
       }
@@ -37,7 +36,6 @@ angular.module('admin.statusconfigures.detail').config(['$routeProvider', functi
 angular.module('admin.statusconfigures.detail').controller('statusconfiguresDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'statusConfigDetails',
   function($scope, $route, $location, utility, adminResource, statusConfigDetails) {
     // local vars
-    //var property = propertyDetails.property;
     var statusName = statusConfigDetails.statusName;
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
@@ -66,8 +64,6 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
         });
       });
     };
-
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
@@ -83,8 +79,6 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
 
     //initial behavior
     var search = $location.search();
-
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -92,7 +86,6 @@ angular.module('admin.statusconfigures.detail').controller('statusconfiguresDeta
     $scope.closeAlert = function(key, ind){
       $scope.alerts[key].splice(ind, 1);
     };
-
     $scope.deleteStatus = function(){
       $scope.deleteAlerts =[];
       if(confirm('Are you sure?')){

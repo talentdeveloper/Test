@@ -37,11 +37,8 @@ angular.module('admin.downloadmaterial.detail').config(['$routeProvider', functi
 angular.module('admin.downloadmaterial.detail').controller('downloadMaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'downloadmaterials',
   function($scope, $route, $location, utility, adminResource, downloadmaterials) {
     // local vars
-    //var property = propertyDetails.property;
-    console.log(downloadmaterials);
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
-      console.log($scope.downloadMaterial);
       adminResource.updateDownloadMaterial(downloadmaterials._id, $scope.downloadMaterial).then(function(result){
          // $scope.alerts.detail.push({
          //    type: 'success',
@@ -80,7 +77,6 @@ angular.module('admin.downloadmaterial.detail').controller('downloadMaterialDeta
 
     //initial behavior
     var search = $location.search();
-
 
     // method def
     $scope.hasError = utility.hasError;

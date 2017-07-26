@@ -12,7 +12,6 @@
         </div>
     </div>                        
 </form>
-
 <div class="row" id="admin-users-index">
     <div class="col-xs-12">
         <div>
@@ -32,7 +31,7 @@
                     <td ng-bind="downloadMaterial.fileName"></td>
                     <td ng-bind="downloadMaterial.fileDescription"></td>
                     <td><a class="btn btn-default btn-sm" ng-href="/admin/downloadmaterial/{{downloadMaterial._id}}">Edit</a>
-                        <button type="button" class="btn btn-danger" ng-click="deleteDownloadMaterial(downloadMaterial._id)">Delete</button>           
+                        <button type="button" class="btn btn-danger" ng-click="deleteDownloadMaterial(downloadMaterial._id)">Delete</button>         
                     </td>
                 </tr>
                 <tr ng-show="downloadMaterials.length === 0">

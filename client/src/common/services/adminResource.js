@@ -253,7 +253,6 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.get(url).then(processResponse, processError)
   };
   resource.addSiteLink = function(data) {
-    console.log("a;sdfasdf", data);
     var url = '/api/admin/linkmaterials';
     return $http.post(url, data).then(processResponse, processError)
   };
@@ -287,13 +286,9 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.delete(url + '/' + _id).then(processResponse, processError)
   };
   resource.updateDownloadMaterial = function(_id, data) {
-    console.log(_id, data);
     var url = '/api/admin/downloadMaterials';
     return $http.put(url + '/' + _id, data).then(processResponse, processError)
   };
-
-  
-
   // ----- admin-groups api -----
   resource.findAdminGroups = function(filters){
     if(angular.equals({}, filters)){

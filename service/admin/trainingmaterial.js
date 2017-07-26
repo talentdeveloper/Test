@@ -74,12 +74,9 @@ var trainingmaterial = {
       if (err) {
         return next(err);
       }
-
       res.status(200).json(selectedVideo);
     });
   },
-
-
 
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
@@ -116,17 +113,13 @@ var trainingmaterial = {
         return workflow.emit('response');
       });
     });
-
     workflow.emit('validate');
-  },
-
-  
+  },  
 
   delete: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
 
     workflow.on('validate', function() {
-
       workflow.emit('deleteInstrunctionVideo');
     });
 
@@ -135,11 +128,9 @@ var trainingmaterial = {
         if (err) {
           return workflow.emit('exception', err);
         }
-
         workflow.emit('response');
       });
     });
-
     workflow.emit('validate');
   },
 
@@ -203,8 +194,6 @@ var trainingmaterial = {
     });
   },
 
-
-
   updateAdv: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
     workflow.on('validate', function() {
@@ -240,7 +229,6 @@ var trainingmaterial = {
         return workflow.emit('response');
       });
     });
-
     workflow.emit('validate');
   },
 
@@ -318,7 +306,6 @@ var trainingmaterial = {
 
   readLinks: function(req, res, next){
     req.app.db.models.SiteLink.findById(req.params.id).exec(function(err, result) {
-      console.log("logged herere");
       if (err) {
         return next(err);
       }
@@ -446,12 +433,9 @@ var trainingmaterial = {
       if (err) {
         return next(err);
       }
-
       res.status(200).json(result);
     });
   },
-
-
 
   updateDownloads: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
@@ -460,7 +444,6 @@ var trainingmaterial = {
       workflow.emit('updateDownload');
     });
     workflow.on('updateDownload', function() {
-      console.log(req.body.fileDescription);
       var fieldsToSet = {
         fileDescription: req.body.fileDescription
       };
@@ -470,22 +453,16 @@ var trainingmaterial = {
         if (err) {
           return workflow.emit('exception', err);
         }
-
         workflow.outcome.property = result;
         return workflow.emit('response');
       });
     });
-
     workflow.emit('validate');
-  },
-
-  
+  },  
 
   deleteDownloads: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
-
     workflow.on('validate', function() {
-
       workflow.emit('deleteDownload');
     });
 
@@ -494,11 +471,9 @@ var trainingmaterial = {
         if (err) {
           return workflow.emit('exception', err);
         }
-
         workflow.emit('response');
       });
     });
-
     workflow.emit('validate');
   },
 };

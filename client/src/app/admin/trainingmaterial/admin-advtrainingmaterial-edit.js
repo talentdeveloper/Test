@@ -28,7 +28,6 @@ angular.module('admin.advtrainingmaterial.detail').config(['$routeProvider', fun
               $location.path(redirectUrl);
               return $q.reject();
             });
-
           return promise;
         }]
       }
@@ -37,8 +36,7 @@ angular.module('admin.advtrainingmaterial.detail').config(['$routeProvider', fun
 angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'trainingmaterialDetails',
   function($scope, $route, $location, utility, adminResource, trainingmaterialDetails) {
     // local vars
-	// youtube Instruction Video URL parssing
-	
+	// youtube Instruction Video URL parssing	
   	var instructID = '';
   	var parseInstructVideoURL = function() {
   		var instructURL = $scope.instructionVideoDetail.videoURL
@@ -54,16 +52,14 @@ angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmateri
   			}
   		}
   		instructID = matches[1];
-  		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';
-  		
+  		var url = 'https://www.youtube.com/embed/' + instructID + '?rel=0&show-info=0';  		
   		return url;
   	};
   	// youtube Instruction Video Thumbnail URL parsing
   	var getThumbURL = function() {
   		var url = 'http://img.youtube.com/vi/' + instructID + '/default.jpg';
   		return url;
-  	};
-	
+  	};	
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
       $scope.instructionVideoDetail.videoURL = parseInstructVideoURL();
@@ -94,25 +90,20 @@ angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmateri
       });
     };
 
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
     $scope.instructionVideoDetail = {
-
       videoURL: trainingmaterialDetails.videoURL,
       videoTitle: trainingmaterialDetails.videoTitle,
       videoDescription: trainingmaterialDetails.videoDescription
-
     };
     $scope.pass = {};
 
     //initial behavior
     var search = $location.search();
-
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -120,6 +111,5 @@ angular.module('admin.advtrainingmaterial.detail').controller('advtrainingmateri
     $scope.closeAlert = function(key, ind){
       $scope.alerts[key].splice(ind, 1);
     };
-
   }
 ]);

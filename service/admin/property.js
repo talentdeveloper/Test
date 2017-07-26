@@ -263,7 +263,6 @@ var property = {
           return workflow.emit('response');
         });
       }).catch(function (err){
-        console.log("there is no zillow api");
         var fieldsToSet = {
           
           propertyType: req.body.propertyType,
@@ -342,7 +341,6 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
-        console.log("herreererererer");
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
           if (err) {
@@ -355,8 +353,6 @@ var property = {
     });
     workflow.emit('validate');
   },
-
-  
 
   delete: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);

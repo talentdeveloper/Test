@@ -406,11 +406,8 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       email:    user.email
     };
     $scope.pass = {};
-
     //initial behavior
     var search = $location.search();
-
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -418,7 +415,6 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
     $scope.closeAlert = function(key, ind){
       $scope.alerts[key].splice(ind, 1);
     };
-
     $scope.submit = function(ngFormCtrl){
       switch (ngFormCtrl.$name){
         case 'detailForm':

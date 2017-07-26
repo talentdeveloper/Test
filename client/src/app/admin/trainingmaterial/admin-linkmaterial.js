@@ -37,8 +37,6 @@ angular.module('admin.linkmaterial.detail').config(['$routeProvider', function($
 angular.module('admin.linkmaterial.detail').controller('linkmaterialDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'linkmaterial',
   function($scope, $route, $location, utility, adminResource, linkmaterial) {
     // local vars
-    //var property = propertyDetails.property;
-
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
       adminResource.updateSiteLink(linkmaterial._id, $scope.linkmaterial).then(function(result){

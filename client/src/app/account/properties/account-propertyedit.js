@@ -53,7 +53,6 @@ angular.module('account.properties.edit').directive('fileModels', ['$parse', fun
 							var newFilePreview = e.target.result;
 							var newFileName = file.name;
 							var newFileSize = file.size;
-							
 							var fileObject = {
 								file : file,
 								name : newFileName,
@@ -231,7 +230,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 		if ($scope.propertyDetail.offerAmountAccepted != null) {
 			sum += 2;
 		}
-		
 		return sum;
 	};
 	// textarea row fixed 15 lines
@@ -244,7 +242,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 			angular.element('#textarea').val(modifiedText.join('\n'));
 		}
 	};
-	
 	// calculate ARV
 	$scope.calcFunc = function(paramARV, paramRepairs, paramAmount) {
 		if(paramARV == null) {
@@ -298,26 +295,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	          }
 	        });
 	    };
-	    /*$scope.photoChanged = function(files) {
-	      if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
-	        $scope.uploading = true;
-	        var file = files[0];
-	        var fileReader = new FileReader();
-	        fileReader.readAsDataURL(file);
-	        fileReader.onload = function(e) {
-	           $timeout(function() {
-	            $scope.thumbnail = {};
-	            $scope.thumbnail.dataUrl = e.target.result;           
-	            $scope.uploading = false;
-	            $scope.message = false;
-	           });
-	        };
-	      } else {
-	        $scope.thumbnail = {};
-	        $scope.message = false;
-	      }
-	    };*/
-	
     var user = propertyDetail.user;
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
@@ -331,19 +308,12 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
       }
       restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
         if(result.success){
-        	console.log("Update Success!");
         }else{
           
         }
       }, function(x){
-        // $scope.identityAlerts.push({
-        //   type: 'danger',
-        //   msg: 'Error updating user identity: ' + x
-        // });
       });
     };
-
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
@@ -403,11 +373,8 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
       email:    user.email
     };
     $scope.pass = {};
-
     //initial behavior
     var search = $location.search();
-
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -415,7 +382,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
     $scope.closeAlert = function(key, ind){
       $scope.alerts[key].splice(ind, 1);
     };
-
     $scope.submit = function(ngFormCtrl){
       switch (ngFormCtrl.$name){
         case 'detailForm':

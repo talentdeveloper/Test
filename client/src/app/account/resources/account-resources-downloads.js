@@ -35,7 +35,6 @@ angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$s
           $location.path('/account/settings');
       }
     });
-
     $scope.submitDownload = function(result) {
       window.location.assign($location.protocol() + "://" + $location.host() + ":" + $location.port() + result);
     };

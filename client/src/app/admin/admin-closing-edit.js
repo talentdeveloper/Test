@@ -37,7 +37,6 @@ angular.module('admin.closingdetail').config(['$routeProvider', function($routeP
 angular.module('admin.closingdetail').controller('closingDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'closingStatsDetails',
   function($scope, $route, $location, utility, adminResource, closingStatsDetails) {
     // local vars
-   // var statusName = statusConfigDetails.statusName;
     $scope.submitDetailForm = function(){
       $scope.alerts.detail = [];
       adminResource.updateClosingStats(closingStatsDetails._id, $scope.closingStats).then(function(result){
@@ -65,8 +64,6 @@ angular.module('admin.closingdetail').controller('closingDetailCtrl', ['$scope',
         });
       });
     };
-
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {

@@ -15,9 +15,6 @@ var adminProperty = require('./service/admin/property');
 var adminTraining = require('./service/admin/trainingmaterial');
 var adminStatusConfigures = require('./service/admin/statusconfigure');
 var adminClosingStats = require('./service/admin/closingstats');
-//var accountTraining = require('./service/resources/training');
-
-
 var commonFileName = '';
 var commonPropertyFileName = '';
 var commonUploadFileName = '';
@@ -463,7 +460,6 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.files);
           req.app.db.models.User.findByIdAndUpdate(req.user.id, { photoURL: '\\' + req.files[0].path }, function(err, user) {
           });
           res.json({ success: true, message: 'File was uploaded'});
@@ -506,7 +502,6 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log("^o^");
            var results = [];
           for (var i = 0; i < req.files.length; i++) {
             results[i] = '\\' + req.files[i].path;
@@ -553,7 +548,6 @@ exports = module.exports = function(app, passport) {
         if (!req.files) {
           res.json({ success: false, message:'No file was selected.'});
         } else {
-          console.log(req.files);
           var fieldsToSet = {
             fileURL: '\\' + req.files[0].path,
             fileName: req.files[0].originalname

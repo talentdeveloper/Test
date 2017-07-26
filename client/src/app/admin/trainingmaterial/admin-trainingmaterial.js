@@ -93,7 +93,6 @@ angular.module('admin.trainingmaterial.index').controller('trainingCtrl', ['$sco
 //    	$scope.videoURL.instructionURL = parseInstructVideoURL();
   	adminResource.updateVideo($scope.videoURL).then(function(result){
   		if(result.success){
-  			console.log('success');
   		}
     }, function(x) {
       

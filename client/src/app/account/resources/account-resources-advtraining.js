@@ -23,7 +23,6 @@ angular.module('account.resources.advtraining').config(['$routeProvider', 'secur
             });
           return promise;
         }]
-
       }
     });
 }]);
@@ -46,5 +45,4 @@ angular.module('account.resources.advtraining').controller('instructionCtrl', [ 
          $location.path('/account/settings');
     }
   });
-
 }]);

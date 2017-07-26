@@ -64,8 +64,7 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
     };
     
     var updateTitleShow = function() {
-	    adminResource.updateClosingStatsTitleShow($scope.closingStatsTitleShow).then(function(data){
-	    
+	    adminResource.updateClosingStatsTitleShow($scope.closingStatsTitleShow).then(function(data){	    
 	      if(data.success){
 	
 	      }else if (data.errors && data.errors.length > 0){
@@ -86,7 +85,6 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
     };
     var remarkUserRankingAndBadge = function() {
       adminResource.remarkSystem().then(function(result){
-
       });
     };
     showRecentlyAddedProperties();

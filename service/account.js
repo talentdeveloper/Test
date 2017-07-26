@@ -198,7 +198,6 @@ var account = {
     });
 
     workflow.on('patchAccount', function() {
-      console.log("as;dflkej;flaksdjf;laksdj;flkasdf", req.body.lastName);
       var fieldsToSet = {
         name: {
           first: req.body.firstName,

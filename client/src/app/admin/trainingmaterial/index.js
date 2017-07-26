@@ -5,6 +5,5 @@ angular.module('admin.trainingmaterial', [
   'admin.downloadmaterial.index',
   'admin.linkmaterial.index',
   'admin.downloadmaterial.detail',
-  'admin.linkmaterial.detail',
-  
+  'admin.linkmaterial.detail'
 ]);

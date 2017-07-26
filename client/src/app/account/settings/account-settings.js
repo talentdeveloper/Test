@@ -42,8 +42,7 @@ angular.module('account.settings').directive('fileUpdate', ['$parse', function($
 						scope.$apply(function() {
 							var newFilePreview = e.target.result;
 							var newFileName = file.name;
-							var newFileSize = file.size;
-							
+							var newFileSize = file.size;							
 							var fileObject = {
 								file : file,
 								name : newFileName,
@@ -97,8 +96,7 @@ angular.module('account.settings').directive('fileDragzone', function() {
 						scope.$apply(function() {
 							var newFilePreview = e.target.result;
 							var newFileName = file.name;
-							var newFileSize = file.size;
-							
+							var newFileSize = file.size;							
 							var fileObject = {
 								file : file,
 								name : newFileName,
@@ -121,12 +119,8 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
 	var isEnterAddress = 0;
     var account = accountDetails.account;
     var user = accountDetails.user;
-    console.log(user);
-    //user.firstName = account.name.first;
-    //user.lastName = account.name.last;
     $scope.user = {};
     $scope.address = JSON.stringify(accountDetails.user.address);
-    console.log($scope.address);
   	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
   		isEnterAddress = 1;
   		var getPlace = $scope.user.address.getPlace().address_components;
@@ -239,7 +233,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     $scope.file = {};
     var submitPhotoForm = function() {
         $scope.uploading = true;
-        console.log($scope.files);
         restResource.upload($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
@@ -289,7 +282,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
     //local vars
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
-      console.log("logged herererer", $scope.user.lastName);
       restResource.setAccountDetails($scope.user).then(function(data){
         if(data.success){
           
@@ -303,9 +295,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         });
       });
     };
-    //$scope.user.lastName = ADetail.last;
-    // $scope.user.firstName = $socpe.userDetail.first;
-
     var submitIdentityForm = function(){
       submitDetailForm();
       $scope.alerts.identity = [];
@@ -317,7 +306,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
       if(isEnterAddress == 0) {
     	  $scope.user.address = accountDetails.user.address;
       }
-      console.log($scope.user.address);
       restResource.setIdentity($scope.user).then(function(data){
         if(data.success){
           $scope.alerts.identity.push({
@@ -413,9 +401,7 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         $scope.social.facebook.connected = true;
       }
     }
-
     $scope.socialAlerts = [];
-
     //initial behavior
     var search = $location.search();
     if(search.provider){
@@ -431,7 +417,6 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         });
       }
     }
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;

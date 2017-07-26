@@ -22,7 +22,6 @@ angular.module('signup').controller('SignupCtrl', [ '$scope', '$location', '$log
   function($scope, $location, $log, utility, security, SOCIAL){
 	$scope.response = ''; // recaptcha response value;
     // local variable
-    console.log(SOCIAL);
     var signupSuccess = function(data){
       if(data.success){
         //account/user created, redirect...
@@ -47,8 +46,6 @@ angular.module('signup').controller('SignupCtrl', [ '$scope', '$location', '$log
     $scope.alerts = [];
     $scope.errfor = {};
     $scope.social = angular.equals({}, SOCIAL)? null: SOCIAL;
-    console.log("FACEBOOK:", $scope.social);
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;

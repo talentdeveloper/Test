@@ -101,8 +101,6 @@ var property = {
       
       var zwsid ="X1-ZWz194cb4rnkzv_93aho";
       var zillow = new Zillow(zwsid);
-      console.log("logged here!!!!!!!!!!!!!", req.body)
-      //temp = '';
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
          temp = results.response.results.result[0].links[0].homedetails;
@@ -189,20 +187,15 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
-        console.log("herreererererer");
         req.app.db.models.Property.create(fieldsToSet, function (err, property) {
           if (err) {
-            console.log("has some erre");
             return workflow.emit('exception', err);
           }
-          console.log('commpletteeere');
           workflow.outcome.record = property;
           return workflow.emit('response');
         });
       }).catch(function (err){
-        console.log("there is no zillow api");
-        var fieldsToSet = {
-          
+        var fieldsToSet = {          
           user: {
             id: req.user._id,
             name: req.user.username, 
@@ -284,13 +277,10 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
-        console.log("herreererererer");
         req.app.db.models.Property.create(fieldsToSet, function (err, property) {
           if (err) {
-            console.log("has some erre");
             return workflow.emit('exception', err);
           }
-          console.log('commpletteeere');
           workflow.outcome.record = property;
           return workflow.emit('response');
         });
@@ -301,42 +291,12 @@ var property = {
     workflow.emit('validate');
   },
   findPropertyList: function (req, res, next) {
-    //req.query.user = req.query.user ? req.query.user : '';
-    // req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
-    // req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
-    // req.query.sort = req.query.sort ? req.query.sort : '_id';
-    // req.query.status = req.query.status ? req.query.status : '';
-
-    // var filters = {};
-    // if (req.query.user) {
-    //   filters.user = new RegExp('^.*?' + req.query.user + '.*$', 'i');
-    // }
-
-    // if (req.query.status) {
-    //     filters['status.id'] = req.query.status;
-    // }
     req.app.db.models.Property.find({ "user.id" : req.params.id }).exec(function(err, user) {
       if (err) {
         return next(err);
       }
       res.status(200).json(user);
     });
-    // { "user": { "id" : req.params.id } }
-    // req.app.db.models.Property.pagedFind({
-    //   filters: filters,
-    //   keys: 'user propertyAddress propertyCity status submittedOn',
-    //   limit: req.query.limit,
-    //   page: req.query.page,
-    //   sort: req.query.sort,
-    //   //user.id: req.param.id 
-    // }, function (err, results) {
-    //   if (err) {
-    //     return next(err);
-    //   }
-    //   results.filters = req.query;
-
-    //   res.status(200).json(results);
-    // });
     
 
 
@@ -407,7 +367,6 @@ var property = {
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
         temp = results.response.results.result[0].links[0].homedetails;
-        console.log("sdfjfa;sdlfkjasdf", temp);
         var fieldsToSet = {
           propertyType: req.body.propertyType,
           multiFamilyUnit: req.body.multiFamilyUnit,
@@ -506,9 +465,7 @@ var property = {
           return workflow.emit('response');
         });
       }).catch(function (err){
-        console.log("there is no zillow api");
-        var fieldsToSet = {
-          
+        var fieldsToSet = {          
           user: {
             id: req.user._id,
             name: req.user.username, 
@@ -590,7 +547,6 @@ var property = {
           photoURL: req.body.photoURL,
           sumPoint: req.body.sumPoint
         };
-        console.log("herreererererer");
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
           if (err) {

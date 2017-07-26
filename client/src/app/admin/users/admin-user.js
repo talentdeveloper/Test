@@ -50,9 +50,6 @@ angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$
         deadLeads: accountPropertyStats['DeadLeads']
       };
     });
-
-
-    
     var closeAlert = function(alert, ind){
       alert.splice(ind, 1);
     };

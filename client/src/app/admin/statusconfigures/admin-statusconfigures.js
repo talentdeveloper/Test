@@ -33,8 +33,6 @@ angular.module('admin.statusconfigures.index').config(['$routeProvider', functio
 angular.module('admin.statusconfigures.index').controller('statusConfiguresIndexCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'statusConfigures',
   function($scope, $route, $location, $log, utility, adminResource, data){
     // local var
-    
- 
     $scope.addStatusConfig = function(){
       adminResource.addStatusConfig($scope.newStatus).then(function(data){
         $scope.newStatus = '';
@@ -50,7 +48,6 @@ angular.module('admin.statusconfigures.index').controller('statusConfiguresIndex
         $log.error(e);
       });
     };
-
     $scope.statusConfigures = data;
     // $scope vars
     //select elements and their associating optio
@@ -73,7 +70,5 @@ angular.module('admin.statusconfigures.index').controller('statusConfiguresIndex
         });
       }
     };
-
-
   }
 ]);

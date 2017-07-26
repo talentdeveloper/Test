@@ -134,12 +134,6 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
     				$scope.quotes = result[(dayVal / result.length) - 1];
     			}
     		}
-    		
-    	    /*$scope.dayOfMonth = moment().format('D');
-    	    $scope.weekOfYear = moment().format('w');
-    	    $scope.dayOfWeek = moment().format('d');
-    	    $scope.weekYear = moment().format('gg');
-    	    $scope.hourOfDay = moment().format('H');*/
     	});
     };
     var showClosingStatsTitle = function() {

@@ -3,7 +3,4 @@ angular.module('account.resources', [
 	'account.resources.advtraining',
 	'account.resources.links',
 	'account.resoureces.downloads'
-
-
-  //'account.resoureces.list'
 ]);

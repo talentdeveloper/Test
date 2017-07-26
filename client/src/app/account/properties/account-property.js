@@ -43,8 +43,7 @@ angular.module('account.properties.submit').directive('photoModel', ['$parse', f
 						scope.$apply(function() {
 							var newFilePreview = e.target.result;
 							var newFileName = file.name;
-							var newFileSize = file.size;
-							
+							var newFileSize = file.size;							
 							var fileObject = {
 								file : file,
 								name : newFileName,
@@ -94,8 +93,7 @@ angular.module('account.properties.submit').directive('fileDropzone', function()
 						scope.$apply(function() {
 							var newFilePreview = e.target.result;
 							var newFileName = file.name;
-							var newFileSize = file.size;
-							
+							var newFileSize = file.size;							
 							var fileObject = {
 								file : file,
 								name : newFileName,
@@ -138,16 +136,14 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 	        administrative_area_level_1: 'short_name',
 	        country: 'long_name',
 	        postal_code: 'short_name'
-		};
-		
+		};		
 		if(getPlace == undefined) {
 			$scope.address = '';
 			$scope.propertyDetail.propertyZip = '';
 			$scope.propertyDetail.propertyAddress = '';
 			$scope.propertyDetail.propertyCity = '';
 			$scope.propertyDetail.propertyState = '';
-			$scope.propertyDetail.propertyCounty = '';
-			
+			$scope.propertyDetail.propertyCounty = '';			
 			return;
 		}
 		for(var i = 0; i < getPlace.length; i++) {
@@ -248,13 +244,11 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
 			return false;
 		}
 	};
-
   restResource.getAccountDetails().then(function(result){
     if (result.user.isCompletedProfile == 'no'){
           $location.path('/account/settings');
     }
   });
-
 	var propertyURL = '';
     var submitPhotoForm = function() {
         $scope.uploading = true;
@@ -266,7 +260,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
             $scope.file = {};
    
             propertyURL = data.data.photoURL;
-            console.log(propertyURL);
           } else {
             $scope.uploading = false;
             $scope.alert = 'alert alert-danger';
@@ -288,26 +281,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
           }
         });
     };
-    /*$scope.photoChanged = function(files) {
-      if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
-        $scope.uploading = true;
-        var file = files[0];
-        var fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = function(e) {
-           $timeout(function() {
-            $scope.thumbnail = {};
-            $scope.thumbnail.dataUrl = e.target.result;           
-            $scope.uploading = false;
-            $scope.message = false;
-           });
-        };
-      } else {
-        $scope.thumbnail = {};
-        $scope.message = false;
-      }
-    };*/
-
     var property = propertyDetails.property;
     var user = propertyDetails.user;
     $scope.user = {
@@ -318,7 +291,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
       $scope.alerts.detail = [];
       $scope.propertyDetail.photoURL = propertyURL;
       $scope.propertyDetail.sumPoint = $scope.sumPoint();
-      console.log($scope.propertyDetail);
       restResource.addAccountProperty($scope.propertyDetail).then(function(data){
         if(data.success){
           $scope.alerts.detail.push({
@@ -340,47 +312,11 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         });
       });
     };
-
-
     //model def
     $scope.errfor = {}; //for identity server-side validation
     $scope.alerts = {
       detail: [], identity: [], pass: []
     };
-    // $scope.propertyDetail = {
-
-  		// propertyType: property.propertyType,
-  		// submittedOn: property.submittedOn,
-  		// propertyAddress: property.propertyAddress,
-  		// propertyCity: property.propertyCity,
-  		// propertyState: property.propertyState,
-  		// propertyZip: property.propertyZip,
-  		// propertyCounty: property.propertyCounty,
-  		// ownerFirstName: property.ownerFirstName,
-  		// ownerLastName: property.ownerLastName,
-  		// ownerPhone: property.ownerPhone,
-  		// ownerCell: property.ownerCell,
-  		// ownerEmail: property.ownerEmail,
-  		// beds: property.beds,
-  		// baths: property.baths,
-  		// askingPrice: property.askingPrice,
-  		// repairs: property.repairs,
-  		// repairNeed: property.repairNeed,
-  		// otherRepairDetail: property.otherRepairDetail,
-  		// occupancy: property.occupancy,  
-  		// listedOnMLS: property.listedOnMLS,
-  		// propertyDetail: property.propertyDetail,
-  		// taxRecordLink: property.taxRecordLink,
-  		// zillowLink: property.zillowLink,
-  		// offerAmountAccepted: property.offerAmountAccepted,    
-  		// approxARV: property.approxARV,
-    //   user: user,
-    //   status: 'new'
-    // };
-    // $scope.user = {
-    //   username: user.username,
-    //   email:    user.email
-    // };
     $scope.pass = {};
     $scope.social = null;
     if(!angular.equals({}, SOCIAL)){
@@ -392,9 +328,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         $scope.social.facebook.connected = true;
       }
     }
-
     $scope.socialAlerts = [];
-
     //initial behavior
     var search = $location.search();
     if(search.provider){
@@ -410,7 +344,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         });
       }
     }
-
     // method def
     $scope.hasError = utility.hasError;
     $scope.showError = utility.showError;
@@ -441,7 +374,5 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
         disconnect(provider);
       }
     };
-
-
   }
 ]);

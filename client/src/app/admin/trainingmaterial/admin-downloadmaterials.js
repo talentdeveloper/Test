@@ -70,9 +70,6 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
   function($scope, $route, $location, $log, utility, adminResource, data){
     // local var
     
- 
-
-
     $scope.downloadMaterials = data;
     // $scope vars
     //select elements and their associating optio
@@ -98,7 +95,6 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
 
     $scope.submitUpload = function () {
       $scope.uploading = true;
-      console.log("files Information:", $scope.files);
         adminResource.uploadFile($scope.files).then(function(data) {
           if (data.data.success) {
             $scope.uploading = false;
@@ -128,7 +124,5 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
           }
         });
     };
-
-
   }
 ]);

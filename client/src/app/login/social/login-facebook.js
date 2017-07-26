@@ -20,7 +20,6 @@ angular.module('login.social.facebook').config(['$routeProvider', function($rout
               $location.path(redirectUrl);
               return $q.reject();
             });
-            console.log(promise);
           return promise;
         }]
       },

@@ -39,7 +39,6 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
     $scope.updateTitle = function() {
       adminResource.updateClosingStatsTitle($scope.closingStatsTitle).then(function(data){
         alert('Closing Stats Title Updated.');
-
         if(data.success){
 
         }else if (data.errors && data.errors.length > 0){
@@ -47,13 +46,11 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
         }else {
           // alert('unknown error.');
         }
-      }, function(e){
-       
+      }, function(e){       
         $log.error(e);
       });
     };
-    $scope.addNewClosingStats = function(){
-    
+    $scope.addNewClosingStats = function(){    
       adminResource.addNewClosingStats($scope.newClosingStatsUsername).then(function(data){
         $scope.newClosingStatsUsername = '';
         if(data.success){

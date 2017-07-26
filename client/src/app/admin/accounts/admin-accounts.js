@@ -45,14 +45,12 @@ angular.module('admin.accounts.index').controller('AccountsIndexCtrl', ['$scope'
     var fetchAccounts = function(){
       adminResource.findAccounts($scope.filters).then(function(data){
         deserializeData(data);
-
         // update url in browser addr bar
         $location.search($scope.filters);
       }, function(e){
         $log.error(e);
       });
     };
-
     // $scope methods
     $scope.canSave = utility.canSave;
     $scope.formatTime = function(timestamp, replace){
@@ -87,7 +85,6 @@ angular.module('admin.accounts.index').controller('AccountsIndexCtrl', ['$scope'
         $log.error(e);
       });
     };
-
     // $scope vars
     //select elements and their associating options
     $scope.statuses = [];
@@ -105,7 +102,6 @@ angular.module('admin.accounts.index').controller('AccountsIndexCtrl', ['$scope'
       {label: "50 items", value: 50},
       {label: "100 items", value: 100}
     ];
-
     //initialize $scope variables
     deserializeData(data);
   }

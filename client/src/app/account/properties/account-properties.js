@@ -33,7 +33,6 @@ angular.module('account.properties.list').controller('AccountPropertyListCtrl', 
     restResource.findPropertyList(user._id).then(function(list){
       $scope.properties = list;
     });
-
     $scope.deleteProperty = function(id) {
       $scope.deleteAlerts =[];
       if(confirm('Are you sure?')){
@@ -54,12 +53,10 @@ angular.module('account.properties.list').controller('AccountPropertyListCtrl', 
         });
       }
     };
-
     restResource.getAccountDetails().then(function(result){
-    if (result.user.isCompletedProfile == 'no'){
-          $location.path('/account/settings');
-    }
-  });
-
+      if (result.user.isCompletedProfile == 'no'){
+            $location.path('/account/settings');
+      }
+    });
   }
 ]);
