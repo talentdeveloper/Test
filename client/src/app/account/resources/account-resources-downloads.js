@@ -32,7 +32,7 @@ angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$s
     $scope.downloadMaterials = downloadMaterials;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
-          $location.path('/account/settings');
+          // $location.path('/account/settings');
       }
     });
     $scope.submitDownload = function(result) {

@@ -43,7 +43,7 @@ angular.module('account.resources.training').controller('instructionCtrl', [ '$s
 
   accountResource.getAccountDetails().then(function(result){
     if (result.user.isCompletedProfile == 'no'){
-         $location.path('/account/settings');
+         // $location.path('/account/settings');
     }
   });
 
