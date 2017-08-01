@@ -52,6 +52,7 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
 
   resource.updateProperty = function(_id, data) {
+    console.log(data);
     var url = baseUrl + '/account/propertyedit/' + _id;
     return $http.put(url, data).then(processResponse, processError);
   };
@@ -112,7 +113,9 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   resource.getDownloadMaterials = function(_id) {
     return $http.get(baseUrl + '/account/downloadmaterial').then(processResponse, processError);
   }
-
+  resource.getAnnouncement = function() {
+    return $http.get(baseUrl + '/account/announcement').then(processResponse, processError);
+  }
 
   resource.upload = function(file) {
     var fd = new FormData();

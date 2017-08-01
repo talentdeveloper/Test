@@ -695,7 +695,14 @@ var account = {
       res.status(200).json(results);
     })
   },
-
+  getAnnouncement: function(req, res, next) {
+    req.app.db.models.Announcement.find({}).exec(function(err, results) {
+      if (err)
+        return err;
+      console.log(results);
+      res.status(200).json(results);
+    })
+  },
   getUserPropertyStats: function(req, res, next) {
     var counts = {};
     var statuses = ['PropertySubmitted', 'New', 'ActivelyWorking', 'OfferAccepted', 'OfferRejected', 'UCSeller', 'UCBuyer', 'Closed','DeadLeads'];

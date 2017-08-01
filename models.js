@@ -23,4 +23,6 @@ exports = module.exports = function(app, mongoose) {
   require('./schema/ClosingTitle')(app, mongoose);
   require('./schema/DownloadMaterial')(app, mongoose);
   require('./schema/SiteLink')(app, mongoose);
+  require('./schema/Announcement')(app, mongoose);
+  
 };

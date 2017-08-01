@@ -61,7 +61,6 @@ angular.module('admin.downloadmaterial.index').directive('fileModel', ['$parse',
           reader.readAsDataURL(file);
         });
         scope.filesToUpload = fileObjectsArray;
-        console.log(fileObjectsArray);
       });
     }
   };

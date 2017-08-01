@@ -13,6 +13,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   var adminInstructionVideosURL = baseUrl + '/admin/instructionvideos';
   var adminAdvInstructionVideosURL = baseUrl + '/admin/advinstructionvideos';
   var adminClosingStatsURL = baseUrl + '/admin/closing';
+  var adminAnnouncement = baseUrl + '/admin/announcement';
 
 
 
@@ -288,6 +289,12 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.updateDownloadMaterial = function(_id, data) {
     var url = '/api/admin/downloadMaterials';
     return $http.put(url + '/' + _id, data).then(processResponse, processError)
+  };
+  resource.getAnnouncement = function() {
+    return $http.get(adminAnnouncement).then(processResponse, processError)
+  };
+  resource.updateAnnouncement = function(data) {
+    return $http.put(adminAnnouncement, data).then(processResponse, processError)
   };
   // ----- admin-groups api -----
   resource.findAdminGroups = function(filters){

@@ -15,6 +15,7 @@ var adminProperty = require('./service/admin/property');
 var adminTraining = require('./service/admin/trainingmaterial');
 var adminStatusConfigures = require('./service/admin/statusconfigure');
 var adminClosingStats = require('./service/admin/closingstats');
+var adminAnnouncement = require('./service/admin/announcement');
 var commonFileName = '';
 var commonPropertyFileName = '';
 var commonUploadFileName = '';
@@ -208,6 +209,8 @@ exports = module.exports = function(app, passport) {
 
   app.get('/api/account/downloadmaterial', account.getDownloadMaterials);
 
+  app.get('/api/account/announcement', account.getAnnouncement);
+
 
   
   
@@ -332,6 +335,10 @@ exports = module.exports = function(app, passport) {
   app.get('/api/admin/closingtitle', adminClosingStats.getClosingTitle);
   app.put('/api/admin/closingtitle', adminClosingStats.updateClosingTitle);
   app.put('/api/admin/closingtitleshow', adminClosingStats.updateClosingTitleShow);
+
+  app.get('/api/admin/announcement', adminAnnouncement.getAnnouncement);
+  app.put('/api/admin/announcement', adminAnnouncement.updateAnnouncement);
+
   
 
   //******** END OF NEW JSON API ********

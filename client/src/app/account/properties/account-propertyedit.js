@@ -272,8 +272,19 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	            $scope.alert = 'alert alert-success';
 	            $scope.message = data.data.message;
 	            $scope.file = {};
-	   
+	   			console.log("logged here");
 	            propertyURL = data.data.photoURL;
+	            var tempURL = {
+	        		photoURL: propertyURL
+	        	};
+	        	console.log(tempURL);
+	            restResource.updateProperty(propertyDetail._id, tempURL).then(function(result){
+		        	if(result.success){
+	    	    	}else{
+	          
+	    	    	}
+	  		    }, function(x){
+	    		});
 	          } else {
 	            $scope.uploading = false;
 	            $scope.alert = 'alert alert-danger';
@@ -281,6 +292,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	            $scope.file = {};
 	          }
 	        });
+
 	        restResource.propertyUploadDist($scope.files).then(function(data) {
 	          if (data.data.success) {
 	            $scope.uploading = false;
@@ -294,6 +306,8 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 	            $scope.file = {};
 	          }
 	        });
+	        
+	        
 	    };
     var user = propertyDetail.user;
     var submitDetailForm = function(){
@@ -307,6 +321,7 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
     	  $scope.propertyDetail.propertyAddress = propertyDetail.propertyAddress;
       }
       restResource.updateProperty(propertyDetail._id, $scope.propertyDetail).then(function(result){
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         if(result.success){
         }else{
           

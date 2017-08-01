@@ -10,5 +10,6 @@ angular.module('admin', [
   'admin.trainingmaterial',
   'admin.statusconfigures',
   'admin.closing',
-  'admin.closingdetail'
+  'admin.closingdetail',
+  'admin.announcement'
 ]);

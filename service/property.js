@@ -364,6 +364,8 @@ var property = {
       var zillow = new Zillow(zwsid);
 
       //temp = '';
+      console.log("logged here");
+      console.log(req.body);
       zillow.get('GetSearchResults', {address: req.body.propertyAddress, citystatezip: req.body.propertyCity})
       .then(function(results) {
         temp = results.response.results.result[0].links[0].homedetails;
@@ -549,6 +551,7 @@ var property = {
         };
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
+          console.log(fieldsToSet);
           if (err) {
             return workflow.emit('exception', err);
           }

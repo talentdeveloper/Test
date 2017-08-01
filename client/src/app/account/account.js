@@ -147,9 +147,18 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
         $scope.closingStats = result;
       });
     };
+
+    var announcement = function() {
+      accountResource.getAnnouncement().then(function(result){
+        console.log(result);
+        $scope.announcements = result;
+      });
+    };
     showClosingStatsTitle();
 //    show();
     quote();
+
+    announcement();
 
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {

@@ -292,6 +292,7 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
       $scope.propertyDetail.photoURL = propertyURL;
       $scope.propertyDetail.sumPoint = $scope.sumPoint();
       restResource.addAccountProperty($scope.propertyDetail).then(function(data){
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         if(data.success){
           $scope.alerts.detail.push({
             type: 'success',
