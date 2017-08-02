@@ -135,8 +135,6 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	};
 	/*****************************************************************/
 	$scope.address = JSON.stringify(propertyDetails.propertyAddress);
-    // local vars
-    //var property = propertyDetails.property;
 	$scope.propertyDetail = {};
 	// Address automatic Complete
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
@@ -266,6 +264,7 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	$scope.file = {};
 	var propertyURL = '';
     var submitPhotoForm = function() {
+    	console.log("UPLOAD_IMAGE", $scope.files);
         $scope.uploading = true;
         adminResource.propertyUpload($scope.files).then(function(data) {
           if (data.data.success) {
@@ -399,7 +398,6 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       status: propertyDetails.status,
       selectCalculate: propertyDetails.selectCalculate,
       propertyCalculate: propertyDetails.propertyCalculate,
-      photoURL: propertyDetails.photoURL
     };
     $scope.user = {
       username: user.name,

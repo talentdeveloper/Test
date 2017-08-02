@@ -122,6 +122,19 @@ angular.module('account.properties.edit').directive('fileDropzones', function() 
 });
 angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', ['$scope', '$route', '$location', 'utility', 'accountResource', 'propertyDetail', '$timeout',
   function($scope, $route, $location, utility, restResource, propertyDetail, $timeout) {
+	/*var img = [];
+	if($scope.files == undefined) {
+		for(var i = 0; i < propertyDetail.photoURL.length; i++) {
+			var tempid = propertyDetail.photoURL[i].split('_')[0];
+			var tempname = propertyDetail.photoURL[i].split(tempid + '_')[1];
+			var obj = {
+				preview: propertyDetail.photoURL[i],
+				name: tempname
+			}
+			img[i] = obj;
+		}
+		$scope.files = img;
+	}*/
 	var isEnterAddress = 0;
 	/************************* Files Drop ****************************/
 	$scope.remove = function(index) {
@@ -262,57 +275,56 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
 		}
 	};
 	
-	 $scope.file = {};
-	   var propertyURL = '';
-	    var submitPhotoForm = function() {
-	        $scope.uploading = true;
-	        restResource.propertyUpload($scope.files).then(function(data) {
-	          if (data.data.success) {
-	            $scope.uploading = false;
-	            $scope.alert = 'alert alert-success';
-	            $scope.message = data.data.message;
-	            $scope.file = {};
-	   			console.log("logged here");
-	            propertyURL = data.data.photoURL;
-	            var tempURL = {
-	        		photoURL: propertyURL
-	        	};
-	        	console.log(tempURL);
-	            restResource.updateProperty(propertyDetail._id, tempURL).then(function(result){
-		        	if(result.success){
-	    	    	}else{
-	          
-	    	    	}
-	  		    }, function(x){
-	    		});
-	          } else {
-	            $scope.uploading = false;
-	            $scope.alert = 'alert alert-danger';
-	            $scope.message = data.data.message;
-	            $scope.file = {};
-	          }
-	        });
+   	var propertyURL = '';
+    var submitPhotoForm = function() {
+        $scope.uploading = true;
+        restResource.propertyUpload($scope.files).then(function(data) {
+          if (data.data.success) {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-success';
+            $scope.message = data.data.message;
+            $scope.file = {};
+   			console.log("logged here");
+            propertyURL = data.data.photoURL;
+            var tempURL = {
+        		photoURL: propertyURL
+        	};
+            restResource.updateProperty(propertyDetail._id, tempURL).then(function(result){
+	        	if(result.success){
+    	    	}else{
+          
+    	    	}
+  		    }, function(x){
+    		});
+          } else {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-danger';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          }
+        });
 
-	        restResource.propertyUploadDist($scope.files).then(function(data) {
-	          if (data.data.success) {
-	            $scope.uploading = false;
-	            $scope.alert = 'alert alert-success';
-	            $scope.message = data.data.message;
-	            $scope.file = {};
-	          } else {
-	            $scope.uploading = false;
-	            $scope.alert = 'alert alert-danger';
-	            $scope.message = data.data.message;
-	            $scope.file = {};
-	          }
-	        });
-	        
-	        
-	    };
+        restResource.propertyUploadDist($scope.files).then(function(data) {
+          if (data.data.success) {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-success';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          } else {
+            $scope.uploading = false;
+            $scope.alert = 'alert alert-danger';
+            $scope.message = data.data.message;
+            $scope.file = {};
+          }
+        });
+        
+        
+    };
     var user = propertyDetail.user;
     var submitDetailForm = function(){
       $scope.alerts.detail = [];
       $scope.propertyDetail.sumPoint = $scope.sumPoint();
+      $scope.propertyDetail.photoURL = propertyURL;
       $scope.alerts.detail.push({
             type: 'success',
             msg: 'Changes have been updated.'
@@ -381,7 +393,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
       status: propertyDetail.status,
       selectCalculate: propertyDetail.selectCalculate,
       propertyCalculate: propertyDetail.propertyCalculate,
-      photoURL: propertyDetail.photoURL
     };
     $scope.user = {
       username: user.name,

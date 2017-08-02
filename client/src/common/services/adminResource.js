@@ -398,8 +398,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
   
   resource.upload = function(file) {
-    var fd = new FormData();
-    fd.append('myfile', file.upload);
+	var fd = new FormData();
+    angular.forEach(file, function(val, key) {
+    	fd.append('myfile', val.file);
+	});
     return $http.post('/upload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -407,8 +409,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
 
   resource.uploadDist = function(file) {
-    var fd = new FormData();
-    fd.append('myfileDist', file.upload);
+	var fd = new FormData();
+	angular.forEach(file, function(val, key) {
+		fd.append('myfileDist', val.file);
+	});
     return $http.post('/uploadDist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -416,8 +420,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
 
   resource.propertyUpload = function(file) {
-    var fd = new FormData();
-    fd.append('propertyImage', file.upload);
+	var fd = new FormData();
+	angular.forEach(file, function(val, key) {
+		fd.append('propertyImage', val.file);
+	});
     return $http.post('/propertyupload', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
@@ -425,8 +431,10 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   };
 
   resource.propertyUploadDist = function(file) {
-    var fd = new FormData();
-    fd.append('propertyImageDist', file.upload);
+	var fd = new FormData();
+	angular.forEach(file, function(val, key) {
+		fd.append('propertyImageDist', val.file);
+	});
     return $http.post('/propertyuploadist', fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }

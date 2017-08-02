@@ -250,37 +250,38 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
     }
   });
 	var propertyURL = '';
-    var submitPhotoForm = function() {
-        $scope.uploading = true;
-        restResource.propertyUpload($scope.files).then(function(data) {
-          if (data.data.success) {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-success';
-            $scope.message = data.data.message;
-            $scope.file = {};
-   
-            propertyURL = data.data.photoURL;
-          } else {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-danger';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          }
-        });
-        restResource.propertyUploadDist($scope.files).then(function(data) {
-          if (data.data.success) {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-success';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          } else {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-danger';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          }
-        });
-    };
+	var submitPhotoForm = function() {
+		console.log($scope.files);
+	    $scope.uploading = true;
+	    restResource.propertyUpload($scope.files).then(function(data) {
+	      if (data.data.success) {
+	        $scope.uploading = false;
+	        $scope.alert = 'alert alert-success';
+	            $scope.message = data.data.message;
+	            $scope.file = {};
+	   
+	            propertyURL = data.data.photoURL;
+	          } else {
+	            $scope.uploading = false;
+	            $scope.alert = 'alert alert-danger';
+	        $scope.message = data.data.message;
+	        $scope.file = {};
+	      }
+	    });
+	    restResource.propertyUploadDist($scope.files).then(function(data) {
+	      if (data.data.success) {
+	        $scope.uploading = false;
+	        $scope.alert = 'alert alert-success';
+	        $scope.message = data.data.message;
+	        $scope.file = {};
+	      } else {
+	        $scope.uploading = false;
+	        $scope.alert = 'alert alert-danger';
+	        $scope.message = data.data.message;
+	        $scope.file = {};
+	      }
+	    });
+	};
     var property = propertyDetails.property;
     var user = propertyDetails.user;
     $scope.user = {
