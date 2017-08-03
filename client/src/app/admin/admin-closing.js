@@ -37,8 +37,13 @@ angular.module('admin.closing').controller('ClosingCtrl', ['$scope', '$route', '
     };
 
     $scope.updateTitle = function() {
+      $scope.alerts.detail = [];
       adminResource.updateClosingStatsTitle($scope.closingStatsTitle).then(function(data){
-        alert('Closing Stats Title Updated.');
+        //alert('Closing Stats Title Updated.');
+        $scope.alerts.detail.push({
+            type: 'success',
+            msg: 'Current Video URL is updated.'
+          });
         if(data.success){
 
         }else if (data.errors && data.errors.length > 0){

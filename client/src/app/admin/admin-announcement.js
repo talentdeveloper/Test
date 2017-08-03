@@ -34,7 +34,7 @@ angular.module('admin.announcement').controller('AnnouncementCtrl', ['$scope', '
 
     $scope.updateAnnouncement = function() {
       adminResource.updateAnnouncement($scope.announcement).then(function(data){
-        alert('Announcement Updated.');
+        //alert('Announcement Updated.');
         if(data.success){
 
         }else if (data.errors && data.errors.length > 0){

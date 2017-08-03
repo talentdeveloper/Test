@@ -291,6 +291,7 @@ var trainingmaterial = {
       var fieldsToSet = {        
        siteURL: req.body.siteURL,
        siteName: req.body.siteName,
+       siteDescription: req.body.siteDescription
       };
       req.app.db.models.SiteLink.create(fieldsToSet, function(err, result) {
         if (err) {

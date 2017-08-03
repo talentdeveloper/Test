@@ -33,7 +33,7 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
     temp = data;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){
-           $location.path('/account/settings');
+           // $location.path('/account/settings');
       } else if (result.user.isCompletedProfile == 'yes'){
         var user = result.user;
         var tmpStats = '';
@@ -118,7 +118,11 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
         });
       });
     };
-    
+    var getAnnouncement = function() {
+      accountResource.getAnnouncement().then(function(result){
+        $scope.announcements = result[0];
+      });
+    };
     var quote = function() {
     	accountResource.getQuote().then(function(result) {
     		$scope.quotes = '';
@@ -148,17 +152,12 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
       });
     };
 
-    var announcement = function() {
-      accountResource.getAnnouncement().then(function(result){
-        console.log(result);
-        $scope.announcements = result;
-      });
-    };
+    
     showClosingStatsTitle();
 //    show();
     quote();
 
-    announcement();
+    getAnnouncement();
 
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {

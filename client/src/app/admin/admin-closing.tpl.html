@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="closingStat in closingStats">
-                    <td><img ng-src="{{ closingStat.photoURL }}" width="80" height="80"></td>
+                    <td><img ng-src="{{ closingStat.photoURL || 'https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg'}}" width="80" height="80"></td>
                     <td>{{ closingStat.username }}</td>
                     <td>{{ closingStat.closingStatsExplanation }}</td>
                     <td>

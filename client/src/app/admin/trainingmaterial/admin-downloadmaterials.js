@@ -94,34 +94,35 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
 
     $scope.submitUpload = function () {
       $scope.uploading = true;
-        adminResource.uploadFile($scope.files).then(function(data) {
-          if (data.data.success) {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-success';
-            $scope.message = data.data.message;
-            $scope.file = {};
-            $location.path('/admin/downloadmaterial');
-            $route.reload();
-          } else {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-danger';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          }
-        });
-        adminResource.uploadFileDist($scope.files).then(function(data) {
-          if (data.data.success) {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-success';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          } else {
-            $scope.uploading = false;
-            $scope.alert = 'alert alert-danger';
-            $scope.message = data.data.message;
-            $scope.file = {};
-          }
-        });
+      adminResource.uploadFile($scope.files).then(function(data) {
+        if (data.data.success) {
+          $scope.uploading = false;
+          $scope.alert = 'alert alert-success';
+          $scope.message = data.data.message;
+          $scope.file = {};
+          $location.path('/admin/downloadmaterial');
+          $route.reload();
+        } else {
+          $scope.uploading = false;
+          $scope.alert = 'alert alert-danger';
+          $scope.message = data.data.message;
+          $scope.file = {};
+        }
+      });
+      adminResource.uploadFileDist($scope.files).then(function(data) {
+        if (data.data.success) {
+          $scope.uploading = false;
+          $scope.alert = 'alert alert-success';
+          $scope.message = data.data.message;
+          $scope.file = {};
+        } else {
+          $scope.uploading = false;
+          $scope.alert = 'alert alert-danger';
+          $scope.message = data.data.message;
+          $scope.file = {};
+        }
+      });
+      
     };
   }
 ]);
