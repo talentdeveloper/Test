@@ -264,7 +264,6 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
 	$scope.file = {};
 	var propertyURL = '';
     var submitPhotoForm = function() {
-    	console.log("UPLOAD_IMAGE", $scope.files);
         $scope.uploading = true;
         adminResource.propertyUpload($scope.files).then(function(data) {
           if (data.data.success) {
@@ -327,22 +326,49 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
       if(isEnterAddress == 0) {
     	  $scope.propertyDetail.propertyAddress = propertyDetails.propertyAddress;
       }
-      adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
-        if(result.success){
-          $scope.user = result.user; //update $scope user model
-          $scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
-        }else{
-         
-          angular.forEach(result.errors, function(err, index){
-            $scope.identityAlerts.push({ type: 'danger', msg: err });
-          });
-        }
-      }, function(x){
-        $scope.identityAlerts.push({
-          type: 'danger',
-          msg: 'Error updating user identity: ' + x
-        });
-      });
+      
+			
+			adminResource.findStatusType($scope.propertyDetail).then(function(data){
+				if (data.isRelatedRanking == 'true'){
+					$scope.propertyDetail.isRelatedRankingStatus = 'yes';
+					adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
+						document.body.scrollTop = document.documentElement.scrollTop = 0;
+						if(result.success){
+							$scope.user = result.user; //update $scope user model
+							$scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
+						}else{
+						
+							angular.forEach(result.errors, function(err, index){
+								$scope.identityAlerts.push({ type: 'danger', msg: err });
+							});
+						}
+					}, function(x){
+						$scope.identityAlerts.push({
+							type: 'danger',
+							msg: 'Error updating user identity: ' + x
+						});
+					});
+				} else {
+					$scope.propertyDetail.isRelatedRankingStatus = '';
+					adminResource.updateProperty(propertyDetails._id, $scope.propertyDetail).then(function(result){
+						document.body.scrollTop = document.documentElement.scrollTop = 0;
+						if(result.success){
+							$scope.user = result.user; //update $scope user model
+							$scope.identityAlerts.push({ type: 'info', msg: 'Changes have been saved.'});
+						}else{
+						
+							angular.forEach(result.errors, function(err, index){
+								$scope.identityAlerts.push({ type: 'danger', msg: err });
+							});
+						}
+					}, function(x){
+						$scope.identityAlerts.push({
+							type: 'danger',
+							msg: 'Error updating user identity: ' + x
+						});
+					});
+				}
+			});
     };
 
 
@@ -436,5 +462,13 @@ angular.module('admin.properties.detail').controller('PropertiesDetailCtrl', ['$
         disconnect(provider);
       }
     };
+
+    var getStatusType = function () {
+    	adminResource.getStatusType().then(function(data){
+    		$scope.statusTypes = data;
+    	});
+    };
+
+    getStatusType();
   }
 ]);

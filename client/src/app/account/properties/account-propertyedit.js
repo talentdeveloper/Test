@@ -284,7 +284,6 @@ angular.module('account.properties.edit').controller('AccountPropertyEditCtrl', 
             $scope.alert = 'alert alert-success';
             $scope.message = data.data.message;
             $scope.file = {};
-   			console.log("logged here");
             propertyURL = data.data.photoURL;
             var tempURL = {
         		photoURL: propertyURL

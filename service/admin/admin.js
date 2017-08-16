@@ -10,6 +10,60 @@ var admin = {
         res.status(200).json(results);
       });
   },
+  getStatss: function(req, res, next){
+    var statuses = req.body;
+    var counts = {};
+    var statusName = '';
+    var queries = [];
+    for (var i = 0; i < statuses.length; i++){
+      statusName = statuses[i].statusName;
+      (function(statusName) {
+        queries.push(function(done){
+          req.app.db.models.Property.find({ "status" : statusName}).count({}, function(err, count){
+            if (err) {
+              return done(err);
+            }
+            counts[statusName] = count;
+            done()
+          });
+        });
+      })(statusName);
+    }
+    var asyncFinally = function(err, results){
+      if(err){
+        return next(err);
+      }
+      res.status(200).json(counts);
+    };
+    require('async').parallel(queries, asyncFinally);
+  },
+  getStatsByUser: function(req, res, next) {
+    var statuses = req.body;
+    var counts = {};
+    var statusName = '';
+    var queries = [];
+    for (var i = 0; i < statuses.length; i++){
+      statusName = statuses[i].statusName;
+      (function(statusName) {
+        queries.push(function(done){
+          req.app.db.models.Property.find({"user.id": req.params.id, "status" : statusName}).count({}, function(err, count){
+            if (err) {
+              return done(err);
+            }
+            counts[statusName] = count;
+            done()
+          });
+        });
+      })(statusName);
+    }
+    var asyncFinally = function(err, results){
+      if(err){
+        return next(err);
+      }
+      res.status(200).json(counts);
+    };
+    require('async').parallel(queries, asyncFinally);
+  },
   getStats: function(req, res, next){
     var counts = {};
     var statuses = ['PropertySubmitted', 'New', 'ActivelyWorking', 'OfferAccepted', 'OfferRejected', 'UCSeller', 'UCBuyer', 'Closed','DeadLeads'];

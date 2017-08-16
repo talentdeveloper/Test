@@ -155,7 +155,7 @@ var property = {
           approxARV: req.body.approxARV,
           selectCalculate: req.body.selectCalculate,
           propertyCalculate: req.body.propertyCalculate,
-          status: 'new',
+          status: 'New',
           search: [
             req.body.user,
             req.body.propertyType,
@@ -245,7 +245,7 @@ var property = {
           approxARV: req.body.approxARV,
           selectCalculate: req.body.selectCalculate,
           propertyCalculate: req.body.propertyCalculate,
-          status: 'new',
+          status: 'New',
           search: [
             req.body.user,
             req.body.propertyType,

@@ -28,7 +28,6 @@ angular.module('account.resources.links').config(['$routeProvider', 'securityAut
 }]);
 angular.module('account.resources.links').controller('linksCtrl', [ '$scope', '$location', 'linkMaterials', 'accountResource',
   function($scope, $location, linkMaterials, accountResource){
-    console.log(linkMaterials);
     $scope.linkMaterials = linkMaterials;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){

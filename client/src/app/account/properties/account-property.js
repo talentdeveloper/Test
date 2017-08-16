@@ -251,7 +251,6 @@ angular.module('account.properties.submit').controller('AccountPropertySubmitCtr
   });
 	var propertyURL = '';
 	var submitPhotoForm = function() {
-		console.log($scope.files);
 	    $scope.uploading = true;
 	    restResource.propertyUpload($scope.files).then(function(data) {
 	      if (data.data.success) {

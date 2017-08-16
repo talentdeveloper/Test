@@ -29,7 +29,6 @@ angular.module('admin.announcement').config(['$routeProvider', function($routePr
 angular.module('admin.announcement').controller('AnnouncementCtrl', ['$scope', '$route', '$location', '$log', 'announcement', 'adminResource',
   function($scope, $route, $location, $log, announcement, adminResource){
     $scope.announcement = announcement;
-    console.log(announcement);
 
 
     $scope.updateAnnouncement = function() {

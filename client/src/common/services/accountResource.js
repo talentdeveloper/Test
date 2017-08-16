@@ -52,7 +52,6 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
 
   resource.updateProperty = function(_id, data) {
-    console.log(data);
     var url = baseUrl + '/account/propertyedit/' + _id;
     return $http.put(url, data).then(processResponse, processError);
   };
@@ -112,10 +111,21 @@ angular.module('services.accountResource', ['security.service']).factory('accoun
   };
   resource.getDownloadMaterials = function(_id) {
     return $http.get(baseUrl + '/account/downloadmaterial').then(processResponse, processError);
-  }
+  };
   resource.getAnnouncement = function() {
     return $http.get(baseUrl + '/account/announcement').then(processResponse, processError);
-  }
+  };
+  resource.refreshRankingScore = function(_id) {
+    return $http.get(baseUrl + '/account/refreshrankingscore/' + _id).then(processResponse, processError);
+  };
+
+  resource.getStatusType = function() {
+    return $http.get('/api/account/getstatustype').then(processResponse, processError);
+  };
+  resource.getStatsByUser = function(_id, data){
+    return $http.put(baseUrl + '/account/gets/' + _id, data).then(processResponse, processError);
+  };
+
 
   resource.upload = function(file) {
     var fd = new FormData();

@@ -59,17 +59,11 @@ exports = module.exports = function(app, mongoose) {
     status: {
       submitted: { type: Number, default: '' },
       new: { type: Number, default: '' },
-      inProgress: { type: Number, default: '' },
-      offerAccepted: { type: Number, default: '' },
-      offerRejected: { type: Number, default: '' },
-      ucSeller: { type: Number, default: '' },
-      ucBuyer: { type: Number, default: '' },
-      closed: { type: Number, default: '' },
-      deadLeads: { type: Number, default: '' },
     },
     photoURL: { type: String, default:''},
     registeredClosingStats: { type: String, default:'no'},
-    closingStatsExplanation: {type: String, default:''}
+    closingStatsExplanation: {type: String, default:''},
+    rankingScore: { type: Number, default: 0}
   });
   userSchema.methods.isVerified = function(done){
     this.populate('roles.account', function(err, user){

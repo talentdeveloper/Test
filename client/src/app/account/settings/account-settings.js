@@ -207,29 +207,17 @@ angular.module('account.settings').controller('AccountSettingsCtrl', [ '$scope',
         lastName: user.lastName,
         status: {        
           submitted: tmpStats['PropertySubmitted'],
-          new: tmpStats['New'],
-          inProgress: tmpStats['ActivelyWorking'],
-          offerAccepted: tmpStats['OfferAccepted'],
-          offerRejected: tmpStats['OfferRejected'],
-          ucSeller: tmpStats['UCSeller'],
-          ucBuyer: tmpStats['UCBuyer'],
-          closed: tmpStats['Closed'],
-          deadLeads: tmpStats['DeadLeads']
         }
-      };
-      $scope.stats = {
-        submitted: accountPropertyStats['PropertySubmitted'],
-        new: accountPropertyStats['New'],
-        activelyWorking: accountPropertyStats['ActivelyWorking'],
-        offerAccepted: accountPropertyStats['OfferAccepted'],
-        offerRejected: accountPropertyStats['OfferRejected'],
-        ucSeller: accountPropertyStats['UCSeller'],
-        ucBuyer: accountPropertyStats['UCBuyer'],
-        closed: accountPropertyStats['Closed'],
-        deadLeads: accountPropertyStats['DeadLeads']
       };
 
     });
+    restResource.getStatusType().then(function(data){
+        
+        restResource.getStatsByUser(user._id, data).then(function(result){
+        $scope.statusTypes = result;
+        });
+      });
+
     $scope.file = {};
     var submitPhotoForm = function() {
         $scope.uploading = true;

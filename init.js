@@ -183,7 +183,7 @@ workflow.on('initDb', function(){
     });
   },function(cb){
     //insert one video doc
-    db.collection('statustypes').insert({ statusName: '', statusDetail: ''}, function(err, res){
+    db.collection('statustypes').insert({ statusName: 'New', statusDetail: 'The property was submitted and is pending review.', isRelatedRanking: ''}, function(err, res){
       return err? cb(err): cb();
     });
   },function(cb){

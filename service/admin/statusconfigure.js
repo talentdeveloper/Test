@@ -12,16 +12,27 @@ var statusconfigure = {
     });
   },
 
+  findStatusType: function(req, res, next) {
+    console.log(req.body);
+    req.app.db.models.StatusType.findOne({statusName: req.body.status}, function (err, result) {
+        if (err) {
+        }
+        res.status(200).json(result);
+    });
+  },
+
 
   create: function (req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
     workflow.on('validate', function () {
       workflow.emit('createStatusType');
     });
+    console.log(req.body);
     workflow.on('createStatusType', function () {
       var fieldsToSet = {        
        statusName: req.body.statusName,
-       statusDetail: req.body.statusDetail
+       statusDetail: req.body.statusDetail,
+       isRelatedRanking: req.body.isRelatedRanking
       };
       req.app.db.models.StatusType.create(fieldsToSet, function (err, statusType) {
         if (err) {
@@ -65,7 +76,8 @@ var statusconfigure = {
     workflow.on('patchStatusConfigures', function() {
       var fieldsToSet = {
         statusName: req.body.statusName,
-        statusDetail: req.body.statusDetail
+        statusDetail: req.body.statusDetail,
+        isRelatedRanking: req.body.isRelatedRanking
       };
       var options = { new: true };
 

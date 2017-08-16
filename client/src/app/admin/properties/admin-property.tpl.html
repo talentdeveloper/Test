@@ -451,14 +451,7 @@
                             <label class="col-md-3 control-label" for="status">Status:*</label>
                             <div class="col-md-5">
                                 <select id="notific8_life" name="status" class="form-control input-medium" ng-model="propertyDetail.status">
-                                    <option value="new">New</option>
-                                    <option value="inProgress">Actively Working(In Progress)</option>
-                                    <option value="offerAccepted">Offer Accepted</option>
-                                    <option value="offerRejected">Offer Rejected</option>
-                                    <option value="ucSeller">UC Seller</option>
-                                    <option value="ucBuyer">UC Buyer</option>
-                                    <option value="closed">closed</option>
-                                    <option value="deadLeads">Dead Leads</option>                                    
+                                    <option ng-repeat="statusType in statusTypes" value="{{statusType.statusName}}">{{statusType.statusName}}</option>                                    
                                 </select>
                             </div>
                         </div>

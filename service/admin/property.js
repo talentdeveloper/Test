@@ -252,7 +252,8 @@ var property = {
             req.body.otherDetail,
             req.body.howFindThis,
           ],
-          sumPoint: req.body.sumPoint
+          sumPoint: req.body.sumPoint,
+          isRelatedRankingStatus: req.body.isRelatedRankingStatus
         };
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {
@@ -339,7 +340,8 @@ var property = {
             req.body.status,
           ],
           photoURL: req.body.photoURL,
-          sumPoint: req.body.sumPoint
+          sumPoint: req.body.sumPoint,
+          isRelatedRankingStatus: req.body.isRelatedRankingStatus
         };
         var options = { new: true };
         req.app.db.models.Property.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, property) {

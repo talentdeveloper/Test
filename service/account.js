@@ -96,6 +96,42 @@ var connectSocial = function(provider, req, res, next){
 
 // public api
 var account = {
+  getStatsByUser: function(req, res, next) {
+    var statuses = req.body;
+    var counts = {};
+    var statusName = '';
+    var queries = [];
+    for (var i = 0; i < statuses.length; i++){
+      statusName = statuses[i].statusName;
+      (function(statusName) {
+        queries.push(function(done){
+          req.app.db.models.Property.find({"user.id": req.params.id, "status" : statusName}).count({}, function(err, count){
+            if (err) {
+              return done(err);
+            }
+            counts[statusName] = count;
+            done()
+          });
+        });
+      })(statusName);
+    }
+    var asyncFinally = function(err, results){
+      if(err){
+        return next(err);
+      }
+      res.status(200).json(counts);
+    };
+    require('async').parallel(queries, asyncFinally);
+  },
+  getStatusFind: function (req, res, next){
+    req.app.db.models.StatusType.find({
+    }, function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json(results);
+    });
+  },
   setProfileCompleted: function(req, res, next){
     req.app.db.models.User.findOneAndUpdate({"username": req.body.username}, {"isCompletedProfile": 'yes'}).exec(function(err, result){
       if (err)
@@ -349,7 +385,8 @@ var account = {
           req.body.warren,
           req.body.whereHeardUs
         ],
-        photoURL: req.body.photoURL
+        photoURL: req.body.photoURL,
+        rankingScore: req.body.rankingScore
       };
       var options = { select: 'username email twitter.id github.id facebook.id google.id tumblr.id phone zip address city state occupation otherSpecify whereHeardUs' };
 
@@ -821,6 +858,15 @@ var account = {
       }
        res.status(200).json(results);
     })
-  }  
+  },
+  refreshRankingScore: function(req, res, next){
+    req.app.db.models.Property.find({ "user.id": req.params.id, "isRelatedRankingStatus": "yes" }).count({}, function(err, count){
+      if(err){
+        return done(err);
+      }
+      console.log(count);
+      res.status(200).json(count);
+    });
+  } 
 };
 module.exports = account;

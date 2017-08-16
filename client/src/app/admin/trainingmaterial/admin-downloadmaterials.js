@@ -94,7 +94,7 @@ angular.module('admin.downloadmaterial.index').controller('downloadCtrl', ['$sco
 
     $scope.submitUpload = function () {
       $scope.uploading = true;
-      adminResource.uploadFile($scope.files).then(function(data) {
+      adminResource.uploadFile($scope.newFile, $scope.files).then(function(data) {
         if (data.data.success) {
           $scope.uploading = false;
           $scope.alert = 'alert alert-success';

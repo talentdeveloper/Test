@@ -37,69 +37,80 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
       } else if (result.user.isCompletedProfile == 'yes'){
         var user = result.user;
         var tmpStats = '';
-        accountResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
-          var tmpStats = accountPropertyStats;
-          var tmpData = {
-            username:   user.username,
-            email:      user.email,
-            phone:      user.phone,
-            address:    user.address,
-            city:     user.city,
-            state:    user.state,
-            zip:      user.zip,
-            phone:      user.phone,
-            atlantic:   user.atlantic,
-            hunterdon:  user.hunterdon,
-            sussex:   user.sussex,
-            gloucester: user.gloucester,
-            salem:    user.salem,
-            cumberland: user.cumberland,
-            ocean:    user.ocean,
-            camden:   user.camden,
-            monmouth:   user.monmouth,
-            bergen:   user.bergen,
-            merser:   user.merser,
-            union:    user.union,
-            hudson:   user.hudson,
-            somerset:   user.somerset,
-            essex:    user.essex,
-            passaic:    user.passaic,
-            capemay:    user.capeMay,
-            morris:   user.morris,
-            burlington: user.burlington,
-            middlesex:  user.middlesex,
-            warren:   user.warren,
-            occupation:   user.occupation,
-            otherSpecify: user.otherSpecify,
-            whereHeardUs: user.whereHeardUs,
-            photoURL:   user.photoURL,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            status: {        
-              submitted: tmpStats['PropertySubmitted'],
-              new: tmpStats['New'],
-              inProgress: tmpStats['ActivelyWorking'],
-              offerAccepted: tmpStats['OfferAccepted'],
-              offerRejected: tmpStats['OfferRejected'],
-              ucSeller: tmpStats['UCSeller'],
-              ucBuyer: tmpStats['UCBuyer'],
-              closed: tmpStats['Closed'],
-              deadLeads: tmpStats['DeadLeads']
-            }
-          };
-          accountResource.setIdentity(tmpData).then(function(data){
-            if(data.success){
-              
-            }else{
-              //error due to server side validation
-            }
-          }, function(x){
-            $scope.alerts.identity.push({
-              type: 'danger',
-              msg: 'Error updating user identity: ' + x
+        
+
+        accountResource.refreshRankingScore(user._id).then(function(result){
+            accountResource.getUserPropertyStats(user._id).then(function(accountPropertyStats) {
+            var tmpStats = accountPropertyStats;
+            var tmpData = {
+              username:   user.username,
+              email:      user.email,
+              phone:      user.phone,
+              address:    user.address,
+              city:     user.city,
+              state:    user.state,
+              zip:      user.zip,
+              phone:      user.phone,
+              atlantic:   user.atlantic,
+              hunterdon:  user.hunterdon,
+              sussex:   user.sussex,
+              gloucester: user.gloucester,
+              salem:    user.salem,
+              cumberland: user.cumberland,
+              ocean:    user.ocean,
+              camden:   user.camden,
+              monmouth:   user.monmouth,
+              bergen:   user.bergen,
+              merser:   user.merser,
+              union:    user.union,
+              hudson:   user.hudson,
+              somerset:   user.somerset,
+              essex:    user.essex,
+              passaic:    user.passaic,
+              capemay:    user.capeMay,
+              morris:   user.morris,
+              burlington: user.burlington,
+              middlesex:  user.middlesex,
+              warren:   user.warren,
+              occupation:   user.occupation,
+              otherSpecify: user.otherSpecify,
+              whereHeardUs: user.whereHeardUs,
+              photoURL:   user.photoURL,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              rankingScore: result,
+              status: {        
+                submitted: tmpStats['PropertySubmitted'],
+              }
+            };
+            accountResource.setIdentity(tmpData).then(function(data){
+              if(data.success){
+                
+              }else{
+                //error due to server side validation
+              }
+            }, function(x){
+              $scope.alerts.identity.push({
+                type: 'danger',
+                msg: 'Error updating user identity: ' + x
+              });
+            });
+
+            accountResource.setAccountDetails(tmpData).then(function(data){
+              if(data.success){
+                
+              }else{
+                
+              }
+            }, function(x){
+              $scope.alerts.detail.push({
+                type: 'danger',
+                msg: 'Error updating account details: ' + x
+              });
             });
           });
         });
+    
       }
       
     });
@@ -153,11 +164,15 @@ angular.module('account.index').controller('AccountCtrl', [ '$scope', '$location
     };
 
     
+
+    
     showClosingStatsTitle();
 //    show();
     quote();
 
     getAnnouncement();
+
+   
 
   }]);
 angular.module('account.index').controller('Controller', ['$scope', '$sce', function($scope, $sce) {

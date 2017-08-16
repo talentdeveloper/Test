@@ -211,6 +211,11 @@ exports = module.exports = function(app, passport) {
 
   app.get('/api/account/announcement', account.getAnnouncement);
 
+  app.get('/api/account/refreshrankingscore/:id', account.refreshRankingScore);
+
+  app.get('/api/account/getstatustype', account.getStatusFind);
+  app.put('/api/account/gets/:id', account.getStatsByUser);
+
 
   
   
@@ -218,6 +223,8 @@ exports = module.exports = function(app, passport) {
   app.all('/api/admin*', apiEnsureAuthenticated);
   app.all('/api/admin*', apiEnsureAdmin);
   app.get('/api/admin', admin.getStats);
+  app.put('/api/admingets', admin.getStatss);
+  app.put('/api/admingets/:id', admin.getStatsByUser);
   app.get('/api/admin/recentlyadded', admin.findRecent);
 
   //admin > users
@@ -340,7 +347,8 @@ exports = module.exports = function(app, passport) {
   app.put('/api/admin/announcement', adminAnnouncement.updateAnnouncement);
 
   
-
+  app.get('/api/admin/getstatustype', adminStatusConfigures.find);
+  app.post('/api/admin/findstatustype', adminStatusConfigures.findStatusType);
   //******** END OF NEW JSON API ********
 
   //******** Static routes handled by Angular ********
@@ -557,8 +565,10 @@ exports = module.exports = function(app, passport) {
         } else {
           var fieldsToSet = {
             fileURL: '\\' + req.files[0].path,
-            fileName: req.files[0].originalname
+            fileName: req.files[0].originalname,
+            fileDescription: req.body.fileDescription
           };
+          console.log(req.body);
           req.app.db.models.DownloadMaterial.create(fieldsToSet, function(err, user) {
           });
           res.json({ success: true, message: 'File was uploaded'});

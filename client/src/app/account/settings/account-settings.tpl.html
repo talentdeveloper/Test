@@ -30,91 +30,14 @@
 </div>
 <div class="row">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;" ng-repeat="(key, data) in statusTypes">
             <div class="dashboard-stat red">
                 <div class="visual">
                     <i class="fa fa-bar-chart-o"></i>
                 </div>
                 <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.new }} </div>
-                    <div class="desc"> New </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat green">
-                <div class="visual">
-                    <i class="fa fa-shopping-cart"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.activelyWorking }} </div>
-                    <div class="desc"> In Progress </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat purple">
-                <div class="visual">
-                    <i class="fa fa-globe"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.offerAccepted }} </div>
-                    <div class="desc" style="padding-left: 5px;"> Offers Accepted </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat green">
-                <div class="visual">
-                    <i class="fa fa-shopping-cart"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.offerRejected }} </div>
-                    <div class="desc" style="padding-left: 5px;"> Offers Rejected </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat purple">
-                <div class="visual">
-                    <i class="fa fa-globe"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.ucSeller }} </div>
-                    <div class="desc"> UC Seller </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat blue">
-                <div class="visual">
-                    <i class="fa fa-comments"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.ucBuyer }} </div>
-                    <div class="desc"> UC Buyer </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat red">
-                <div class="visual">
-                    <i class="fa fa-bar-chart-o"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.closed }} </div>
-                    <div class="desc"> Closed </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
-            <div class="dashboard-stat purple">
-                <div class="visual">
-                    <i class="fa fa-globe"></i>
-                </div>
-                <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ stats.deadLeads }} </div>
-                    <div class="desc"> Dead Leads </div>
+                    <div class="number" style="padding-top: 10px;"> {{ data }} </div>
+                    <div class="desc"> {{key}} </div>
                 </div>
             </div>
         </div>

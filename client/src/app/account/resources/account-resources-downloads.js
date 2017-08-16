@@ -28,7 +28,6 @@ angular.module('account.resoureces.downloads').config(['$routeProvider', 'securi
 }]);
 angular.module('account.resoureces.downloads').controller('downloadsCtrl', [ '$scope', '$location', 'downloadMaterials', 'accountResource',
   function($scope, $location, downloadMaterials, accountResource){
-    console.log(downloadMaterials);
     $scope.downloadMaterials = downloadMaterials;
     accountResource.getAccountDetails().then(function(result){
       if (result.user.isCompletedProfile == 'no'){

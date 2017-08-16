@@ -5,7 +5,7 @@ exports = module.exports = function(app, mongoose) {
     user: {
       id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       name: { type: String, default: '' },
-      email: { type: String, defaul: ''}
+      email: { type: String, default: ''}
     },
     propertyType: { type: String, default: '' },
     multiFamilyUnit: { type: String, default: '' },
@@ -53,7 +53,8 @@ exports = module.exports = function(app, mongoose) {
     propertyCalculate: { type: String, default: '' },
     status: { type: String, default: ''},
     photoURL: [],
-    sumPoint: {type: Number, default: ''}
+    sumPoint: {type: Number, default: ''},
+    isRelatedRankingStatus: {type: String, default: ''}
   });
 
   propertySchema.plugin(require('./plugins/pagedFind'));

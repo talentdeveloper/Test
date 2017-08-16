@@ -36,20 +36,28 @@ angular.module('admin.users.detail').config(['$routeProvider', function($routePr
 angular.module('admin.users.detail').controller('UsersDetailCtrl', ['$scope', '$route', '$location', 'utility', 'adminResource', 'user',
   function($scope, $route, $location, utility, adminResource, user) {
     // local vars
-    adminResource.getAccountPropertyStats(user._id).then(function(accountPropertyStats) {
+    // adminResource.getAccountPropertyStats(user._id).then(function(accountPropertyStats) {
      
-      $scope.status = {
-        submitted: accountPropertyStats['PropertySubmitted'],
-        new: accountPropertyStats['New'],
-        activelyWorking: accountPropertyStats['ActivelyWorking'],
-        offerAccepted: accountPropertyStats['OfferAccepted'],
-        offerRejected: accountPropertyStats['OfferRejected'],
-        ucSeller: accountPropertyStats['UCSeller'],
-        ucBuyer: accountPropertyStats['UCBuyer'],
-        closed: accountPropertyStats['Closed'],
-        deadLeads: accountPropertyStats['DeadLeads']
-      };
+    //   $scope.status = {
+    //     submitted: accountPropertyStats['PropertySubmitted'],
+    //     new: accountPropertyStats['New'],
+    //     activelyWorking: accountPropertyStats['ActivelyWorking'],
+    //     offerAccepted: accountPropertyStats['OfferAccepted'],
+    //     offerRejected: accountPropertyStats['OfferRejected'],
+    //     ucSeller: accountPropertyStats['UCSeller'],
+    //     ucBuyer: accountPropertyStats['UCBuyer'],
+    //     closed: accountPropertyStats['Closed'],
+    //     deadLeads: accountPropertyStats['DeadLeads']
+    //   };
+    // });
+   
+    adminResource.getStatusType().then(function(data){
+      adminResource.getStatsByUser(user._id, data).then(function(result){
+        $scope.statusTypes = result;
+      });
     });
+
+
     var closeAlert = function(alert, ind){
       alert.splice(ind, 1);
     };

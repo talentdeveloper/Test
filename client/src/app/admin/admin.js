@@ -87,5 +87,15 @@ angular.module('admin.index').controller('AdminCtrl', ['$scope', '$log', 'stats'
       adminResource.remarkSystem().then(function(result){
       });
     };
+
+    var getStatusType = function() {
+      adminResource.getStatusType().then(function(data){
+        
+        adminResource.getStatss(data).then(function(result){
+          $scope.statusTypes = result;
+        });
+      });
+    };
     showRecentlyAddedProperties();
+    getStatusType();
   }]);

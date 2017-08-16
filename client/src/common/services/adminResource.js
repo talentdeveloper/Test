@@ -32,6 +32,14 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
   resource.getStats = function(){
     return $http.get(baseUrl + '/admin').then(processResponse, processError);
   };
+  resource.getStatss = function(data){
+    return $http.put(baseUrl + '/admingets', data).then(processResponse, processError);
+  }
+  resource.getStatsByUser = function(_id, data){
+    return $http.put(baseUrl + '/admingets/' + _id, data).then(processResponse, processError);
+  };
+
+
   resource.search = function(query){
     return $http.get(baseUrl + '/admin/search', { params: { q: query }} ).then(processResponse, processError);
   };
@@ -229,7 +237,7 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.get(adminStatusConfiguresURL).then(processResponse, processError);
   };
   resource.addStatusConfig = function(data) {
-    return $http.post(adminStatusConfiguresURL, {statusName: data.name, statusDetail: data.detail}).then(processResponse, processError);
+    return $http.post(adminStatusConfiguresURL, {statusName: data.name, statusDetail: data.detail, isRelatedRanking: data.isRelatedRanking}).then(processResponse, processError);
   };
   resource.findStatusConfigure = function(_id) {
     var url = adminStatusConfiguresURL + '/' + _id;
@@ -396,6 +404,14 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     var url = userUrl + '/' + _id + '/submitted';
     return $http.get(url).then(processResponse, processError);
   };
+
+  resource.getStatusType = function() {
+    return $http.get('/api/admin/getstatustype').then(processResponse, processError);
+  }
+  
+  resource.findStatusType = function(data){
+    return $http.post('/api/admin/findstatustype', data).then(processResponse, processError);
+  }
   
   resource.upload = function(file) {
 	var fd = new FormData();
@@ -445,12 +461,12 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     return $http.get('/api/remark').then(processResponse, processError);
   };
 
-  resource.uploadFile = function(file) {
+  resource.uploadFile = function(data, file) {
     var fd = new FormData();
     angular.forEach(file, function(val, key) {
       fd.append('uploadFile', val.file);
     });
-    return $http.post('/uploadfile', fd, {
+    return $http.post('/uploadfile', data, fd, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined }
     });

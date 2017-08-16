@@ -5,18 +5,18 @@
 </style>
 <div class="row" id="admin">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;" ng-repeat="(key, data) in statusTypes">
             <div class="dashboard-stat red">
                 <div class="visual">
                     <i class="fa fa-bar-chart-o"></i>
                 </div>
                 <div class="details">
-                    <div class="number" style="padding-top: 10px;"> {{ user.new }} </div>
-                    <div class="desc"> New </div>
+                    <div class="number" style="padding-top: 10px;"> {{ data }} </div>
+                    <div class="desc"> {{key}} </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
+        <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 12%;">
             <div class="dashboard-stat green">
                 <div class="visual">
                     <i class="fa fa-shopping-cart"></i>
@@ -92,7 +92,7 @@
                     <div class="desc"> Dead Leads </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="col-md-6">

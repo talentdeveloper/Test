@@ -26,7 +26,6 @@ angular.module('config')
   })
 ;
 angular.module('config').config(['$provide', 'ENABLE_SOCIAL', function($provide, ENABLE_SOCIAL){
-	console.log(ENABLE_SOCIAL);
   var setting = {
     'facebook': {
       text: 'Facebook',
